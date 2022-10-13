@@ -1,0 +1,14 @@
+{
+  "name": "coreus-rpa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "max <i.snova.bebebe@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "lerna": "^6.0.0"
+  }
+}
