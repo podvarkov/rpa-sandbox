@@ -1,11 +1,28 @@
-import { ConflictException, Injectable, Logger } from "@nestjs/common";
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  Logger,
+} from "@nestjs/common";
 import { ConfigProvider } from "../config/config.provider";
 import {
   InsertOneMessage,
+  QueryMessage,
   SocketMessage,
   TokenUser,
 } from "@openiap/openflow-api";
 import { WebSocket } from "ws";
+
+type Workflow = {
+  _id: string;
+  projectandname?: string;
+  projectid?: string;
+  name: string;
+  _type: string;
+  _modified: string;
+  _created: string;
+  _createdby: string;
+};
 
 @Injectable()
 export class OpenflowCommanderService {
@@ -16,6 +33,66 @@ export class OpenflowCommanderService {
   private parseMessageData<T>(data: string): T | null {
     if (data) return JSON.parse(data) as unknown as T;
     return null;
+  }
+
+  async listRobotWorkflows() {
+    const [data] = QueryMessage.parse({
+      top: 100,
+      skip: 0,
+      priority: 2,
+      decrypt: true,
+      collectionname: "openrpa",
+      projection: {
+        _type: 1,
+        name: 1,
+        _created: 1,
+        _modified: 1,
+        projectid: 1,
+        _created_by: 1,
+        description: 1,
+      },
+      query: { _type: "workflow" },
+      jwt: this.config.OPENFLOW_ROOT_TOKEN,
+    });
+    const reply = await this.sendCommand<{
+      data: { message?: string; result: Workflow[] };
+      command: string;
+    }>("query", data);
+
+    if (reply.command === "error") {
+      throw new BadRequestException(reply.data.message);
+    }
+
+    return { data: reply.data.result };
+  }
+
+  async listFormWorkflows() {
+    const [data] = QueryMessage.parse({
+      top: 100,
+      skip: 0,
+      priority: 2,
+      decrypt: true,
+      collectionname: "workflow",
+      projection: {
+        _type: 1,
+        name: 1,
+        _created: 1,
+        _modified: 1,
+        _created_by: 1,
+      },
+      query: { _type: "workflow", web: true },
+      jwt: this.config.OPENFLOW_ROOT_TOKEN,
+    });
+    const reply = await this.sendCommand<{
+      data: { message?: string; result: Workflow[] };
+      command: string;
+    }>("query", data);
+
+    if (reply.command === "error") {
+      throw new BadRequestException(reply.data.message);
+    }
+
+    return { data: reply.data.result };
   }
 
   async createUser(data: { username: string; password: string }) {
@@ -40,11 +117,10 @@ export class OpenflowCommanderService {
       jwt: this.config.OPENFLOW_ROOT_TOKEN,
     });
 
-    const reply = await this.sendCommand<{ error?: string; result: TokenUser }>(
-      "insertone",
-      insertUserData
-    );
-    if (reply.error) throw new ConflictException(reply.error);
+    const reply = await this.sendCommand<{
+      data: { error?: string; result: TokenUser };
+    }>("insertone", insertUserData);
+    if (reply.data.error) throw new ConflictException(reply.data.error);
     return reply;
   }
 
@@ -74,7 +150,10 @@ export class OpenflowCommanderService {
 
         if (reply.replyto === msg.id) {
           ws.close();
-          resolve(this.parseMessageData<T>(reply.data));
+          resolve({
+            ...reply,
+            data: this.parseMessageData<T>(reply.data),
+          } as T);
         }
       });
 
