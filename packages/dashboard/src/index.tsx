@@ -6,10 +6,11 @@ import App from "./app";
 import { AuthProvider, RequireAuth } from "./components/auth-provider";
 import { SigninPage } from "./pages/sign-in";
 import { SignupPage } from "./pages/sign-up";
+import { ProgressProvider } from "./components/progress-provider";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <AuthProvider>
+  <AuthProvider>
+    <ProgressProvider>
       <ChakraProvider>
         <BrowserRouter>
           <Routes>
@@ -28,6 +29,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
           </Routes>
         </BrowserRouter>
       </ChakraProvider>
-    </AuthProvider>
-  </React.StrictMode>
+    </ProgressProvider>
+  </AuthProvider>
 );

@@ -4,7 +4,7 @@ import { CookieJar } from "tough-cookie";
 import * as axiosCookieJarSupport from "axios-cookiejar-support";
 import * as axios from "axios";
 import { TokenUser } from "@openiap/openflow-api";
-import { OpenflowCommanderService } from "../openflow-commander/openflow-commander.service";
+import { OpenflowService } from "src/openflow-commander/openflow.service";
 
 export type Session = {
   user: Pick<
@@ -19,7 +19,7 @@ export class AuthService {
   private readonly logger = new Logger(AuthService.name);
   constructor(
     private readonly config: ConfigProvider,
-    private readonly commander: OpenflowCommanderService
+    private readonly commander: OpenflowService
   ) {}
 
   async validateUser(username: string, password: string) {

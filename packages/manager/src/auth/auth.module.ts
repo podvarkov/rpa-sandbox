@@ -5,10 +5,10 @@ import { LocalStrategy } from "./local.strategy";
 import { JwtStrategy } from "./jwt.strategy";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
-import { OpenflowCommanderModule } from "../openflow-commander/openflow-commander.module";
+import { OpenflowModule } from "src/openflow-commander/openflow.module";
 
 @Module({
-  imports: [JwtModule.register({}), PassportModule, OpenflowCommanderModule],
+  imports: [JwtModule.register({}), PassportModule, OpenflowModule],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
 })

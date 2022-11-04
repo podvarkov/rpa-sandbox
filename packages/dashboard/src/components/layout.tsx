@@ -10,9 +10,11 @@ import {
   MenuList,
   MenuItem,
   MenuButton,
+  Progress,
 } from "@chakra-ui/react";
 import { useAuth } from "./auth-provider";
 import { Link as ReactLink, Outlet } from "react-router-dom";
+import { useProgress } from "./progress-provider";
 
 const menuItems = [
   {
@@ -89,9 +91,11 @@ export const Header: React.FC = () => {
 };
 
 const Layout: React.FC = () => {
+  const { visible } = useProgress();
   return (
     <Flex direction="column" h="100vh">
       <Header />
+      {visible ? <Progress size="xs" isIndeterminate /> : null}
 
       <Box p={4} bg="gray.50" h={"100%"}>
         <Outlet />

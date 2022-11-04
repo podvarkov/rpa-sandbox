@@ -1,5 +1,6 @@
 import Axios, { AxiosInstance } from "axios";
 import { TokenUser } from "@openiap/openflow-api";
+import { WorkflowFormValues } from "./components/workflow-form";
 
 export type SigninParams = { username: string; password: string };
 export type Session = {
@@ -9,6 +10,35 @@ export type Session = {
   >;
   jwt: string;
 } | null;
+
+export type WorkflowTemplate = {
+  _id: string;
+  projectandname?: string;
+  projectid?: string;
+  description?: string;
+  name: string;
+  _type: string;
+  _modified: string;
+  _created: string;
+  _createdby: string;
+  Parameters?: { type: string; direction: string; name: string }[];
+  collection: string;
+};
+
+export type Workflow = {
+  _id: string;
+  collection: string;
+  description?: string;
+  name: string;
+  templateId: string;
+  defaultArguments?: { [key: string]: unknown };
+  _created: string;
+  _modified: string;
+  _createdby: string;
+  _createdbyid: string;
+  _type: string;
+};
+
 type AuthStateChangedCb = (user: Session) => void;
 
 class Api {
@@ -55,6 +85,32 @@ class Api {
 
   onAuthStateChanged(cb: AuthStateChangedCb) {
     this.authStateChangedCb = cb;
+  }
+
+  getTemplates(signal?: AbortSignal) {
+    return this.axios
+      .get<WorkflowTemplate[]>("templates", { signal })
+      .then(({ data }) => data);
+  }
+
+  getTemplate(type: string, id: string) {
+    return this.axios
+      .get<WorkflowTemplate>(`templates/${type}/${id}`)
+      .then(({ data }) => data);
+  }
+
+  getWorkflows(signal?: AbortSignal) {
+    return this.axios
+      .get<Workflow[]>("workflows", { signal })
+      .then(({ data }) => data);
+  }
+
+  upsertWorkflow(params: WorkflowFormValues) {
+    return this.axios.post("workflows", params);
+  }
+
+  deleteWorkflow(id: string) {
+    return this.axios.delete(`workflows/${id}`);
   }
 }
 
