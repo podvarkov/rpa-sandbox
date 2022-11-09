@@ -45,12 +45,12 @@ export const SigninPage: React.FC = () => {
             initialValues={{ username: "", password: "" }}
             onSubmit={(values, actions) => {
               signin(values)
-                .then(() => {
-                  actions.setSubmitting(false);
-                })
                 .catch((e: AxiosError) => {
                   console.error(e);
                   setError("Wrong password or username");
+                })
+                .finally(() => {
+                  actions.setSubmitting(false);
                 });
             }}
             validationSchema={Yup.object({
@@ -60,43 +60,49 @@ export const SigninPage: React.FC = () => {
               password: Yup.string().required("This field is required"),
             })}
           >
-            <Form>
-              <Stack spacing="4">
-                <Field name="username">
-                  {({ field, meta }: FieldProps) => {
-                    return (
+            {({ isSubmitting }) => (
+              <Form>
+                <Stack spacing="4">
+                  <Field name="username">
+                    {({ field, meta }: FieldProps) => {
+                      return (
+                        <FormControl isInvalid={!!(meta.touched && meta.error)}>
+                          <FormLabel>Email address</FormLabel>
+                          <Input placeholder="Email" {...field} />
+                          <FormErrorMessage>{meta.error}</FormErrorMessage>
+                        </FormControl>
+                      );
+                    }}
+                  </Field>
+                  <Field name="password">
+                    {({ field, meta }: FieldProps) => (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <FormLabel>Email address</FormLabel>
-                        <Input placeholder="Email" {...field} />
+                        <FormLabel>Password</FormLabel>
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          {...field}
+                        />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
                       </FormControl>
-                    );
-                  }}
-                </Field>
-                <Field name="password">
-                  {({ field, meta }: FieldProps) => (
-                    <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                      <FormLabel>Password</FormLabel>
-                      <Input
-                        type="password"
-                        placeholder="Password"
-                        {...field}
-                      />
-                      <FormErrorMessage>{meta.error}</FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                {error ? (
-                  <Alert status="error">
-                    <AlertIcon />
-                    <AlertDescription>{error}</AlertDescription>
-                  </Alert>
-                ) : null}
-                <Button type="submit" colorScheme="teal">
-                  Sign in
-                </Button>
-              </Stack>
-            </Form>
+                    )}
+                  </Field>
+                  {error ? (
+                    <Alert status="error">
+                      <AlertIcon />
+                      <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                  ) : null}
+                  <Button
+                    type="submit"
+                    colorScheme="teal"
+                    isLoading={isSubmitting}
+                  >
+                    Sign in
+                  </Button>
+                </Stack>
+              </Form>
+            )}
           </Formik>
 
           <Text fontSize="sm" align="right">

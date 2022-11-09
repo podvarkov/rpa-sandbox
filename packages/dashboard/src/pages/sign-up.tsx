@@ -47,9 +47,6 @@ export const SignupPage: React.FC = () => {
             }}
             onSubmit={(values, actions) => {
               signup(values)
-                .then(() => {
-                  actions.setSubmitting(false);
-                })
                 .catch((e: AxiosError) => {
                   console.error(e);
                   setError(
@@ -57,6 +54,9 @@ export const SignupPage: React.FC = () => {
                       ? `User ${values.username} already exists`
                       : "Something goes wrong"
                   );
+                })
+                .finally(() => {
+                  actions.setSubmitting(false);
                 });
             }}
             validationSchema={Yup.object({
@@ -69,56 +69,62 @@ export const SignupPage: React.FC = () => {
                 .required("This field is required"),
             })}
           >
-            <Form>
-              <Stack spacing="4">
-                <Field name="username">
-                  {({ field, meta }: FieldProps) => {
-                    return (
+            {({ isSubmitting }) => (
+              <Form>
+                <Stack spacing="4">
+                  <Field name="username">
+                    {({ field, meta }: FieldProps) => {
+                      return (
+                        <FormControl isInvalid={!!(meta.touched && meta.error)}>
+                          <FormLabel>Email address</FormLabel>
+                          <Input placeholder="Email" {...field} />
+                          <FormErrorMessage>{meta.error}</FormErrorMessage>
+                        </FormControl>
+                      );
+                    }}
+                  </Field>
+                  <Field name="password">
+                    {({ field, meta }: FieldProps) => (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <FormLabel>Email address</FormLabel>
-                        <Input placeholder="Email" {...field} />
+                        <FormLabel>Password</FormLabel>
+                        <Input
+                          type="password"
+                          placeholder="Password"
+                          {...field}
+                        />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
                       </FormControl>
-                    );
-                  }}
-                </Field>
-                <Field name="password">
-                  {({ field, meta }: FieldProps) => (
-                    <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                      <FormLabel>Password</FormLabel>
-                      <Input
-                        type="password"
-                        placeholder="Password"
-                        {...field}
-                      />
-                      <FormErrorMessage>{meta.error}</FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="passwordConfirmation">
-                  {({ field, meta }: FieldProps) => (
-                    <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                      <FormLabel>Confirm password</FormLabel>
-                      <Input
-                        type="password"
-                        placeholder="Confirm password"
-                        {...field}
-                      />
-                      <FormErrorMessage>{meta.error}</FormErrorMessage>
-                    </FormControl>
-                  )}
-                </Field>
-                {error ? (
-                  <Alert status="error">
-                    <AlertIcon />
-                    <AlertDescription>{error}</AlertDescription>
-                  </Alert>
-                ) : null}
-                <Button type="submit" colorScheme="teal">
-                  Create account
-                </Button>
-              </Stack>
-            </Form>
+                    )}
+                  </Field>
+                  <Field name="passwordConfirmation">
+                    {({ field, meta }: FieldProps) => (
+                      <FormControl isInvalid={!!(meta.touched && meta.error)}>
+                        <FormLabel>Confirm password</FormLabel>
+                        <Input
+                          type="password"
+                          placeholder="Confirm password"
+                          {...field}
+                        />
+                        <FormErrorMessage>{meta.error}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  {error ? (
+                    <Alert status="error">
+                      <AlertIcon />
+                      <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                  ) : null}
+                  <Button
+                    type="submit"
+                    colorScheme="teal"
+                    isLoading={isSubmitting}
+                  >
+                    Create account
+                  </Button>
+                </Stack>
+              </Form>
+            )}
           </Formik>
 
           <Text fontSize="sm" align="right">
