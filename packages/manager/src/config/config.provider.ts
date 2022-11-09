@@ -17,6 +17,9 @@ export class ConfigProvider {
   OPENFLOW_WS_HOST!: string;
 
   @IsString()
+  OPENFLOW_ROBOT_ID!: string;
+
+  @IsString()
   OPENFLOW_AES_SECRET!: string;
 
   @IsString()

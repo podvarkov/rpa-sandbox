@@ -329,7 +329,7 @@ export class OpenflowService {
           const [queueMessageData] = QueueMessage.parse({
             jwt: this.config.OPENFLOW_ROOT_TOKEN,
             priority: 2,
-            queuename: "632f282c4855a7d6ff0bce42", // todo get from envs
+            queuename: this.config.OPENFLOW_ROBOT_ID,
             replyto: this.parseMessageData<{ queuename: string }>(
               socketMessage.data
             ).queuename,
