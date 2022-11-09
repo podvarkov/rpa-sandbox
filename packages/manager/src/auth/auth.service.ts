@@ -50,6 +50,6 @@ export class AuthService {
   }
 
   async createUser(username: string, password: string) {
-    await this.commander.createUser({ username, password });
+    return this.commander.createUser({ username, password });
   }
 }

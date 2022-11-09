@@ -105,12 +105,24 @@ class Api {
       .then(({ data }) => data);
   }
 
+  getWorkflow(id: string) {
+    return this.axios.get<Workflow>(`workflows/${id}`).then(({ data }) => data);
+  }
+
   upsertWorkflow(params: WorkflowFormValues) {
     return this.axios.post("workflows", params);
   }
 
   deleteWorkflow(id: string) {
     return this.axios.delete(`workflows/${id}`);
+  }
+
+  executeWorkflow(data: {
+    expiration: number;
+    workflowid: string;
+    arguments: { [key: string]: unknown };
+  }) {
+    return this.axios.post("workflows/execute", data);
   }
 }
 

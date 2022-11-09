@@ -10,11 +10,13 @@ import {
   InsertOneMessage,
   QueryMessage,
   QueryOptions,
+  QueueMessage,
   SocketMessage,
   TokenUser,
   UpdateOneMessage,
 } from "@openiap/openflow-api";
 import { WebSocket } from "ws";
+import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
 
 type Workflow = {
   _id: string;
@@ -135,7 +137,7 @@ export class OpenflowService {
     }));
   }
 
-  async listUserWorkflows(jwt: string) {
+  async listUserWorkflows(jwt: string, query = {}) {
     const reply = await this.queryCollection<{
       data: {
         message?: string;
@@ -144,7 +146,7 @@ export class OpenflowService {
       };
       command: string;
     }>(jwt, {
-      query: { _type: "user_workflow" },
+      query: { ...query, _type: "user_workflow" },
       collectionname: "entities",
     });
 
@@ -156,6 +158,11 @@ export class OpenflowService {
       ...wf,
       collection: reply.data.collectionname,
     }));
+  }
+
+  async getUserWorkflow(jwt: string, id: string) {
+    const data = await this.listUserWorkflows(jwt, { _id: id });
+    return data[0];
   }
 
   async deleteUserWorkflow(jwt: string, id: string) {
@@ -259,7 +266,86 @@ export class OpenflowService {
       data: { error?: string; result: TokenUser };
     }>("insertone", insertUserData);
     if (reply.data.error) throw new ConflictException(reply.data.error);
-    return reply;
+    return reply.data.result;
+  }
+
+  async executeWorkflow(workflow: ExecuteWorkflowDto) {
+    const ws = new WebSocket(this.config.OPENFLOW_WS_HOST);
+    return new Promise((resolve, reject) => {
+      const registerQueueMsg = SocketMessage.fromcommand("registerqueue");
+      registerQueueMsg.data = JSON.stringify({
+        priority: 2,
+        count: 1,
+        index: 0,
+        data: '{"priority":2}',
+        jwt: this.config.OPENFLOW_ROOT_TOKEN,
+      });
+
+      ws.on("open", () => {
+        setTimeout(() => {
+          ws.send(JSON.stringify(registerQueueMsg));
+        }, 50);
+      });
+
+      ws.on("message", (data) => {
+        const socketMessage = SocketMessage.fromjson(data.toString());
+
+        if (socketMessage.command === "error") {
+          reject(new BadRequestException(socketMessage));
+        }
+
+        if (
+          socketMessage.command === "queuemessage" &&
+          socketMessage.replyto == null
+        ) {
+          const socketData = this.parseMessageData<{
+            data: {
+              command: string;
+              workflowid: string;
+              data: { [key: string]: unknown };
+            };
+          }>(socketMessage.data);
+
+          if (
+            ["timeout", "invokefailed", "error"].includes(
+              socketData.data.command
+            )
+          ) {
+            reject(
+              new BadRequestException(
+                socketData.data.data.Message
+                  ? `${socketData.data.command}: ${socketData.data.data.Message}`
+                  : socketData.data.command
+              )
+            );
+          }
+
+          if (socketData.data.command === "invokecompleted") {
+            resolve(socketData.data.data);
+          }
+        }
+
+        if (socketMessage.replyto === registerQueueMsg.id) {
+          const [queueMessageData] = QueueMessage.parse({
+            jwt: this.config.OPENFLOW_ROOT_TOKEN,
+            priority: 2,
+            queuename: "632f282c4855a7d6ff0bce42", // todo get from envs
+            replyto: this.parseMessageData<{ queuename: string }>(
+              socketMessage.data
+            ).queuename,
+            data: {
+              command: "invoke",
+              workflowid: workflow.workflowid,
+              data: workflow.arguments,
+            },
+            expiration: workflow.expiration,
+          });
+          const queueMsg = SocketMessage.fromcommand("queuemessage");
+          queueMsg.data = JSON.stringify(queueMessageData);
+          ws.send(JSON.stringify(queueMsg));
+        }
+      });
+    });
   }
 
   private sendCommand<T>(

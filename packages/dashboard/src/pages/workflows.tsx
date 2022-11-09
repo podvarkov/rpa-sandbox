@@ -27,9 +27,11 @@ import { useFetch } from "../components/use-fetch";
 import { api, Workflow } from "../api";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { WorkflowForm } from "../components/workflow-form";
+import { useNavigate } from "react-router-dom";
 
 export const WorkflowsPage: React.FC = () => {
   const toast = useToast();
+  const navigate = useNavigate();
   const {
     data: workflows,
     error,
@@ -208,7 +210,7 @@ export const WorkflowsPage: React.FC = () => {
                 rounded="sm"
                 colorScheme="teal"
                 onClick={() => {
-                  // setSelectedTemplate(t);
+                  navigate(`/execute/${wf._id}`);
                 }}
               >
                 Run workflow
