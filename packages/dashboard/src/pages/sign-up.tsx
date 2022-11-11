@@ -21,6 +21,7 @@ import * as Yup from "yup";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../components/auth-provider";
 import { AxiosError } from "axios";
+import { t, Trans } from "@lingui/macro";
 
 export const SignupPage: React.FC = () => {
   const { signup, session } = useAuth();
@@ -36,7 +37,9 @@ export const SignupPage: React.FC = () => {
       <Container bg="white" boxShadow="sm" p="6">
         <Stack spacing="4" direction="column">
           <Center>
-            <Heading size="lg">Sign up</Heading>
+            <Heading size="lg">
+              <Trans>Sign up</Trans>
+            </Heading>
           </Center>
 
           <Formik
@@ -51,8 +54,8 @@ export const SignupPage: React.FC = () => {
                   console.error(e);
                   setError(
                     e.response?.status === 409
-                      ? `User ${values.username} already exists`
-                      : "Something goes wrong"
+                      ? t`User ${values.username} already exists`
+                      : t`Something goes wrong`
                   );
                 })
                 .finally(() => {
@@ -61,12 +64,12 @@ export const SignupPage: React.FC = () => {
             }}
             validationSchema={Yup.object({
               username: Yup.string()
-                .email("Must be a valid email")
-                .required("This field is required"),
-              password: Yup.string().required("This field is required"),
+                .email(t`Must be a valid email`)
+                .required(t`This field is required`),
+              password: Yup.string().required(t`This field is required`),
               passwordConfirmation: Yup.string()
-                .oneOf([Yup.ref("password")], "Passwords must match")
-                .required("This field is required"),
+                .oneOf([Yup.ref("password")], t`Passwords must match`)
+                .required(t`This field is required`),
             })}
           >
             {({ isSubmitting }) => (
@@ -76,8 +79,10 @@ export const SignupPage: React.FC = () => {
                     {({ field, meta }: FieldProps) => {
                       return (
                         <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                          <FormLabel>Email address</FormLabel>
-                          <Input placeholder="Email" {...field} />
+                          <FormLabel>
+                            <Trans>Email address</Trans>
+                          </FormLabel>
+                          <Input placeholder={t`Email`} {...field} />
                           <FormErrorMessage>{meta.error}</FormErrorMessage>
                         </FormControl>
                       );
@@ -86,10 +91,12 @@ export const SignupPage: React.FC = () => {
                   <Field name="password">
                     {({ field, meta }: FieldProps) => (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>
+                          <Trans>Password</Trans>
+                        </FormLabel>
                         <Input
                           type="password"
-                          placeholder="Password"
+                          placeholder={t`Password`}
                           {...field}
                         />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -99,10 +106,12 @@ export const SignupPage: React.FC = () => {
                   <Field name="passwordConfirmation">
                     {({ field, meta }: FieldProps) => (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <FormLabel>Confirm password</FormLabel>
+                        <FormLabel>
+                          <Trans>Confirm password</Trans>
+                        </FormLabel>
                         <Input
                           type="password"
-                          placeholder="Confirm password"
+                          placeholder={t`Confirm password`}
                           {...field}
                         />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -120,7 +129,7 @@ export const SignupPage: React.FC = () => {
                     colorScheme="teal"
                     isLoading={isSubmitting}
                   >
-                    Create account
+                    <Trans>Create account</Trans>
                   </Button>
                 </Stack>
               </Form>
@@ -128,9 +137,9 @@ export const SignupPage: React.FC = () => {
           </Formik>
 
           <Text fontSize="sm" align="right">
-            Have an account?{" "}
+            <Trans>Have an account? </Trans>{" "}
             <Link color="teal.500" to="/signin" as={RouterLink}>
-              Sign in
+              <Trans>Sign in</Trans>
             </Link>
           </Text>
         </Stack>

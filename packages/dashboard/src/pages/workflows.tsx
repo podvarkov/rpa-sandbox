@@ -28,6 +28,7 @@ import { api, Workflow } from "../api";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { WorkflowForm } from "../components/workflow-form";
 import { useNavigate } from "react-router-dom";
+import { t, Trans } from "@lingui/macro";
 
 export const WorkflowsPage: React.FC = () => {
   const toast = useToast();
@@ -44,7 +45,7 @@ export const WorkflowsPage: React.FC = () => {
   useEffect(() => {
     if (error) {
       toast({
-        title: "There was an error while loading",
+        title: t`There was an error while loading`,
         status: "error",
         position: "top-right",
         duration: 1000,
@@ -54,7 +55,9 @@ export const WorkflowsPage: React.FC = () => {
 
   return workflows && workflows.length === 0 ? (
     <Center>
-      <Heading size="sm">Your workflows will be listed here</Heading>
+      <Heading size="sm">
+        <Trans>Your workflows will be listed here</Trans>
+      </Heading>
     </Center>
   ) : (
     <>
@@ -70,7 +73,7 @@ export const WorkflowsPage: React.FC = () => {
               <HStack>
                 <Avatar size={"sm"} src="/wf-icon.png" />
                 <Heading fontFamily={"roboto"} size={"md"}>
-                  New workflow
+                  <Trans>New workflow</Trans>
                 </Heading>
               </HStack>
             </ModalHeader>
@@ -82,18 +85,18 @@ export const WorkflowsPage: React.FC = () => {
                     .upsertWorkflow(values)
                     .then(() => {
                       toast({
-                        title: "Workflow edited",
+                        title: t`Workflow updated`,
                         status: "success",
                         position: "top-right",
                         duration: 1000,
                       });
                       setEditIntent(undefined);
-                      fetch();
+                      void fetch();
                     })
                     .catch((e) => {
                       console.error(e);
                       toast({
-                        title: "Can not edit workflow",
+                        title: t`Can not edit workflow`,
                         status: "error",
                         position: "top-right",
                         duration: 1000,
@@ -114,11 +117,13 @@ export const WorkflowsPage: React.FC = () => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Delete workflow
+              <Trans>Delete workflow</Trans>
             </AlertDialogHeader>
 
             <AlertDialogBody>
-              Are you sure? You can not undo this action afterwards.
+              <Trans>
+                Are you sure? You can not undo this action afterwards.
+              </Trans>
             </AlertDialogBody>
 
             <AlertDialogFooter>
@@ -128,36 +133,38 @@ export const WorkflowsPage: React.FC = () => {
                   setDeleteIntent(undefined);
                 }}
               >
-                Cancel
+                <Trans>Cancel</Trans>
               </Button>
               <Button
                 colorScheme="red"
                 ml={3}
                 onClick={() => {
-                  api
-                    .deleteWorkflow(deleteIntent!)
-                    .then(() => {
-                      toast({
-                        title: "Workflow deleted",
-                        status: "success",
-                        position: "top-right",
-                        duration: 1000,
+                  if (deleteIntent) {
+                    api
+                      .deleteWorkflow(deleteIntent)
+                      .then(() => {
+                        toast({
+                          title: t`Workflow deleted`,
+                          status: "success",
+                          position: "top-right",
+                          duration: 1000,
+                        });
+                        setDeleteIntent(undefined);
+                        void fetch();
+                      })
+                      .catch((e) => {
+                        console.error(e);
+                        toast({
+                          title: t`Can not delete workflow`,
+                          status: "error",
+                          position: "top-right",
+                          duration: 1000,
+                        });
                       });
-                      fetch();
-                      setDeleteIntent(undefined);
-                    })
-                    .catch((e) => {
-                      console.error(e);
-                      toast({
-                        title: "Can not delete workflow",
-                        status: "error",
-                        position: "top-right",
-                        duration: 1000,
-                      });
-                    });
+                  }
                 }}
               >
-                Delete
+                <Trans>Delete</Trans>
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>
@@ -185,7 +192,10 @@ export const WorkflowsPage: React.FC = () => {
               <IconButton
                 size="xs"
                 variant="outline"
-                aria-label="Edit"
+                aria-label={
+                  /* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */
+                  "Edit"
+                }
                 onClick={() => {
                   setEditIntent(wf);
                 }}
@@ -194,14 +204,17 @@ export const WorkflowsPage: React.FC = () => {
               <IconButton
                 size="xs"
                 variant="outline"
-                aria-label="Delete"
+                aria-label={
+                  /* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */
+                  "Delete"
+                }
                 onClick={() => setDeleteIntent(wf._id)}
                 icon={<DeleteIcon />}
               />
             </HStack>
             <Divider />
             <Box p={4} fontFamily={"roboto"}>
-              <Text mb={4}>{wf.description || "No description "}</Text>
+              <Text mb={4}>{wf.description || t`No description`}</Text>
             </Box>
             <Box textAlign="right" px={4} pb={4}>
               <Button
@@ -213,7 +226,7 @@ export const WorkflowsPage: React.FC = () => {
                   navigate(`/execute/${wf._id}`);
                 }}
               >
-                Run workflow
+                <Trans>Run workflow</Trans>
               </Button>
             </Box>
           </Box>

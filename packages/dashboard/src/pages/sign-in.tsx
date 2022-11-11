@@ -21,6 +21,7 @@ import * as Yup from "yup";
 import { useAuth } from "../components/auth-provider";
 import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
 import { AxiosError } from "axios";
+import { t, Trans } from "@lingui/macro";
 
 export const SigninPage: React.FC = () => {
   const { session, signin } = useAuth();
@@ -38,7 +39,9 @@ export const SigninPage: React.FC = () => {
       <Container bg="white" boxShadow="sm" p="6">
         <Stack spacing="4" direction="column">
           <Center>
-            <Heading size="lg">Sign in</Heading>
+            <Heading size="lg">
+              <Trans>Sign in</Trans>
+            </Heading>
           </Center>
 
           <Formik
@@ -47,7 +50,7 @@ export const SigninPage: React.FC = () => {
               signin(values)
                 .catch((e: AxiosError) => {
                   console.error(e);
-                  setError("Wrong password or username");
+                  setError(t`Wrong password or username`);
                 })
                 .finally(() => {
                   actions.setSubmitting(false);
@@ -55,9 +58,9 @@ export const SigninPage: React.FC = () => {
             }}
             validationSchema={Yup.object({
               username: Yup.string()
-                .email("Must be a valid email")
-                .required("This field is required"),
-              password: Yup.string().required("This field is required"),
+                .email(t`Must be a valid email`)
+                .required(t`This field is required`),
+              password: Yup.string().required(t`This field is required`),
             })}
           >
             {({ isSubmitting }) => (
@@ -67,8 +70,10 @@ export const SigninPage: React.FC = () => {
                     {({ field, meta }: FieldProps) => {
                       return (
                         <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                          <FormLabel>Email address</FormLabel>
-                          <Input placeholder="Email" {...field} />
+                          <FormLabel>
+                            <Trans>Email address</Trans>
+                          </FormLabel>
+                          <Input placeholder={t`Email`} {...field} />
                           <FormErrorMessage>{meta.error}</FormErrorMessage>
                         </FormControl>
                       );
@@ -77,10 +82,12 @@ export const SigninPage: React.FC = () => {
                   <Field name="password">
                     {({ field, meta }: FieldProps) => (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>
+                          <Trans>Password</Trans>
+                        </FormLabel>
                         <Input
                           type="password"
-                          placeholder="Password"
+                          placeholder={t`Password`}
                           {...field}
                         />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -98,7 +105,7 @@ export const SigninPage: React.FC = () => {
                     colorScheme="teal"
                     isLoading={isSubmitting}
                   >
-                    Sign in
+                    <Trans>Sign in</Trans>
                   </Button>
                 </Stack>
               </Form>
@@ -106,9 +113,9 @@ export const SigninPage: React.FC = () => {
           </Formik>
 
           <Text fontSize="sm" align="right">
-            Not a member?{" "}
+            <Trans>Not a member? </Trans>{" "}
             <Link color="teal.500" to="/signup" as={RouterLink}>
-              Sign up
+              <Trans>Sign up</Trans>
             </Link>
           </Text>
         </Stack>

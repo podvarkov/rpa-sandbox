@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+./node_modules/.bin/lerna run extract
+./node_modules/.bin/lint-staged -v
+git add .

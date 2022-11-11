@@ -18,6 +18,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { t, Trans } from "@lingui/macro";
 import { api, WorkflowTemplate } from "../api";
 import { useFetch } from "../components/use-fetch";
 import { WorkflowForm } from "../components/workflow-form";
@@ -30,7 +31,7 @@ export const TemplatesPage: React.FC = () => {
   useEffect(() => {
     if (error) {
       toast({
-        title: "There was an error while loading",
+        title: t`There was an error while loading`,
         status: "error",
         position: "top-right",
         duration: 1000,
@@ -40,7 +41,9 @@ export const TemplatesPage: React.FC = () => {
 
   return templates && templates.length === 0 ? (
     <Center>
-      <Heading size="md">No templates found</Heading>
+      <Heading size="md">
+        <Trans>No templates found</Trans>
+      </Heading>
     </Center>
   ) : (
     <>
@@ -56,7 +59,7 @@ export const TemplatesPage: React.FC = () => {
               <HStack>
                 <Avatar size={"sm"} src="/wf-icon.png" />
                 <Heading fontFamily={"roboto"} size={"md"}>
-                  New workflow
+                  <Trans>New workflow</Trans>
                 </Heading>
               </HStack>
             </ModalHeader>
@@ -75,7 +78,7 @@ export const TemplatesPage: React.FC = () => {
                     .upsertWorkflow(values)
                     .then(() => {
                       toast({
-                        title: "Workflow created",
+                        title: t`Workflow created`,
                         status: "success",
                         position: "top-right",
                         duration: 1000,
@@ -85,7 +88,7 @@ export const TemplatesPage: React.FC = () => {
                     .catch((e) => {
                       console.error(e);
                       toast({
-                        title: "Can not create workflow",
+                        title: t`Can not create workflow`,
                         status: "error",
                         position: "top-right",
                         duration: 1000,
@@ -99,7 +102,7 @@ export const TemplatesPage: React.FC = () => {
       ) : null}
 
       <Flex alignItems="baseline" flexWrap={"wrap"}>
-        {templates?.map((t) => (
+        {templates?.map((template) => (
           <Box
             m={2}
             flexShrink={0}
@@ -107,22 +110,22 @@ export const TemplatesPage: React.FC = () => {
             w={[null, null, "45%", "25%", "20%"]}
             maxW={[null, null, "45%", "25%", "25%"]}
             bg="white"
-            key={t._id}
+            key={template._id}
             boxShadow={"sm"}
             _hover={{ boxShadow: "md" }}
           >
             <HStack p={4}>
               <Avatar size={"sm"} src="/wf-icon.png" />
               <Heading fontFamily={"roboto"} size={"md"}>
-                {t.name}
+                {template.name}
               </Heading>
             </HStack>
             <Divider />
             <Box p={4} fontFamily={"roboto"}>
-              <Text mb={4}>{t.description || "No description "}</Text>
-              {t.Parameters?.length ? (
+              <Text mb={4}>{template.description || t`No description `}</Text>
+              {template.Parameters?.length ? (
                 <UnorderedList>
-                  {t?.Parameters?.filter(
+                  {template?.Parameters?.filter(
                     ({ direction }) => direction === "in"
                   )?.map((param) => (
                     <ListItem key={param.name}>
@@ -131,7 +134,9 @@ export const TemplatesPage: React.FC = () => {
                   ))}
                 </UnorderedList>
               ) : (
-                <Text> No parameters</Text>
+                <Text>
+                  <Trans>No parameters</Trans>
+                </Text>
               )}
             </Box>
             <Box textAlign="right" px={4} pb={4}>
@@ -141,10 +146,10 @@ export const TemplatesPage: React.FC = () => {
                 rounded="sm"
                 colorScheme="teal"
                 onClick={() => {
-                  setSelectedTemplate(t);
+                  setSelectedTemplate(template);
                 }}
               >
-                Use template
+                <Trans>Use template</Trans>
               </Button>
             </Box>
           </Box>

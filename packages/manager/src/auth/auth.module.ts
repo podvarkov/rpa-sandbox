@@ -5,7 +5,7 @@ import { LocalStrategy } from "./local.strategy";
 import { JwtStrategy } from "./jwt.strategy";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
-import { OpenflowModule } from "src/openflow-commander/openflow.module";
+import { OpenflowModule } from "src/openflow/openflow.module";
 
 @Module({
   imports: [JwtModule.register({}), PassportModule, OpenflowModule],

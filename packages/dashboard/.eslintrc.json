@@ -22,9 +22,11 @@
     "react",
     "@typescript-eslint",
     "import",
-    "prettier"
+    "prettier",
+    "string-to-lingui"
   ],
   "rules": {
-    "@typescript-eslint/lines-between-class-members": "off"
+    "@typescript-eslint/lines-between-class-members": "off",
+    "string-to-lingui/missing-lingui-transformation": "warn"
   }
 }

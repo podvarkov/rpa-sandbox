@@ -1,0 +1,225 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2022-11-11 11:57+0500\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ja-JP\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/pages/workflows.tsx:124
+msgid "Are you sure? You can not undo this action afterwards."
+msgstr ""
+
+#: src/pages/templates.tsx:91
+msgid "Can not create workflow"
+msgstr ""
+
+#: src/pages/workflows.tsx:158
+msgid "Can not delete workflow"
+msgstr ""
+
+#: src/pages/workflows.tsx:99
+msgid "Can not edit workflow"
+msgstr ""
+
+#: src/pages/workflows.tsx:136
+msgid "Cancel"
+msgstr ""
+
+#: src/pages/sign-up.tsx:110
+#: src/pages/sign-up.tsx:114
+msgid "Confirm password"
+msgstr ""
+
+#: src/pages/sign-up.tsx:132
+msgid "Create account"
+msgstr ""
+
+#: src/components/workflow-form.tsx:89
+msgid "Create workflow"
+msgstr ""
+
+#: src/pages/workflows.tsx:167
+msgid "Delete"
+msgstr ""
+
+#: src/pages/workflows.tsx:120
+msgid "Delete workflow"
+msgstr ""
+
+#: src/pages/sign-in.tsx:76
+#: src/pages/sign-up.tsx:85
+msgid "Email"
+msgstr ""
+
+#: src/pages/sign-in.tsx:74
+#: src/pages/sign-up.tsx:83
+msgid "Email address"
+msgstr ""
+
+#: src/pages/workflow-runner.tsx:134
+msgid "Execute"
+msgstr ""
+
+#: src/app.tsx:20
+#: src/components/layout.tsx:34
+msgid "Executions"
+msgstr "処刑"
+
+#: src/pages/sign-up.tsx:140
+msgid "Have an account?"
+msgstr ""
+
+#: src/components/workflow-form.tsx:79
+msgid "Input argument"
+msgstr ""
+
+#: src/components/workflow-form.tsx:77
+msgid "Input argument: {key}"
+msgstr ""
+
+#: src/pages/sign-in.tsx:61
+#: src/pages/sign-up.tsx:67
+msgid "Must be a valid email"
+msgstr ""
+
+#: src/pages/templates.tsx:62
+#: src/pages/workflows.tsx:76
+msgid "New workflow"
+msgstr ""
+
+#: src/pages/templates.tsx:125
+#: src/pages/workflows.tsx:217
+msgid "No description"
+msgstr ""
+
+#: src/pages/templates.tsx:138
+msgid "No parameters"
+msgstr ""
+
+#: src/pages/templates.tsx:45
+msgid "No templates found"
+msgstr ""
+
+#: src/pages/sign-in.tsx:116
+msgid "Not a member?"
+msgstr ""
+
+#: src/components/workflow-form.tsx:63
+msgid "Optional description"
+msgstr ""
+
+#: src/pages/sign-in.tsx:86
+#: src/pages/sign-in.tsx:90
+#: src/pages/sign-up.tsx:95
+#: src/pages/sign-up.tsx:99
+msgid "Password"
+msgstr ""
+
+#: src/pages/sign-up.tsx:71
+msgid "Passwords must match"
+msgstr ""
+
+#: src/pages/workflows.tsx:229
+msgid "Run workflow"
+msgstr ""
+
+#: src/pages/sign-in.tsx:43
+#: src/pages/sign-in.tsx:108
+#: src/pages/sign-up.tsx:142
+msgid "Sign in"
+msgstr ""
+
+#: src/components/layout.tsx:94
+msgid "Sign out"
+msgstr ""
+
+#: src/pages/sign-in.tsx:118
+#: src/pages/sign-up.tsx:41
+msgid "Sign up"
+msgstr ""
+
+#: src/pages/sign-up.tsx:58
+msgid "Something goes wrong"
+msgstr ""
+
+#: src/components/layout.tsx:26
+msgid "Templates"
+msgstr "テンプレート"
+
+#: src/pages/templates.tsx:34
+#: src/pages/workflows.tsx:48
+msgid "There was an error while loading"
+msgstr ""
+
+#: src/components/workflow-form.tsx:35
+#: src/pages/sign-in.tsx:62
+#: src/pages/sign-in.tsx:63
+#: src/pages/sign-up.tsx:68
+#: src/pages/sign-up.tsx:69
+#: src/pages/sign-up.tsx:72
+msgid "This field is required"
+msgstr ""
+
+#: src/pages/workflow-runner.tsx:110
+msgid "Timeout"
+msgstr ""
+
+#: src/components/workflow-form.tsx:89
+msgid "Update workflow"
+msgstr ""
+
+#: src/pages/templates.tsx:152
+msgid "Use template"
+msgstr ""
+
+#: src/pages/sign-up.tsx:57
+msgid "User {0} already exists"
+msgstr ""
+
+#: src/pages/templates.tsx:81
+msgid "Workflow created"
+msgstr ""
+
+#: src/pages/workflows.tsx:147
+msgid "Workflow deleted"
+msgstr ""
+
+#: src/components/workflow-form.tsx:61
+msgid "Workflow description:"
+msgstr ""
+
+#: src/components/workflow-form.tsx:47
+msgid "Workflow name:"
+msgstr ""
+
+#: src/pages/workflows.tsx:88
+msgid "Workflow updated"
+msgstr ""
+
+#: src/components/layout.tsx:30
+msgid "Workflows"
+msgstr "ワークフロー"
+
+#: src/pages/sign-in.tsx:53
+msgid "Wrong password or username"
+msgstr ""
+
+#: src/pages/workflows.tsx:59
+msgid "Your workflows will be listed here"
+msgstr ""
+
+#: src/pages/workflow-runner.tsx:114
+msgid "timeout"
+msgstr ""
+
+#: src/components/layout.tsx:51
+msgid "© 2022 Coreus RPA. All rights reserved"
+msgstr ""

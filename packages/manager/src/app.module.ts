@@ -3,7 +3,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ConfigModule } from "./config/config.module";
 import { AuthModule } from "./auth/auth.module";
-import { OpenflowModule } from "src/openflow-commander/openflow.module";
+import { OpenflowModule } from "./openflow/openflow.module";
 import { TemplatesModule } from "./templates/templates.module";
 import { WorkflowsModule } from "./workflows/workflows.module";
 

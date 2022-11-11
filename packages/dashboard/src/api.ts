@@ -63,6 +63,7 @@ class Api {
   applySession(session: Session) {
     localStorage.setItem("session", JSON.stringify(session));
     this.session = session;
+    // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
     this.axios.defaults.headers.Authorization = `Bearer ${this.session?.jwt}`;
     if (this.authStateChangedCb) this.authStateChangedCb(session);
   }

@@ -9,6 +9,7 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
+import { t, Trans } from "@lingui/macro";
 
 export type WorkflowFormValues = {
   _id?: string;
@@ -31,7 +32,7 @@ export const WorkflowForm: React.FC<{
         });
       }}
       validationSchema={Yup.object({
-        name: Yup.string().required("This field is required"),
+        name: Yup.string().required(t`This field is required`),
         description: Yup.string(),
       })}
     >
@@ -42,7 +43,9 @@ export const WorkflowForm: React.FC<{
               {({ field, meta }: FieldProps) => {
                 return (
                   <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                    <FormLabel>Workflow name:</FormLabel>
+                    <FormLabel>
+                      <Trans>Workflow name:</Trans>
+                    </FormLabel>
                     <Input {...field} />
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
                   </FormControl>
@@ -54,8 +57,10 @@ export const WorkflowForm: React.FC<{
               {({ field, meta }: FieldProps) => {
                 return (
                   <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                    <FormLabel>Workflow description:</FormLabel>
-                    <Input placeholder="Optional description" {...field} />
+                    <FormLabel>
+                      <Trans>Workflow description:</Trans>
+                    </FormLabel>
+                    <Input placeholder={t`Optional description`} {...field} />
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
                   </FormControl>
                 );
@@ -68,8 +73,10 @@ export const WorkflowForm: React.FC<{
                   {({ field, meta }: FieldProps) => {
                     return (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <FormLabel>Input argument: {key}</FormLabel>
-                        <Input placeholder="Input argument" {...field} />
+                        <FormLabel>
+                          <Trans>Input argument: {key}</Trans>
+                        </FormLabel>
+                        <Input placeholder={t`Input argument`} {...field} />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
                       </FormControl>
                     );
@@ -79,7 +86,7 @@ export const WorkflowForm: React.FC<{
             })}
 
             <Button isLoading={isSubmitting} type="submit" colorScheme="teal">
-              {initialValues._id ? "Update workflow" : "Create workflow"}
+              {initialValues._id ? t`Update workflow` : t`Create workflow`}
             </Button>
           </Stack>
         </Form>

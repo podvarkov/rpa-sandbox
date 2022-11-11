@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { OpenflowService } from "src/openflow-commander/openflow.service";
+import { OpenflowService } from "src/openflow/openflow.service";
 
 @Injectable()
 export class TemplatesService {

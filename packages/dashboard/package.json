@@ -7,6 +7,11 @@
     "@chakra-ui/react": "^2.3.5",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@fluent/langneg": "^0.6.2",
+    "@lingui/cli": "^3.15.0",
+    "@lingui/core": "^3.15.0",
+    "@lingui/macro": "3.13.3",
+    "@lingui/react": "^3.15.0",
     "@openiap/openflow-api": "^2.1.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -21,6 +26,8 @@
     "eslint-config-airbnb-typescript": "^17.0.0",
     "formik": "^2.2.9",
     "framer-motion": "^7.5.3",
+    "lint-staged": "^13.0.3",
+    "make-plural": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.2",
@@ -33,7 +40,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "extract": "lingui extract",
+    "compile": "lingui compile",
+    "postinstall": "yarn compile"
   },
   "eslintConfig": {
     "extends": [
@@ -57,6 +67,23 @@
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",
-    "eslint-plugin-react": "^7.31.10"
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-string-to-lingui": "^0.18.0"
+  },
+  "lingui": {
+    "locales": [
+      "en-US",
+      "ja-JP"
+    ],
+    "sourceLocale": "en-US",
+    "catalogs": [
+      {
+        "path": "src/locales/{locale}/messages",
+        "include": [
+          "src"
+        ]
+      }
+    ],
+    "format": "po"
   }
 }

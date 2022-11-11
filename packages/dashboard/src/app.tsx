@@ -4,6 +4,7 @@ import Layout from "./components/layout";
 import { TemplatesPage } from "./pages/templates";
 import { WorkflowsPage } from "./pages/workflows";
 import { WorkflowRunnerPage } from "./pages/workflow-runner";
+import { Trans } from "@lingui/macro";
 
 const App: React.FC = () => {
   return (
@@ -12,7 +13,14 @@ const App: React.FC = () => {
         <Route path="/templates" element={<TemplatesPage />} />
         <Route path="/workflows" element={<WorkflowsPage />} />
         <Route path="/execute/:id" element={<WorkflowRunnerPage />} />
-        <Route path="/executions" element={<div>Executions</div>} />
+        <Route
+          path="/executions"
+          element={
+            <div>
+              <Trans>Executions</Trans>
+            </div>
+          }
+        />
         <Route path="/*" element={<Navigate to="/templates" />} />
       </Route>
     </Routes>

@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { WorkflowsService } from "./workflows.service";
 import { WorkflowsController } from "./workflows.controller";
-import { OpenflowModule } from "src/openflow-commander/openflow.module";
+import { OpenflowModule } from "src/openflow/openflow.module";
 
 @Module({
   imports: [OpenflowModule],

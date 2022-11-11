@@ -18,6 +18,7 @@ export const useFetch = <E extends AxiosError, T>(
       .then((res) => setData(res))
       .catch((e) => {
         if (e instanceof CanceledError) {
+          // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
           console.log("Request canceled");
         } else {
           setError(e);

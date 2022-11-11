@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { OpenflowService } from "src/openflow-commander/openflow.service";
+import { OpenflowService } from "src/openflow/openflow.service";
 
 @Module({
   providers: [OpenflowService],

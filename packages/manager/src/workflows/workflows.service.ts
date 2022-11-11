@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CreateWorkflowDto } from "./create-workflow.dto";
-import { OpenflowService } from "src/openflow-commander/openflow.service";
+import { OpenflowService } from "src/openflow/openflow.service";
 import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
 
 @Injectable()

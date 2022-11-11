@@ -17,13 +17,15 @@ import {
 } from "@chakra-ui/react";
 import { useFetch } from "../components/use-fetch";
 import { api, WorkflowTemplate } from "../api";
-// import * as Yup from "yup";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { AxiosError } from "axios";
+import { t, Trans } from "@lingui/macro";
 
 export const WorkflowRunnerPage: React.FC = () => {
   const params = useParams<{ id: string }>();
-  const { data: workflow } = useFetch(() => api.getWorkflow(params.id!), true);
+  const { data: workflow } = useFetch(async () => {
+    if (params.id) return api.getWorkflow(params.id);
+  }, true);
   const [template, setTemplate] = useState<WorkflowTemplate>();
   const [status, setStatus] = useState<{
     status: "info" | "error";
@@ -104,10 +106,12 @@ export const WorkflowRunnerPage: React.FC = () => {
                     <Field name="expiration">
                       {({ field, meta }: FieldProps) => (
                         <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                          <FormLabel>Timeout</FormLabel>
+                          <FormLabel>
+                            <Trans>Timeout</Trans>
+                          </FormLabel>
                           <Input
                             type="number"
-                            placeholder={"timeout"}
+                            placeholder={t`timeout`}
                             {...field}
                           />
                           <FormErrorMessage>{meta.error}</FormErrorMessage>
@@ -127,7 +131,7 @@ export const WorkflowRunnerPage: React.FC = () => {
                       type="submit"
                       colorScheme="teal"
                     >
-                      Execute
+                      <Trans>Execute</Trans>
                     </Button>
                   </Stack>
                 </Form>

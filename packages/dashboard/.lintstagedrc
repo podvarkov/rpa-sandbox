@@ -1,0 +1,6 @@
+{
+  "{src,public}/{**/*,*,**/*,*}.{ts,jsx,tsx,html,vue}": [
+    "eslint --fix",
+    "prettier --write"
+  ]
+}
