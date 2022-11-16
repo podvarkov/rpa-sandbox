@@ -141,7 +141,11 @@ export class OpenflowService {
     const reply = await this.queryCollection<{
       data: {
         message?: string;
-        result: UserWorkflow[];
+        result: Array<
+          Omit<UserWorkflow, "defaultArguments"> & {
+            defaultArguments: string;
+          }
+        >;
         collectionname: string;
       };
       command: string;
@@ -343,8 +347,6 @@ export class OpenflowService {
           const queueMsg = SocketMessage.fromcommand("queuemessage");
           queueMsg.data = JSON.stringify(queueMessageData);
           ws.send(JSON.stringify(queueMsg));
-          console.log(JSON.stringify(queueMsg), "JSON");
-          console.log(workflow.arguments, "DATA");
         }
       });
     });

@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsObject, IsOptional, IsString } from "class-validator";
+import { Transform } from "class-transformer";
 
 export class CreateWorkflowDto {
   @IsOptional()
@@ -17,9 +18,13 @@ export class CreateWorkflowDto {
   @IsString()
   description?: string;
 
-  @IsOptional()
   @IsObject()
-  defaultArguments?: { [key: string]: unknown } = {};
+  @Transform(({ value }) => {
+    return Object.entries(value).reduce((acc, [key, val]) => {
+      return val !== "" && val != null ? { ...acc, [key]: val } : acc;
+    }, {});
+  })
+  defaultArguments: { [key: string]: unknown };
 
   @IsOptional()
   @IsString()
