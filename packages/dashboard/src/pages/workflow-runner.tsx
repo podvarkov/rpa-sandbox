@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   Alert,
@@ -16,38 +16,31 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useFetch } from "../components/use-fetch";
-import { api, WorkflowTemplate } from "../api";
+import { api } from "../api";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { AxiosError } from "axios";
 import { t, Trans } from "@lingui/macro";
+import { ParametersFormField } from "../components/parameter-form-field";
 
 export const WorkflowRunnerPage: React.FC = () => {
   const params = useParams<{ id: string }>();
   const { data: workflow } = useFetch(async () => {
     if (params.id) return api.getWorkflow(params.id);
   }, true);
-  const [template, setTemplate] = useState<WorkflowTemplate>();
+
   const [status, setStatus] = useState<{
     status: "info" | "error";
     message: string;
   }>();
 
-  useEffect(() => {
-    if (workflow?.templateId) {
-      api
-        .getTemplate("openrpa", workflow.templateId)
-        .then((res) => setTemplate(res));
-    }
-  }, [workflow?.templateId]);
-
-  // todo validate schema from params
-
   return (
     <Box h={"100%"}>
-      {workflow && template ? (
+      {workflow ? (
         <Container p={4}>
           <VStack spacing={4}>
-            <Heading size="lg">{workflow.name}</Heading>
+            <Heading size="lg" p={4}>
+              {workflow.name}
+            </Heading>
             <Formik
               initialValues={{
                 arguments: workflow.defaultArguments || {},
@@ -79,30 +72,22 @@ export const WorkflowRunnerPage: React.FC = () => {
               {({ isSubmitting }) => (
                 <Form style={{ width: "100%" }}>
                   <Stack spacing="4">
-                    {(template.Parameters || [])
+                    {(workflow.template.Parameters || [])
                       .sort((a, b) => (a.name > b.name ? -1 : 1))
                       .sort((a) => (a.direction === "in" ? -1 : 1))
-                      .map(({ type, name }) => {
+                      .map(({ type, name, direction }) => {
                         return (
-                          <Field name={`arguments.${name}`} key={name}>
-                            {({ field, meta }: FieldProps) => {
-                              return (
-                                <FormControl
-                                  isInvalid={!!(meta.touched && meta.error)}
-                                >
-                                  <FormLabel>
-                                    {name}({type})
-                                  </FormLabel>
-                                  <Input placeholder={name} {...field} />
-                                  <FormErrorMessage>
-                                    {meta.error}
-                                  </FormErrorMessage>
-                                </FormControl>
-                              );
-                            }}
-                          </Field>
+                          <ParametersFormField
+                            key={`arguments.${name}`}
+                            name={`arguments.${name}`}
+                            label={name}
+                            placeholder={name}
+                            type={type}
+                            disabled={direction === "out"}
+                          />
                         );
                       })}
+
                     <Field name="expiration">
                       {({ field, meta }: FieldProps) => (
                         <FormControl isInvalid={!!(meta.touched && meta.error)}>

@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -14,6 +15,7 @@ import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";
 import { CreateWorkflowDto } from "./create-workflow.dto";
 import { Session } from "../auth/auth.service";
 import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
+import { GetWorkflowQueryParamsDto } from "src/workflows/get-workflow-query-params.dto";
 
 @Controller("api/workflows")
 export class WorkflowsController {
@@ -52,8 +54,16 @@ export class WorkflowsController {
   }
 
   @Get(":id")
+  @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
   @UseGuards(JwtAuthGuard)
-  async get(@Param("id") id: string, @UserSession() session: Session) {
+  async get(
+    @Query() queryParams: GetWorkflowQueryParamsDto,
+    @Param("id") id: string,
+    @UserSession() session: Session
+  ) {
+    if (queryParams.withTemplate) {
+      return this.workflowsService.getWithTemplate(session.jwt, id);
+    }
     return this.workflowsService.get(session.jwt, id);
   }
 }

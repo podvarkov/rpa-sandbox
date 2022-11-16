@@ -11,6 +11,17 @@ export type Session = {
   jwt: string;
 } | null;
 
+export enum ParametersType {
+  "BOOLEAN" = "System.Boolean",
+  "ARRAY<BOOLEAN>" = "System.Boolean[]",
+  "NUMBER" = "System.Int32",
+  "ARRAY<NUMBER>" = "System.Int32[]",
+  "OBJECT" = "System.Object",
+  "ARRAY<OBJECT>" = "System.Object[]",
+  "STRING" = "System.String",
+  "ARRAY<STRING>" = "System.String[]",
+}
+
 export type WorkflowTemplate = {
   _id: string;
   projectandname?: string;
@@ -21,7 +32,11 @@ export type WorkflowTemplate = {
   _modified: string;
   _created: string;
   _createdby: string;
-  Parameters?: { type: string; direction: string; name: string }[];
+  Parameters?: {
+    type: ParametersType;
+    direction: string;
+    name: string;
+  }[];
   collection: string;
 };
 
@@ -107,7 +122,11 @@ class Api {
   }
 
   getWorkflow(id: string) {
-    return this.axios.get<Workflow>(`workflows/${id}`).then(({ data }) => data);
+    return this.axios
+      .get<Workflow & { template: WorkflowTemplate }>(
+        `workflows/${id}?withTemplate=true`
+      )
+      .then(({ data }) => data);
   }
 
   upsertWorkflow(params: WorkflowFormValues) {

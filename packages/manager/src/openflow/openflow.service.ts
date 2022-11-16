@@ -343,6 +343,8 @@ export class OpenflowService {
           const queueMsg = SocketMessage.fromcommand("queuemessage");
           queueMsg.data = JSON.stringify(queueMessageData);
           ws.send(JSON.stringify(queueMsg));
+          console.log(JSON.stringify(queueMsg), "JSON");
+          console.log(workflow.arguments, "DATA");
         }
       });
     });

@@ -10,6 +10,8 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
+import { WorkflowTemplate } from "../api";
+import { ParametersFormField } from "../components/parameter-form-field";
 
 export type WorkflowFormValues = {
   _id?: string;
@@ -20,9 +22,10 @@ export type WorkflowFormValues = {
 };
 
 export const WorkflowForm: React.FC<{
+  templateParameters: WorkflowTemplate["Parameters"];
   initialValues: WorkflowFormValues;
   onSubmit: (values: WorkflowFormValues) => Promise<unknown>;
-}> = ({ initialValues, onSubmit }) => {
+}> = ({ initialValues, onSubmit, templateParameters }) => {
   return (
     <Formik
       initialValues={initialValues}
@@ -67,23 +70,18 @@ export const WorkflowForm: React.FC<{
               }}
             </Field>
 
-            {Object.keys(initialValues.defaultArguments || {}).map((key) => {
-              return (
-                <Field name={`defaultArguments.${key}`} key={key}>
-                  {({ field, meta }: FieldProps) => {
-                    return (
-                      <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <FormLabel>
-                          <Trans>Input argument: {key}</Trans>
-                        </FormLabel>
-                        <Input placeholder={t`Input argument`} {...field} />
-                        <FormErrorMessage>{meta.error}</FormErrorMessage>
-                      </FormControl>
-                    );
-                  }}
-                </Field>
-              );
-            })}
+            {(templateParameters || [])
+              .filter(({ direction }) => direction === "in")
+              .map(({ type, name }) => (
+                <ParametersFormField
+                  key={name}
+                  type={type}
+                  label={t`Input argument: ${name}`}
+                  placeholder={t`Input argument: ${name}`}
+                  disabled={false}
+                  name={`defaultArguments.${name}`}
+                />
+              ))}
 
             <Button isLoading={isSubmitting} type="submit" colorScheme="teal">
               {initialValues._id ? t`Update workflow` : t`Create workflow`}

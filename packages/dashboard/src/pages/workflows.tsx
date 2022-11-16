@@ -24,11 +24,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useFetch } from "../components/use-fetch";
-import { api, Workflow } from "../api";
+import { api, Workflow, WorkflowTemplate } from "../api";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { WorkflowForm } from "../components/workflow-form";
 import { useNavigate } from "react-router-dom";
 import { t, Trans } from "@lingui/macro";
+import { useProgress } from "../components/progress-provider";
 
 export const WorkflowsPage: React.FC = () => {
   const toast = useToast();
@@ -39,8 +40,11 @@ export const WorkflowsPage: React.FC = () => {
     fetch,
   } = useFetch(api.getWorkflows.bind(api), true);
   const [deleteIntent, setDeleteIntent] = useState<string>();
-  const [editIntent, setEditIntent] = useState<Workflow>();
+  const [editIntent, setEditIntent] = useState<
+    Workflow & { template: WorkflowTemplate }
+  >();
   const cancelRef = useRef(null);
+  const { setVisible } = useProgress();
 
   useEffect(() => {
     if (error) {
@@ -79,6 +83,7 @@ export const WorkflowsPage: React.FC = () => {
             </ModalHeader>
             <ModalBody fontFamily="roboto">
               <WorkflowForm
+                templateParameters={editIntent.template.Parameters || []}
                 initialValues={editIntent}
                 onSubmit={(values) => {
                   return api
@@ -197,7 +202,20 @@ export const WorkflowsPage: React.FC = () => {
                   "Edit"
                 }
                 onClick={() => {
-                  setEditIntent(wf);
+                  setVisible(true);
+                  api
+                    .getWorkflow(wf._id)
+                    .then((data) => setEditIntent(data))
+                    .catch((e) => {
+                      console.error(e);
+                      toast({
+                        title: t`There was an error while loading`,
+                        status: "error",
+                        position: "top-right",
+                        duration: 1000,
+                      });
+                    })
+                    .finally(() => setVisible(false));
                 }}
                 icon={<EditIcon />}
               />

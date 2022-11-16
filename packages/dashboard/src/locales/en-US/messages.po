@@ -13,23 +13,27 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/workflows.tsx:124
+#: src/components/parameter-form-field.tsx:78
+msgid "Add field"
+msgstr "Add field"
+
+#: src/pages/workflows.tsx:129
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr "Are you sure? You can not undo this action afterwards."
 
-#: src/pages/templates.tsx:91
+#: src/pages/templates.tsx:92
 msgid "Can not create workflow"
 msgstr "Can not create workflow"
 
-#: src/pages/workflows.tsx:158
+#: src/pages/workflows.tsx:163
 msgid "Can not delete workflow"
 msgstr "Can not delete workflow"
 
-#: src/pages/workflows.tsx:99
+#: src/pages/workflows.tsx:104
 msgid "Can not edit workflow"
 msgstr "Can not edit workflow"
 
-#: src/pages/workflows.tsx:136
+#: src/pages/workflows.tsx:141
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -42,15 +46,15 @@ msgstr "Confirm password"
 msgid "Create account"
 msgstr "Create account"
 
-#: src/components/workflow-form.tsx:89
+#: src/components/workflow-form.tsx:87
 msgid "Create workflow"
 msgstr "Create workflow"
 
-#: src/pages/workflows.tsx:167
+#: src/pages/workflows.tsx:172
 msgid "Delete"
 msgstr "Delete"
 
-#: src/pages/workflows.tsx:120
+#: src/pages/workflows.tsx:125
 msgid "Delete workflow"
 msgstr "Delete workflow"
 
@@ -64,7 +68,7 @@ msgstr "Email"
 msgid "Email address"
 msgstr "Email address"
 
-#: src/pages/workflow-runner.tsx:134
+#: src/pages/workflow-runner.tsx:119
 msgid "Execute"
 msgstr "Execute"
 
@@ -78,12 +82,17 @@ msgid "Have an account?"
 msgstr "Have an account?"
 
 #: src/components/workflow-form.tsx:79
-msgid "Input argument"
-msgstr "Input argument"
+#~ msgid "Input argument"
+#~ msgstr "Input argument"
 
 #: src/components/workflow-form.tsx:77
-msgid "Input argument: {key}"
-msgstr "Input argument: {key}"
+#~ msgid "Input argument: {key}"
+#~ msgstr "Input argument: {key}"
+
+#: src/components/workflow-form.tsx:79
+#: src/components/workflow-form.tsx:80
+msgid "Input argument: {name}"
+msgstr "Input argument: {name}"
 
 #: src/pages/sign-in.tsx:61
 #: src/pages/sign-up.tsx:67
@@ -91,16 +100,16 @@ msgid "Must be a valid email"
 msgstr "Must be a valid email"
 
 #: src/pages/templates.tsx:62
-#: src/pages/workflows.tsx:76
+#: src/pages/workflows.tsx:80
 msgid "New workflow"
 msgstr "New workflow"
 
-#: src/pages/templates.tsx:125
-#: src/pages/workflows.tsx:217
+#: src/pages/templates.tsx:126
+#: src/pages/workflows.tsx:235
 msgid "No description"
 msgstr "No description"
 
-#: src/pages/templates.tsx:138
+#: src/pages/templates.tsx:139
 msgid "No parameters"
 msgstr "No parameters"
 
@@ -112,7 +121,7 @@ msgstr "No templates found"
 msgid "Not a member?"
 msgstr "Not a member?"
 
-#: src/components/workflow-form.tsx:63
+#: src/components/workflow-form.tsx:66
 msgid "Optional description"
 msgstr "Optional description"
 
@@ -127,7 +136,7 @@ msgstr "Password"
 msgid "Passwords must match"
 msgstr "Passwords must match"
 
-#: src/pages/workflows.tsx:229
+#: src/pages/workflows.tsx:247
 msgid "Run workflow"
 msgstr "Run workflow"
 
@@ -155,11 +164,12 @@ msgid "Templates"
 msgstr "Templates"
 
 #: src/pages/templates.tsx:34
-#: src/pages/workflows.tsx:48
+#: src/pages/workflows.tsx:52
+#: src/pages/workflows.tsx:212
 msgid "There was an error while loading"
 msgstr "There was an error while loading"
 
-#: src/components/workflow-form.tsx:35
+#: src/components/workflow-form.tsx:38
 #: src/pages/sign-in.tsx:62
 #: src/pages/sign-in.tsx:63
 #: src/pages/sign-up.tsx:68
@@ -168,15 +178,15 @@ msgstr "There was an error while loading"
 msgid "This field is required"
 msgstr "This field is required"
 
-#: src/pages/workflow-runner.tsx:110
+#: src/pages/workflow-runner.tsx:95
 msgid "Timeout"
 msgstr "Timeout"
 
-#: src/components/workflow-form.tsx:89
+#: src/components/workflow-form.tsx:87
 msgid "Update workflow"
 msgstr "Update workflow"
 
-#: src/pages/templates.tsx:152
+#: src/pages/templates.tsx:153
 msgid "Use template"
 msgstr "Use template"
 
@@ -184,23 +194,23 @@ msgstr "Use template"
 msgid "User {0} already exists"
 msgstr "User {0} already exists"
 
-#: src/pages/templates.tsx:81
+#: src/pages/templates.tsx:82
 msgid "Workflow created"
 msgstr "Workflow created"
 
-#: src/pages/workflows.tsx:147
+#: src/pages/workflows.tsx:152
 msgid "Workflow deleted"
 msgstr "Workflow deleted"
 
-#: src/components/workflow-form.tsx:61
+#: src/components/workflow-form.tsx:64
 msgid "Workflow description:"
 msgstr "Workflow description:"
 
-#: src/components/workflow-form.tsx:47
+#: src/components/workflow-form.tsx:50
 msgid "Workflow name:"
 msgstr "Workflow name:"
 
-#: src/pages/workflows.tsx:88
+#: src/pages/workflows.tsx:93
 msgid "Workflow updated"
 msgstr "Workflow updated"
 
@@ -212,11 +222,11 @@ msgstr "Workflows"
 msgid "Wrong password or username"
 msgstr "Wrong password or username"
 
-#: src/pages/workflows.tsx:59
+#: src/pages/workflows.tsx:63
 msgid "Your workflows will be listed here"
 msgstr "Your workflows will be listed here"
 
-#: src/pages/workflow-runner.tsx:114
+#: src/pages/workflow-runner.tsx:99
 msgid "timeout"
 msgstr "timeout"
 

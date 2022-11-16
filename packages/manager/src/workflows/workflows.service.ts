@@ -27,6 +27,16 @@ export class WorkflowsService {
     return this.openflowService.getUserWorkflow(jwt, id);
   }
 
+  async getWithTemplate(jwt: string, id: string) {
+    const workflow = await this.get(jwt, id);
+    const template = await this.openflowService.getRobotWorkflow(
+      jwt,
+      workflow.templateId
+    );
+
+    return { ...workflow, template };
+  }
+
   execute(jwt: string, body: ExecuteWorkflowDto) {
     return this.openflowService.executeWorkflow(body);
   }

@@ -126,7 +126,7 @@ const Layout: React.FC = () => {
         <Header />
         {visible ? <Progress size="xs" isIndeterminate /> : null}
 
-        <Box p={4} bg="gray.50" h={"100%"}>
+        <Box p={4} bg="gray.50" h={"100%"} overflowY="scroll">
           <Outlet />
         </Box>
 

@@ -65,6 +65,7 @@ export const TemplatesPage: React.FC = () => {
             </ModalHeader>
             <ModalBody fontFamily="roboto">
               <WorkflowForm
+                templateParameters={selectedTemplate.Parameters}
                 initialValues={{
                   name: selectedTemplate.name,
                   templateId: selectedTemplate._id,
