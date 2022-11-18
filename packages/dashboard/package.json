@@ -43,7 +43,8 @@
     "eject": "react-scripts eject",
     "extract": "lingui extract",
     "compile": "lingui compile",
-    "postinstall": "yarn compile"
+    "postinstall": "yarn compile",
+    "prebuild": "lingui compile"
   },
   "eslintConfig": {
     "extends": [
