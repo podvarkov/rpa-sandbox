@@ -27,7 +27,7 @@ export class AuthService {
     this.logger.debug({ message: "validate user", username, password });
     // @ts-expect-error wrong types
     const http = axios.create({
-      baseURL: this.config.OPENFLOW_API_HOST,
+      baseURL: this.config.OPENFLOW_URL,
       withCredentials: true,
       jar,
     });
@@ -37,7 +37,7 @@ export class AuthService {
       username,
       password,
     });
-    const cookies = jar.getCookiesSync(this.config.OPENFLOW_API_HOST);
+    const cookies = jar.getCookiesSync(this.config.OPENFLOW_URL);
     this.logger.debug({ message: "cookies received, getting user", cookies });
     return await http.get<Session>("/jwtlong").then(({ data }) => {
       this.logger.debug({ message: "user received", data });

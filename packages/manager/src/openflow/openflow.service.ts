@@ -49,8 +49,24 @@ type UserWorkflow = {
 @Injectable()
 export class OpenflowService {
   private readonly logger = new Logger(OpenflowService.name);
+  private robotId: string | null;
 
   constructor(private readonly config: ConfigProvider) {}
+
+  private async getRobotId(username: string) {
+    if (this.robotId) return this.robotId;
+    const reply = await this.queryCollection<{
+      data?: { result?: TokenUser[] };
+    }>(this.config.OPENFLOW_ROOT_TOKEN, {
+      collectionname: "users",
+      query: { username },
+    });
+
+    this.robotId = reply?.data?.result[0]?._id;
+    if (!this.robotId)
+      throw new Error(`Can not get robot with username: ${username}`);
+    return this.robotId;
+  }
 
   private parseMessageData<T>(data: string): T | null {
     if (data) {
@@ -274,7 +290,9 @@ export class OpenflowService {
   }
 
   async executeWorkflow(workflow: ExecuteWorkflowDto) {
-    const ws = new WebSocket(this.config.OPENFLOW_WS_HOST);
+    const robotId = await this.getRobotId(this.config.OPENFLOW_ROBOT_USERNAME);
+
+    const ws = new WebSocket(this.config.OPENFLOW_WS_URL);
     return new Promise((resolve, reject) => {
       const registerQueueMsg = SocketMessage.fromcommand("registerqueue");
       registerQueueMsg.data = JSON.stringify({
@@ -333,7 +351,7 @@ export class OpenflowService {
           const [queueMessageData] = QueueMessage.parse({
             jwt: this.config.OPENFLOW_ROOT_TOKEN,
             priority: 2,
-            queuename: this.config.OPENFLOW_ROBOT_ID,
+            queuename: robotId,
             replyto: this.parseMessageData<{ queuename: string }>(
               socketMessage.data
             ).queuename,
@@ -357,7 +375,7 @@ export class OpenflowService {
     data: string | unknown = ""
   ): Promise<T | null> {
     return new Promise((resolve, reject) => {
-      const ws = new WebSocket(this.config.OPENFLOW_WS_HOST);
+      const ws = new WebSocket(this.config.OPENFLOW_WS_URL);
 
       const msg = SocketMessage.fromcommand(cmd);
       msg.data = typeof data === "string" ? data : JSON.stringify(data);

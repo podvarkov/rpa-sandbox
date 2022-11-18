@@ -6,6 +6,8 @@ import { AuthModule } from "./auth/auth.module";
 import { OpenflowModule } from "./openflow/openflow.module";
 import { TemplatesModule } from "./templates/templates.module";
 import { WorkflowsModule } from "./workflows/workflows.module";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import { join } from "path";
 
 @Module({
   imports: [
@@ -14,6 +16,9 @@ import { WorkflowsModule } from "./workflows/workflows.module";
     OpenflowModule,
     TemplatesModule,
     WorkflowsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, "static"),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

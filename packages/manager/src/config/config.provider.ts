@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { plainToClass, Transform } from "class-transformer";
 import { validateSync, IsOptional, IsString } from "class-validator";
+import { parse as parseUrl } from "url";
 
 @Injectable()
 export class ConfigProvider {
@@ -8,20 +9,42 @@ export class ConfigProvider {
 
   @Transform(({ value }) => Number.parseInt(value))
   @IsOptional()
+  /**
+   * port on which the server is listening
+   */
   PORT = 3000;
 
+  /**
+   * Url of openaip api
+   * @example https://iap.example.com
+   */
   @IsString()
-  OPENFLOW_API_HOST!: string;
+  OPENFLOW_URL!: string;
 
+  /**
+   * Url of openaip websocket endpoint
+   */
+  get OPENFLOW_WS_URL(): string {
+    const { host, protocol } = parseUrl(this.OPENFLOW_URL);
+    return `${protocol === "https:" ? "wss:" : "ws:"}//${host}`;
+  }
+
+  /**
+   * Username of robot to run workflows
+   * @example admin@example.com
+   */
   @IsString()
-  OPENFLOW_WS_HOST!: string;
+  OPENFLOW_ROBOT_USERNAME!: string;
 
-  @IsString()
-  OPENFLOW_ROBOT_ID!: string;
-
+  /**
+   * AES key of openaip instance
+   */
   @IsString()
   OPENFLOW_AES_SECRET!: string;
 
+  /**
+   * openaip root user's jwt token
+   */
   @IsString()
   OPENFLOW_ROOT_TOKEN!: string;
 }

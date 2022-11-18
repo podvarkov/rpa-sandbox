@@ -7,7 +7,10 @@ import { ConfigProvider } from "./config/config.provider";
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
     logger: WinstonModule.createLogger({
-      format: winston.format.combine(winston.format.json()),
+      format: winston.format.combine(
+        winston.format.json(),
+        winston.format.prettyPrint()
+      ),
       transports: [new winston.transports.Console()],
       level: "debug",
     }),
