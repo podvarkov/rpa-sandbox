@@ -17,6 +17,7 @@ import {
 } from "@openiap/openflow-api";
 import { WebSocket } from "ws";
 import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
+import { CryptService } from "src/crypt/crypt.service";
 
 type Workflow = {
   _id: string;
@@ -51,15 +52,19 @@ export class OpenflowService {
   private readonly logger = new Logger(OpenflowService.name);
   private robotId: string | null;
 
-  constructor(private readonly config: ConfigProvider) {}
+  constructor(
+    private readonly config: ConfigProvider,
+    private readonly cryptService: CryptService
+  ) {}
 
   private async getRobotId(username: string) {
     if (this.robotId) return this.robotId;
     const reply = await this.queryCollection<{
       data?: { result?: TokenUser[] };
-    }>(this.config.OPENFLOW_ROOT_TOKEN, {
+    }>(this.cryptService.rootToken, {
       collectionname: "users",
       query: { username },
+      projection: ["_id"],
     });
 
     this.robotId = reply?.data?.result[0]?._id;
@@ -279,7 +284,7 @@ export class OpenflowService {
         emailvalidated: true,
         formvalidated: true,
       },
-      jwt: this.config.OPENFLOW_ROOT_TOKEN,
+      jwt: this.cryptService.rootToken,
     });
 
     const reply = await this.sendCommand<{
@@ -300,7 +305,7 @@ export class OpenflowService {
         count: 1,
         index: 0,
         data: '{"priority":2}',
-        jwt: this.config.OPENFLOW_ROOT_TOKEN,
+        jwt: this.cryptService.rootToken,
       });
 
       ws.on("open", () => {
@@ -349,7 +354,7 @@ export class OpenflowService {
 
         if (socketMessage.replyto === registerQueueMsg.id) {
           const [queueMessageData] = QueueMessage.parse({
-            jwt: this.config.OPENFLOW_ROOT_TOKEN,
+            jwt: this.cryptService.rootToken,
             priority: 2,
             queuename: robotId,
             replyto: this.parseMessageData<{ queuename: string }>(

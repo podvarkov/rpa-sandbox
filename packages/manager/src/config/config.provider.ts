@@ -41,12 +41,6 @@ export class ConfigProvider {
    */
   @IsString()
   OPENFLOW_AES_SECRET!: string;
-
-  /**
-   * openaip root user's jwt token
-   */
-  @IsString()
-  OPENFLOW_ROOT_TOKEN!: string;
 }
 
 export const configFactory = {
