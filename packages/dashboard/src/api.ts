@@ -52,6 +52,7 @@ export type Workflow = {
   _createdby: string;
   _createdbyid: string;
   _type: string;
+  expiration: number;
 };
 
 type AuthStateChangedCb = (user: Session) => void;
@@ -109,9 +110,9 @@ class Api {
       .then(({ data }) => data);
   }
 
-  getTemplate(type: string, id: string) {
+  getTemplate(type: string, id: string, signal?: AbortSignal) {
     return this.axios
-      .get<WorkflowTemplate>(`templates/${type}/${id}`)
+      .get<WorkflowTemplate>(`templates/${type}/${id}`, { signal })
       .then(({ data }) => data);
   }
 
@@ -121,20 +122,25 @@ class Api {
       .then(({ data }) => data);
   }
 
-  getWorkflow(id: string) {
+  getWorkflowWithTemplate(id: string, signal?: AbortSignal) {
     return this.axios
       .get<Workflow & { template: WorkflowTemplate }>(
-        `workflows/${id}?withTemplate=true`
+        `workflows/${id}?withTemplate=true`,
+        { signal }
       )
       .then(({ data }) => data);
   }
 
   upsertWorkflow(params: WorkflowFormValues) {
-    return this.axios.post("workflows", params);
+    return this.axios
+      .post<Workflow>("workflows", params)
+      .then(({ data }) => data);
   }
 
   deleteWorkflow(id: string) {
-    return this.axios.delete(`workflows/${id}`);
+    return this.axios
+      .delete<{ id: string }>(`workflows/${id}`)
+      .then(({ data }) => data);
   }
 
   executeWorkflow(data: {

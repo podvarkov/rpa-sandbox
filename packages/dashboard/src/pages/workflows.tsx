@@ -15,36 +15,52 @@ import {
   Heading,
   HStack,
   IconButton,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { useFetch } from "../components/use-fetch";
-import { api, Workflow, WorkflowTemplate } from "../api";
+import { api, Workflow } from "../api";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { WorkflowForm } from "../components/workflow-form";
 import { useNavigate } from "react-router-dom";
 import { t, Trans } from "@lingui/macro";
-import { useProgress } from "../components/progress-provider";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 
 export const WorkflowsPage: React.FC = () => {
   const toast = useToast();
   const navigate = useNavigate();
-  const {
-    data: workflows,
-    error,
-    fetch,
-  } = useFetch(api.getWorkflows.bind(api), true);
+  const { data: workflows, error } = useQuery("workflows", ({ signal }) =>
+    api.getWorkflows(signal)
+  );
+  const client = useQueryClient();
   const [deleteIntent, setDeleteIntent] = useState<string>();
-  const [editIntent, setEditIntent] = useState<
-    Workflow & { template: WorkflowTemplate }
-  >();
   const cancelRef = useRef(null);
-  const { setVisible } = useProgress();
+  const mutation = useMutation(
+    async () => {
+      return deleteIntent ? api.deleteWorkflow(deleteIntent) : undefined;
+    },
+    {
+      onSuccess: (data) => {
+        toast({
+          title: t`Workflow deleted`,
+          status: "success",
+          position: "top-right",
+          duration: 1000,
+        });
+        setDeleteIntent(undefined);
+        client.setQueryData<Workflow[]>("workflows", (res) =>
+          (res || []).filter(({ _id }) => data?.id !== _id)
+        );
+      },
+      onError: (e) => {
+        console.error(e);
+        toast({
+          title: t`Can not delete workflow`,
+          status: "error",
+          position: "top-right",
+          duration: 1000,
+        });
+      },
+    }
+  );
 
   useEffect(() => {
     if (error) {
@@ -65,55 +81,6 @@ export const WorkflowsPage: React.FC = () => {
     </Center>
   ) : (
     <>
-      {editIntent ? (
-        <Modal
-          size="lg"
-          isOpen={!!editIntent}
-          onClose={() => setEditIntent(undefined)}
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>
-              <HStack>
-                <Avatar size={"sm"} src="/wf-icon.png" />
-                <Heading fontFamily={"roboto"} size={"md"}>
-                  <Trans>New workflow</Trans>
-                </Heading>
-              </HStack>
-            </ModalHeader>
-            <ModalBody fontFamily="roboto">
-              <WorkflowForm
-                templateParameters={editIntent.template.Parameters || []}
-                initialValues={editIntent}
-                onSubmit={(values) => {
-                  return api
-                    .upsertWorkflow(values)
-                    .then(() => {
-                      toast({
-                        title: t`Workflow updated`,
-                        status: "success",
-                        position: "top-right",
-                        duration: 1000,
-                      });
-                      setEditIntent(undefined);
-                      void fetch();
-                    })
-                    .catch((e) => {
-                      console.error(e);
-                      toast({
-                        title: t`Can not edit workflow`,
-                        status: "error",
-                        position: "top-right",
-                        duration: 1000,
-                      });
-                    });
-                }}
-              />
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      ) : null}
-
       <AlertDialog
         isOpen={!!deleteIntent}
         leastDestructiveRef={cancelRef}
@@ -141,32 +108,11 @@ export const WorkflowsPage: React.FC = () => {
                 <Trans>Cancel</Trans>
               </Button>
               <Button
+                isLoading={mutation.isLoading}
                 colorScheme="red"
                 ml={3}
                 onClick={() => {
-                  if (deleteIntent) {
-                    api
-                      .deleteWorkflow(deleteIntent)
-                      .then(() => {
-                        toast({
-                          title: t`Workflow deleted`,
-                          status: "success",
-                          position: "top-right",
-                          duration: 1000,
-                        });
-                        setDeleteIntent(undefined);
-                        void fetch();
-                      })
-                      .catch((e) => {
-                        console.error(e);
-                        toast({
-                          title: t`Can not delete workflow`,
-                          status: "error",
-                          position: "top-right",
-                          duration: 1000,
-                        });
-                      });
-                  }
+                  mutation.mutate();
                 }}
               >
                 <Trans>Delete</Trans>
@@ -202,20 +148,7 @@ export const WorkflowsPage: React.FC = () => {
                   "Edit"
                 }
                 onClick={() => {
-                  setVisible(true);
-                  api
-                    .getWorkflow(wf._id)
-                    .then((data) => setEditIntent(data))
-                    .catch((e) => {
-                      console.error(e);
-                      toast({
-                        title: t`There was an error while loading`,
-                        status: "error",
-                        position: "top-right",
-                        duration: 1000,
-                      });
-                    })
-                    .finally(() => setVisible(false));
+                  navigate(wf._id);
                 }}
                 icon={<EditIcon />}
               />
@@ -241,7 +174,7 @@ export const WorkflowsPage: React.FC = () => {
                 rounded="sm"
                 colorScheme="teal"
                 onClick={() => {
-                  navigate(`/execute/${wf._id}`);
+                  navigate(`execute/${wf._id}`);
                 }}
               >
                 <Trans>Run workflow</Trans>

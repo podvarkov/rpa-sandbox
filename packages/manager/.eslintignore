@@ -1,5 +1,4 @@
 **/*.js
 **/*.html
 **/*.spec.ts
-react-app-env.d.ts
 node_modules

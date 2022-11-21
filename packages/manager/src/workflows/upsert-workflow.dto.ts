@@ -1,7 +1,13 @@
-import { IsNotEmpty, IsObject, IsOptional, IsString } from "class-validator";
+import {
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+} from "class-validator";
 import { Transform } from "class-transformer";
 
-export class CreateWorkflowDto {
+export class UpsertWorkflowDto {
   @IsOptional()
   @IsString()
   _id: string;
@@ -13,6 +19,10 @@ export class CreateWorkflowDto {
   @IsNotEmpty()
   @IsString()
   templateId: string;
+
+  @IsNotEmpty()
+  @IsNumber()
+  expiration: string;
 
   @IsOptional()
   @IsString()

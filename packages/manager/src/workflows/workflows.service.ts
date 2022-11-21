@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { CreateWorkflowDto } from "./create-workflow.dto";
+import { UpsertWorkflowDto } from "src/workflows/upsert-workflow.dto";
 import { OpenflowService } from "../openflow/openflow.service";
 import { ExecuteWorkflowDto } from "./execute-workflow.dto";
 import { CryptService } from "src/crypt/crypt.service";
@@ -11,7 +11,7 @@ export class WorkflowsService {
     private readonly cryptService: CryptService
   ) {}
 
-  upsert(jwt: string, workflow: CreateWorkflowDto) {
+  upsert(jwt: string, workflow: UpsertWorkflowDto) {
     const workflowData = {
       ...workflow,
       defaultArguments: this.cryptService.encrypt(
@@ -42,22 +42,28 @@ export class WorkflowsService {
   }
 
   get(jwt: string, id: string) {
-    return this.openflowService.getUserWorkflow(jwt, id).then((workflow) => ({
-      ...workflow,
-      defaultArguments: JSON.parse(
-        this.cryptService.decrypt(workflow.defaultArguments)
-      ),
-    }));
+    return this.openflowService.getUserWorkflow(jwt, id).then((workflow) => {
+      return workflow
+        ? {
+            ...workflow,
+            defaultArguments: JSON.parse(
+              this.cryptService.decrypt(workflow.defaultArguments)
+            ),
+          }
+        : null;
+    });
   }
 
   async getWithTemplate(jwt: string, id: string) {
     const workflow = await this.get(jwt, id);
-    const template = await this.openflowService.getRobotWorkflow(
-      jwt,
-      workflow.templateId
-    );
-
-    return { ...workflow, template };
+    if (workflow) {
+      const template = await this.openflowService.getRobotWorkflow(
+        jwt,
+        workflow.templateId
+      );
+      return { ...workflow, template };
+    }
+    return null;
   }
 
   execute(jwt: string, body: ExecuteWorkflowDto) {

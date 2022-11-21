@@ -12,10 +12,10 @@ import {
 } from "@nestjs/common";
 import { WorkflowsService } from "./workflows.service";
 import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";
-import { CreateWorkflowDto } from "./create-workflow.dto";
 import { Session } from "../auth/auth.service";
-import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
-import { GetWorkflowQueryParamsDto } from "src/workflows/get-workflow-query-params.dto";
+import { UpsertWorkflowDto } from "./upsert-workflow.dto";
+import { ExecuteWorkflowDto } from "./execute-workflow.dto";
+import { GetWorkflowQueryParamsDto } from "./get-workflow-query-params.dto";
 
 @Controller("api/workflows")
 export class WorkflowsController {
@@ -41,7 +41,7 @@ export class WorkflowsController {
   @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
   @UseGuards(JwtAuthGuard)
   async upsert(
-    @Body() body: CreateWorkflowDto,
+    @Body() body: UpsertWorkflowDto,
     @UserSession() session: Session
   ) {
     return this.workflowsService.upsert(session.jwt, body);

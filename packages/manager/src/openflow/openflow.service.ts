@@ -45,6 +45,11 @@ type UserWorkflow = {
   _createdby: string;
   _createdbyid: string;
   _type: string;
+  expiration: number;
+};
+
+type EncryptedUserWorkflow = Omit<UserWorkflow, "defaultArguments"> & {
+  defaultArguments: string;
 };
 
 @Injectable()
@@ -162,11 +167,7 @@ export class OpenflowService {
     const reply = await this.queryCollection<{
       data: {
         message?: string;
-        result: Array<
-          Omit<UserWorkflow, "defaultArguments"> & {
-            defaultArguments: string;
-          }
-        >;
+        result: Array<EncryptedUserWorkflow>;
         collectionname: string;
       };
       command: string;
@@ -185,9 +186,12 @@ export class OpenflowService {
     }));
   }
 
-  async getUserWorkflow(jwt: string, id: string) {
+  async getUserWorkflow(
+    jwt: string,
+    id: string
+  ): Promise<EncryptedUserWorkflow | null> {
     const data = await this.listUserWorkflows(jwt, { _id: id });
-    return data[0];
+    return data.length > 0 ? data[0] : null;
   }
 
   async deleteUserWorkflow(jwt: string, id: string) {
@@ -233,14 +237,14 @@ export class OpenflowService {
 
     const reply = await this.sendCommand<{
       command: string;
-      data: { message?: string };
+      data: { message?: string; result: UserWorkflow };
     }>("insertone", insertEntityData);
 
     if (reply.command === "error") {
       throw new BadRequestException(reply.data.message);
     }
 
-    return reply;
+    return reply.data.result;
   }
 
   async updateEntity(jwt: string, item: { [key: string]: unknown }) {
@@ -255,14 +259,14 @@ export class OpenflowService {
 
     const reply = await this.sendCommand<{
       command: string;
-      data: { message?: string };
+      data: { message?: string; result: UserWorkflow };
     }>("updateone", updateEntityData);
 
     if (reply.command === "error") {
       throw new BadRequestException(reply.data.message);
     }
 
-    return reply;
+    return reply.data.result;
   }
 
   async createUser(data: { username: string; password: string }) {

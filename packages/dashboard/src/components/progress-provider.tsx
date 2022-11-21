@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useIsFetching } from "react-query";
 
 interface ProgressContextType {
   visible: boolean;
@@ -16,6 +17,10 @@ export const ProgressProvider = ({
   children: React.ReactNode;
 }) => {
   const [visible, setVisible] = useState(false);
+  const isFetching = useIsFetching();
+  useEffect(() => {
+    setVisible(!!isFetching);
+  }, [isFetching, setVisible]);
   return (
     <ProgressContext.Provider value={{ visible, setVisible }}>
       {children}

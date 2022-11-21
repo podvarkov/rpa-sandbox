@@ -20,13 +20,41 @@ import {
 import React, { useEffect, useState } from "react";
 import { t, Trans } from "@lingui/macro";
 import { api, WorkflowTemplate } from "../api";
-import { useFetch } from "../components/use-fetch";
-import { WorkflowForm } from "../components/workflow-form";
+import { WorkflowForm, WorkflowFormValues } from "../components/workflow-form";
+import { useMutation, useQuery } from "react-query";
 
 export const TemplatesPage: React.FC = () => {
   const toast = useToast();
-  const { data: templates, error } = useFetch(api.getTemplates.bind(api), true);
+  const { error, data: templates } = useQuery("templates", ({ signal }) =>
+    api.getTemplates(signal)
+  );
   const [selectedTemplate, setSelectedTemplate] = useState<WorkflowTemplate>();
+
+  const mutation = useMutation(
+    (workflow: WorkflowFormValues) => {
+      return api.upsertWorkflow(workflow);
+    },
+    {
+      onSuccess: () => {
+        toast({
+          title: t`Workflow created`,
+          status: "success",
+          position: "top-right",
+          duration: 1000,
+        });
+        setSelectedTemplate(undefined);
+      },
+      onError: (e) => {
+        console.error(e);
+        toast({
+          title: t`Can not create workflow`,
+          status: "error",
+          position: "top-right",
+          duration: 1000,
+        });
+      },
+    }
+  );
 
   useEffect(() => {
     if (error) {
@@ -70,31 +98,13 @@ export const TemplatesPage: React.FC = () => {
                   name: selectedTemplate.name,
                   templateId: selectedTemplate._id,
                   description: "",
+                  expiration: 60000,
                   defaultArguments: (selectedTemplate.Parameters || [])
                     .filter(({ direction }) => direction === "in")
                     .reduce((acc, param) => ({ ...acc, [param.name]: "" }), {}),
                 }}
                 onSubmit={(values) => {
-                  return api
-                    .upsertWorkflow(values)
-                    .then(() => {
-                      toast({
-                        title: t`Workflow created`,
-                        status: "success",
-                        position: "top-right",
-                        duration: 1000,
-                      });
-                      setSelectedTemplate(undefined);
-                    })
-                    .catch((e) => {
-                      console.error(e);
-                      toast({
-                        title: t`Can not create workflow`,
-                        status: "error",
-                        position: "top-right",
-                        duration: 1000,
-                      });
-                    });
+                  return mutation.mutateAsync(values);
                 }}
               />
             </ModalBody>

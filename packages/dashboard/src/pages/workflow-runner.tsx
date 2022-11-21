@@ -6,6 +6,7 @@ import {
   AlertIcon,
   Box,
   Button,
+  Center,
   Container,
   FormControl,
   FormErrorMessage,
@@ -15,18 +16,23 @@ import {
   Stack,
   VStack,
 } from "@chakra-ui/react";
-import { useFetch } from "../components/use-fetch";
+import * as Yup from "yup";
 import { api } from "../api";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { AxiosError } from "axios";
 import { t, Trans } from "@lingui/macro";
 import { ParametersFormField } from "../components/parameter-form-field";
+import { useQuery } from "react-query";
 
 export const WorkflowRunnerPage: React.FC = () => {
   const params = useParams<{ id: string }>();
-  const { data: workflow } = useFetch(async () => {
-    if (params.id) return api.getWorkflow(params.id);
-  }, true);
+  const { data: workflow, isFetching } = useQuery(
+    ["workflows", params.id],
+    async ({ signal }) => {
+      if (params.id) return api.getWorkflowWithTemplate(params.id, signal);
+    },
+    { enabled: !!params.id }
+  );
 
   const [status, setStatus] = useState<{
     status: "info" | "error";
@@ -35,6 +41,13 @@ export const WorkflowRunnerPage: React.FC = () => {
 
   return (
     <Box h={"100%"}>
+      {!isFetching && !workflow ? (
+        <Center>
+          <Heading size="sm">
+            <Trans>Workflow with {params.id} not found</Trans>
+          </Heading>
+        </Center>
+      ) : null}
       {workflow ? (
         <Container p={4}>
           <VStack spacing={4}>
@@ -42,9 +55,12 @@ export const WorkflowRunnerPage: React.FC = () => {
               {workflow.name}
             </Heading>
             <Formik
+              validationSchema={Yup.object({
+                expiration: Yup.number().required(t`This field is required`),
+              })}
               initialValues={{
                 arguments: workflow.defaultArguments || {},
-                expiration: 60000,
+                expiration: workflow.expiration,
                 workflowid: workflow.templateId,
               }}
               onSubmit={(values, actions) => {
@@ -57,10 +73,14 @@ export const WorkflowRunnerPage: React.FC = () => {
                     });
                     actions.setFieldValue("arguments", res.data);
                   })
-                  .catch((e: AxiosError<{ message: string }>) => {
+                  .catch((e: AxiosError<{ message: string | string[] }>) => {
                     console.error(e);
                     setStatus({
-                      message: e.response?.data.message || "error",
+                      message: e.response?.data.message
+                        ? Array.isArray(e.response?.data.message)
+                          ? e.response?.data.message.join("\n")
+                          : e.response?.data.message
+                        : t`error`,
                       status: "error",
                     });
                   })
@@ -113,6 +133,7 @@ export const WorkflowRunnerPage: React.FC = () => {
 
                     <Button
                       isLoading={isSubmitting}
+                      disabled={isFetching}
                       type="submit"
                       colorScheme="teal"
                     >

@@ -10,31 +10,36 @@ import { SignupPage } from "./pages/sign-up";
 import { ProgressProvider } from "./components/progress-provider";
 import App from "./app";
 import "./i18n";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const Component = () => {
   return (
     <I18nProvider i18n={i18n}>
       <AuthProvider>
-        <ProgressProvider>
-          <ChakraProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route element={<Outlet />}>
-                  <Route path="/signup" element={<SignupPage />} />
-                  <Route path="/signin" element={<SigninPage />} />
-                  <Route
-                    path="/*"
-                    element={
-                      <RequireAuth>
-                        <App />
-                      </RequireAuth>
-                    }
-                  />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </ChakraProvider>
-        </ProgressProvider>
+        <QueryClientProvider client={queryClient}>
+          <ProgressProvider>
+            <ChakraProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route element={<Outlet />}>
+                    <Route path="/signup" element={<SignupPage />} />
+                    <Route path="/signin" element={<SigninPage />} />
+                    <Route
+                      path="/*"
+                      element={
+                        <RequireAuth>
+                          <App />
+                        </RequireAuth>
+                      }
+                    />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </ChakraProvider>
+          </ProgressProvider>
+        </QueryClientProvider>
       </AuthProvider>
     </I18nProvider>
   );

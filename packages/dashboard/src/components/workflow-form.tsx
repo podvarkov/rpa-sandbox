@@ -18,6 +18,7 @@ export type WorkflowFormValues = {
   name: string;
   description?: string;
   templateId: string;
+  expiration: number;
   defaultArguments?: { [key: string]: unknown };
 };
 
@@ -72,6 +73,7 @@ export const WorkflowForm: React.FC<{
 
             {(templateParameters || [])
               .filter(({ direction }) => direction === "in")
+              .sort((a, b) => (a.name > b.name ? -1 : 1))
               .map(({ type, name }) => (
                 <ParametersFormField
                   key={name}
@@ -82,6 +84,18 @@ export const WorkflowForm: React.FC<{
                   name={`defaultArguments.${name}`}
                 />
               ))}
+
+            <Field name="expiration">
+              {({ field, meta }: FieldProps) => (
+                <FormControl isInvalid={!!(meta.touched && meta.error)}>
+                  <FormLabel>
+                    <Trans>Timeout</Trans>
+                  </FormLabel>
+                  <Input type="number" placeholder={t`timeout`} {...field} />
+                  <FormErrorMessage>{meta.error}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
 
             <Button isLoading={isSubmitting} type="submit" colorScheme="teal">
               {initialValues._id ? t`Update workflow` : t`Create workflow`}
