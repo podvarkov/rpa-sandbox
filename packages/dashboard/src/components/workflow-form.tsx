@@ -41,7 +41,7 @@ export const WorkflowForm: React.FC<{
       })}
     >
       {({ isSubmitting }) => (
-        <Form>
+        <Form style={{ width: "100%" }}>
           <Stack spacing="4" mb={4}>
             <Field name="name">
               {({ field, meta }: FieldProps) => {

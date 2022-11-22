@@ -117,9 +117,9 @@ export const TemplatesPage: React.FC = () => {
           <Box
             m={2}
             flexShrink={0}
-            flexGrow={1}
-            w={[null, null, "45%", "25%", "20%"]}
-            maxW={[null, null, "45%", "25%", "25%"]}
+            flexGrow={0}
+            w={[null, null, "47%", "30%", "24%"]}
+            maxW={[null, null, "47%", "30%", "24%"]}
             bg="white"
             key={template._id}
             boxShadow={"sm"}
