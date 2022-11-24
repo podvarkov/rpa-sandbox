@@ -56,11 +56,11 @@ export const EditWorkflowPage: React.FC = () => {
   );
 
   return (
-    <Box h={"100%"}>
+    <Box h={"100%"} bg="white">
       {!isFetching && !workflow ? (
         <Center>
           <Heading size="sm">
-            <Trans>Workflow with {params.id} not found</Trans>
+            <Trans>Workflow with {params.id} id not found</Trans>
           </Heading>
         </Center>
       ) : null}

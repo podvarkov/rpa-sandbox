@@ -67,6 +67,6 @@ export class WorkflowsService {
   }
 
   execute(jwt: string, body: ExecuteWorkflowDto) {
-    return this.openflowService.executeWorkflow(body);
+    return this.openflowService.executeWorkflow(jwt, body);
   }
 }

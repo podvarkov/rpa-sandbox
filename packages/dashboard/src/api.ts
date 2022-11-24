@@ -55,6 +55,33 @@ export type Workflow = {
   expiration: number;
 };
 
+export type Execution = {
+  _id: string;
+  collection: string;
+  _created: string;
+  _modified: string;
+  _createdby: string;
+  _createdbyid: string;
+  _type: string;
+  expiration: number;
+  correlationId: string;
+  status:
+    | "timeout"
+    | "invokefailed"
+    | "error"
+    | "invokecompleted"
+    | "invokesuccess";
+  startedAt: Date;
+  invokedAt: Date;
+  finishedAt: Date;
+  arguments: { [key: string]: unknown };
+  output?: { [key: string]: unknown };
+  error: string | null;
+  robotId: string;
+  workflowId: string;
+  templateId: string;
+};
+
 type AuthStateChangedCb = (user: Session) => void;
 
 class Api {
@@ -122,6 +149,12 @@ class Api {
       .then(({ data }) => data);
   }
 
+  getWorkflow(id: string, signal?: AbortSignal) {
+    return this.axios
+      .get<Workflow>(`workflows/${id}`, { signal })
+      .then(({ data }) => data);
+  }
+
   getWorkflowWithTemplate(id: string, signal?: AbortSignal) {
     return this.axios
       .get<Workflow & { template: WorkflowTemplate }>(
@@ -145,10 +178,33 @@ class Api {
 
   executeWorkflow(data: {
     expiration: number;
-    workflowid: string;
+    workflowId: string;
+    templateId: string;
     arguments: { [key: string]: unknown };
   }) {
     return this.axios.post("workflows/execute", data);
+  }
+
+  getExecutions(
+    signal?: AbortSignal,
+    params?: {
+      top: number;
+      skip: number;
+      workflowId: string | null;
+      status: string | null;
+      orderBy: string | null;
+      direction: string | null;
+    }
+  ) {
+    return this.axios
+      .get<Execution[]>("executions", { signal, params })
+      .then(({ data }) => data);
+  }
+
+  getExecution(id: string, signal?: AbortSignal) {
+    return this.axios
+      .get<Execution>(`executions/${id}`, { signal })
+      .then(({ data }) => data);
   }
 }
 

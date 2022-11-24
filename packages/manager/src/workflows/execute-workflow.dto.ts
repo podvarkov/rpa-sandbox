@@ -4,7 +4,11 @@ import { Transform } from "class-transformer";
 export class ExecuteWorkflowDto {
   @IsNotEmpty()
   @IsString()
-  workflowid: string;
+  workflowId: string;
+
+  @IsNotEmpty()
+  @IsString()
+  templateId: string;
 
   @IsNotEmpty()
   @IsNumber()

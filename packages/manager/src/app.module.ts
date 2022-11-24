@@ -8,6 +8,7 @@ import { TemplatesModule } from "./templates/templates.module";
 import { WorkflowsModule } from "./workflows/workflows.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
+import { ExecutionsModule } from './executions/executions.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { join } from "path";
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "static"),
     }),
+    ExecutionsModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

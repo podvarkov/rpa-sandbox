@@ -17,8 +17,20 @@ msgstr ""
 msgid "Add field"
 msgstr "フィールドを追加"
 
+#: src/pages/executions.tsx:107
+msgid "All workflows"
+msgstr ""
+
+#: src/pages/executions.tsx:134
+msgid "Any status"
+msgstr ""
+
 #: src/pages/workflows.tsx:96
 msgid "Are you sure? You can not undo this action afterwards."
+msgstr ""
+
+#: src/pages/execution-details.tsx:65
+msgid "Arguments:"
 msgstr ""
 
 #: src/pages/templates.tsx:50
@@ -35,6 +47,10 @@ msgstr ""
 
 #: src/pages/workflows.tsx:108
 msgid "Cancel"
+msgstr ""
+
+#: src/pages/executions.tsx:28
+msgid "Completed"
 msgstr ""
 
 #: src/pages/sign-up.tsx:110
@@ -68,17 +84,44 @@ msgstr ""
 msgid "Email address"
 msgstr ""
 
-#: src/pages/workflow-runner.tsx:140
+#: src/pages/executions.tsx:29
+msgid "Error"
+msgstr ""
+
+#: src/pages/execution-details.tsx:85
+msgid "Error:"
+msgstr ""
+
+#: src/pages/workflow-runner.tsx:141
 msgid "Execute"
 msgstr ""
 
-#: src/app.tsx:22
+#: src/pages/execution-details.tsx:32
+msgid "Execution with {0} id not found"
+msgstr ""
+
 #: src/components/layout.tsx:34
 msgid "Executions"
 msgstr "処刑"
 
+#: src/pages/executions.tsx:87
+msgid "Filters:"
+msgstr ""
+
+#: src/pages/executions.tsx:156
+msgid "Finished"
+msgstr ""
+
+#: src/pages/execution-details.tsx:59
+msgid "Finished at:"
+msgstr ""
+
 #: src/pages/sign-up.tsx:140
 msgid "Have an account?"
+msgstr ""
+
+#: src/pages/execution-details.tsx:41
+msgid "ID:"
 msgstr ""
 
 #~ msgid "Input argument"
@@ -90,6 +133,14 @@ msgstr ""
 #: src/components/workflow-form.tsx:81
 #: src/components/workflow-form.tsx:82
 msgid "Input argument: {name}"
+msgstr ""
+
+#: src/pages/executions.tsx:27
+msgid "Invoke failed"
+msgstr ""
+
+#: src/pages/execution-details.tsx:53
+msgid "Invoked at:"
 msgstr ""
 
 #: src/pages/sign-in.tsx:61
@@ -120,6 +171,10 @@ msgstr ""
 
 #: src/components/workflow-form.tsx:67
 msgid "Optional description"
+msgstr ""
+
+#: src/pages/execution-details.tsx:78
+msgid "Output:"
 msgstr ""
 
 #: src/pages/sign-in.tsx:86
@@ -156,10 +211,27 @@ msgstr ""
 msgid "Something goes wrong"
 msgstr ""
 
+#: src/pages/executions.tsx:153
+msgid "Started"
+msgstr ""
+
+#: src/pages/execution-details.tsx:47
+msgid "Started at:"
+msgstr ""
+
+#: src/pages/executions.tsx:159
+msgid "Status"
+msgstr ""
+
+#: src/pages/execution-details.tsx:71
+msgid "Status:"
+msgstr ""
+
 #: src/components/layout.tsx:26
 msgid "Templates"
 msgstr "テンプレート"
 
+#: src/pages/executions.tsx:68
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
 msgid "There was an error while loading"
@@ -176,7 +248,8 @@ msgid "This field is required"
 msgstr ""
 
 #: src/components/workflow-form.tsx:92
-#: src/pages/workflow-runner.tsx:115
+#: src/pages/executions.tsx:30
+#: src/pages/workflow-runner.tsx:116
 msgid "Timeout"
 msgstr ""
 
@@ -190,6 +263,10 @@ msgstr ""
 
 #: src/pages/sign-up.tsx:57
 msgid "User {0} already exists"
+msgstr ""
+
+#: src/pages/executions.tsx:150
+msgid "Workflow"
 msgstr ""
 
 #: src/pages/templates.tsx:40
@@ -214,8 +291,13 @@ msgstr ""
 
 #: src/pages/workflow-edit.tsx:63
 #: src/pages/workflow-runner.tsx:47
-msgid "Workflow with {0} not found"
+msgid "Workflow with {0} id not found"
 msgstr ""
+
+#: src/pages/workflow-edit.tsx:63
+#: src/pages/workflow-runner.tsx:47
+#~ msgid "Workflow with {0} not found"
+#~ msgstr ""
 
 #: src/components/layout.tsx:30
 msgid "Workflows"
@@ -229,13 +311,17 @@ msgstr ""
 msgid "Your workflows will be listed here"
 msgstr ""
 
-#: src/pages/workflow-runner.tsx:83
+#: src/pages/workflow-runner.tsx:84
 msgid "error"
 msgstr ""
 
 #: src/components/workflow-form.tsx:94
-#: src/pages/workflow-runner.tsx:119
+#: src/pages/workflow-runner.tsx:120
 msgid "timeout"
+msgstr ""
+
+#: src/pages/execution-details.tsx:73
+msgid "{0}"
 msgstr ""
 
 #: src/components/layout.tsx:51

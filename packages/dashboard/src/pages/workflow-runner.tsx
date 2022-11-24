@@ -40,11 +40,11 @@ export const WorkflowRunnerPage: React.FC = () => {
   }>();
 
   return (
-    <Box h={"100%"}>
+    <Box h={"100%"} bg="white">
       {!isFetching && !workflow ? (
         <Center>
           <Heading size="sm">
-            <Trans>Workflow with {params.id} not found</Trans>
+            <Trans>Workflow with {params.id} id not found</Trans>
           </Heading>
         </Center>
       ) : null}
@@ -61,7 +61,8 @@ export const WorkflowRunnerPage: React.FC = () => {
               initialValues={{
                 arguments: workflow.defaultArguments || {},
                 expiration: workflow.expiration,
-                workflowid: workflow.templateId,
+                templateId: workflow.templateId,
+                workflowId: workflow._id,
               }}
               onSubmit={(values, actions) => {
                 void api

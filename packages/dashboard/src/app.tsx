@@ -1,11 +1,12 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Trans } from "@lingui/macro";
 import Layout from "./components/layout";
 import { TemplatesPage } from "./pages/templates";
 import { WorkflowsPage } from "./pages/workflows";
 import { WorkflowRunnerPage } from "./pages/workflow-runner";
 import { EditWorkflowPage } from "./pages/workflow-edit";
+import { ExecutionsPage } from "./pages/executions";
+import { ExecutionDetailsPage } from "./pages/execution-details";
 
 const App: React.FC = () => {
   return (
@@ -15,15 +16,9 @@ const App: React.FC = () => {
         <Route path="/workflows/execute/:id" element={<WorkflowRunnerPage />} />
         <Route path="/workflows/:id" element={<EditWorkflowPage />} />
         <Route path="/workflows" element={<WorkflowsPage />} />
-        <Route
-          path="/executions"
-          element={
-            <div>
-              <Trans>Executions</Trans>
-            </div>
-          }
-        />
-        <Route path="/*" element={<Navigate to="/templates" />} />
+        <Route path="/executions/:id" element={<ExecutionDetailsPage />} />
+        <Route path="/executions" element={<ExecutionsPage />} />
+        <Route path="/*" element={<Navigate to="/workflows" />} />
       </Route>
     </Routes>
   );

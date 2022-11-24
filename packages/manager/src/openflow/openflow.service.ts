@@ -18,39 +18,12 @@ import {
 import { WebSocket } from "ws";
 import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
 import { CryptService } from "src/crypt/crypt.service";
-
-type Workflow = {
-  _id: string;
-  projectandname?: string;
-  projectid?: string;
-  description?: string;
-  name: string;
-  _type: string;
-  _modified: string;
-  _created: string;
-  _createdby: string;
-  Parameters?: { type: string; direction: string; name: string }[];
-  collection: string;
-};
-
-type UserWorkflow = {
-  _id: string;
-  collection: string;
-  description?: string;
-  name: string;
-  templateId: string;
-  defaultArguments?: { [key: string]: unknown };
-  _created: string;
-  _modified: string;
-  _createdby: string;
-  _createdbyid: string;
-  _type: string;
-  expiration: number;
-};
-
-type EncryptedUserWorkflow = Omit<UserWorkflow, "defaultArguments"> & {
-  defaultArguments: string;
-};
+import {
+  EncryptedUserWorkflow,
+  Execution,
+  UserWorkflow,
+  Workflow,
+} from "./types";
 
 @Injectable()
 export class OpenflowService {
@@ -161,6 +134,59 @@ export class OpenflowService {
       ...wf,
       collection: reply.data.collectionname,
     }));
+  }
+
+  async listExecutions(
+    jwt: string,
+    query = {},
+    pagination = { skip: 0, top: 50 },
+    orderby: { [key: string]: number } = { startedAt: -1 }
+  ) {
+    const reply = await this.queryCollection<{
+      data: {
+        message?: string;
+        result: Array<Execution>;
+        collectionname: string;
+      };
+      command: string;
+    }>(jwt, {
+      query: { ...query, _type: "user_execution" },
+      orderby,
+      collectionname: "entities",
+      projection: [
+        "_id",
+        "collection",
+        "_createdby",
+        "_createdbyid",
+        "_type",
+        "startedAt",
+        "invokedAt",
+        "finishedAt",
+        "arguments",
+        "output",
+        "error",
+        "workflowId",
+        "templateId",
+        "status",
+        "expiration",
+      ],
+      ...pagination,
+    });
+
+    if (reply.command === "error") {
+      throw new BadRequestException(reply.data.message);
+    }
+
+    return reply.data.result.map((execution) => ({
+      ...execution,
+      collection: reply.data.collectionname,
+    }));
+  }
+
+  getExecution(jwt: string, id: string) {
+    return this.listExecutions(jwt, { _id: id }).then((res) => {
+      return res[0];
+    });
   }
 
   async listUserWorkflows(jwt: string, query = {}) {
@@ -298,8 +324,16 @@ export class OpenflowService {
     return reply.data.result;
   }
 
-  async executeWorkflow(workflow: ExecuteWorkflowDto) {
+  async executeWorkflow(jwt: string, workflow: ExecuteWorkflowDto) {
     const robotId = await this.getRobotId(this.config.OPENFLOW_ROBOT_USERNAME);
+    const executionContext: Partial<Execution> = {
+      robotId,
+      arguments: workflow.arguments,
+      _type: "user_execution",
+      workflowId: workflow.workflowId,
+      templateId: workflow.templateId,
+      expiration: workflow.expiration,
+    };
 
     const ws = new WebSocket(this.config.OPENFLOW_WS_URL);
     return new Promise((resolve, reject) => {
@@ -319,6 +353,7 @@ export class OpenflowService {
       });
 
       ws.on("message", (data) => {
+        const timestamp = new Date();
         const socketMessage = SocketMessage.fromjson(data.toString());
 
         if (socketMessage.command === "error") {
@@ -331,28 +366,45 @@ export class OpenflowService {
         ) {
           const socketData = this.parseMessageData<{
             data: {
-              command: string;
+              command: Execution["status"];
               workflowid: string;
               data: { [key: string]: unknown };
             };
           }>(socketMessage.data);
+
+          executionContext.status = socketData.data.command;
+
+          if (socketData.data.command === "invokesuccess") {
+            executionContext.invokedAt = timestamp;
+          }
 
           if (
             ["timeout", "invokefailed", "error"].includes(
               socketData.data.command
             )
           ) {
-            reject(
-              new BadRequestException(
-                socketData.data.data.Message
-                  ? `${socketData.data.command}: ${socketData.data.data.Message}`
-                  : socketData.data.command
+            executionContext.finishedAt = timestamp;
+            executionContext.error =
+              (socketData.data.data.Message as string) ||
+              socketData.data.command;
+
+            this.createEntity(jwt, executionContext).then(() =>
+              reject(
+                new BadRequestException(
+                  socketData.data.data.Message
+                    ? `${socketData.data.command}: ${socketData.data.data.Message}`
+                    : socketData.data.command
+                )
               )
             );
           }
 
           if (socketData.data.command === "invokecompleted") {
-            resolve(socketData.data.data);
+            executionContext.finishedAt = timestamp;
+            executionContext.output = socketData.data.data;
+            this.createEntity(jwt, executionContext).then(() =>
+              resolve(socketData.data.data)
+            );
           }
         }
 
@@ -366,13 +418,17 @@ export class OpenflowService {
             ).queuename,
             data: {
               command: "invoke",
-              workflowid: workflow.workflowid,
+              workflowid: workflow.templateId,
               data: workflow.arguments,
             },
             expiration: workflow.expiration,
           });
           const queueMsg = SocketMessage.fromcommand("queuemessage");
           queueMsg.data = JSON.stringify(queueMessageData);
+
+          executionContext.startedAt = new Date();
+          executionContext.correlationId = queueMessageData.correlationId;
+
           ws.send(JSON.stringify(queueMsg));
         }
       });
@@ -399,16 +455,20 @@ export class OpenflowService {
         }, 50);
       });
 
-      ws.once("message", (data) => {
+      let messageBuffer = "";
+      ws.on("message", (data) => {
         const reply = SocketMessage.fromjson(data.toString());
         this.logger.debug({ message: "reply received", reply });
 
         if (reply.replyto === msg.id) {
-          ws.close();
-          resolve({
-            ...reply,
-            data: this.parseMessageData<T>(reply.data),
-          } as T);
+          messageBuffer += reply.data;
+          if (reply.index === reply.count - 1) {
+            ws.close();
+            resolve({
+              ...reply,
+              data: this.parseMessageData<T>(messageBuffer),
+            } as T);
+          }
         }
       });
 
