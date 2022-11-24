@@ -26,7 +26,7 @@ export class WorkflowsService {
     }
   }
 
-  list(jwt: string) {
+  findAll(jwt: string) {
     return this.openflowService.listUserWorkflows(jwt).then((workflow) =>
       workflow.map((workflow) => ({
         ...workflow,
@@ -41,7 +41,7 @@ export class WorkflowsService {
     return this.openflowService.deleteUserWorkflow(jwt, id);
   }
 
-  get(jwt: string, id: string) {
+  findOne(jwt: string, id: string) {
     return this.openflowService.getUserWorkflow(jwt, id).then((workflow) => {
       return workflow
         ? {
@@ -54,8 +54,8 @@ export class WorkflowsService {
     });
   }
 
-  async getWithTemplate(jwt: string, id: string) {
-    const workflow = await this.get(jwt, id);
+  async findOneWithTemplate(jwt: string, id: string) {
+    const workflow = await this.findOne(jwt, id);
     if (workflow) {
       const template = await this.openflowService.getRobotWorkflow(
         jwt,

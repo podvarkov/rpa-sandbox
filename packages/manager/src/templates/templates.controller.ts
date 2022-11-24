@@ -9,17 +9,17 @@ export class TemplatesController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  listTemplates(@UserSession() session: Session) {
-    return this.templatesService.listTemplates(session.jwt);
+  findAll(@UserSession() session: Session) {
+    return this.templatesService.findAll(session.jwt);
   }
 
   @Get(":type/:id")
   @UseGuards(JwtAuthGuard)
-  getTemplate(
+  findOne(
     @UserSession() session: Session,
     @Param("id") id: string,
     @Param("type") type: string
   ) {
-    return this.templatesService.getTemplate(session.jwt, id, type);
+    return this.templatesService.findOne(session.jwt, id, type);
   }
 }

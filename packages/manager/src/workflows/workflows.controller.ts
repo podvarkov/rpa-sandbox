@@ -33,8 +33,8 @@ export class WorkflowsController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-  list(@UserSession() session: Session) {
-    return this.workflowsService.list(session.jwt);
+  findAll(@UserSession() session: Session) {
+    return this.workflowsService.findAll(session.jwt);
   }
 
   @Post()
@@ -56,14 +56,14 @@ export class WorkflowsController {
   @Get(":id")
   @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
   @UseGuards(JwtAuthGuard)
-  async get(
+  async findOne(
     @Query() queryParams: GetWorkflowQueryParamsDto,
     @Param("id") id: string,
     @UserSession() session: Session
   ) {
     if (queryParams.withTemplate) {
-      return this.workflowsService.getWithTemplate(session.jwt, id);
+      return this.workflowsService.findOneWithTemplate(session.jwt, id);
     }
-    return this.workflowsService.get(session.jwt, id);
+    return this.workflowsService.findOne(session.jwt, id);
   }
 }
