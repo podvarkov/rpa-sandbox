@@ -249,7 +249,7 @@ export const ExecutionsPage: React.FC = () => {
                       (workflow) => workflow._id === execution.workflowId
                     )?.name || execution.workflowId}
                   </Td>
-                  <Td>{dayjs(execution.finishedAt).format("ll HH:mm:ss")}</Td>
+                  <Td>{dayjs(execution.startedAt).format("ll HH:mm:ss")}</Td>
                   <Td>{dayjs(execution.finishedAt).format("ll HH:mm:ss")}</Td>
                   <Td cursor={"default"}>
                     <Tooltip label={execution.error}>
