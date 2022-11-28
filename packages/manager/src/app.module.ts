@@ -8,7 +8,7 @@ import { TemplatesModule } from "./templates/templates.module";
 import { WorkflowsModule } from "./workflows/workflows.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
-import { ExecutionsModule } from './executions/executions.module';
+import { ExecutionsModule } from "./executions/executions.module";
 
 @Module({
   imports: [
