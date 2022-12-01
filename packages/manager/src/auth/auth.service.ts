@@ -4,7 +4,7 @@ import { CookieJar } from "tough-cookie";
 import * as axiosCookieJarSupport from "axios-cookiejar-support";
 import * as axios from "axios";
 import { TokenUser } from "@openiap/openflow-api";
-import { OpenflowService } from "src/openflow/openflow.service";
+import { OpenflowService } from "../openflow/openflow.service";
 
 export type Session = {
   user: Pick<

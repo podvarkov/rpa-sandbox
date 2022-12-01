@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ConfigProvider } from "src/config/config.provider";
+import { ConfigProvider } from "../config/config.provider";
 import * as crypto from "crypto";
 import {
   Rolemember,
