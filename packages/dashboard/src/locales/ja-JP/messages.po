@@ -17,11 +17,11 @@ msgstr ""
 msgid "Add field"
 msgstr "フィールドを追加"
 
-#: src/pages/executions.tsx:107
+#: src/pages/executions.tsx:164
 msgid "All workflows"
 msgstr ""
 
-#: src/pages/executions.tsx:134
+#: src/pages/executions.tsx:191
 msgid "Any status"
 msgstr ""
 
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr ""
 
-#: src/pages/execution-details.tsx:65
+#: src/pages/execution-details.tsx:103
 msgid "Arguments:"
 msgstr ""
 
@@ -49,7 +49,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/pages/executions.tsx:28
+#: src/pages/executions.tsx:33
 msgid "Completed"
 msgstr ""
 
@@ -84,11 +84,11 @@ msgstr ""
 msgid "Email address"
 msgstr ""
 
-#: src/pages/executions.tsx:29
+#: src/pages/executions.tsx:34
 msgid "Error"
 msgstr ""
 
-#: src/pages/execution-details.tsx:85
+#: src/pages/execution-details.tsx:121
 msgid "Error:"
 msgstr ""
 
@@ -96,7 +96,11 @@ msgstr ""
 msgid "Execute"
 msgstr ""
 
-#: src/pages/execution-details.tsx:32
+#: src/pages/execution-details.tsx:69
+msgid "Execution details"
+msgstr ""
+
+#: src/pages/execution-details.tsx:61
 msgid "Execution with {0} id not found"
 msgstr ""
 
@@ -104,15 +108,19 @@ msgstr ""
 msgid "Executions"
 msgstr "処刑"
 
-#: src/pages/executions.tsx:87
+#: src/pages/execution-details.tsx:97
+msgid "Expiration timeout:"
+msgstr ""
+
+#: src/pages/executions.tsx:144
 msgid "Filters:"
 msgstr ""
 
-#: src/pages/executions.tsx:156
+#: src/pages/executions.tsx:224
 msgid "Finished"
 msgstr ""
 
-#: src/pages/execution-details.tsx:59
+#: src/pages/execution-details.tsx:144
 msgid "Finished at:"
 msgstr ""
 
@@ -120,8 +128,12 @@ msgstr ""
 msgid "Have an account?"
 msgstr ""
 
-#: src/pages/execution-details.tsx:41
+#: src/pages/execution-details.tsx:73
 msgid "ID:"
+msgstr ""
+
+#: src/pages/executions.tsx:37
+msgid "In progress"
 msgstr ""
 
 #~ msgid "Input argument"
@@ -135,11 +147,11 @@ msgstr ""
 msgid "Input argument: {name}"
 msgstr ""
 
-#: src/pages/executions.tsx:27
+#: src/pages/executions.tsx:32
 msgid "Invoke failed"
 msgstr ""
 
-#: src/pages/execution-details.tsx:53
+#: src/pages/execution-details.tsx:136
 msgid "Invoked at:"
 msgstr ""
 
@@ -173,7 +185,7 @@ msgstr ""
 msgid "Optional description"
 msgstr ""
 
-#: src/pages/execution-details.tsx:78
+#: src/pages/execution-details.tsx:112
 msgid "Output:"
 msgstr ""
 
@@ -186,6 +198,10 @@ msgstr ""
 
 #: src/pages/sign-up.tsx:71
 msgid "Passwords must match"
+msgstr ""
+
+#: src/pages/executions.tsx:36
+msgid "Queued"
 msgstr ""
 
 #: src/pages/workflows.tsx:180
@@ -211,19 +227,19 @@ msgstr ""
 msgid "Something goes wrong"
 msgstr ""
 
-#: src/pages/executions.tsx:153
+#: src/pages/executions.tsx:217
 msgid "Started"
 msgstr ""
 
-#: src/pages/execution-details.tsx:47
+#: src/pages/execution-details.tsx:128
 msgid "Started at:"
 msgstr ""
 
-#: src/pages/executions.tsx:159
+#: src/pages/executions.tsx:231
 msgid "Status"
 msgstr ""
 
-#: src/pages/execution-details.tsx:71
+#: src/pages/execution-details.tsx:85
 msgid "Status:"
 msgstr ""
 
@@ -231,7 +247,8 @@ msgstr ""
 msgid "Templates"
 msgstr "テンプレート"
 
-#: src/pages/executions.tsx:68
+#: src/pages/execution-details.tsx:47
+#: src/pages/executions.tsx:125
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
 msgid "There was an error while loading"
@@ -248,7 +265,7 @@ msgid "This field is required"
 msgstr ""
 
 #: src/components/workflow-form.tsx:92
-#: src/pages/executions.tsx:30
+#: src/pages/executions.tsx:35
 #: src/pages/workflow-runner.tsx:116
 msgid "Timeout"
 msgstr ""
@@ -265,7 +282,7 @@ msgstr ""
 msgid "User {0} already exists"
 msgstr ""
 
-#: src/pages/executions.tsx:150
+#: src/pages/executions.tsx:210
 msgid "Workflow"
 msgstr ""
 
@@ -299,6 +316,10 @@ msgstr ""
 #~ msgid "Workflow with {0} not found"
 #~ msgstr ""
 
+#: src/pages/execution-details.tsx:79
+msgid "Workflow:"
+msgstr ""
+
 #: src/components/layout.tsx:30
 msgid "Workflows"
 msgstr "ワークフロー"
@@ -321,8 +342,8 @@ msgid "timeout"
 msgstr ""
 
 #: src/pages/execution-details.tsx:73
-msgid "{0}"
-msgstr ""
+#~ msgid "{0}"
+#~ msgstr ""
 
 #: src/components/layout.tsx:51
 msgid "© 2022 Coreus RPA. All rights reserved"

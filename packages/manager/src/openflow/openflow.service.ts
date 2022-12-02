@@ -6,7 +6,9 @@ import {
 } from "@nestjs/common";
 import { ConfigProvider } from "../config/config.provider";
 import {
+  DeleteManyMessage,
   DeleteOneMessage,
+  InsertManyMessage,
   InsertOneMessage,
   QueryMessage,
   QueryOptions,
@@ -107,6 +109,32 @@ export class OpenflowService {
     return { collection: reply.data.collectionname, id: reply.data.id };
   }
 
+  async deleteMany(jwt: string, query = {}, collectionname = "entities") {
+    const [data] = DeleteManyMessage.parse({
+      priority: 2,
+      recursive: false,
+      collectionname,
+      query,
+      jwt,
+    });
+
+    const reply = await this.sendCommand<{
+      data: { message?: string; affectedrows: number; collectionname: string };
+      command: string;
+    }>("deletemany", data);
+
+    console.log("REPLY", reply);
+
+    if (reply.command === "error") {
+      throw new Error(reply.data.message);
+    }
+
+    return {
+      collection: reply.data.collectionname,
+      rows: reply.data.affectedrows,
+    };
+  }
+
   async insertOne<T extends { [key: string]: unknown }>(
     jwt: string,
     item: T,
@@ -125,6 +153,33 @@ export class OpenflowService {
       command: string;
       data: { message?: string; result: T };
     }>("insertone", insertEntityData);
+
+    if (reply.command === "error") {
+      throw new Error(reply.data.message);
+    }
+
+    return reply.data.result;
+  }
+
+  async insertMany<T extends { [key: string]: unknown }>(
+    jwt: string,
+    items: T[],
+    collectionname = "entities"
+  ) {
+    const [insertManyData] = InsertManyMessage.parse({
+      priority: 2,
+      w: 1,
+      j: true,
+      collectionname,
+      items,
+      skipresults: true,
+      jwt,
+    });
+
+    const reply = await this.sendCommand<{
+      command: string;
+      data: { message?: string; result: T };
+    }>("insertmany", insertManyData);
 
     if (reply.command === "error") {
       throw new Error(reply.data.message);
@@ -200,6 +255,7 @@ export class OpenflowService {
     };
 
     const ws = new WebSocket(this.config.OPENFLOW_WS_URL);
+
     return new Promise((resolve, reject) => {
       const registerQueueMsg = SocketMessage.fromcommand("registerqueue");
       registerQueueMsg.data = JSON.stringify({
@@ -209,6 +265,11 @@ export class OpenflowService {
         data: '{"priority":2}',
         jwt: this.cryptService.rootToken,
       });
+
+      const interval = setInterval(() => {
+        const ping = SocketMessage.fromcommand("ping");
+        ws.send(JSON.stringify(ping));
+      }, 10_000);
 
       ws.on("open", () => {
         setTimeout(() => {
@@ -240,6 +301,7 @@ export class OpenflowService {
 
           if (socketData.data.command === "invokesuccess") {
             executionContext.invokedAt = timestamp;
+            this.updateOne(jwt, executionContext);
           }
 
           if (
@@ -252,23 +314,25 @@ export class OpenflowService {
               (socketData.data.data.Message as string) ||
               socketData.data.command;
 
-            this.insertOne(jwt, executionContext).then(() =>
+            this.updateOne(jwt, executionContext).then(() => {
               reject(
                 new BadRequestException(
                   socketData.data.data.Message
                     ? `${socketData.data.command}: ${socketData.data.data.Message}`
                     : socketData.data.command
                 )
-              )
-            );
+              );
+              ws.close();
+            });
           }
 
           if (socketData.data.command === "invokecompleted") {
             executionContext.finishedAt = timestamp;
             executionContext.output = socketData.data.data;
-            this.insertOne(jwt, executionContext).then(() =>
-              resolve(socketData.data.data)
-            );
+            this.updateOne(jwt, executionContext).then(() => {
+              resolve(socketData.data.data);
+              ws.close();
+            });
           }
         }
 
@@ -290,11 +354,19 @@ export class OpenflowService {
           const queueMsg = SocketMessage.fromcommand("queuemessage");
           queueMsg.data = JSON.stringify(queueMessageData);
 
-          executionContext.startedAt = new Date();
+          executionContext.startedAt = timestamp;
           executionContext.correlationId = queueMessageData.correlationId;
-
-          ws.send(JSON.stringify(queueMsg));
+          executionContext.status = "queued";
+          this.insertOne(jwt, executionContext).then((data) => {
+            executionContext._id = data._id;
+            ws.send(JSON.stringify(queueMsg));
+          });
         }
+      });
+
+      ws.on("close", () => {
+        clearInterval(interval);
+        reject(new Error("Connection closed!"));
       });
     });
   }

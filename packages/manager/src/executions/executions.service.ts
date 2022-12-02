@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { OpenflowService } from "../openflow/openflow.service";
 import { GetExecutionsQueryParamsDto } from "./get-executions-query-params.dto";
-import { Execution } from "src/openflow/types";
+import { Execution } from "../openflow/types";
 
 @Injectable()
 export class ExecutionsService {

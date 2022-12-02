@@ -36,6 +36,7 @@ export type Execution = Entity<{
     | "invokefailed"
     | "error"
     | "invokecompleted"
+    | "queued"
     | "invokesuccess";
   startedAt: Date;
   invokedAt: Date;
