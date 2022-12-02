@@ -5,13 +5,15 @@ import { ExecuteWorkflowDto } from "./execute-workflow.dto";
 import { CryptService } from "../crypt/crypt.service";
 import { EncryptedUserWorkflow } from "../openflow/types";
 import { TemplatesService } from "../templates/templates.service";
+import { EventEmitter2 } from "@nestjs/event-emitter";
 
 @Injectable()
 export class WorkflowsService {
   constructor(
     private readonly openflowService: OpenflowService,
     private readonly cryptService: CryptService,
-    private readonly templatesService: TemplatesService
+    private readonly templatesService: TemplatesService,
+    private readonly eventEmitter: EventEmitter2
   ) {}
 
   decryptArguments(workflow: EncryptedUserWorkflow) {
@@ -70,6 +72,7 @@ export class WorkflowsService {
   }
 
   execute(jwt: string, body: ExecuteWorkflowDto) {
-    return this.openflowService.executeWorkflow(jwt, body);
+    this.eventEmitter.emit("workflow.queued", jwt, body);
+    return { status: "queued" };
   }
 }
