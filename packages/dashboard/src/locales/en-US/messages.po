@@ -17,11 +17,11 @@ msgstr ""
 msgid "Add field"
 msgstr "Add field"
 
-#: src/pages/executions.tsx:164
+#: src/pages/executions.tsx:176
 msgid "All workflows"
 msgstr "All workflows"
 
-#: src/pages/executions.tsx:191
+#: src/pages/executions.tsx:203
 msgid "Any status"
 msgstr "Any status"
 
@@ -112,11 +112,11 @@ msgstr "Executions"
 msgid "Expiration timeout:"
 msgstr "Expiration timeout:"
 
-#: src/pages/executions.tsx:144
+#: src/pages/executions.tsx:156
 msgid "Filters:"
 msgstr "Filters:"
 
-#: src/pages/executions.tsx:224
+#: src/pages/executions.tsx:236
 msgid "Finished"
 msgstr "Finished"
 
@@ -132,7 +132,11 @@ msgstr "Have an account?"
 msgid "ID:"
 msgstr "ID:"
 
-#: src/pages/executions.tsx:37
+#: src/pages/executions.tsx:39
+msgid "Idle"
+msgstr "Idle"
+
+#: src/pages/executions.tsx:38
 msgid "In progress"
 msgstr "In progress"
 
@@ -152,6 +156,10 @@ msgstr "Input argument: {name}"
 #: src/pages/executions.tsx:32
 msgid "Invoke failed"
 msgstr "Invoke failed"
+
+#: src/pages/executions.tsx:36
+msgid "Invoked"
+msgstr "Invoked"
 
 #: src/pages/execution-details.tsx:136
 msgid "Invoked at:"
@@ -202,7 +210,7 @@ msgstr "Password"
 msgid "Passwords must match"
 msgstr "Passwords must match"
 
-#: src/pages/executions.tsx:36
+#: src/pages/executions.tsx:37
 msgid "Queued"
 msgstr "Queued"
 
@@ -229,7 +237,7 @@ msgstr "Sign up"
 msgid "Something goes wrong"
 msgstr "Something goes wrong"
 
-#: src/pages/executions.tsx:217
+#: src/pages/executions.tsx:229
 msgid "Started"
 msgstr "Started"
 
@@ -237,7 +245,7 @@ msgstr "Started"
 msgid "Started at:"
 msgstr "Started at:"
 
-#: src/pages/executions.tsx:231
+#: src/pages/executions.tsx:243
 msgid "Status"
 msgstr "Status"
 
@@ -250,7 +258,7 @@ msgid "Templates"
 msgstr "Templates"
 
 #: src/pages/execution-details.tsx:47
-#: src/pages/executions.tsx:125
+#: src/pages/executions.tsx:137
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
 msgid "There was an error while loading"
@@ -284,7 +292,7 @@ msgstr "Use template"
 msgid "User {0} already exists"
 msgstr "User {0} already exists"
 
-#: src/pages/executions.tsx:210
+#: src/pages/executions.tsx:222
 msgid "Workflow"
 msgstr "Workflow"
 
@@ -337,6 +345,10 @@ msgstr "Your workflows will be listed here"
 #: src/pages/workflow-runner.tsx:84
 msgid "error"
 msgstr "error"
+
+#: src/pages/workflow-runner.tsx:72
+msgid "queued"
+msgstr "queued"
 
 #: src/components/workflow-form.tsx:94
 #: src/pages/workflow-runner.tsx:120

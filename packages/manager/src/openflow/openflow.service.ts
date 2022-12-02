@@ -12,47 +12,23 @@ import {
   InsertOneMessage,
   QueryMessage,
   QueryOptions,
-  QueueMessage,
   SocketMessage,
   TokenUser,
   UpdateOneMessage,
 } from "@openiap/openflow-api";
 import { WebSocket } from "ws";
-import { ExecuteWorkflowDto } from "../workflows/execute-workflow.dto";
 import { CryptService } from "../crypt/crypt.service";
-import { Execution } from "./types";
 
 @Injectable()
 export class OpenflowService {
   private readonly logger = new Logger(OpenflowService.name);
-  private robotId: string | null;
 
   constructor(
     private readonly config: ConfigProvider,
     private readonly cryptService: CryptService
   ) {}
 
-  private async getRobotId(username: string) {
-    if (this.robotId) return this.robotId;
-
-    const data = await this.queryCollection<TokenUser>(
-      this.cryptService.rootToken,
-      {
-        collectionname: "users",
-        query: { username },
-        projection: ["_id"],
-      }
-    );
-
-    this.robotId = data[0]?._id;
-    if (!this.robotId) {
-      throw new Error(`Can not get robot with username: ${username}`);
-    }
-
-    return this.robotId;
-  }
-
-  private parseMessageData<T>(data: string): T | null {
+  public parseMessageData<T>(data: string): T | null {
     if (data) {
       try {
         return JSON.parse(data) as unknown as T;
@@ -122,8 +98,6 @@ export class OpenflowService {
       data: { message?: string; affectedrows: number; collectionname: string };
       command: string;
     }>("deletemany", data);
-
-    console.log("REPLY", reply);
 
     if (reply.command === "error") {
       throw new Error(reply.data.message);
@@ -204,11 +178,11 @@ export class OpenflowService {
 
     const reply = await this.sendCommand<{
       command: string;
-      data: { message?: string; result: T };
+      data: { message?: string; error?: string; result: T };
     }>("updateone", updateEntityData);
 
-    if (reply.command === "error") {
-      throw new BadRequestException(reply.data.message);
+    if (reply.command === "error" || reply.data.error) {
+      throw new BadRequestException(reply.data.message || reply.data.error);
     }
 
     return reply.data.result;
@@ -241,134 +215,6 @@ export class OpenflowService {
     }>("insertone", insertUserData);
     if (reply.data.error) throw new ConflictException(reply.data.error);
     return reply.data.result;
-  }
-
-  async executeWorkflow(jwt: string, workflow: ExecuteWorkflowDto) {
-    const robotId = await this.getRobotId(this.config.OPENFLOW_ROBOT_USERNAME);
-    const executionContext: Partial<Execution> = {
-      robotId,
-      arguments: workflow.arguments,
-      _type: "user_execution",
-      workflowId: workflow.workflowId,
-      templateId: workflow.templateId,
-      expiration: workflow.expiration,
-    };
-
-    const ws = new WebSocket(this.config.OPENFLOW_WS_URL);
-
-    return new Promise((resolve, reject) => {
-      const registerQueueMsg = SocketMessage.fromcommand("registerqueue");
-      registerQueueMsg.data = JSON.stringify({
-        priority: 2,
-        count: 1,
-        index: 0,
-        data: '{"priority":2}',
-        jwt: this.cryptService.rootToken,
-      });
-
-      const interval = setInterval(() => {
-        const ping = SocketMessage.fromcommand("ping");
-        ws.send(JSON.stringify(ping));
-      }, 10_000);
-
-      ws.on("open", () => {
-        setTimeout(() => {
-          ws.send(JSON.stringify(registerQueueMsg));
-        }, 50);
-      });
-
-      ws.on("message", (data) => {
-        const timestamp = new Date();
-        const socketMessage = SocketMessage.fromjson(data.toString());
-
-        if (socketMessage.command === "error") {
-          reject(new BadRequestException(socketMessage));
-        }
-
-        if (
-          socketMessage.command === "queuemessage" &&
-          socketMessage.replyto == null
-        ) {
-          const socketData = this.parseMessageData<{
-            data: {
-              command: Execution["status"];
-              workflowid: string;
-              data: { [key: string]: unknown };
-            };
-          }>(socketMessage.data);
-
-          executionContext.status = socketData.data.command;
-
-          if (socketData.data.command === "invokesuccess") {
-            executionContext.invokedAt = timestamp;
-            this.updateOne(jwt, executionContext);
-          }
-
-          if (
-            ["timeout", "invokefailed", "error"].includes(
-              socketData.data.command
-            )
-          ) {
-            executionContext.finishedAt = timestamp;
-            executionContext.error =
-              (socketData.data.data.Message as string) ||
-              socketData.data.command;
-
-            this.updateOne(jwt, executionContext).then(() => {
-              reject(
-                new BadRequestException(
-                  socketData.data.data.Message
-                    ? `${socketData.data.command}: ${socketData.data.data.Message}`
-                    : socketData.data.command
-                )
-              );
-              ws.close();
-            });
-          }
-
-          if (socketData.data.command === "invokecompleted") {
-            executionContext.finishedAt = timestamp;
-            executionContext.output = socketData.data.data;
-            this.updateOne(jwt, executionContext).then(() => {
-              resolve(socketData.data.data);
-              ws.close();
-            });
-          }
-        }
-
-        if (socketMessage.replyto === registerQueueMsg.id) {
-          const [queueMessageData] = QueueMessage.parse({
-            jwt: this.cryptService.rootToken,
-            priority: 2,
-            queuename: robotId,
-            replyto: this.parseMessageData<{ queuename: string }>(
-              socketMessage.data
-            ).queuename,
-            data: {
-              command: "invoke",
-              workflowid: workflow.templateId,
-              data: workflow.arguments,
-            },
-            expiration: workflow.expiration,
-          });
-          const queueMsg = SocketMessage.fromcommand("queuemessage");
-          queueMsg.data = JSON.stringify(queueMessageData);
-
-          executionContext.startedAt = timestamp;
-          executionContext.correlationId = queueMessageData.correlationId;
-          executionContext.status = "queued";
-          this.insertOne(jwt, executionContext).then((data) => {
-            executionContext._id = data._id;
-            ws.send(JSON.stringify(queueMsg));
-          });
-        }
-      });
-
-      ws.on("close", () => {
-        clearInterval(interval);
-        reject(new Error("Connection closed!"));
-      });
-    });
   }
 
   private sendCommand<T>(

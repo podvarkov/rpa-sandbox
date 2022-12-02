@@ -69,7 +69,7 @@ export const WorkflowRunnerPage: React.FC = () => {
                   .executeWorkflow(values)
                   .then((res) => {
                     setStatus({
-                      message: "completed",
+                      message: t`queued`,
                       status: "info",
                     });
                     actions.setFieldValue("arguments", res.data);

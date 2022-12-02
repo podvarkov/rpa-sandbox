@@ -17,11 +17,11 @@ msgstr ""
 msgid "Add field"
 msgstr "フィールドを追加"
 
-#: src/pages/executions.tsx:164
+#: src/pages/executions.tsx:176
 msgid "All workflows"
 msgstr ""
 
-#: src/pages/executions.tsx:191
+#: src/pages/executions.tsx:203
 msgid "Any status"
 msgstr ""
 
@@ -112,11 +112,11 @@ msgstr "処刑"
 msgid "Expiration timeout:"
 msgstr ""
 
-#: src/pages/executions.tsx:144
+#: src/pages/executions.tsx:156
 msgid "Filters:"
 msgstr ""
 
-#: src/pages/executions.tsx:224
+#: src/pages/executions.tsx:236
 msgid "Finished"
 msgstr ""
 
@@ -132,7 +132,11 @@ msgstr ""
 msgid "ID:"
 msgstr ""
 
-#: src/pages/executions.tsx:37
+#: src/pages/executions.tsx:39
+msgid "Idle"
+msgstr ""
+
+#: src/pages/executions.tsx:38
 msgid "In progress"
 msgstr ""
 
@@ -149,6 +153,10 @@ msgstr ""
 
 #: src/pages/executions.tsx:32
 msgid "Invoke failed"
+msgstr ""
+
+#: src/pages/executions.tsx:36
+msgid "Invoked"
 msgstr ""
 
 #: src/pages/execution-details.tsx:136
@@ -200,7 +208,7 @@ msgstr ""
 msgid "Passwords must match"
 msgstr ""
 
-#: src/pages/executions.tsx:36
+#: src/pages/executions.tsx:37
 msgid "Queued"
 msgstr ""
 
@@ -227,7 +235,7 @@ msgstr ""
 msgid "Something goes wrong"
 msgstr ""
 
-#: src/pages/executions.tsx:217
+#: src/pages/executions.tsx:229
 msgid "Started"
 msgstr ""
 
@@ -235,7 +243,7 @@ msgstr ""
 msgid "Started at:"
 msgstr ""
 
-#: src/pages/executions.tsx:231
+#: src/pages/executions.tsx:243
 msgid "Status"
 msgstr ""
 
@@ -248,7 +256,7 @@ msgid "Templates"
 msgstr "テンプレート"
 
 #: src/pages/execution-details.tsx:47
-#: src/pages/executions.tsx:125
+#: src/pages/executions.tsx:137
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
 msgid "There was an error while loading"
@@ -282,7 +290,7 @@ msgstr ""
 msgid "User {0} already exists"
 msgstr ""
 
-#: src/pages/executions.tsx:210
+#: src/pages/executions.tsx:222
 msgid "Workflow"
 msgstr ""
 
@@ -334,6 +342,10 @@ msgstr ""
 
 #: src/pages/workflow-runner.tsx:84
 msgid "error"
+msgstr ""
+
+#: src/pages/workflow-runner.tsx:72
+msgid "queued"
 msgstr ""
 
 #: src/components/workflow-form.tsx:94

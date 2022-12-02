@@ -33,8 +33,10 @@ export const executionStatuses = {
   invokecompleted: defineMessage({ message: "Completed" }),
   error: defineMessage({ message: "Error" }),
   timeout: defineMessage({ message: "Timeout" }),
-  queued: defineMessage({ message: "Queued" }),
+  queued: defineMessage({ message: "Invoked" }),
+  invoke: defineMessage({ message: "Queued" }),
   invokesuccess: defineMessage({ message: "In progress" }),
+  invokeidle: defineMessage({ message: "Idle" }),
 };
 /* eslint-enable string-to-lingui/missing-lingui-transformation */
 
@@ -102,7 +104,17 @@ export const ExecutionsPage: React.FC = () => {
         orderBy,
         direction,
       }),
-    { keepPreviousData: true }
+    {
+      keepPreviousData: true,
+      refetchInterval: (data) => {
+        const needRefetch = (data || []).find((execution) =>
+          ["queued", "invoke", "invokesuccess", "invokeidle"].includes(
+            execution.status
+          )
+        );
+        return needRefetch ? 1000 : 0;
+      },
+    }
   );
   const { data: workflows, error: workflowsError } = useQuery(
     "workflows",
