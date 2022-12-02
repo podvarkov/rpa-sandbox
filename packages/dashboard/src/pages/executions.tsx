@@ -33,6 +33,8 @@ export const executionStatuses = {
   invokecompleted: defineMessage({ message: "Completed" }),
   error: defineMessage({ message: "Error" }),
   timeout: defineMessage({ message: "Timeout" }),
+  queued: defineMessage({ message: "Queued" }),
+  invokesuccess: defineMessage({ message: "In progress" }),
 };
 /* eslint-enable string-to-lingui/missing-lingui-transformation */
 
@@ -249,7 +251,9 @@ export const ExecutionsPage: React.FC = () => {
                       (workflow) => workflow._id === execution.workflowId
                     )?.name || execution.workflowId}
                   </Td>
+                  {/* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */}
                   <Td>{dayjs(execution.startedAt).format("ll HH:mm:ss")}</Td>
+                  {/* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */}
                   <Td>{dayjs(execution.finishedAt).format("ll HH:mm:ss")}</Td>
                   <Td cursor={"default"}>
                     <Tooltip label={execution.error}>

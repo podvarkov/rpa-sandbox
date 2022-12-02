@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TemplatesService } from "./templates.service";
 import { TemplatesController } from "./templates.controller";
-import { OpenflowModule } from "src/openflow/openflow.module";
+import { OpenflowModule } from "../openflow/openflow.module";
 
 @Module({
   imports: [OpenflowModule],

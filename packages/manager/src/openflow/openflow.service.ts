@@ -6,7 +6,9 @@ import {
 } from "@nestjs/common";
 import { ConfigProvider } from "../config/config.provider";
 import {
+  DeleteManyMessage,
   DeleteOneMessage,
+  InsertManyMessage,
   InsertOneMessage,
   QueryMessage,
   QueryOptions,
@@ -16,14 +18,9 @@ import {
   UpdateOneMessage,
 } from "@openiap/openflow-api";
 import { WebSocket } from "ws";
-import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
-import { CryptService } from "src/crypt/crypt.service";
-import {
-  EncryptedUserWorkflow,
-  Execution,
-  UserWorkflow,
-  Workflow,
-} from "./types";
+import { ExecuteWorkflowDto } from "../workflows/execute-workflow.dto";
+import { CryptService } from "../crypt/crypt.service";
+import { Execution } from "./types";
 
 @Injectable()
 export class OpenflowService {
@@ -37,17 +34,21 @@ export class OpenflowService {
 
   private async getRobotId(username: string) {
     if (this.robotId) return this.robotId;
-    const reply = await this.queryCollection<{
-      data?: { result?: TokenUser[] };
-    }>(this.cryptService.rootToken, {
-      collectionname: "users",
-      query: { username },
-      projection: ["_id"],
-    });
 
-    this.robotId = reply?.data?.result[0]?._id;
-    if (!this.robotId)
+    const data = await this.queryCollection<TokenUser>(
+      this.cryptService.rootToken,
+      {
+        collectionname: "users",
+        query: { username },
+        projection: ["_id"],
+      }
+    );
+
+    this.robotId = data[0]?._id;
+    if (!this.robotId) {
       throw new Error(`Can not get robot with username: ${username}`);
+    }
+
     return this.robotId;
   }
 
@@ -62,7 +63,7 @@ export class OpenflowService {
     return null;
   }
 
-  private async queryCollection<T>(jwt: string, options: QueryOptions) {
+  async queryCollection<T>(jwt: string, options: QueryOptions) {
     const [data] = QueryMessage.parse({
       top: 100,
       skip: 0,
@@ -72,159 +73,26 @@ export class OpenflowService {
       jwt,
     });
 
-    return this.sendCommand<T>("query", data);
-  }
-
-  async listRobotWorkflows(
-    jwt: string,
-    query: { [key: string]: unknown } = {}
-  ) {
-    const reply = await this.queryCollection<{
-      data: { message?: string; result: Workflow[]; collectionname: string };
+    const reply = await this.sendCommand<{
+      data: { message?: string; result: T[]; collectionname: string };
       command: string;
-    }>(jwt, {
-      query: { _type: "workflow", ...query },
-      projection: {
-        _type: 1,
-        name: 1,
-        _created: 1,
-        _modified: 1,
-        projectid: 1,
-        _created_by: 1,
-        description: 1,
-        Parameters: 1,
-      },
-      collectionname: "openrpa",
-    });
+    }>("query", data);
 
     if (reply.command === "error") {
-      throw new BadRequestException(reply.data.message);
+      throw new Error(reply.data.message);
     }
 
-    return reply.data.result.map((wf) => ({
-      ...wf,
+    return reply.data.result.map((result) => ({
+      ...result,
       collection: reply.data.collectionname,
     }));
   }
 
-  async listFormWorkflows(jwt: string, query: { [key: string]: unknown } = {}) {
-    const reply = await this.queryCollection<{
-      data: { message?: string; result: Workflow[]; collectionname: string };
-      command: string;
-    }>(jwt, {
-      query: { _type: "workflow", web: true, ...query },
-      projection: {
-        _type: 1,
-        name: 1,
-        _created: 1,
-        _modified: 1,
-        projectid: 1,
-        _created_by: 1,
-        description: 1,
-        Parameters: 1,
-      },
-      collectionname: "workflow",
-    });
-
-    if (reply.command === "error") {
-      throw new BadRequestException(reply.data.message);
-    }
-
-    return reply.data.result.map((wf) => ({
-      ...wf,
-      collection: reply.data.collectionname,
-    }));
-  }
-
-  async listExecutions(
-    jwt: string,
-    query = {},
-    pagination = { skip: 0, top: 50 },
-    orderby: { [key: string]: number } = { startedAt: -1 }
-  ) {
-    const reply = await this.queryCollection<{
-      data: {
-        message?: string;
-        result: Array<Execution>;
-        collectionname: string;
-      };
-      command: string;
-    }>(jwt, {
-      query: { ...query, _type: "user_execution" },
-      orderby,
-      collectionname: "entities",
-      projection: [
-        "_id",
-        "collection",
-        "_createdby",
-        "_createdbyid",
-        "_type",
-        "startedAt",
-        "invokedAt",
-        "finishedAt",
-        "arguments",
-        "output",
-        "error",
-        "workflowId",
-        "templateId",
-        "status",
-        "expiration",
-      ],
-      ...pagination,
-    });
-
-    if (reply.command === "error") {
-      throw new BadRequestException(reply.data.message);
-    }
-
-    return reply.data.result.map((execution) => ({
-      ...execution,
-      collection: reply.data.collectionname,
-    }));
-  }
-
-  getExecution(jwt: string, id: string) {
-    return this.listExecutions(jwt, { _id: id }).then((res) => {
-      return res[0];
-    });
-  }
-
-  async listUserWorkflows(jwt: string, query = {}) {
-    const reply = await this.queryCollection<{
-      data: {
-        message?: string;
-        result: Array<EncryptedUserWorkflow>;
-        collectionname: string;
-      };
-      command: string;
-    }>(jwt, {
-      query: { ...query, _type: "user_workflow" },
-      collectionname: "entities",
-    });
-
-    if (reply.command === "error") {
-      throw new BadRequestException(reply.data.message);
-    }
-
-    return reply.data.result.map((wf) => ({
-      ...wf,
-      collection: reply.data.collectionname,
-    }));
-  }
-
-  async getUserWorkflow(
-    jwt: string,
-    id: string
-  ): Promise<EncryptedUserWorkflow | null> {
-    const data = await this.listUserWorkflows(jwt, { _id: id });
-    return data.length > 0 ? data[0] : null;
-  }
-
-  async deleteUserWorkflow(jwt: string, id: string) {
+  async deleteOne(jwt: string, id: string, collectionname = "entities") {
     const [data] = DeleteOneMessage.parse({
       priority: 2,
       recursive: false,
-      collectionname: "entities",
+      collectionname,
       id,
       jwt,
     });
@@ -235,57 +103,108 @@ export class OpenflowService {
     }>("deleteone", data);
 
     if (reply.command === "error") {
-      throw new BadRequestException(reply.data.message);
+      throw new Error(reply.data.message);
     }
 
     return { collection: reply.data.collectionname, id: reply.data.id };
   }
 
-  async getRobotWorkflow(jwt: string, id: string): Promise<Workflow> {
-    const results = await this.listRobotWorkflows(jwt, { _id: id });
-    return results[0];
+  async deleteMany(jwt: string, query = {}, collectionname = "entities") {
+    const [data] = DeleteManyMessage.parse({
+      priority: 2,
+      recursive: false,
+      collectionname,
+      query,
+      jwt,
+    });
+
+    const reply = await this.sendCommand<{
+      data: { message?: string; affectedrows: number; collectionname: string };
+      command: string;
+    }>("deletemany", data);
+
+    console.log("REPLY", reply);
+
+    if (reply.command === "error") {
+      throw new Error(reply.data.message);
+    }
+
+    return {
+      collection: reply.data.collectionname,
+      rows: reply.data.affectedrows,
+    };
   }
 
-  async getFormWorkflow(jwt: string, id: string): Promise<Workflow> {
-    const results = await this.listFormWorkflows(jwt, { _id: id });
-    return results[0];
-  }
-
-  async createEntity(jwt: string, item: { [key: string]: unknown }) {
+  async insertOne<T extends { [key: string]: unknown }>(
+    jwt: string,
+    item: T,
+    collectionname = "entities"
+  ) {
     const [insertEntityData] = InsertOneMessage.parse({
       priority: 2,
       w: 1,
       j: true,
-      collectionname: "entities",
+      collectionname,
       item,
       jwt,
     });
 
     const reply = await this.sendCommand<{
       command: string;
-      data: { message?: string; result: UserWorkflow };
+      data: { message?: string; result: T };
     }>("insertone", insertEntityData);
 
     if (reply.command === "error") {
-      throw new BadRequestException(reply.data.message);
+      throw new Error(reply.data.message);
     }
 
     return reply.data.result;
   }
 
-  async updateEntity(jwt: string, item: { [key: string]: unknown }) {
+  async insertMany<T extends { [key: string]: unknown }>(
+    jwt: string,
+    items: T[],
+    collectionname = "entities"
+  ) {
+    const [insertManyData] = InsertManyMessage.parse({
+      priority: 2,
+      w: 1,
+      j: true,
+      collectionname,
+      items,
+      skipresults: true,
+      jwt,
+    });
+
+    const reply = await this.sendCommand<{
+      command: string;
+      data: { message?: string; result: T };
+    }>("insertmany", insertManyData);
+
+    if (reply.command === "error") {
+      throw new Error(reply.data.message);
+    }
+
+    return reply.data.result;
+  }
+
+  async updateOne<T extends { [key: string]: unknown }>(
+    jwt: string,
+    item: T,
+    collectionname = "entities"
+  ) {
     const [updateEntityData] = UpdateOneMessage.parse({
       priority: 2,
       w: 1,
       j: true,
-      collectionname: "entities",
+      collectionname,
       item,
       jwt,
     });
 
     const reply = await this.sendCommand<{
       command: string;
-      data: { message?: string; result: UserWorkflow };
+      data: { message?: string; result: T };
     }>("updateone", updateEntityData);
 
     if (reply.command === "error") {
@@ -336,6 +255,7 @@ export class OpenflowService {
     };
 
     const ws = new WebSocket(this.config.OPENFLOW_WS_URL);
+
     return new Promise((resolve, reject) => {
       const registerQueueMsg = SocketMessage.fromcommand("registerqueue");
       registerQueueMsg.data = JSON.stringify({
@@ -345,6 +265,11 @@ export class OpenflowService {
         data: '{"priority":2}',
         jwt: this.cryptService.rootToken,
       });
+
+      const interval = setInterval(() => {
+        const ping = SocketMessage.fromcommand("ping");
+        ws.send(JSON.stringify(ping));
+      }, 10_000);
 
       ws.on("open", () => {
         setTimeout(() => {
@@ -376,6 +301,7 @@ export class OpenflowService {
 
           if (socketData.data.command === "invokesuccess") {
             executionContext.invokedAt = timestamp;
+            this.updateOne(jwt, executionContext);
           }
 
           if (
@@ -388,23 +314,25 @@ export class OpenflowService {
               (socketData.data.data.Message as string) ||
               socketData.data.command;
 
-            this.createEntity(jwt, executionContext).then(() =>
+            this.updateOne(jwt, executionContext).then(() => {
               reject(
                 new BadRequestException(
                   socketData.data.data.Message
                     ? `${socketData.data.command}: ${socketData.data.data.Message}`
                     : socketData.data.command
                 )
-              )
-            );
+              );
+              ws.close();
+            });
           }
 
           if (socketData.data.command === "invokecompleted") {
             executionContext.finishedAt = timestamp;
             executionContext.output = socketData.data.data;
-            this.createEntity(jwt, executionContext).then(() =>
-              resolve(socketData.data.data)
-            );
+            this.updateOne(jwt, executionContext).then(() => {
+              resolve(socketData.data.data);
+              ws.close();
+            });
           }
         }
 
@@ -426,11 +354,19 @@ export class OpenflowService {
           const queueMsg = SocketMessage.fromcommand("queuemessage");
           queueMsg.data = JSON.stringify(queueMessageData);
 
-          executionContext.startedAt = new Date();
+          executionContext.startedAt = timestamp;
           executionContext.correlationId = queueMessageData.correlationId;
-
-          ws.send(JSON.stringify(queueMsg));
+          executionContext.status = "queued";
+          this.insertOne(jwt, executionContext).then((data) => {
+            executionContext._id = data._id;
+            ws.send(JSON.stringify(queueMsg));
+          });
         }
+      });
+
+      ws.on("close", () => {
+        clearInterval(interval);
+        reject(new Error("Connection closed!"));
       });
     });
   }

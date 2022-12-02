@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
-import { OpenflowService } from "src/openflow/openflow.service";
-import { CryptModule } from "src/crypt/crypt.module";
+import { OpenflowService } from "./openflow.service";
+import { CryptModule } from "../crypt/crypt.module";
 
 @Module({
   imports: [CryptModule],
