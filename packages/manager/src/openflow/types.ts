@@ -50,3 +50,9 @@ export type Execution = Entity<{
   workflowId: string;
   templateId: string;
 }>;
+
+export type ScheduledEvent = Entity<{
+  workflowId: string;
+  name: string;
+  rrule: RRule["options"];
+}>;

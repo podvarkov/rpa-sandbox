@@ -128,7 +128,10 @@ export const ExecutionDetailsPage: React.FC = () => {
                 <Trans>Started at:</Trans>
               </Box>
               <Box flex={1}>
-                {dayjs(execution.startedAt).format("ll HH:mm:ss")}
+                {execution.startedAt
+                  ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
+                    dayjs(execution.finishedAt).format("ll HH:mm:ss")
+                  : null}
               </Box>
             </HStack>
             <HStack spacing={4} w="100%">
@@ -136,7 +139,10 @@ export const ExecutionDetailsPage: React.FC = () => {
                 <Trans>Invoked at:</Trans>
               </Box>
               <Box flex={1}>
-                {dayjs(execution.invokedAt).format("ll HH:mm:ss")}
+                {execution.invokedAt
+                  ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
+                    dayjs(execution.invokedAt).format("ll HH:mm:ss")
+                  : null}
               </Box>
             </HStack>
             <HStack spacing={4} w="100%">
@@ -144,7 +150,10 @@ export const ExecutionDetailsPage: React.FC = () => {
                 <Trans>Finished at:</Trans>
               </Box>
               <Box flex={1}>
-                {dayjs(execution.finishedAt).format("ll HH:mm:ss")}
+                {execution.finishedAt
+                  ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
+                    dayjs(execution.finishedAt).format("ll HH:mm:ss")
+                  : null}
               </Box>
             </HStack>
           </VStack>
