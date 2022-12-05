@@ -47,7 +47,6 @@ export class ExecutionWorkerService {
   private updateExecution(context: Partial<Execution>) {
     this.openflowService
       .updateOne(this.cryptService.rootToken, {
-        ...this.contexts[context._id],
         ...context,
       })
       .catch((error) => {
@@ -95,6 +94,7 @@ export class ExecutionWorkerService {
     this.ws.on("close", () => {
       this.logger.error("connection is closed");
       clearInterval(pingInterval);
+      this.initSocketConnection();
     });
   }
 
@@ -107,7 +107,6 @@ export class ExecutionWorkerService {
       });
       if (socketMessage.command === "error") {
         this.logger.error({ message: "error message received", socketMessage });
-        ws.close();
       }
 
       if (socketMessage.command === "queuemessage") {
@@ -122,10 +121,8 @@ export class ExecutionWorkerService {
           };
         }>(socketMessage.data);
 
-        const executionContext: Partial<Execution> = {
-          status: socketData.data.command,
-          _id: socketData.correlationId,
-        };
+        const executionContext = this.contexts[socketData.correlationId];
+        executionContext.status = socketData.data.command;
 
         if (socketData.data.command === "invokesuccess") {
           executionContext.invokedAt = timestamp;
@@ -150,7 +147,7 @@ export class ExecutionWorkerService {
   }
 
   @OnEvent("workflow.queued")
-  async handleOrderCreatedEvent(jwt: string, workflow: ExecuteWorkflowDto) {
+  async handleWorkflowQueuedEvent(jwt: string, workflow: ExecuteWorkflowDto) {
     const robotId = await this.getRobotId(this.config.OPENFLOW_ROBOT_USERNAME);
     const executionContext: Partial<Execution> = {
       robotId,
