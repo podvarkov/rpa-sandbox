@@ -10,6 +10,7 @@ import { OpenflowModule } from "./openflow/openflow.module";
 import { TemplatesModule } from "./templates/templates.module";
 import { WorkflowsModule } from "./workflows/workflows.module";
 import { ExecutionsModule } from "./executions/executions.module";
+import { SchedulerModule } from "./scheduler/scheduler.module";
 
 @Module({
   imports: [
@@ -22,6 +23,8 @@ import { ExecutionsModule } from "./executions/executions.module";
       rootPath: join(__dirname, "static"),
     }),
     ExecutionsModule,
+    SchedulerModule,
+    EventEmitterModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService, Logger],
