@@ -1,24 +1,15 @@
-import React from "react";
 import {
-  Box,
-  Flex,
-  Avatar,
-  HStack,
-  Link,
-  Text,
-  Menu,
-  MenuList,
-  MenuItem,
-  MenuButton,
-  Progress,
-  Select,
+  Avatar, Box,
+  Flex, HStack,
+  Link, Menu, MenuButton, MenuItem, MenuList, Select, Text
 } from "@chakra-ui/react";
-import { useAuth } from "./auth-provider";
-import { Link as ReactLink, Outlet } from "react-router-dom";
-import { useProgress } from "./progress-provider";
 import { defineMessage, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React from "react";
+import { Link as ReactLink, Outlet } from "react-router-dom";
 import { locales } from "../i18n";
+import { useAuth } from "./auth-provider";
+import { useProgress } from "./progress-provider";
 
 /* eslint-disable string-to-lingui/missing-lingui-transformation */
 const menuItems = [
@@ -124,7 +115,7 @@ const Layout: React.FC = () => {
     <>
       <Flex direction="column" h="100vh">
         <Header />
-        {visible ? <Progress size="xs" isIndeterminate /> : null}
+        {/* {visible ? <Progress size="xs" isIndeterminate /> : null} */}
 
         <Box p={4} bg="gray.50" h={"100%"}>
           <Outlet />

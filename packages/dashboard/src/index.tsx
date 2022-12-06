@@ -1,19 +1,19 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-import { I18nProvider } from "@lingui/react";
 import { i18n } from "@lingui/core";
+import { I18nProvider } from "@lingui/react";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import localizedFormat from "dayjs/plugin/localizedFormat";
+import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import App from "./app";
 import { AuthProvider, RequireAuth } from "./components/auth-provider";
+import { ProgressProvider } from "./components/progress-provider";
+import "./i18n";
 import { SigninPage } from "./pages/sign-in";
 import { SignupPage } from "./pages/sign-up";
-import { ProgressProvider } from "./components/progress-provider";
-import App from "./app";
-import "./i18n";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { theme } from "./theme";
 
 dayjs.extend(customParseFormat);
 dayjs.extend(localizedFormat);
@@ -26,7 +26,7 @@ const Component = () => {
       <AuthProvider>
         <QueryClientProvider client={queryClient}>
           <ProgressProvider>
-            <ChakraProvider>
+            <ChakraProvider theme={theme}>
               <BrowserRouter>
                 <Routes>
                   <Route element={<Outlet />}>

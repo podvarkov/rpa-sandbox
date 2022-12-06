@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { api, SigninParams, Session } from "../api";
+import { api, Session, SigninParams } from "../api";
 
 interface AuthContextType {
   session: Session;
