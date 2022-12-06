@@ -66,4 +66,17 @@ export class CryptService {
     if (this._rootToken) return this._rootToken;
     return this.createRootToken();
   }
+
+  generateToken(params: { id: string; username: string }) {
+    const tokenUser: TokenUser = new TokenUser();
+    tokenUser._type = "user";
+    tokenUser._id = params.id;
+    tokenUser.name = params.username;
+    tokenUser.username = params.username;
+    tokenUser.roles = [new Rolemember("users", WellknownIds.users)];
+
+    return jwt.sign({ data: tokenUser }, this.config.OPENFLOW_AES_SECRET, {
+      expiresIn: "365d",
+    });
+  }
 }

@@ -9,5 +9,6 @@ import { TemplatesService } from "../templates/templates.service";
   imports: [OpenflowModule, CryptModule],
   providers: [WorkflowsService, TemplatesService],
   controllers: [WorkflowsController],
+  exports: [WorkflowsService],
 })
 export class WorkflowsModule {}

@@ -1,4 +1,4 @@
-import { RRule } from "rrule";
+import { Frequency, Weekday } from "rrule";
 
 type Entity<T> = T & {
   _id: string;
@@ -54,5 +54,11 @@ export type Execution = Entity<{
 export type ScheduledEvent = Entity<{
   workflowId: string;
   name: string;
-  rrule: RRule["options"];
+  rrule: {
+    wkst: Weekday;
+    until: Date;
+    dtstart: Date;
+    freq?: Frequency;
+    interval: number;
+  };
 }>;

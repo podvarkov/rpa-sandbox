@@ -11,6 +11,7 @@ import { TemplatesModule } from "./templates/templates.module";
 import { WorkflowsModule } from "./workflows/workflows.module";
 import { ExecutionsModule } from "./executions/executions.module";
 import { SchedulerModule } from "./scheduler/scheduler.module";
+import { ScheduleModule } from "@nestjs/schedule";
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { SchedulerModule } from "./scheduler/scheduler.module";
     ExecutionsModule,
     SchedulerModule,
     EventEmitterModule.forRoot(),
+    ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

@@ -94,54 +94,73 @@ export class ExecutionWorkerService {
     this.ws.on("close", () => {
       this.logger.error("connection is closed");
       clearInterval(pingInterval);
+      // retry connection
       this.initSocketConnection();
     });
   }
 
   listenQueue(ws: WebSocket) {
-    ws.on("message", (data) => {
-      const socketMessage = SocketMessage.fromjson(data.toString());
-      this.logger.debug({
-        message: "message received",
-        socketMessage,
-      });
-      if (socketMessage.command === "error") {
-        this.logger.error({ message: "error message received", socketMessage });
-      }
-
-      if (socketMessage.command === "queuemessage") {
-        const timestamp = new Date();
-
-        const socketData = this.openflowService.parseMessageData<{
-          correlationId: string;
-          data: {
-            command: Execution["status"];
-            workflowid: string;
-            data: { [key: string]: unknown };
-          };
-        }>(socketMessage.data);
-
-        const executionContext = this.contexts[socketData.correlationId];
-        executionContext.status = socketData.data.command;
-
-        if (socketData.data.command === "invokesuccess") {
-          executionContext.invokedAt = timestamp;
+    ws.on("message", async (data) => {
+      try {
+        const socketMessage = SocketMessage.fromjson(data.toString());
+        this.logger.debug({
+          message: "message received",
+          socketMessage,
+        });
+        if (socketMessage.command === "error") {
+          this.logger.error({
+            message: "error message received",
+            socketMessage,
+          });
         }
 
-        if (
-          ["timeout", "invokefailed", "error"].includes(socketData.data.command)
-        ) {
-          executionContext.finishedAt = timestamp;
-          executionContext.error =
-            (socketData.data.data.Message as string) || socketData.data.command;
-        }
+        if (socketMessage.command === "queuemessage") {
+          const timestamp = new Date();
 
-        if (socketData.data.command === "invokecompleted") {
-          executionContext.finishedAt = timestamp;
-          executionContext.output = socketData.data.data;
-        }
+          const socketData = this.openflowService.parseMessageData<{
+            correlationId: string;
+            data: {
+              command: Execution["status"];
+              workflowid: string;
+              data: { [key: string]: unknown };
+            };
+          }>(socketMessage.data);
 
-        this.updateExecution(executionContext);
+          const executionContext =
+            this.contexts[socketData.correlationId] ||
+            (await this.openflowService
+              .queryCollection<Execution>(this.cryptService.rootToken, {
+                query: { _id: socketData.correlationId },
+                collectionname: "entities",
+              })
+              .then((executions) => executions[0]));
+
+          executionContext.status = socketData.data.command;
+
+          if (socketData.data.command === "invokesuccess") {
+            executionContext.invokedAt = timestamp;
+          }
+
+          if (
+            ["timeout", "invokefailed", "error"].includes(
+              socketData.data.command
+            )
+          ) {
+            executionContext.finishedAt = timestamp;
+            executionContext.error =
+              (socketData.data.data.Message as string) ||
+              socketData.data.command;
+          }
+
+          if (socketData.data.command === "invokecompleted") {
+            executionContext.finishedAt = timestamp;
+            executionContext.output = socketData.data.data;
+          }
+
+          this.updateExecution(executionContext);
+        }
+      } catch (error) {
+        this.logger.error({ message: "can not process ws message", error });
       }
     });
   }
