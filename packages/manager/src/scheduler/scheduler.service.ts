@@ -20,7 +20,6 @@ export class SchedulerService {
   ) {}
 
   findEvents(jwt: string, query = {}) {
-    console.log(JSON.stringify(query));
     return this.openflowService.queryCollection<ScheduledEvent>(jwt, {
       collectionname: "entities",
       query: { _type: "scheduled_event", ...query },
