@@ -43,4 +43,8 @@ export class SchedulerController {
   delete(@UserSession() session: Session, @Param("id") id: string) {
     return this.schedulerService.deleteEvent(session.jwt, id);
   }
+
+  @Get("/test") test() {
+    return this.schedulerService.executeScheduledWorkflows();
+  }
 }

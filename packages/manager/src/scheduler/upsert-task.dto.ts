@@ -34,15 +34,15 @@ class PartialRRuleOptions implements Partial<Options> {
   get options() {
     const opts: {
       wkst: Weekday;
-      count: number;
       until: Date;
       dtstart: Date;
       freq?: Frequency;
+      interval: number;
     } = {
       wkst: RRule.MO,
       dtstart: this.dtstart,
       until: this.until ?? (!this.interval && this.dtstart),
-      count: 10,
+      interval: this.interval || 1,
     };
 
     if (this.freq) {
