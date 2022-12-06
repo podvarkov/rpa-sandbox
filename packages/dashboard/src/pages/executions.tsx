@@ -33,6 +33,10 @@ export const executionStatuses = {
   invokecompleted: defineMessage({ message: "Completed" }),
   error: defineMessage({ message: "Error" }),
   timeout: defineMessage({ message: "Timeout" }),
+  queued: defineMessage({ message: "Invoked" }),
+  invoke: defineMessage({ message: "Queued" }),
+  invokesuccess: defineMessage({ message: "In progress" }),
+  invokeidle: defineMessage({ message: "Idle" }),
 };
 /* eslint-enable string-to-lingui/missing-lingui-transformation */
 
@@ -100,7 +104,17 @@ export const ExecutionsPage: React.FC = () => {
         orderBy,
         direction,
       }),
-    { keepPreviousData: true }
+    {
+      keepPreviousData: true,
+      refetchInterval: (data) => {
+        const needRefetch = (data || []).find((execution) =>
+          ["queued", "invoke", "invokesuccess", "invokeidle"].includes(
+            execution.status
+          )
+        );
+        return needRefetch ? 1000 : 0;
+      },
+    }
   );
   const { data: workflows, error: workflowsError } = useQuery(
     "workflows",
@@ -249,8 +263,18 @@ export const ExecutionsPage: React.FC = () => {
                       (workflow) => workflow._id === execution.workflowId
                     )?.name || execution.workflowId}
                   </Td>
-                  <Td>{dayjs(execution.startedAt).format("ll HH:mm:ss")}</Td>
-                  <Td>{dayjs(execution.finishedAt).format("ll HH:mm:ss")}</Td>
+                  <Td>
+                    {execution.startedAt
+                      ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
+                        dayjs(execution.startedAt).format("ll HH:mm:ss")
+                      : null}
+                  </Td>
+                  <Td>
+                    {execution.finishedAt
+                      ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
+                        dayjs(execution.finishedAt).format("ll HH:mm:ss")
+                      : null}
+                  </Td>
                   <Td cursor={"default"}>
                     <Tooltip label={execution.error}>
                       {i18n._(

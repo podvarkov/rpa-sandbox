@@ -15,11 +15,7 @@ export class TemplatesController {
 
   @Get(":type/:id")
   @UseGuards(JwtAuthGuard)
-  findOne(
-    @UserSession() session: Session,
-    @Param("id") id: string,
-    @Param("type") type: string
-  ) {
-    return this.templatesService.findOne(session.jwt, id, type);
+  findOne(@UserSession() session: Session, @Param("id") id: string) {
+    return this.templatesService.findOne(session.jwt, id);
   }
 }

@@ -17,11 +17,11 @@ msgstr ""
 msgid "Add field"
 msgstr "Add field"
 
-#: src/pages/executions.tsx:107
+#: src/pages/executions.tsx:176
 msgid "All workflows"
 msgstr "All workflows"
 
-#: src/pages/executions.tsx:134
+#: src/pages/executions.tsx:203
 msgid "Any status"
 msgstr "Any status"
 
@@ -29,7 +29,7 @@ msgstr "Any status"
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr "Are you sure? You can not undo this action afterwards."
 
-#: src/pages/execution-details.tsx:65
+#: src/pages/execution-details.tsx:103
 msgid "Arguments:"
 msgstr "Arguments:"
 
@@ -49,7 +49,7 @@ msgstr "Can not edit workflow"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/pages/executions.tsx:28
+#: src/pages/executions.tsx:33
 msgid "Completed"
 msgstr "Completed"
 
@@ -84,11 +84,11 @@ msgstr "Email"
 msgid "Email address"
 msgstr "Email address"
 
-#: src/pages/executions.tsx:29
+#: src/pages/executions.tsx:34
 msgid "Error"
 msgstr "Error"
 
-#: src/pages/execution-details.tsx:85
+#: src/pages/execution-details.tsx:121
 msgid "Error:"
 msgstr "Error:"
 
@@ -96,7 +96,11 @@ msgstr "Error:"
 msgid "Execute"
 msgstr "Execute"
 
-#: src/pages/execution-details.tsx:32
+#: src/pages/execution-details.tsx:69
+msgid "Execution details"
+msgstr "Execution details"
+
+#: src/pages/execution-details.tsx:61
 msgid "Execution with {0} id not found"
 msgstr "Execution with {0} id not found"
 
@@ -104,15 +108,19 @@ msgstr "Execution with {0} id not found"
 msgid "Executions"
 msgstr "Executions"
 
-#: src/pages/executions.tsx:87
+#: src/pages/execution-details.tsx:97
+msgid "Expiration timeout:"
+msgstr "Expiration timeout:"
+
+#: src/pages/executions.tsx:156
 msgid "Filters:"
 msgstr "Filters:"
 
-#: src/pages/executions.tsx:156
+#: src/pages/executions.tsx:236
 msgid "Finished"
 msgstr "Finished"
 
-#: src/pages/execution-details.tsx:59
+#: src/pages/execution-details.tsx:144
 msgid "Finished at:"
 msgstr "Finished at:"
 
@@ -120,9 +128,17 @@ msgstr "Finished at:"
 msgid "Have an account?"
 msgstr "Have an account?"
 
-#: src/pages/execution-details.tsx:41
+#: src/pages/execution-details.tsx:73
 msgid "ID:"
 msgstr "ID:"
+
+#: src/pages/executions.tsx:39
+msgid "Idle"
+msgstr "Idle"
+
+#: src/pages/executions.tsx:38
+msgid "In progress"
+msgstr "In progress"
 
 #: src/components/workflow-form.tsx:79
 #~ msgid "Input argument"
@@ -137,11 +153,15 @@ msgstr "ID:"
 msgid "Input argument: {name}"
 msgstr "Input argument: {name}"
 
-#: src/pages/executions.tsx:27
+#: src/pages/executions.tsx:32
 msgid "Invoke failed"
 msgstr "Invoke failed"
 
-#: src/pages/execution-details.tsx:53
+#: src/pages/executions.tsx:36
+msgid "Invoked"
+msgstr "Invoked"
+
+#: src/pages/execution-details.tsx:136
 msgid "Invoked at:"
 msgstr "Invoked at:"
 
@@ -175,7 +195,7 @@ msgstr "Not a member?"
 msgid "Optional description"
 msgstr "Optional description"
 
-#: src/pages/execution-details.tsx:78
+#: src/pages/execution-details.tsx:112
 msgid "Output:"
 msgstr "Output:"
 
@@ -189,6 +209,10 @@ msgstr "Password"
 #: src/pages/sign-up.tsx:71
 msgid "Passwords must match"
 msgstr "Passwords must match"
+
+#: src/pages/executions.tsx:37
+msgid "Queued"
+msgstr "Queued"
 
 #: src/pages/workflows.tsx:180
 msgid "Run workflow"
@@ -213,19 +237,19 @@ msgstr "Sign up"
 msgid "Something goes wrong"
 msgstr "Something goes wrong"
 
-#: src/pages/executions.tsx:153
+#: src/pages/executions.tsx:229
 msgid "Started"
 msgstr "Started"
 
-#: src/pages/execution-details.tsx:47
+#: src/pages/execution-details.tsx:128
 msgid "Started at:"
 msgstr "Started at:"
 
-#: src/pages/executions.tsx:159
+#: src/pages/executions.tsx:243
 msgid "Status"
 msgstr "Status"
 
-#: src/pages/execution-details.tsx:71
+#: src/pages/execution-details.tsx:85
 msgid "Status:"
 msgstr "Status:"
 
@@ -233,7 +257,8 @@ msgstr "Status:"
 msgid "Templates"
 msgstr "Templates"
 
-#: src/pages/executions.tsx:68
+#: src/pages/execution-details.tsx:47
+#: src/pages/executions.tsx:137
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
 msgid "There was an error while loading"
@@ -250,7 +275,7 @@ msgid "This field is required"
 msgstr "This field is required"
 
 #: src/components/workflow-form.tsx:92
-#: src/pages/executions.tsx:30
+#: src/pages/executions.tsx:35
 #: src/pages/workflow-runner.tsx:116
 msgid "Timeout"
 msgstr "Timeout"
@@ -267,7 +292,7 @@ msgstr "Use template"
 msgid "User {0} already exists"
 msgstr "User {0} already exists"
 
-#: src/pages/executions.tsx:150
+#: src/pages/executions.tsx:222
 msgid "Workflow"
 msgstr "Workflow"
 
@@ -301,6 +326,10 @@ msgstr "Workflow with {0} id not found"
 #~ msgid "Workflow with {0} not found"
 #~ msgstr "Workflow with {0} not found"
 
+#: src/pages/execution-details.tsx:79
+msgid "Workflow:"
+msgstr "Workflow:"
+
 #: src/components/layout.tsx:30
 msgid "Workflows"
 msgstr "Workflows"
@@ -317,14 +346,18 @@ msgstr "Your workflows will be listed here"
 msgid "error"
 msgstr "error"
 
+#: src/pages/workflow-runner.tsx:72
+msgid "queued"
+msgstr "queued"
+
 #: src/components/workflow-form.tsx:94
 #: src/pages/workflow-runner.tsx:120
 msgid "timeout"
 msgstr "timeout"
 
 #: src/pages/execution-details.tsx:73
-msgid "{0}"
-msgstr "{0}"
+#~ msgid "{0}"
+#~ msgstr "{0}"
 
 #: src/components/layout.tsx:51
 msgid "© 2022 Coreus RPA. All rights reserved"

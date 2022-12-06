@@ -71,9 +71,9 @@ export type Execution = {
     | "error"
     | "invokecompleted"
     | "invokesuccess";
-  startedAt: Date;
-  invokedAt: Date;
-  finishedAt: Date;
+  startedAt?: Date;
+  invokedAt?: Date;
+  finishedAt?: Date;
   arguments: { [key: string]: unknown };
   output?: { [key: string]: unknown };
   error: string | null;

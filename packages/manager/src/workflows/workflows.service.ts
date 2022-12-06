@@ -1,15 +1,29 @@
 import { Injectable } from "@nestjs/common";
-import { UpsertWorkflowDto } from "src/workflows/upsert-workflow.dto";
+import { UpsertWorkflowDto } from "./upsert-workflow.dto";
 import { OpenflowService } from "../openflow/openflow.service";
 import { ExecuteWorkflowDto } from "./execute-workflow.dto";
-import { CryptService } from "src/crypt/crypt.service";
+import { CryptService } from "../crypt/crypt.service";
+import { EncryptedUserWorkflow } from "../openflow/types";
+import { TemplatesService } from "../templates/templates.service";
+import { EventEmitter2 } from "@nestjs/event-emitter";
 
 @Injectable()
 export class WorkflowsService {
   constructor(
     private readonly openflowService: OpenflowService,
-    private readonly cryptService: CryptService
+    private readonly cryptService: CryptService,
+    private readonly templatesService: TemplatesService,
+    private readonly eventEmitter: EventEmitter2
   ) {}
+
+  decryptArguments(workflow: EncryptedUserWorkflow) {
+    return {
+      ...workflow,
+      defaultArguments: JSON.parse(
+        this.cryptService.decrypt(workflow.defaultArguments)
+      ),
+    };
+  }
 
   upsert(jwt: string, workflow: UpsertWorkflowDto) {
     const workflowData = {
@@ -20,44 +34,35 @@ export class WorkflowsService {
     };
 
     if (workflow._id) {
-      return this.openflowService.updateEntity(jwt, workflowData);
+      return this.openflowService.updateOne(jwt, workflowData);
     } else {
-      return this.openflowService.createEntity(jwt, workflowData);
+      return this.openflowService.insertOne(jwt, workflowData);
     }
   }
 
-  findAll(jwt: string) {
-    return this.openflowService.listUserWorkflows(jwt).then((workflow) =>
-      workflow.map((workflow) => ({
-        ...workflow,
-        defaultArguments: JSON.parse(
-          this.cryptService.decrypt(workflow.defaultArguments)
-        ),
-      }))
-    );
-  }
-
-  delete(jwt: string, id: string) {
-    return this.openflowService.deleteUserWorkflow(jwt, id);
+  findAll(jwt: string, query?: { [key: string]: unknown }) {
+    return this.openflowService
+      .queryCollection<EncryptedUserWorkflow>(jwt, {
+        query: { ...query, _type: "user_workflow" },
+        collectionname: "entities",
+      })
+      .then((workflows) =>
+        workflows.map((workflow) => this.decryptArguments(workflow))
+      );
   }
 
   findOne(jwt: string, id: string) {
-    return this.openflowService.getUserWorkflow(jwt, id).then((workflow) => {
-      return workflow
-        ? {
-            ...workflow,
-            defaultArguments: JSON.parse(
-              this.cryptService.decrypt(workflow.defaultArguments)
-            ),
-          }
-        : null;
-    });
+    return this.findAll(jwt, { _id: id }).then((workflows) => workflows[0]);
+  }
+
+  delete(jwt: string, id: string) {
+    return this.openflowService.deleteOne(jwt, id);
   }
 
   async findOneWithTemplate(jwt: string, id: string) {
     const workflow = await this.findOne(jwt, id);
     if (workflow) {
-      const template = await this.openflowService.getRobotWorkflow(
+      const template = await this.templatesService.findOne(
         jwt,
         workflow.templateId
       );
@@ -67,6 +72,7 @@ export class WorkflowsService {
   }
 
   execute(jwt: string, body: ExecuteWorkflowDto) {
-    return this.openflowService.executeWorkflow(jwt, body);
+    this.eventEmitter.emit("workflow.queued", jwt, body);
+    return { status: "queued" };
   }
 }

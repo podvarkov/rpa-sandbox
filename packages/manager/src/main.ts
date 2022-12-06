@@ -3,6 +3,7 @@ import { WinstonModule } from "nest-winston";
 import * as winston from "winston";
 import { AppModule } from "./app.module";
 import { ConfigProvider } from "./config/config.provider";
+import * as process from "process";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -12,10 +13,11 @@ async function bootstrap() {
         winston.format.prettyPrint()
       ),
       transports: [new winston.transports.Console()],
-      level: "debug",
+      level: process.env.LOG_LEVEL || "info",
     }),
   });
   const port = app.get(ConfigProvider).PORT;
   await app.listen(port || 3000);
 }
-bootstrap();
+
+void bootstrap();

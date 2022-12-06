@@ -1,41 +1,36 @@
-export type Workflow = {
+import { Frequency, Weekday } from "rrule";
+
+type Entity<T> = T & {
   _id: string;
+  _created: string;
+  _modified: string;
+  _createdby: string;
+  _createdbyid: string;
+  _type: string;
+  collection: string;
+};
+
+export type Workflow = Entity<{
   projectandname?: string;
   projectid?: string;
   description?: string;
   name: string;
-  _type: string;
-  _modified: string;
-  _created: string;
-  _createdby: string;
   Parameters?: { type: string; direction: string; name: string }[];
-  collection: string;
-};
-export type UserWorkflow = {
-  _id: string;
-  collection: string;
+}>;
+
+export type UserWorkflow = Entity<{
   description?: string;
   name: string;
   templateId: string;
   defaultArguments?: { [key: string]: unknown };
-  _created: string;
-  _modified: string;
-  _createdby: string;
-  _createdbyid: string;
-  _type: string;
   expiration: number;
-};
+}>;
+
 export type EncryptedUserWorkflow = Omit<UserWorkflow, "defaultArguments"> & {
   defaultArguments: string;
 };
-export type Execution = {
-  _id: string;
-  collection: string;
-  _created: string;
-  _modified: string;
-  _createdby: string;
-  _createdbyid: string;
-  _type: string;
+
+export type Execution = Entity<{
   expiration: number;
   correlationId: string;
   status:
@@ -43,6 +38,7 @@ export type Execution = {
     | "invokefailed"
     | "error"
     | "invokecompleted"
+    | "queued"
     | "invokesuccess";
   startedAt: Date;
   invokedAt: Date;
@@ -53,4 +49,16 @@ export type Execution = {
   robotId: string;
   workflowId: string;
   templateId: string;
-};
+}>;
+
+export type ScheduledEvent = Entity<{
+  workflowId: string;
+  name: string;
+  rrule: {
+    wkst: Weekday;
+    until: Date;
+    dtstart: Date;
+    freq?: Frequency;
+    interval: number;
+  };
+}>;
