@@ -20,7 +20,7 @@ import {
   FaRegChartBar,
   FaCodeBranch,
 } from "react-icons/fa";
-import { Outlet } from "react-router-dom";
+import { Outlet, Link as ReactLink } from "react-router-dom";
 import Header from "./header";
 
 interface LinkItemProps {
@@ -43,7 +43,8 @@ interface NavItemProps extends FlexProps {
 const NavItem = ({ icon, to, children, ...rest }: NavItemProps) => {
   return (
     <Link
-      href={to}
+      as={ReactLink}
+      to={to}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
@@ -89,7 +90,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     >
       <Flex h="20" justifyContent="space-between">
         <Box w={40} p={4} alignItems="center">
-          <img src="/header_logo.png" width="90%" />
+          <img src="/header_logo.png" width="90%" alt="avatar" />
         </Box>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
