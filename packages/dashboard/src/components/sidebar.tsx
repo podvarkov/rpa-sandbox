@@ -15,7 +15,11 @@ import {
 import { t, Trans } from "@lingui/macro";
 import { IconType } from "react-icons";
 import { AiFillHome } from "react-icons/ai";
-import { FaCloudDownloadAlt, FaRegChartBar } from "react-icons/fa";
+import {
+  FaCloudDownloadAlt,
+  FaRegChartBar,
+  FaCodeBranch,
+} from "react-icons/fa";
 import { Outlet } from "react-router-dom";
 import Header from "./header";
 
@@ -27,6 +31,7 @@ interface LinkItemProps {
 const LinkItems: Array<LinkItemProps> = [
   { name: t`Home`, icon: AiFillHome, to: "/home" },
   { name: t`Reporting`, icon: FaRegChartBar, to: "/beta-rpa" },
+  { name: t`Executions`, icon: FaCodeBranch, to: "/executions" },
   { name: t`Report download`, icon: FaCloudDownloadAlt, to: "/" },
 ];
 

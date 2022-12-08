@@ -213,7 +213,7 @@ export const ExecutionsPage: React.FC = () => {
 
       <TableContainer bg="white">
         <Table size="md">
-          <Thead bg="#384c5b">
+          <Thead bg="#33B4DE">
             <Tr>
               <TSorter
                 orderBy={orderBy}
