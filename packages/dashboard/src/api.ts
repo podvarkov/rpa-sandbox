@@ -206,6 +206,10 @@ class Api {
       .get<Execution>(`executions/${id}`, { signal })
       .then(({ data }) => data);
   }
+
+  upsertEvent(params: any) {
+    return this.axios.post("schedule", params);
+  }
 }
 
 export const api = new Api();

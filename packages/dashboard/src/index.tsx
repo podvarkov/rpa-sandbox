@@ -1,3 +1,4 @@
+import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";

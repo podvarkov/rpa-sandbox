@@ -53,7 +53,7 @@ class PartialRRuleOptions implements Partial<Options> {
   }
 }
 
-export class UpsertTaskDto {
+export class UpsertEventDto {
   @IsOptional()
   @IsString()
   _id: string;

@@ -112,7 +112,7 @@ export const ExecutionsPage: React.FC = () => {
             execution.status
           )
         );
-        return needRefetch ? 1000 : 0;
+        return needRefetch ? 5000 : 0;
       },
     }
   );

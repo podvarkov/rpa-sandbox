@@ -8,6 +8,7 @@ import {
   Container,
   Heading,
   HStack,
+  useBoolean,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -15,6 +16,7 @@ import { t, Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 import { useLingui } from "@lingui/react";
 import { executionStatuses } from "./executions";
+import { SchedulerModal } from "../components/scheduler-form";
 
 export const ExecutionDetailsPage: React.FC = () => {
   const params = useParams<{ id: string }>();
@@ -30,7 +32,7 @@ export const ExecutionDetailsPage: React.FC = () => {
     async ({ signal }) => {
       if (params.id) return api.getExecution(params.id, signal);
     },
-    { enabled: !!params.id }
+    { enabled: !!params.id, refetchOnWindowFocus: false }
   );
 
   const { data: workflow } = useQuery(
@@ -52,6 +54,7 @@ export const ExecutionDetailsPage: React.FC = () => {
       console.error(error);
     }
   }, [error]);
+  const [isOpen, { on, off }] = useBoolean(false);
 
   return (
     <Box h={"100%"} bg={"white"}>
@@ -60,6 +63,8 @@ export const ExecutionDetailsPage: React.FC = () => {
           <Heading size="sm">
             <Trans>Execution with {params.id} id not found</Trans>
           </Heading>
+          <button onClick={() => on()}>Schedule event</button>
+          <SchedulerModal isOpen={isOpen} onClose={off} />
         </Center>
       ) : null}
       {execution ? (
@@ -130,7 +135,7 @@ export const ExecutionDetailsPage: React.FC = () => {
               <Box flex={1}>
                 {execution.startedAt
                   ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                    dayjs(execution.finishedAt).format("ll HH:mm:ss")
+                    dayjs(execution.startedAt).format("ll HH:mm:ss")
                   : null}
               </Box>
             </HStack>

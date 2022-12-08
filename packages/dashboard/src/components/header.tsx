@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Avatar,
   Box,
@@ -23,7 +24,7 @@ interface MobileProps extends FlexProps {
 }
 
 export default function Header({ onOpen }: MobileProps) {
-  const { session, signout } = useAuth();
+  const { signout } = useAuth();
   const navigate = useNavigate();
   const { i18n } = useLingui();
 

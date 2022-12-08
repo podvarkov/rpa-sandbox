@@ -10,7 +10,7 @@ import {
   ValidationPipe,
 } from "@nestjs/common";
 import { SchedulerService } from "./scheduler.service";
-import { UpsertTaskDto } from "./upsert-task.dto";
+import { UpsertEventDto } from "src/scheduler/upsert-event.dto";
 import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";
 import { Session } from "../auth/auth.service";
 
@@ -33,9 +33,11 @@ export class SchedulerController {
   @UseGuards(JwtAuthGuard)
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   @Post()
-  upsert(@UserSession() session: Session, @Body() body: UpsertTaskDto) {
-    if (body._id) return this.schedulerService.updateEvent(session.jwt, body);
-    return this.schedulerService.createEvent(session.jwt, body);
+  upsert(@UserSession() session: Session, @Body() body: UpsertEventDto) {
+    console.log("BODY", body);
+    return body;
+    // if (body._id) return this.schedulerService.updateEvent(session.jwt, body);
+    // return this.schedulerService.createEvent(session.jwt, body);
   }
 
   @UseGuards(JwtAuthGuard)

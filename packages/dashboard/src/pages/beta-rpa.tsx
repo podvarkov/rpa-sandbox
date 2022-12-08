@@ -15,14 +15,12 @@ import { Trans } from "@lingui/macro";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
 
 export const BetaRpa: React.FC = () => {
-  const [isExecuted, setIsExecuted] = useState<Boolean>(false);
+  const [isExecuted, setIsExecuted] = useState(false);
 
   const [startDate, setStartDate] = useState(new Date());
 
-  const navigate = useNavigate();
   return (
     <Center>
       <Box>

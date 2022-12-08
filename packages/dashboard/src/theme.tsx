@@ -31,7 +31,7 @@ const buttonTheme = defineStyleConfig({
 const { definePartsStyle, defineMultiStyleConfig } =
   createMultiStyleConfigHelpers(inputAnatomy.keys);
 
-const mypage_input = definePartsStyle({
+const myPageInput = definePartsStyle({
   field: {
     border: "1px",
     borderColor: "gray.200",
@@ -46,7 +46,7 @@ const mypage_input = definePartsStyle({
 });
 
 const inputTheme = defineMultiStyleConfig({
-  variants: { mypage_input },
+  variants: { mypage_input: myPageInput },
 });
 
 export const theme = extendTheme({

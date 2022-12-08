@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { RRule } from "rrule";
 import { EventEmitter2 } from "@nestjs/event-emitter";
-import { UpsertTaskDto } from "./upsert-task.dto";
+import { UpsertEventDto } from "src/scheduler/upsert-event.dto";
 import { OpenflowService } from "../openflow/openflow.service";
 import { ScheduledEvent } from "../openflow/types";
 import { Cron, CronExpression } from "@nestjs/schedule";
@@ -30,7 +30,7 @@ export class SchedulerService {
     return this.findEvents(jwt, { _id: id }).then((events) => events[0]);
   }
 
-  async createEvent(jwt: string, params: UpsertTaskDto) {
+  async createEvent(jwt: string, params: UpsertEventDto) {
     return await this.openflowService.insertOne<Partial<ScheduledEvent>>(jwt, {
       name: params.name,
       workflowId: params.workflowId,
@@ -39,7 +39,7 @@ export class SchedulerService {
     });
   }
 
-  async updateEvent(jwt: string, params: UpsertTaskDto) {
+  async updateEvent(jwt: string, params: UpsertEventDto) {
     const event = await this.openflowService.updateOne<Partial<ScheduledEvent>>(
       jwt,
       {

@@ -3,17 +3,19 @@ import React from "react";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { BsFillPinAngleFill } from "react-icons/bs";
 
-interface newsItem {
+interface NewsItem {
   date: Date;
   content: string;
   category: string;
+  id: string;
 }
 
-const news: Array<newsItem> = [
+const news: Array<NewsItem> = [
   {
     date: new Date(),
     content: "先行ロボットをリリースしました",
     category: "お知らせ",
+    id: "identifier",
   },
 ];
 
@@ -21,7 +23,7 @@ export const Home: React.FC = () => {
   return (
     <Box p={2}>
       {news.map((item) => (
-        <Flex borderBottom="1px" borderColor="borderColors.main">
+        <Flex key={item.id} borderBottom="1px" borderColor="borderColors.main">
           <Box width="10%">
             <Center flexDirection="column" justifyContent="space-between">
               <AiFillInfoCircle size={32} color="#C2C2C2" />
