@@ -29,8 +29,8 @@ export const MallInfo: React.FC = () => {
             <Trans>Please enter your R-Login ID and password.</Trans>
           </Text>
 
-          <Input variant="mypage_input" placeholder={t`ID`} />
-          <Input variant="mypage_input" placeholder={t`password`} />
+          <Input variant="default" placeholder={t`ID`} />
+          <Input variant="default" placeholder={t`password`} />
         </Stack>
 
         <Stack my={5}>
@@ -39,8 +39,8 @@ export const MallInfo: React.FC = () => {
             <Trans>Enter your Rakuten member ID and password.</Trans>
           </Text>
 
-          <Input variant="mypage_input" placeholder={t`ID`} />
-          <Input variant="mypage_input" placeholder={t`password`} />
+          <Input variant="default" placeholder={t`ID`} />
+          <Input variant="default" placeholder={t`password`} />
         </Stack>
 
         <Button>

@@ -76,7 +76,7 @@ const MyPageInput: React.FC = () => {
                         <Input
                           placeholder={t`surname`}
                           {...field}
-                          variant="mypage_input"
+                          variant="default"
                         />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
                       </FormControl>
@@ -89,7 +89,7 @@ const MyPageInput: React.FC = () => {
                       <Input
                         placeholder={t`name`}
                         {...field}
-                        variant="mypage_input"
+                        variant="default"
                       />
                       <FormErrorMessage>{meta.error}</FormErrorMessage>
                     </FormControl>
@@ -110,7 +110,7 @@ const MyPageInput: React.FC = () => {
                         <Input
                           placeholder={`セイ`}
                           {...field}
-                          variant="mypage_input"
+                          variant="default"
                         />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
                       </FormControl>
@@ -123,7 +123,7 @@ const MyPageInput: React.FC = () => {
                       <Input
                         placeholder={`メイ`}
                         {...field}
-                        variant="mypage_input"
+                        variant="default"
                       />
                       <FormErrorMessage>{meta.error}</FormErrorMessage>
                     </FormControl>
@@ -144,7 +144,7 @@ const MyPageInput: React.FC = () => {
                   {({ field, meta }: FieldProps) => {
                     return (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <Input {...field} variant="mypage_input" />
+                        <Input {...field} variant="default" />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
                       </FormControl>
                     );
@@ -164,7 +164,7 @@ const MyPageInput: React.FC = () => {
                       <Input
                         placeholder={`入力例：coreus@example.com`}
                         {...field}
-                        variant="mypage_input"
+                        variant="default"
                       />
                       <FormErrorMessage>{meta.error}</FormErrorMessage>
                     </FormControl>
