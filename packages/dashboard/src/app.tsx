@@ -22,13 +22,15 @@ const App: React.FC = () => {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/beta-rpa" element={<BetaRpa />} />
-        <Route path="/mallinfo" element={<MallInfo />} />
+        {/* <Route path="/mallinfo" element={<MallInfo />} /> */}
         <Route path="/workflows/:id" element={<EditWorkflowPage />} />
         <Route path="/workflows" element={<WorkflowsPage />} />
         <Route path="/executions/:id" element={<ExecutionDetailsPage />} />
         <Route path="/executions" element={<ExecutionsPage />} />
         <Route path="/*" element={<Navigate to="/workflows" />} />
       </Route>
+
+      <Route path="/mallinfo" element={<MallInfo />} />
     </Routes>
   );
 };

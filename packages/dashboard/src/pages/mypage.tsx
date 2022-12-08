@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Center,
   Divider,
   Flex,
   FormControl,
@@ -22,7 +21,10 @@ import {
   Text,
   Textarea,
   useDisclosure,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
+import { t, Trans } from "@lingui/macro";
 import { Field, FieldProps, Form, Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
 import { FaAsterisk } from "react-icons/fa";
@@ -41,12 +43,16 @@ export const MyPage: React.FC = () => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay bg="bgColors.modalBg" />
         <ModalContent>
-          <ModalHeader fontSize="sm">お問い合わせ</ModalHeader>
+          <ModalHeader fontSize="sm">
+            <Trans>inquiry</Trans>
+          </ModalHeader>
           <ModalCloseButton />
           <Divider />
           <ModalBody py={6}>
             <Heading size="md">
-              <Text>お問い合わせ内容</Text>
+              <Text>
+                <Trans>Contents of inquiry</Trans>
+              </Text>
             </Heading>
             <Box mt={2}>
               <Textarea
@@ -58,72 +64,79 @@ export const MyPage: React.FC = () => {
           </ModalBody>
           <ModalFooter>
             <Button variant="outline" shadow="sm" px={8} borderRadius={20}>
-              送信
+              <Trans>send</Trans>
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
       <Grid templateColumns="repeat(5, 1fr)" gap={4} px={2}>
         <GridItem colSpan={4} h="10">
-          <Center>
-            <Box width="100%" maxWidth="600px">
-              <HStack spacing="16px" color="textColors.main">
-                <Box
-                  width="50%"
-                  border="1px"
-                  borderColor="borderColors.main"
-                  p="16px"
-                  borderRadius={5}
+          <Box width="100%" maxWidth="600px" mx="auto">
+            <Wrap w="100%">
+              <WrapItem
+                w={{ sm: "100%", lg: "48%" }}
+                border="1px"
+                borderColor="borderColors.main"
+                p="16px"
+                borderRadius={5}
+                flexDirection="column"
+              >
+                <Heading as="h6" size="xs">
+                  {/* <Text>プロフィール登録</Text> */}
+                  <Text>
+                    <Trans>Profile registration</Trans>
+                  </Text>
+                </Heading>
+                <RiCheckFill size={45} />
+                <Button
+                  onClick={() => setIsVisible(!isVisible)}
+                  variant="brandPrimary"
+                  size="xs"
+                  pl={0}
                 >
-                  <Heading as="h6" size="xs">
-                    <Text>プロフィール登録</Text>
-                  </Heading>
-                  <RiCheckFill size={45} />
-                  <Button
-                    onClick={() => setIsVisible(!isVisible)}
-                    variant="brandPrimary"
-                    size="xs"
-                    pl={0}
-                  >
-                    登録・編集
-                  </Button>
-                </Box>
-                <Box
-                  width="50%"
-                  border="1px"
-                  borderColor="borderColors.main"
-                  p="16px"
-                  borderRadius={5}
+                  <Trans>Registration / Editing</Trans>
+                </Button>
+              </WrapItem>
+              <WrapItem
+                w={{ sm: "100%", lg: "48%" }}
+                border="1px"
+                borderColor="borderColors.main"
+                p="16px"
+                borderRadius={5}
+                flexDirection="column"
+              >
+                <Heading as="h6" size="xs">
+                  {/* <Text>店舗情報登録</Text> */}
+                  <Text>
+                    <Trans>Store Information Registration</Trans>
+                  </Text>
+                </Heading>
+                <RiCheckFill size={45} />
+                <Button
+                  variant="brandPrimary"
+                  pl={0}
+                  onClick={() => navigate("/mallinfo")}
+                  size="xs"
                 >
-                  <Heading as="h6" size="xs">
-                    <Text>店舗情報登録</Text>
-                  </Heading>
-                  <RiCheckFill size={45} />
-                  <Button
-                    variant="brandPrimary"
-                    pl={0}
-                    onClick={() => navigate("/mallinfo")}
-                    size="xs"
-                  >
-                    登録・編集
-                  </Button>
-                </Box>
-              </HStack>
+                  {/* 登録・編集 */}
+                  <Trans>Registration / Editing</Trans>
+                </Button>
+              </WrapItem>
+            </Wrap>
 
-              {isVisible && (
-                <Box
-                  p={4}
-                  py={8}
-                  my={4}
-                  border="1px"
-                  borderColor="borderColors.main"
-                  borderRadius={5}
-                >
-                  <MyPageInput />
-                </Box>
-              )}
-            </Box>
-          </Center>
+            {isVisible && (
+              <Box
+                p={4}
+                py={8}
+                my={4}
+                border="1px"
+                borderColor="borderColors.main"
+                borderRadius={5}
+              >
+                <MyPageInput />
+              </Box>
+            )}
+          </Box>
         </GridItem>
         <GridItem width="100%" colSpan={1} h="10">
           <Box>
@@ -134,13 +147,20 @@ export const MyPage: React.FC = () => {
               minHeight="200px"
             >
               <Heading>
-                <Text fontSize="18px">御社の担当</Text>
+                <Text fontSize="18px">
+                  <Trans>In charge of your company</Trans>
+                </Text>
               </Heading>
               <Text fontSize="16px" py={4}>
-                {"salesManager " + Math.floor(Math.random() * 10)}
+                <Trans>
+                  {"salesManager " + Math.floor(Math.random() * 10)}
+                </Trans>
               </Text>
               <Box fontSize="12px">
-                <Text>RPAに関するお問い合わせ</Text>
+                {/* <Text>RPAに関するお問い合わせ</Text> */}
+                <Text>
+                  <Trans>Inquiries about RPA</Trans>
+                </Text>
                 <Text>TEL:00-0000-0000</Text>
                 <Text>FAX:00-0000-0000</Text>
                 <Text> MAIL:00000@00.com</Text>
@@ -156,26 +176,32 @@ export const MyPage: React.FC = () => {
                 bg="bgColors.primary"
                 color="white"
               >
-                お問い合わせはこちら
+                {/* お問い合わせはこちら */}
+                <Trans>Contact us</Trans>
               </Button>
             </Box>
             <Box p={4} my={2} border="1px" borderColor="borderColors.main">
               <Text fontSize="14px" mb={2}>
-                ご契約情報
+                {/* ご契約情報 */}
+                <Trans>Contract Information</Trans>
               </Text>
               <Text fontSize="12px" color="textColors.main">
-                111様
+                {/* 111様 */}
+                <Trans>Dear 111</Trans>
               </Text>
               <Text fontSize="12px" color="textColors.main">
-                お試し無料プラン
+                {/* お試し無料プラン */}
+                <Trans>Free Trial Plan</Trans>
               </Text>
             </Box>
             <Box p={4} border="1px" borderColor="borderColors.main">
               <Text fontSize="16px" mb={2} color="textColors.main">
-                レポート結果
+                {/* レポート結果 */}
+                <Trans>Report Results</Trans>
               </Text>
               <Text fontSize="14px" color="textColors.main">
-                閲覧
+                {/* 閲覧 */}
+                <Trans>Browse</Trans>
               </Text>
             </Box>
           </Box>
@@ -225,7 +251,9 @@ const MyPageInput: React.FC = () => {
           <Stack spacing="25px">
             <HStack>
               <Flex w="30%">
-                <Text>お名前</Text>
+                <Text>
+                  <Trans>name</Trans>
+                </Text>
                 <FaAsterisk size={10} color="red" />
               </Flex>
               <Flex w="70%" gap={2}>
@@ -234,7 +262,7 @@ const MyPageInput: React.FC = () => {
                     return (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
                         <Input
-                          placeholder={`姓`}
+                          placeholder={t`surname`}
                           {...field}
                           variant="mypage_input"
                         />
@@ -247,7 +275,7 @@ const MyPageInput: React.FC = () => {
                   {({ field, meta }: FieldProps) => (
                     <FormControl isInvalid={!!(meta.touched && meta.error)}>
                       <Input
-                        placeholder={`名`}
+                        placeholder={t`name`}
                         {...field}
                         variant="mypage_input"
                       />
@@ -293,10 +321,13 @@ const MyPageInput: React.FC = () => {
             </HStack>
             <HStack>
               <Flex w="30%">
-                <Text>会社名</Text>
+                <Text>
+                  <Trans>Phone Number</Trans>
+                </Text>
                 <FaAsterisk size={10} color="red" />
               </Flex>
               <Flex w="70%">
+                {/* mandatory */}
                 <Field name="company_name">
                   {({ field, meta }: FieldProps) => {
                     return (

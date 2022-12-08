@@ -29,7 +29,8 @@ export const Home: React.FC = () => {
             </Center>
           </Box>
           <Box justifyContent="space-between" flex={1}>
-            <Text>There should be date</Text>
+            <Text>There should be date </Text>
+            {/* <Input placeholder="Select Date and Time" size="md" type="date" /> */}
             <Text mt={2}>{item.content}</Text>
           </Box>
           <Box>
