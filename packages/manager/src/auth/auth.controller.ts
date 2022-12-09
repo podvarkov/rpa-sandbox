@@ -43,7 +43,6 @@ export class AuthController {
   ): Promise<UserProfileEntity> {
     const profile = await this.authService.getUserProfile(session);
     const salesManager = await this.authService.getSalesMember(
-      session.jwt,
       profile.salesManagerId
     );
     return new UserProfileEntity(profile, salesManager);

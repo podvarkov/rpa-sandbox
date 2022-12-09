@@ -7,6 +7,7 @@ import { TokenUser } from "@openiap/openflow-api";
 import { OpenflowService } from "../openflow/openflow.service";
 import { UpdateUserDto } from "src/auth/update-user.dto";
 import { Profile, SalesManager } from "src/openflow/types";
+import { CryptService } from "src/crypt/crypt.service";
 
 export type Session = {
   user: Pick<
@@ -21,7 +22,8 @@ export class AuthService {
   private readonly logger = new Logger(AuthService.name);
   constructor(
     private readonly config: ConfigProvider,
-    private readonly openflowService: OpenflowService
+    private readonly openflowService: OpenflowService,
+    private readonly cryptService: CryptService
   ) {}
 
   async validateUser(username: string, password: string) {
@@ -52,7 +54,16 @@ export class AuthService {
   }
 
   async createUser(username: string, password: string) {
-    return this.openflowService.createUser({ username, password });
+    const salesMembers = await this.getSalesMembers();
+    if (!salesMembers.length)
+      throw new BadRequestException("You likely forgot to add your sales team");
+
+    return this.openflowService.createUser({
+      username,
+      password,
+      salesManagerId:
+        salesMembers[Math.floor(Math.random() * salesMembers.length)]._id,
+    });
   }
 
   async updateUserProfile(session: Session, data: UpdateUserDto) {
@@ -66,13 +77,18 @@ export class AuthService {
     );
   }
 
-  async getSalesMember(jwt: string, id: string) {
-    return this.openflowService
-      .queryCollection<SalesManager>(jwt, {
-        query: { _id: id, _type: "sales" },
+  async getSalesMember(id: string) {
+    return this.getSalesMembers({ _id: id }).then((data) => data[0]);
+  }
+
+  async getSalesMembers(query = {}) {
+    return this.openflowService.queryCollection<SalesManager>(
+      this.cryptService.rootToken,
+      {
+        query: { _type: "sales", ...query },
         collectionname: "entities",
-      })
-      .then((data) => data[0]);
+      }
+    );
   }
 
   async getUserProfile(session: Session) {

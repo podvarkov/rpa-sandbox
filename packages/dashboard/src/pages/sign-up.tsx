@@ -17,15 +17,16 @@ import { t, Trans } from "@lingui/macro";
 import { AxiosError } from "axios";
 import { Field, FieldProps, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import * as Yup from "yup";
 import { useAuth } from "../components/auth-provider";
 
+const passwordRegex = /^(?=.*[0-9])(?=.*[_!@#$^~])[a-zA-Z0-9_!@#$^~]{8,32}$/;
 export const SignupPage: React.FC = () => {
   const { signup, session } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState<string>();
-  const { email } = useParams();
+  const [params] = useSearchParams();
 
   useEffect(() => {
     if (session) navigate("/", { replace: true });
@@ -43,7 +44,7 @@ export const SignupPage: React.FC = () => {
 
           <Formik
             initialValues={{
-              username: email || "",
+              username: params.get("email") || "",
               password: "",
               passwordConfirmation: "",
             }}
@@ -65,7 +66,9 @@ export const SignupPage: React.FC = () => {
               username: Yup.string()
                 .email(t`Must be a valid email`)
                 .required(t`This field is required`),
-              password: Yup.string().required(t`This field is required`),
+              password: Yup.string()
+                .required(t`This field is required`)
+                .matches(passwordRegex, t`Must match pattern`),
               passwordConfirmation: Yup.string()
                 .oneOf([Yup.ref("password")], t`Passwords must match`)
                 .required(t`This field is required`),
@@ -104,6 +107,20 @@ export const SignupPage: React.FC = () => {
                         </FormControl>
                       )}
                     </Field>
+
+                    <Field name="passwordConfirmation">
+                      {({ field, meta }: FieldProps) => (
+                        <FormControl isInvalid={!!(meta.touched && meta.error)}>
+                          <Input
+                            variant="signUpInput"
+                            type="password"
+                            placeholder={t`Confirm password`}
+                            {...field}
+                          />
+                          <FormErrorMessage>{meta.error}</FormErrorMessage>
+                        </FormControl>
+                      )}
+                    </Field>
                   </Stack>
 
                   <Box fontSize="14px">
@@ -117,9 +134,7 @@ export const SignupPage: React.FC = () => {
                     <Text>
                       <Trans>Available symbols (half-width)</Trans>
                     </Text>
-                    <Text>
-                      <Trans> _ ! # $ ~ ^ @</Trans>
-                    </Text>
+                    <Text>_ ! # $ ~ ^ @</Text>
                     <Text>
                       <Trans>
                         *Please do not set a password that is related to your

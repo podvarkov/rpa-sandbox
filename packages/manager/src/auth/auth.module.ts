@@ -6,9 +6,15 @@ import { JwtStrategy } from "./jwt.strategy";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
 import { OpenflowModule } from "../openflow/openflow.module";
+import { CryptModule } from "src/crypt/crypt.module";
 
 @Module({
-  imports: [JwtModule.register({}), PassportModule, OpenflowModule],
+  imports: [
+    JwtModule.register({}),
+    PassportModule,
+    OpenflowModule,
+    CryptModule,
+  ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
 })

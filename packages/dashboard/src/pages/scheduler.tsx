@@ -178,7 +178,6 @@ export const SchedulerPage: React.FC = () => {
                   : undefined
               }
               onSubmit={(values) => {
-                console.log(values);
                 return api
                   .upsertEvent(values)
                   .then(() => {

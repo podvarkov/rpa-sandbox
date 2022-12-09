@@ -188,7 +188,11 @@ export class OpenflowService {
     return reply.data.result;
   }
 
-  async createUser(data: { username: string; password: string }) {
+  async createUser(data: {
+    username: string;
+    password: string;
+    salesManagerId: string;
+  }) {
     const [insertUserData] = InsertOneMessage.parse({
       priority: 2,
       w: 1,
@@ -206,6 +210,7 @@ export class OpenflowService {
         validated: true,
         emailvalidated: true,
         formvalidated: true,
+        salesManagerId: data.salesManagerId,
       },
       jwt: this.cryptService.rootToken,
     });

@@ -21,7 +21,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     api.onAuthStateChanged((newSession) => {
-      console.log(newSession?.user.username);
       setSession(newSession);
     });
   }, []);
