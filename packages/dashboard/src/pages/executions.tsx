@@ -17,7 +17,6 @@ import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { api } from "../api";
 import { defineMessage, t, Trans } from "@lingui/macro";
-import dayjs from "dayjs";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useLingui } from "@lingui/react";
 import {
@@ -26,6 +25,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
 } from "@chakra-ui/icons";
+import { format } from "date-fns";
 
 /* eslint-disable string-to-lingui/missing-lingui-transformation */
 export const executionStatuses = {
@@ -144,8 +144,8 @@ export const ExecutionsPage: React.FC = () => {
   }, [executionsError, workflowsError]);
 
   return (
-    <>
-      <Box bg="white" mb={2} px={6} py={2}>
+    <Box px={6}>
+      <Box bg="white" mb={2} py={2}>
         <Stack
           w={["100%", "100%", "50%", "100%", "30%"]}
           direction="row"
@@ -211,7 +211,7 @@ export const ExecutionsPage: React.FC = () => {
         </Stack>
       </Box>
 
-      <TableContainer bg="white">
+      <TableContainer bg="gray.50">
         <Table size="md">
           <Thead bg="#33B4DE">
             <Tr>
@@ -246,47 +246,55 @@ export const ExecutionsPage: React.FC = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {(executions || []).map((execution) => {
-              return (
-                <Tr
-                  key={execution._id}
-                  _hover={{
-                    bg: "var(--chakra-colors-chakra-border-color)",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => {
-                    navigate(execution._id);
-                  }}
-                >
-                  <Td>
-                    {(workflows || []).find(
-                      (workflow) => workflow._id === execution.workflowId
-                    )?.name || execution.workflowId}
-                  </Td>
-                  <Td>
-                    {execution.startedAt
-                      ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                        dayjs(execution.startedAt).format("ll HH:mm:ss")
-                      : null}
-                  </Td>
-                  <Td>
-                    {execution.finishedAt
-                      ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                        dayjs(execution.finishedAt).format("ll HH:mm:ss")
-                      : null}
-                  </Td>
-                  <Td cursor={"default"}>
-                    <Tooltip label={execution.error}>
-                      {i18n._(
-                        executionStatuses[
-                          execution.status as keyof typeof executionStatuses
-                        ]
-                      )}
-                    </Tooltip>
-                  </Td>
-                </Tr>
-              );
-            })}
+            {executions && executions.length === 0 ? (
+              <Tr>
+                <Td colSpan={4} textAlign="center">
+                  <Trans>No data available</Trans>
+                </Td>
+              </Tr>
+            ) : (
+              executions?.map((execution) => {
+                return (
+                  <Tr
+                    key={execution._id}
+                    _hover={{
+                      bg: "var(--chakra-colors-chakra-border-color)",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      navigate(execution._id);
+                    }}
+                  >
+                    <Td>
+                      {(workflows || []).find(
+                        (workflow) => workflow._id === execution.workflowId
+                      )?.name || execution.workflowId}
+                    </Td>
+                    <Td>
+                      {execution.startedAt
+                        ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
+                          format(new Date(execution.startedAt), "Pp")
+                        : null}
+                    </Td>
+                    <Td>
+                      {execution.finishedAt
+                        ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
+                          format(new Date(execution.finishedAt), "Pp")
+                        : null}
+                    </Td>
+                    <Td cursor={"default"}>
+                      <Tooltip label={execution.error}>
+                        {i18n._(
+                          executionStatuses[
+                            execution.status as keyof typeof executionStatuses
+                          ]
+                        )}
+                      </Tooltip>
+                    </Td>
+                  </Tr>
+                );
+              })
+            )}
           </Tbody>
         </Table>
       </TableContainer>
@@ -320,6 +328,6 @@ export const ExecutionsPage: React.FC = () => {
           <ChevronRightIcon />
         </IconButton>
       </Stack>
-    </>
+    </Box>
   );
 };

@@ -8,15 +8,13 @@ import {
   Container,
   Heading,
   HStack,
-  useBoolean,
   useToast,
   VStack,
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
-import dayjs from "dayjs";
 import { useLingui } from "@lingui/react";
 import { executionStatuses } from "./executions";
-import { SchedulerModal } from "../components/scheduler-form";
+import { format } from "date-fns";
 
 export const ExecutionDetailsPage: React.FC = () => {
   const params = useParams<{ id: string }>();
@@ -54,7 +52,6 @@ export const ExecutionDetailsPage: React.FC = () => {
       console.error(error);
     }
   }, [error]);
-  const [isOpen, { on, off }] = useBoolean(false);
 
   return (
     <Box h={"100%"} bg={"white"}>
@@ -63,8 +60,6 @@ export const ExecutionDetailsPage: React.FC = () => {
           <Heading size="sm">
             <Trans>Execution with {params.id} id not found</Trans>
           </Heading>
-          <button onClick={() => on()}>Schedule event</button>
-          <SchedulerModal isOpen={isOpen} onClose={off} />
         </Center>
       ) : null}
       {execution ? (
@@ -135,7 +130,7 @@ export const ExecutionDetailsPage: React.FC = () => {
               <Box flex={1}>
                 {execution.startedAt
                   ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                    dayjs(execution.startedAt).format("ll HH:mm:ss")
+                    format(new Date(execution.startedAt), "Pp")
                   : null}
               </Box>
             </HStack>
@@ -146,7 +141,7 @@ export const ExecutionDetailsPage: React.FC = () => {
               <Box flex={1}>
                 {execution.invokedAt
                   ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                    dayjs(execution.invokedAt).format("ll HH:mm:ss")
+                    format(new Date(execution.invokedAt), "Pp")
                   : null}
               </Box>
             </HStack>
@@ -157,7 +152,7 @@ export const ExecutionDetailsPage: React.FC = () => {
               <Box flex={1}>
                 {execution.finishedAt
                   ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                    dayjs(execution.finishedAt).format("ll HH:mm:ss")
+                    format(new Date(execution.finishedAt), "Pp")
                   : null}
               </Box>
             </HStack>

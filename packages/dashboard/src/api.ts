@@ -1,6 +1,7 @@
 import { TokenUser } from "@openiap/openflow-api";
 import Axios, { AxiosInstance } from "axios";
 import { WorkflowFormValues } from "./components/workflow-form";
+import { EventFormValues } from "./components/scheduler-form";
 
 export type SigninParams = { username: string; password: string };
 export type Session = {
@@ -71,15 +72,35 @@ export type Execution = {
     | "error"
     | "invokecompleted"
     | "invokesuccess";
-  startedAt?: Date;
-  invokedAt?: Date;
-  finishedAt?: Date;
+  startedAt?: string;
+  invokedAt?: string;
+  finishedAt?: string;
   arguments: { [key: string]: unknown };
   output?: { [key: string]: unknown };
   error: string | null;
   robotId: string;
   workflowId: string;
   templateId: string;
+};
+
+export type ScheduledEvent = {
+  _id: string;
+  collection: string;
+  _created: string;
+  _modified: string;
+  _createdby: string;
+  _createdbyid: string;
+  _type: string;
+  workflowId: string;
+  name: string;
+  rrule: {
+    until?: string;
+    dtstart: string;
+    freq: number | undefined;
+    interval: number;
+    preset: string;
+    byweekday?: number[];
+  };
 };
 
 type AuthStateChangedCb = (user: Session) => void;
@@ -207,8 +228,19 @@ class Api {
       .then(({ data }) => data);
   }
 
-  upsertEvent(params: any) {
+  getEvents(signal?: AbortSignal) {
+    return this.axios
+      .get<ScheduledEvent[]>("schedule/events", { signal })
+      .then(({ data }) => data);
+  }
+  upsertEvent(params: EventFormValues) {
     return this.axios.post("schedule", params);
+  }
+
+  deleteEvent(id: string) {
+    return this.axios
+      .delete<{ id: string }>(`schedule/${id}`)
+      .then(({ data }) => data);
   }
 }
 

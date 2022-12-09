@@ -34,10 +34,8 @@ export class SchedulerController {
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   @Post()
   upsert(@UserSession() session: Session, @Body() body: UpsertEventDto) {
-    console.log("BODY", body);
-    return body;
-    // if (body._id) return this.schedulerService.updateEvent(session.jwt, body);
-    // return this.schedulerService.createEvent(session.jwt, body);
+    if (body._id) return this.schedulerService.updateEvent(session.jwt, body);
+    return this.schedulerService.createEvent(session.jwt, body);
   }
 
   @UseGuards(JwtAuthGuard)

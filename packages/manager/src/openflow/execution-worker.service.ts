@@ -92,10 +92,16 @@ export class ExecutionWorkerService {
     });
 
     this.ws.on("close", () => {
-      this.logger.error("connection is closed");
+      this.logger.error("connection is closed, retry after 5...");
       clearInterval(pingInterval);
       // retry connection
-      this.initSocketConnection();
+      setTimeout(() => {
+        this.initSocketConnection();
+      }, 5000);
+    });
+
+    this.ws.on("error", (error) => {
+      this.logger.error({ message: "connection is closed", error });
     });
   }
 

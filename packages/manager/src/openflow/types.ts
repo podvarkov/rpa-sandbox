@@ -60,5 +60,7 @@ export type ScheduledEvent = Entity<{
     dtstart: Date;
     freq?: Frequency;
     interval: number;
+    preset: string;
+    byweekday?: number[];
   };
 }>;

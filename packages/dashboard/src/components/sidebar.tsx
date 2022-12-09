@@ -8,7 +8,6 @@ import {
   Flex,
   FlexProps,
   Icon,
-  Link,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -19,8 +18,9 @@ import {
   FaCloudDownloadAlt,
   FaRegChartBar,
   FaCodeBranch,
+  FaCalendarDay,
 } from "react-icons/fa";
-import { Outlet, Link as ReactLink } from "react-router-dom";
+import { Outlet, NavLink as ReactLink } from "react-router-dom";
 import Header from "./header";
 
 interface LinkItemProps {
@@ -32,7 +32,8 @@ const LinkItems: Array<LinkItemProps> = [
   { name: t`Home`, icon: AiFillHome, to: "/home" },
   { name: t`Reporting`, icon: FaRegChartBar, to: "/beta-rpa" },
   { name: t`Executions`, icon: FaCodeBranch, to: "/executions" },
-  { name: t`Report download`, icon: FaCloudDownloadAlt, to: "/" },
+  { name: t`Schedule`, icon: FaCalendarDay, to: "/schedule" },
+  { name: t`Report download`, icon: FaCloudDownloadAlt, to: "/workflows" },
 ];
 
 interface NavItemProps extends FlexProps {
@@ -42,37 +43,34 @@ interface NavItemProps extends FlexProps {
 }
 const NavItem = ({ icon, to, children, ...rest }: NavItemProps) => {
   return (
-    <Link
-      as={ReactLink}
-      to={to}
-      style={{ textDecoration: "none" }}
-      _focus={{ boxShadow: "none" }}
-    >
-      <Flex
-        align="center"
-        p="4"
-        role="group"
-        cursor="pointer"
-        color="white"
-        _hover={{
-          bg: "rgba(255,255,255, 0.3)",
-          color: "white",
-        }}
-        {...rest}
-      >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="24"
-            _groupHover={{
-              color: "white",
-            }}
-            as={icon}
-          />
-        )}
-        <Trans>{children}</Trans>
-      </Flex>
-    </Link>
+    <ReactLink to={to} style={{ textDecoration: "none" }}>
+      {({ isActive }) => (
+        <Flex
+          align="center"
+          p="4"
+          role="group"
+          cursor="pointer"
+          color="white"
+          bg={isActive ? "rgba(255,255,255, 0.3)" : undefined}
+          _hover={{
+            bg: "rgba(255,255,255, 0.3)",
+          }}
+          {...rest}
+        >
+          {icon && (
+            <Icon
+              mr="4"
+              fontSize="24"
+              _groupHover={{
+                color: "white",
+              }}
+              as={icon}
+            />
+          )}
+          <Trans>{children}</Trans>
+        </Flex>
+      )}
+    </ReactLink>
   );
 };
 

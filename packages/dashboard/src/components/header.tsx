@@ -16,8 +16,10 @@ import {
 import { useLingui } from "@lingui/react";
 import { FiMenu } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { locales } from "../i18n";
+import { datefnsLocales, locales } from "../i18n";
 import { useAuth } from "./auth-provider";
+import { setDefaultLocale } from "react-datepicker";
+import { setDefaultOptions } from "date-fns";
 
 interface MobileProps extends FlexProps {
   onOpen: any;
@@ -60,6 +62,8 @@ export default function Header({ onOpen }: MobileProps) {
           onChange={(e) => {
             localStorage.setItem("locale", e.target.value);
             i18n.activate(e.target.value);
+            setDefaultLocale(e.target.value);
+            setDefaultOptions({ locale: datefnsLocales[e.target.value] });
           }}
         >
           {Object.entries(locales).map(([key, name]) => (

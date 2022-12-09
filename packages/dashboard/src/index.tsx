@@ -2,9 +2,6 @@ import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
-import dayjs from "dayjs";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-import localizedFormat from "dayjs/plugin/localizedFormat";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
@@ -15,9 +12,6 @@ import "./i18n";
 import { SigninPage } from "./pages/sign-in";
 import { SignupPage } from "./pages/sign-up";
 import { theme } from "./theme";
-
-dayjs.extend(customParseFormat);
-dayjs.extend(localizedFormat);
 
 const queryClient = new QueryClient();
 

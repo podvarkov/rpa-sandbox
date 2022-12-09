@@ -5,14 +5,8 @@ import {
   Checkbox,
   FormControl,
   FormErrorMessage,
-  Heading,
   HStack,
   Input,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Radio,
   RadioGroup,
   Select,
@@ -27,10 +21,10 @@ import {
   RepeatClockIcon,
   SettingsIcon,
 } from "@chakra-ui/icons";
-import dayjs from "dayjs";
-import { api } from "../api";
-
-// todo name, workflowId, repeating
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./datepicker.css";
+import { Workflow } from "../api";
 
 const CheckboxGroup: React.FC<{
   items: Array<{ value: string; title: string }>;
@@ -61,6 +55,7 @@ const CheckboxGroup: React.FC<{
     </HStack>
   );
 };
+
 const frequencies = {
   MINUTELY: 5,
   HOURLY: 4,
@@ -75,8 +70,8 @@ const getPreset = (
   | {
       interval: number | undefined;
       freq: number | undefined;
-      byweekday: string[] | undefined;
-      until: string | undefined;
+      byweekday: number[] | undefined;
+      until: Date | undefined;
       preset: string;
     }
   | undefined => {
@@ -110,7 +105,7 @@ const getPreset = (
         preset: "WEEKLY",
         interval: 1,
         freq: frequencies.WEEKLY,
-        byweekday: [new Date().getDay().toString()],
+        byweekday: [new Date().getDay()],
         until: undefined,
       };
     case "MONTHLY":
@@ -126,7 +121,7 @@ const getPreset = (
         preset: "WORKDAYS",
         interval: 1,
         freq: frequencies.WEEKLY,
-        byweekday: ["1", "2", "3", "4", "5"],
+        byweekday: [1, 2, 3, 4, 5],
         until: undefined,
       };
     case "NO_REPEAT":
@@ -142,35 +137,81 @@ const getPreset = (
         preset: "CUSTOM",
         interval: 1,
         freq: frequencies.WEEKLY,
-        byweekday: [new Date().getDay().toString()],
+        byweekday: [new Date().getDay()],
         until: undefined,
       };
   }
 };
-export const SchedulerForm = () => {
+
+export type EventFormValues = {
+  _id?: string;
+  workflowId: string;
+  name: string;
+  rrule: {
+    dtstart: Date;
+    preset: string;
+    interval: number | undefined;
+    freq: number | undefined;
+    byweekday: number[] | undefined;
+    until: Date | undefined;
+  };
+};
+
+export const SchedulerForm: React.FC<{
+  onSubmit: (values: EventFormValues) => Promise<unknown>;
+  workflows: Workflow[];
+  event?: EventFormValues;
+}> = ({ onSubmit, event, workflows }) => {
   return (
     <Formik
-      initialValues={{
-        rrule: {
-          // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-          dtstart: dayjs().format("YYYY-DD-MMTHH:mm"),
-          ...getPreset("NO_REPEAT"),
-        },
-      }}
-      onSubmit={(values) => {
-        console.log(values);
-        api.upsertEvent(values);
+      initialValues={
+        event
+          ? {
+              ...event,
+              rrule: {
+                ...event.rrule,
+                dtstart: new Date(event.rrule.dtstart),
+                until: event.rrule.until
+                  ? new Date(event.rrule.until)
+                  : undefined,
+              },
+            }
+          : ({
+              workflowId: workflows[0]._id,
+              name: "",
+              rrule: {
+                // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
+                dtstart: new Date(),
+                ...getPreset("NO_REPEAT"),
+              },
+            } as EventFormValues)
+      }
+      onSubmit={(values, actions) => {
+        onSubmit({
+          ...values,
+          rrule: {
+            ...values.rrule,
+            freq: values.rrule.freq
+              ? Number.parseInt(values.rrule.freq as unknown as string)
+              : undefined,
+          },
+        }).finally(() => actions.setSubmitting(false));
       }}
     >
       {(form) => (
-        <Form style={{ width: "100%" }}>
+        <Form style={{ width: "100%", marginBottom: 12 }}>
           <Stack spacing="4">
             <Field name="name">
               {({ field, meta }: FieldProps) => (
                 <FormControl isInvalid={!!(meta.touched && meta.error)}>
                   <HStack spacing={4}>
                     <EditIcon color="gray.300" />
-                    <Input placeholder={t`Enter event title`} {...field} />
+                    <Input
+                      required
+                      variant="default"
+                      placeholder={t`Enter event title`}
+                      {...field}
+                    />
                   </HStack>
                   <FormErrorMessage>{meta.error}</FormErrorMessage>
                 </FormControl>
@@ -182,8 +223,8 @@ export const SchedulerForm = () => {
                 <FormControl isInvalid={!!(meta.touched && meta.error)}>
                   <HStack spacing={4}>
                     <SettingsIcon color="gray.300" />
-                    <Select {...field}>
-                      {([{ _id: 1, name: "wf_1" }] || []).map((wf) => (
+                    <Select variant="default" {...field}>
+                      {workflows.map((wf) => (
                         <option key={wf._id} value={wf._id}>
                           {wf.name}
                         </option>
@@ -199,12 +240,16 @@ export const SchedulerForm = () => {
                 <FormControl isInvalid={!!(meta.touched && meta.error)}>
                   <HStack spacing={4}>
                     <CalendarIcon color="gray.300" />
-                    <Input
-                      required
-                      type="datetime-local"
-                      placeholder={t`timeout`}
-                      {...field}
-                    />
+                    <div className="react-datepicker__field-wrapper">
+                      <DatePicker
+                        minDate={new Date()}
+                        showTimeSelect
+                        timeIntervals={1}
+                        dateFormat="Pp"
+                        selected={field.value}
+                        onChange={(d) => form.setFieldValue(field.name, d)}
+                      />
+                    </div>
                   </HStack>
                   <FormErrorMessage>{meta.error}</FormErrorMessage>
                 </FormControl>
@@ -216,6 +261,7 @@ export const SchedulerForm = () => {
                 <HStack spacing={4}>
                   <RepeatClockIcon color="gray.300" />
                   <Select
+                    variant="default"
                     {...field}
                     onChange={(e) => {
                       const preset = getPreset(e.target.value);
@@ -268,7 +314,12 @@ export const SchedulerForm = () => {
                         flex={"20%"}
                         isInvalid={!!(meta.touched && meta.error)}
                       >
-                        <Input required type="number" {...field} />
+                        <Input
+                          variant="default"
+                          required
+                          type="number"
+                          {...field}
+                        />
                       </FormControl>
                     )}
                   </Field>
@@ -280,6 +331,7 @@ export const SchedulerForm = () => {
                         isInvalid={!!(meta.touched && meta.error)}
                       >
                         <Select
+                          variant="default"
                           {...field}
                           onChange={(e) => {
                             if (
@@ -287,7 +339,7 @@ export const SchedulerForm = () => {
                               frequencies.WEEKLY
                             ) {
                               form.setFieldValue("rrule.byweekday", [
-                                new Date().getDay().toString(),
+                                new Date().getDay(),
                               ]);
                             } else {
                               form.setFieldValue("rrule.byweekday", undefined);
@@ -332,13 +384,13 @@ export const SchedulerForm = () => {
                           { title: t`Sa`, value: "6" },
                           { title: t`Su`, value: "7" },
                         ]}
-                        value={field.value}
+                        value={field.value?.map((v: number) => v.toString())}
                         onChange={(value) =>
                           form.setFieldValue(
                             field.name,
                             value.length
-                              ? value
-                              : [new Date().getDay().toString()]
+                              ? value.map((v) => Number.parseInt(v))
+                              : [new Date().getDay()]
                           )
                         }
                       />
@@ -362,10 +414,7 @@ export const SchedulerForm = () => {
                             onChange={(value) =>
                               form.setFieldValue(
                                 field.name,
-                                value === "never"
-                                  ? undefined
-                                  : // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                                    dayjs().format("YYYY-DD-MMTHH:mm")
+                                value === "never" ? undefined : new Date()
                               )
                             }
                             value={
@@ -384,11 +433,19 @@ export const SchedulerForm = () => {
                                   <Trans>Date</Trans>
                                 </Radio>
 
-                                <Input
-                                  disabled={!field.value}
-                                  type="datetime-local"
-                                  {...field}
-                                />
+                                <div className="react-datepicker__field-wrapper">
+                                  <DatePicker
+                                    disabled={!field.value}
+                                    minDate={new Date()}
+                                    showTimeSelect
+                                    timeIntervals={1}
+                                    dateFormat="Pp"
+                                    selected={field.value}
+                                    onChange={(d) =>
+                                      form.setFieldValue(field.name, d)
+                                    }
+                                  />
+                                </div>
                               </HStack>
                             </VStack>
                           </RadioGroup>
@@ -401,10 +458,10 @@ export const SchedulerForm = () => {
             ) : null}
 
             <Button
-              // isLoading={isSubmitting}
-              // disabled={isFetching}
+              isLoading={form.isSubmitting}
+              borderRadius={0}
               type="submit"
-              colorScheme="teal"
+              variant={"submitBtn"}
             >
               <Trans>Save</Trans>
             </Button>
@@ -412,28 +469,5 @@ export const SchedulerForm = () => {
         </Form>
       )}
     </Formik>
-  );
-};
-
-export const SchedulerModal: React.FC<{
-  isOpen: boolean;
-  onClose: () => void;
-}> = ({ isOpen, onClose }) => {
-  return (
-    <Modal size="lg" isOpen={isOpen} onClose={() => onClose()}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
-          <HStack>
-            <Heading fontFamily={"roboto"} size={"md"}>
-              <Trans>Schedule execution</Trans>
-            </Heading>
-          </HStack>
-        </ModalHeader>
-        <ModalBody>
-          <SchedulerForm />
-        </ModalBody>
-      </ModalContent>
-    </Modal>
   );
 };

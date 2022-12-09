@@ -12,24 +12,38 @@ import { Transform, Type } from "class-transformer";
 class PartialRRuleOptions implements Partial<Options> {
   @IsNotEmpty()
   @Transform(({ value }) => {
-    return new Date(value);
+    const d = new Date(value);
+    d.setSeconds(0);
+    d.setMilliseconds(0);
+    return d;
   })
   @IsDate()
   dtstart: Date;
 
   @IsOptional()
   @Transform(({ value }) => {
-    return new Date(value);
+    const d = new Date(value);
+    d.setSeconds(0);
+    d.setMilliseconds(0);
+    return d;
   })
   @IsDate()
   until: Date;
 
   @IsOptional()
+  @IsNumber()
   freq: Frequency;
 
   @IsOptional()
   @IsNumber()
-  interval;
+  interval?: number;
+
+  @IsOptional()
+  @IsNumber({}, { each: true })
+  byweekday?: number[];
+
+  @IsString()
+  preset: string;
 
   get options() {
     const opts: {
@@ -38,15 +52,19 @@ class PartialRRuleOptions implements Partial<Options> {
       dtstart: Date;
       freq?: Frequency;
       interval: number;
+      preset: string;
+      byweekday?: number[];
     } = {
       wkst: RRule.MO,
       dtstart: this.dtstart,
       until: this.until ?? (!this.interval && this.dtstart),
       interval: this.interval || 1,
+      preset: this.preset,
+      freq: this.freq || 5,
     };
 
-    if (this.freq) {
-      opts.freq = this.freq;
+    if (this.byweekday) {
+      opts.byweekday = this.byweekday;
     }
 
     return opts;

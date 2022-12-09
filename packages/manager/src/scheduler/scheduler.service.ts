@@ -22,7 +22,10 @@ export class SchedulerService {
   findEvents(jwt: string, query = {}) {
     return this.openflowService.queryCollection<ScheduledEvent>(jwt, {
       collectionname: "entities",
-      query: { _type: "scheduled_event", ...query },
+      query: {
+        _type: "scheduled_event",
+        ...query,
+      },
     });
   }
 
@@ -57,25 +60,30 @@ export class SchedulerService {
     return event;
   }
 
+  private parseDate(dateLike: string | Date | undefined): Date | undefined {
+    if (!dateLike) return undefined;
+    const date = new Date(dateLike);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+    return date;
+  }
+
   async deleteEvent(jwt: string, id: string) {
     return this.openflowService.deleteOne(jwt, id);
   }
 
   @Cron(CronExpression.EVERY_MINUTE)
   async executeScheduledWorkflows() {
+    const ts = this.parseDate(Date());
     this.logger.log({
+      ts,
       message: "Scheduled workflows cron started",
-      ts: new Date(),
     });
-
-    const ts = new Date();
-    ts.setSeconds(0);
-    ts.setMilliseconds(0);
 
     const events = await this.findEvents(this.cryptService.rootToken, {
       _type: "scheduled_event",
       $or: [
-        { "rrule.until": { $gte: `ISODate("${ts.toISOString()}")` } },
+        { "rrule.until": { $gte: ts.toISOString() } },
         { "rrule.until": false },
       ],
     });
@@ -83,13 +91,18 @@ export class SchedulerService {
     for (const event of events) {
       const rule = new RRule({
         wkst: event.rrule.wkst,
-        dtstart: new Date(event.rrule.dtstart),
-        until: event.rrule.until ? new Date(event.rrule.until) : undefined,
+        dtstart: this.parseDate(event.rrule.dtstart),
+        until: event.rrule.until
+          ? this.parseDate(event.rrule.until)
+          : undefined,
         freq: event.rrule.freq,
         interval: event.rrule.interval,
         count: undefined,
+        byweekday: event.rrule.byweekday,
       });
-      const nextRunAt = rule.after(ts, true);
+
+      const nextRunAt = this.parseDate(rule.after(ts, true));
+
       if (nextRunAt && nextRunAt.getTime() === ts.getTime()) {
         const jwt = this.cryptService.generateToken({
           username: event._createdby,
@@ -106,7 +119,10 @@ export class SchedulerService {
             return entity;
           });
         this.eventEmitter.emit("workflow.queued", jwt, workflow);
-        this.logger.log(`Workflow with id:${workflow.workflowId} queued`);
+        this.logger.log({
+          message: `Workflow with id:${workflow.workflowId} queued`,
+          eventId: event._id,
+        });
       }
     }
   }

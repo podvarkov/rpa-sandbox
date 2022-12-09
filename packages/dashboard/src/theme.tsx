@@ -68,5 +68,5 @@ export const theme = extendTheme({
       secondary: "#f0f0f0",
     },
   },
-  components: { Button: buttonTheme, Input: inputTheme },
+  components: { Button: buttonTheme, Input: inputTheme, Select: inputTheme },
 });
