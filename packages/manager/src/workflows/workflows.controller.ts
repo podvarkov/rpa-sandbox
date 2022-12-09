@@ -8,7 +8,7 @@ import {
   Query,
   UseGuards,
   UsePipes,
-  ValidationPipe
+  ValidationPipe,
 } from "@nestjs/common";
 import { Session } from "../auth/auth.service";
 import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";

@@ -1,10 +1,12 @@
-import { Injectable, Logger } from "@nestjs/common";
+import { BadRequestException, Injectable, Logger } from "@nestjs/common";
 import { ConfigProvider } from "../config/config.provider";
 import { CookieJar } from "tough-cookie";
 import * as axiosCookieJarSupport from "axios-cookiejar-support";
 import * as axios from "axios";
 import { TokenUser } from "@openiap/openflow-api";
 import { OpenflowService } from "../openflow/openflow.service";
+import { UpdateUserDto } from "src/auth/update-user.dto";
+import { Profile } from "src/openflow/types";
 
 export type Session = {
   user: Pick<
@@ -19,7 +21,7 @@ export class AuthService {
   private readonly logger = new Logger(AuthService.name);
   constructor(
     private readonly config: ConfigProvider,
-    private readonly commander: OpenflowService
+    private readonly openflowService: OpenflowService
   ) {}
 
   async validateUser(username: string, password: string) {
@@ -50,6 +52,35 @@ export class AuthService {
   }
 
   async createUser(username: string, password: string) {
-    return this.commander.createUser({ username, password });
+    return this.openflowService.createUser({ username, password });
+  }
+
+  async updateUser(session: Session, data: UpdateUserDto) {
+    const oldUser = await this.getUser(session);
+    if (!oldUser) throw new BadRequestException("User not found");
+
+    return this.openflowService.updateOne(
+      session.jwt,
+      { ...oldUser, ...data },
+      "users"
+    );
+  }
+
+  async getUser(session: Session) {
+    return this.openflowService
+      .queryCollection<Profile>(session.jwt, {
+        collectionname: "users",
+        query: { _id: session.user._id },
+        projection: [
+          "username",
+          "name",
+          "surname",
+          "phone",
+          "furiganaSurname",
+          "furiganaMay",
+          "salesManagerId",
+        ],
+      })
+      .then((data) => data[0]);
   }
 }

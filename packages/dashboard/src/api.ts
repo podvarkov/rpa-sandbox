@@ -103,6 +103,22 @@ export type ScheduledEvent = {
   };
 };
 
+export type Profile = {
+  _id: string;
+  surname: string;
+  name: string;
+  furiganaSurname: string;
+  furiganaMay: string;
+  /**
+   *  username = equals email
+   */
+  username: string;
+  phone?: string;
+  salesManagerId: string;
+};
+
+export type UpdatableProfile = Omit<Profile, "_id" | "salesManagerId">;
+
 type AuthStateChangedCb = (user: Session) => void;
 
 class Api {
@@ -240,6 +256,18 @@ class Api {
   deleteEvent(id: string) {
     return this.axios
       .delete<{ id: string }>(`schedule/${id}`)
+      .then(({ data }) => data);
+  }
+
+  getProfile(signal?: AbortSignal) {
+    return this.axios
+      .get<Profile>("auth/profile", { signal })
+      .then(({ data }) => data);
+  }
+
+  updateProfile(profile: UpdatableProfile) {
+    return this.axios
+      .post<Profile>("auth/profile", profile)
       .then(({ data }) => data);
   }
 }

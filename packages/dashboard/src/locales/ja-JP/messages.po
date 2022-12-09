@@ -50,7 +50,7 @@ msgstr ""
 msgid "Available symbols (half-width)"
 msgstr ""
 
-#: src/pages/mypage.tsx:354
+#: src/pages/profile.tsx:413
 msgid "Browse"
 msgstr ""
 
@@ -70,6 +70,10 @@ msgstr ""
 msgid "Can not edit workflow"
 msgstr ""
 
+#: src/pages/profile.tsx:181
+msgid "Can not update profile"
+msgstr ""
+
 #: src/pages/scheduler.tsx:125
 #: src/pages/workflows.tsx:108
 msgid "Cancel"
@@ -84,15 +88,15 @@ msgstr ""
 #~ msgid "Confirm password"
 #~ msgstr ""
 
-#: src/pages/mypage.tsx:330
+#: src/pages/profile.tsx:389
 msgid "Contact us"
 msgstr ""
 
-#: src/pages/mypage.tsx:204
+#: src/pages/profile.tsx:224
 msgid "Contents of inquiry"
 msgstr ""
 
-#: src/pages/mypage.tsx:336
+#: src/pages/profile.tsx:395
 msgid "Contract Information"
 msgstr ""
 
@@ -120,7 +124,7 @@ msgstr ""
 msgid "Day"
 msgstr ""
 
-#: src/pages/mypage.tsx:340
+#: src/pages/profile.tsx:399
 msgid "Dear 111"
 msgstr ""
 
@@ -142,6 +146,7 @@ msgstr ""
 msgid "Do not repeat"
 msgstr ""
 
+#: src/pages/profile.tsx:144
 #: src/pages/sign-in.tsx:74
 #: src/pages/sign-up.tsx:86
 msgid "Email"
@@ -233,7 +238,7 @@ msgstr ""
 msgid "Fr"
 msgstr ""
 
-#: src/pages/mypage.tsx:344
+#: src/pages/profile.tsx:403
 msgid "Free Trial Plan"
 msgstr ""
 
@@ -266,7 +271,7 @@ msgstr ""
 msgid "Idle"
 msgstr ""
 
-#: src/pages/mypage.tsx:301
+#: src/pages/profile.tsx:360
 msgid "In charge of your company"
 msgstr ""
 
@@ -289,7 +294,7 @@ msgstr ""
 msgid "Input argument: {name}"
 msgstr ""
 
-#: src/pages/mypage.tsx:312
+#: src/pages/profile.tsx:371
 msgid "Inquiries about RPA"
 msgstr ""
 
@@ -332,6 +337,10 @@ msgstr ""
 #: src/pages/sign-in.tsx:60
 #: src/pages/sign-up.tsx:66
 msgid "Must be a valid email"
+msgstr ""
+
+#: src/pages/profile.tsx:88
+msgid "Name"
 msgstr ""
 
 #: src/components/scheduler-form.tsx:429
@@ -386,15 +395,27 @@ msgid "Passwords must match"
 msgstr ""
 
 #: src/pages/mypage.tsx:137
-msgid "Phone Number"
+#~ msgid "Phone Number"
+#~ msgstr ""
+
+#: src/pages/profile.tsx:131
+msgid "Phone number"
 msgstr ""
 
 #: src/pages/mall-info.tsx:29
 msgid "Please enter your R-Login ID and password."
 msgstr ""
 
-#: src/pages/mypage.tsx:237
+#: src/components/header.tsx:97
+msgid "Profile"
+msgstr ""
+
+#: src/pages/profile.tsx:257
 msgid "Profile registration"
+msgstr ""
+
+#: src/pages/profile.tsx:189
+msgid "Profile updated"
 msgstr ""
 
 #: src/pages/executions.tsx:37
@@ -405,8 +426,8 @@ msgstr ""
 msgid "Rakuten monthly report creation"
 msgstr ""
 
-#: src/pages/mypage.tsx:247
-#: src/pages/mypage.tsx:272
+#: src/pages/profile.tsx:267
+#: src/pages/profile.tsx:292
 msgid "Registration / Editing"
 msgstr ""
 
@@ -418,7 +439,7 @@ msgstr ""
 msgid "Repeat interval:"
 msgstr ""
 
-#: src/pages/mypage.tsx:350
+#: src/pages/profile.tsx:409
 msgid "Report Results"
 msgstr ""
 
@@ -468,6 +489,7 @@ msgstr ""
 #~ msgid "Sign in"
 #~ msgstr ""
 
+#: src/components/header.tsx:100
 #: src/components/layout.tsx:85
 msgid "Sign out"
 msgstr ""
@@ -497,7 +519,7 @@ msgstr ""
 msgid "Status:"
 msgstr ""
 
-#: src/pages/mypage.tsx:261
+#: src/pages/profile.tsx:281
 msgid "Store Information Registration"
 msgstr ""
 
@@ -519,6 +541,7 @@ msgstr ""
 
 #: src/pages/execution-details.tsx:47
 #: src/pages/executions.tsx:137
+#: src/pages/profile.tsx:202
 #: src/pages/scheduler.tsx:88
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
@@ -652,7 +675,7 @@ msgstr ""
 msgid "execution"
 msgstr ""
 
-#: src/pages/mypage.tsx:197
+#: src/pages/profile.tsx:217
 msgid "inquiry"
 msgstr ""
 
@@ -660,8 +683,7 @@ msgstr ""
 msgid "login"
 msgstr ""
 
-#: src/pages/mypage.tsx:67
-#: src/pages/mypage.tsx:90
+#: src/pages/profile.tsx:103
 msgid "name"
 msgstr ""
 
@@ -679,11 +701,11 @@ msgstr ""
 msgid "register"
 msgstr ""
 
-#: src/pages/mypage.tsx:217
+#: src/pages/profile.tsx:237
 msgid "send"
 msgstr ""
 
-#: src/pages/mypage.tsx:77
+#: src/pages/profile.tsx:93
 msgid "surname"
 msgstr ""
 
@@ -692,7 +714,7 @@ msgstr ""
 msgid "timeout"
 msgstr ""
 
-#: src/pages/mypage.tsx:305
+#: src/pages/profile.tsx:364
 msgid "{0}"
 msgstr ""
 

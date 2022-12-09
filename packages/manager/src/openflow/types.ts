@@ -64,3 +64,16 @@ export type ScheduledEvent = Entity<{
     byweekday?: number[];
   };
 }>;
+
+export type Profile = Entity<{
+  surname: string;
+  name: string;
+  furiganaSurname: string;
+  furiganaMay: string;
+  /**
+   *  username = equals email
+   */
+  username: string;
+  phone?: string;
+  salesManagerId: string;
+}>;

@@ -7,7 +7,7 @@ import { ExecutionDetailsPage } from "./pages/execution-details";
 import { ExecutionsPage } from "./pages/executions";
 import { Home } from "./pages/home";
 import { MallInfo } from "./pages/mall-info";
-import { MyPage } from "./pages/mypage";
+import { ProfilePage } from "./pages/profile";
 import { TemplatesPage } from "./pages/templates";
 import { EditWorkflowPage } from "./pages/workflow-edit";
 import { WorkflowRunnerPage } from "./pages/workflow-runner";
@@ -20,10 +20,9 @@ const App: React.FC = () => {
       <Route element={<SidebarWithHeader />}>
         <Route path="/templates" element={<TemplatesPage />} />
         <Route path="/workflows/execute/:id" element={<WorkflowRunnerPage />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/beta-rpa" element={<BetaRpa />} />
-        {/* <Route path="/mallinfo" element={<MallInfo />} /> */}
         <Route path="/workflows/:id" element={<EditWorkflowPage />} />
         <Route path="/workflows" element={<WorkflowsPage />} />
         <Route path="/executions/:id" element={<ExecutionDetailsPage />} />

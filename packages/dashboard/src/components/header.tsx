@@ -20,6 +20,7 @@ import { datefnsLocales, locales } from "../i18n";
 import { useAuth } from "./auth-provider";
 import { setDefaultLocale } from "react-datepicker";
 import { setDefaultOptions } from "date-fns";
+import { Trans } from "@lingui/macro";
 
 interface MobileProps extends FlexProps {
   onOpen: any;
@@ -51,7 +52,7 @@ export default function Header({ onOpen }: MobileProps) {
         />
       )}
       <Box w={40} p={4} alignItems="center">
-        <img src="/header-logo-with-bg.png" width="90%" />
+        <img alt="profile" src="/header-logo-with-bg.png" width="90%" />
       </Box>
 
       <HStack spacing={{ base: "0", md: "6" }}>
@@ -92,8 +93,12 @@ export default function Header({ onOpen }: MobileProps) {
               bg={useColorModeValue("white", "gray.900")}
               borderColor={useColorModeValue("gray.200", "gray.700")}
             >
-              <MenuItem onClick={() => navigate("/mypage")}>Profile</MenuItem>
-              <MenuItem onClick={() => signout()}>Sign out</MenuItem>
+              <MenuItem onClick={() => navigate("/profile")}>
+                <Trans>Profile</Trans>
+              </MenuItem>
+              <MenuItem onClick={() => signout()}>
+                <Trans>Sign out</Trans>
+              </MenuItem>
             </MenuList>
           </Menu>
         </Flex>
