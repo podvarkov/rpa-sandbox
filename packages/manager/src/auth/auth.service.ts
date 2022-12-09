@@ -5,7 +5,7 @@ import * as axiosCookieJarSupport from "axios-cookiejar-support";
 import * as axios from "axios";
 import { TokenUser } from "@openiap/openflow-api";
 import { OpenflowService } from "../openflow/openflow.service";
-import { UpdateUserDto } from "src/auth/update-user.dto";
+import { UpdateProfileDto } from "src/auth/update-profile.dto";
 import { Profile, SalesManager } from "src/openflow/types";
 import { CryptService } from "src/crypt/crypt.service";
 
@@ -66,7 +66,7 @@ export class AuthService {
     });
   }
 
-  async updateUserProfile(session: Session, data: UpdateUserDto) {
+  async updateUserProfile(session: Session, data: UpdateProfileDto) {
     const oldUser = await this.getUserProfile(session);
     if (!oldUser) throw new BadRequestException("User not found");
 

@@ -14,9 +14,9 @@ import {
 import { LocalAuthGuard } from "./local.strategy";
 import { AuthService, Session } from "./auth.service";
 import { SignUpParamsDto } from "./sign-up-params.dto";
-import { JwtAuthGuard, UserSession } from "src/auth/jwt.strategy";
-import { UpdateUserDto } from "src/auth/update-user.dto";
-import { UserProfileEntity } from "src/auth/userProfileEntity";
+import { JwtAuthGuard, UserSession } from "./jwt.strategy";
+import { UpdateProfileDto } from "./update-profile.dto";
+import { UserProfileEntity } from "./user-profile.entity";
 
 @Controller("api/auth")
 export class AuthController {
@@ -55,7 +55,7 @@ export class AuthController {
   @Post("profile")
   async updateProfile(
     @UserSession() session: Session,
-    @Body() body: UpdateUserDto
+    @Body() body: UpdateProfileDto
   ) {
     const profile = await this.authService.updateUserProfile(session, body);
     return new UserProfileEntity(profile);

@@ -70,7 +70,7 @@ msgstr ""
 msgid "Can not edit workflow"
 msgstr ""
 
-#: src/pages/profile.tsx:181
+#: src/pages/profile.tsx:179
 msgid "Can not update profile"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Contact us"
 msgstr ""
 
-#: src/pages/profile.tsx:224
+#: src/pages/profile.tsx:222
 msgid "Contents of inquiry"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgstr ""
 msgid "Do not repeat"
 msgstr ""
 
-#: src/pages/profile.tsx:144
+#: src/pages/profile.tsx:142
 #: src/pages/sign-in.tsx:74
 #: src/pages/sign-up.tsx:89
 msgid "Email"
@@ -350,7 +350,7 @@ msgstr ""
 msgid "Must match pattern"
 msgstr ""
 
-#: src/pages/profile.tsx:88
+#: src/pages/profile.tsx:86
 msgid "Name"
 msgstr ""
 
@@ -409,7 +409,7 @@ msgstr ""
 #~ msgid "Phone Number"
 #~ msgstr ""
 
-#: src/pages/profile.tsx:131
+#: src/pages/profile.tsx:129
 msgid "Phone number"
 msgstr ""
 
@@ -421,11 +421,11 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: src/pages/profile.tsx:257
+#: src/pages/profile.tsx:255
 msgid "Profile registration"
 msgstr ""
 
-#: src/pages/profile.tsx:189
+#: src/pages/profile.tsx:187
 msgid "Profile updated"
 msgstr ""
 
@@ -437,8 +437,8 @@ msgstr ""
 msgid "Rakuten monthly report creation"
 msgstr ""
 
-#: src/pages/profile.tsx:267
-#: src/pages/profile.tsx:292
+#: src/pages/profile.tsx:265
+#: src/pages/profile.tsx:290
 msgid "Registration / Editing"
 msgstr ""
 
@@ -530,7 +530,7 @@ msgstr ""
 msgid "Status:"
 msgstr ""
 
-#: src/pages/profile.tsx:281
+#: src/pages/profile.tsx:279
 msgid "Store Information Registration"
 msgstr ""
 
@@ -556,7 +556,7 @@ msgstr ""
 
 #: src/pages/execution-details.tsx:47
 #: src/pages/executions.tsx:137
-#: src/pages/profile.tsx:202
+#: src/pages/profile.tsx:200
 #: src/pages/scheduler.tsx:88
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
@@ -690,7 +690,7 @@ msgstr ""
 msgid "execution"
 msgstr ""
 
-#: src/pages/profile.tsx:217
+#: src/pages/profile.tsx:215
 msgid "inquiry"
 msgstr ""
 
@@ -698,7 +698,7 @@ msgstr ""
 msgid "login"
 msgstr ""
 
-#: src/pages/profile.tsx:103
+#: src/pages/profile.tsx:101
 msgid "name"
 msgstr ""
 
@@ -716,11 +716,11 @@ msgstr ""
 msgid "register"
 msgstr ""
 
-#: src/pages/profile.tsx:237
+#: src/pages/profile.tsx:235
 msgid "send"
 msgstr ""
 
-#: src/pages/profile.tsx:93
+#: src/pages/profile.tsx:91
 msgid "surname"
 msgstr ""
 

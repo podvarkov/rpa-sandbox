@@ -70,7 +70,7 @@ msgstr "Can not delete workflow"
 msgid "Can not edit workflow"
 msgstr "Can not edit workflow"
 
-#: src/pages/profile.tsx:181
+#: src/pages/profile.tsx:179
 msgid "Can not update profile"
 msgstr "Can not update profile"
 
@@ -91,7 +91,7 @@ msgstr "Confirm password"
 msgid "Contact us"
 msgstr "Contact us"
 
-#: src/pages/profile.tsx:224
+#: src/pages/profile.tsx:222
 msgid "Contents of inquiry"
 msgstr "Contents of inquiry"
 
@@ -145,7 +145,7 @@ msgstr "Desired delivery date of the robot"
 msgid "Do not repeat"
 msgstr "Do not repeat"
 
-#: src/pages/profile.tsx:144
+#: src/pages/profile.tsx:142
 #: src/pages/sign-in.tsx:74
 #: src/pages/sign-up.tsx:89
 msgid "Email"
@@ -352,7 +352,7 @@ msgstr "Must be a valid email"
 msgid "Must match pattern"
 msgstr "Must match pattern"
 
-#: src/pages/profile.tsx:88
+#: src/pages/profile.tsx:86
 msgid "Name"
 msgstr "Name"
 
@@ -411,7 +411,7 @@ msgstr "Passwords must match"
 #~ msgid "Phone Number"
 #~ msgstr "Phone Number"
 
-#: src/pages/profile.tsx:131
+#: src/pages/profile.tsx:129
 msgid "Phone number"
 msgstr "Phone number"
 
@@ -423,11 +423,11 @@ msgstr "Please enter your R-Login ID and password."
 msgid "Profile"
 msgstr "Profile"
 
-#: src/pages/profile.tsx:257
+#: src/pages/profile.tsx:255
 msgid "Profile registration"
 msgstr "Profile registration"
 
-#: src/pages/profile.tsx:189
+#: src/pages/profile.tsx:187
 msgid "Profile updated"
 msgstr "Profile updated"
 
@@ -439,8 +439,8 @@ msgstr "Queued"
 msgid "Rakuten monthly report creation"
 msgstr "Rakuten monthly report creation"
 
-#: src/pages/profile.tsx:267
-#: src/pages/profile.tsx:292
+#: src/pages/profile.tsx:265
+#: src/pages/profile.tsx:290
 msgid "Registration / Editing"
 msgstr "Registration / Editing"
 
@@ -532,7 +532,7 @@ msgstr "Status"
 msgid "Status:"
 msgstr "Status:"
 
-#: src/pages/profile.tsx:281
+#: src/pages/profile.tsx:279
 msgid "Store Information Registration"
 msgstr "Store Information Registration"
 
@@ -558,7 +558,7 @@ msgstr "Th"
 
 #: src/pages/execution-details.tsx:47
 #: src/pages/executions.tsx:137
-#: src/pages/profile.tsx:202
+#: src/pages/profile.tsx:200
 #: src/pages/scheduler.tsx:88
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
@@ -692,7 +692,7 @@ msgstr "error"
 msgid "execution"
 msgstr "execution"
 
-#: src/pages/profile.tsx:217
+#: src/pages/profile.tsx:215
 msgid "inquiry"
 msgstr "inquiry"
 
@@ -700,7 +700,7 @@ msgstr "inquiry"
 msgid "login"
 msgstr "login"
 
-#: src/pages/profile.tsx:103
+#: src/pages/profile.tsx:101
 msgid "name"
 msgstr "name"
 
@@ -718,11 +718,11 @@ msgstr "queued"
 msgid "register"
 msgstr "register"
 
-#: src/pages/profile.tsx:237
+#: src/pages/profile.tsx:235
 msgid "send"
 msgstr "send"
 
-#: src/pages/profile.tsx:93
+#: src/pages/profile.tsx:91
 msgid "surname"
 msgstr "surname"
 

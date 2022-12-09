@@ -44,9 +44,7 @@ const profileValidationSchema = {
   username: Yup.string()
     .email()
     .required(`有効なメールアドレスを入力してください`),
-  phone: Yup.string()
-    .matches(phoneRegExp)
-    .required(`有効なメールアドレスを入力してください`),
+  phone: Yup.string().matches(phoneRegExp),
 };
 
 const HorizontalFormField: React.FC<
@@ -303,45 +301,47 @@ export const ProfilePage: React.FC = () => {
                 borderColor="borderColors.main"
                 borderRadius={5}
               >
-                <Formik
-                  initialValues={{
-                    surname: profile?.surname || "",
-                    name: profile?.name || "",
-                    furiganaSurname: profile?.furiganaSurname || "",
-                    furiganaMay: profile?.furiganaMay || "",
-                    phone: profile?.phone || "",
-                    username: profile?.username || "",
-                  }}
-                  onSubmit={(
-                    values: UpdatableProfile,
-                    { setSubmitting, setValues }
-                  ) => {
-                    mutation
-                      .mutateAsync(values)
-                      .then((data) => setValues(data))
-                      .finally(() => {
-                        setSubmitting(false);
-                      });
-                  }}
-                  validationSchema={Yup.object(profileValidationSchema)}
-                >
-                  {({ isSubmitting, dirty }) => (
-                    <Form>
-                      <Stack spacing="6">
-                        <ProfileInfoFields />
+                {profile ? (
+                  <Formik
+                    initialValues={{
+                      surname: profile.surname,
+                      name: profile.name,
+                      furiganaSurname: profile.furiganaSurname,
+                      furiganaMay: profile.furiganaMay,
+                      phone: profile.phone,
+                      username: profile.username,
+                    }}
+                    onSubmit={(
+                      values: UpdatableProfile,
+                      { setSubmitting, setValues }
+                    ) => {
+                      mutation
+                        .mutateAsync(values)
+                        .then((data) => setValues(data))
+                        .finally(() => {
+                          setSubmitting(false);
+                        });
+                    }}
+                    validationSchema={Yup.object(profileValidationSchema)}
+                  >
+                    {({ isSubmitting, dirty }) => (
+                      <Form>
+                        <Stack spacing="6">
+                          <ProfileInfoFields />
 
-                        <Button
-                          type="submit"
-                          variant="submitBtn"
-                          isLoading={isSubmitting}
-                          disabled={!dirty}
-                        >
-                          登録
-                        </Button>
-                      </Stack>
-                    </Form>
-                  )}
-                </Formik>
+                          <Button
+                            type="submit"
+                            variant="submitBtn"
+                            isLoading={isSubmitting}
+                            disabled={!dirty}
+                          >
+                            登録
+                          </Button>
+                        </Stack>
+                      </Form>
+                    )}
+                  </Formik>
+                ) : null}
               </Box>
             )}
           </Box>
