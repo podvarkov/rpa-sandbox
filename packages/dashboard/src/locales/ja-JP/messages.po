@@ -17,6 +17,10 @@ msgstr ""
 msgid "*Beta version only supports Rakuten"
 msgstr ""
 
+#: src/pages/sign-up.tsx:124
+msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
+msgstr ""
+
 #: src/pages/scheduler.tsx:275
 msgid "Add event"
 msgstr ""
@@ -40,6 +44,10 @@ msgstr ""
 
 #: src/pages/execution-details.tsx:103
 msgid "Arguments:"
+msgstr ""
+
+#: src/pages/sign-up.tsx:118
+msgid "Available symbols (half-width)"
 msgstr ""
 
 #: src/pages/mypage.tsx:354
@@ -73,8 +81,8 @@ msgstr ""
 
 #: src/pages/sign-up.tsx:110
 #: src/pages/sign-up.tsx:114
-msgid "Confirm password"
-msgstr ""
+#~ msgid "Confirm password"
+#~ msgstr ""
 
 #: src/pages/mypage.tsx:330
 msgid "Contact us"
@@ -89,8 +97,8 @@ msgid "Contract Information"
 msgstr ""
 
 #: src/pages/sign-up.tsx:132
-msgid "Create account"
-msgstr ""
+#~ msgid "Create account"
+#~ msgstr ""
 
 #: src/components/workflow-form.tsx:101
 msgid "Create workflow"
@@ -134,15 +142,15 @@ msgstr ""
 msgid "Do not repeat"
 msgstr ""
 
-#: src/pages/sign-in.tsx:76
-#: src/pages/sign-up.tsx:85
+#: src/pages/sign-in.tsx:74
+#: src/pages/sign-up.tsx:86
 msgid "Email"
 msgstr ""
 
 #: src/pages/sign-in.tsx:74
 #: src/pages/sign-up.tsx:83
-msgid "Email address"
-msgstr ""
+#~ msgid "Email address"
+#~ msgstr ""
 
 #: src/components/scheduler-form.tsx:212
 msgid "Enter event title"
@@ -217,6 +225,10 @@ msgstr ""
 msgid "Finished at:"
 msgstr ""
 
+#: src/pages/sign-up.tsx:164
+msgid "For account holders"
+msgstr ""
+
 #: src/components/scheduler-form.tsx:383
 msgid "Fr"
 msgstr ""
@@ -225,9 +237,13 @@ msgstr ""
 msgid "Free Trial Plan"
 msgstr ""
 
-#: src/pages/sign-up.tsx:140
-msgid "Have an account?"
+#: src/pages/sign-up.tsx:171
+msgid "Go to login screen"
 msgstr ""
+
+#: src/pages/sign-up.tsx:140
+#~ msgid "Have an account?"
+#~ msgstr ""
 
 #: src/components/sidebar.tsx:32
 msgid "Home"
@@ -289,6 +305,10 @@ msgstr ""
 msgid "Invoked at:"
 msgstr ""
 
+#: src/pages/sign-in.tsx:42
+msgid "Login"
+msgstr ""
+
 #: src/components/scheduler-form.tsx:352
 msgid "Minute"
 msgstr ""
@@ -309,8 +329,8 @@ msgstr ""
 msgid "Monthly report creation"
 msgstr ""
 
-#: src/pages/sign-in.tsx:61
-#: src/pages/sign-up.tsx:67
+#: src/pages/sign-in.tsx:60
+#: src/pages/sign-up.tsx:66
 msgid "Must be a valid email"
 msgstr ""
 
@@ -341,8 +361,8 @@ msgid "No templates found"
 msgstr ""
 
 #: src/pages/sign-in.tsx:116
-msgid "Not a member?"
-msgstr ""
+#~ msgid "Not a member?"
+#~ msgstr ""
 
 #: src/components/workflow-form.tsx:67
 msgid "Optional description"
@@ -352,14 +372,16 @@ msgstr ""
 msgid "Output:"
 msgstr ""
 
-#: src/pages/sign-in.tsx:86
-#: src/pages/sign-in.tsx:90
-#: src/pages/sign-up.tsx:95
-#: src/pages/sign-up.tsx:99
+#: src/pages/sign-in.tsx:87
+#: src/pages/sign-up.tsx:100
 msgid "Password"
 msgstr ""
 
-#: src/pages/sign-up.tsx:71
+#: src/pages/sign-up.tsx:111
+msgid "Password must be 8 characters or more and 32 characters or less. You can use single-byte alphanumeric characters and the following symbols."
+msgstr ""
+
+#: src/pages/sign-up.tsx:70
 msgid "Passwords must match"
 msgstr ""
 
@@ -443,20 +465,19 @@ msgstr ""
 #: src/pages/sign-in.tsx:43
 #: src/pages/sign-in.tsx:108
 #: src/pages/sign-up.tsx:142
-msgid "Sign in"
-msgstr ""
+#~ msgid "Sign in"
+#~ msgstr ""
 
 #: src/components/layout.tsx:85
 msgid "Sign out"
 msgstr ""
 
-#: src/pages/sign-in.tsx:118
-#: src/pages/sign-up.tsx:41
+#: src/pages/sign-up.tsx:40
 msgid "Sign up"
 msgstr ""
 
 #: src/pages/scheduler.tsx:197
-#: src/pages/sign-up.tsx:58
+#: src/pages/sign-up.tsx:57
 msgid "Something goes wrong"
 msgstr ""
 
@@ -505,13 +526,17 @@ msgid "There was an error while loading"
 msgstr ""
 
 #: src/components/workflow-form.tsx:39
+#: src/pages/sign-in.tsx:61
 #: src/pages/sign-in.tsx:62
-#: src/pages/sign-in.tsx:63
+#: src/pages/sign-up.tsx:67
 #: src/pages/sign-up.tsx:68
-#: src/pages/sign-up.tsx:69
-#: src/pages/sign-up.tsx:72
+#: src/pages/sign-up.tsx:71
 #: src/pages/workflow-runner.tsx:59
 msgid "This field is required"
+msgstr ""
+
+#: src/pages/sign-in.tsx:117
+msgid "Those who have not yet registered as a member"
 msgstr ""
 
 #: src/components/workflow-form.tsx:92
@@ -536,7 +561,7 @@ msgstr ""
 msgid "Use template"
 msgstr ""
 
-#: src/pages/sign-up.tsx:57
+#: src/pages/sign-up.tsx:56
 msgid "User {0} already exists"
 msgstr ""
 
@@ -594,7 +619,7 @@ msgstr ""
 msgid "Workflows"
 msgstr "ワークフロー"
 
-#: src/pages/sign-in.tsx:53
+#: src/pages/sign-in.tsx:52
 msgid "Wrong password or username"
 msgstr ""
 
@@ -602,8 +627,16 @@ msgstr ""
 msgid "Yahoo! monthly report creation"
 msgstr ""
 
+#: src/pages/sign-up.tsx:133
+msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
+msgstr ""
+
 #: src/pages/workflows.tsx:79
 msgid "Your workflows will be listed here"
+msgstr ""
+
+#: src/pages/sign-up.tsx:121
+msgid "_ ! # $ ~ ^ @"
 msgstr ""
 
 #: src/pages/beta-rpa.tsx:148
@@ -623,6 +656,10 @@ msgstr ""
 msgid "inquiry"
 msgstr ""
 
+#: src/pages/sign-in.tsx:108
+msgid "login"
+msgstr ""
+
 #: src/pages/mypage.tsx:67
 #: src/pages/mypage.tsx:90
 msgid "name"
@@ -638,6 +675,7 @@ msgid "queued"
 msgstr ""
 
 #: src/pages/mall-info.tsx:47
+#: src/pages/sign-up.tsx:155
 msgid "register"
 msgstr ""
 

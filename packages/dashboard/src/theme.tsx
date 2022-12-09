@@ -22,8 +22,20 @@ const submitBtn = defineStyle({
   borderRadius: 20,
 });
 
+const outline = defineStyle({
+  background: "none",
+  borderBottom: "1px",
+  borderColor: "#33B4DE",
+  color: "#33B4DE",
+  borderRadius: 30,
+  boxShadow: "rgb(51 180 222) 1px 2px 4px 0px;",
+  _hover: {
+    borderColor: "gray.600",
+  },
+});
+
 const buttonTheme = defineStyleConfig({
-  variants: { brandPrimary, submitBtn },
+  variants: { brandPrimary, submitBtn, outline },
 });
 
 // variants for input
@@ -45,8 +57,18 @@ const defaultInput = definePartsStyle({
   },
 });
 
+const InputWihtBorderBtm = definePartsStyle({
+  field: {
+    borderBottom: "1px",
+    borderColor: "rgb(233, 233, 233)",
+    background: "none",
+    paddingLeft: 0,
+    borderRadius: 0,
+  },
+});
+
 const inputTheme = defineMultiStyleConfig({
-  variants: { default: defaultInput },
+  variants: { default: defaultInput, signUpInput: InputWihtBorderBtm },
 });
 
 export const theme = extendTheme({

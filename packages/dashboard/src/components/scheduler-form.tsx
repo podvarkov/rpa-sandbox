@@ -1,4 +1,9 @@
-import React from "react";
+import {
+  CalendarIcon,
+  EditIcon,
+  RepeatClockIcon,
+  SettingsIcon,
+} from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -15,16 +20,11 @@ import {
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
 import { Field, FieldProps, Form, Formik } from "formik";
-import {
-  CalendarIcon,
-  EditIcon,
-  RepeatClockIcon,
-  SettingsIcon,
-} from "@chakra-ui/icons";
+import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./datepicker.css";
 import { Workflow } from "../api";
+import "./datepicker.css";
 
 const CheckboxGroup: React.FC<{
   items: Array<{ value: string; title: string }>;
@@ -177,7 +177,7 @@ export const SchedulerForm: React.FC<{
               },
             }
           : ({
-              workflowId: workflows[0]._id,
+              workflowId: workflows[0]?._id,
               name: "",
               rrule: {
                 // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
@@ -223,7 +223,7 @@ export const SchedulerForm: React.FC<{
                 <FormControl isInvalid={!!(meta.touched && meta.error)}>
                   <HStack spacing={4}>
                     <SettingsIcon color="gray.300" />
-                    <Select variant="default" {...field}>
+                    <Select required variant="default" {...field}>
                       {workflows.map((wf) => (
                         <option key={wf._id} value={wf._id}>
                           {wf.name}

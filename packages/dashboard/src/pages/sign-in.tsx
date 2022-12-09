@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import {
   Alert,
   AlertDescription,
@@ -9,19 +8,19 @@ import {
   Container,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   Heading,
   Input,
   Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { t, Trans } from "@lingui/macro";
+import { AxiosError } from "axios";
 import { Field, FieldProps, Form, Formik } from "formik";
+import React, { useEffect, useState } from "react";
+import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useAuth } from "../components/auth-provider";
-import { useLocation, useNavigate, Link as RouterLink } from "react-router-dom";
-import { AxiosError } from "axios";
-import { t, Trans } from "@lingui/macro";
 
 export const SigninPage: React.FC = () => {
   const { session, signin } = useAuth();
@@ -35,12 +34,12 @@ export const SigninPage: React.FC = () => {
   }, [session, from]);
 
   return (
-    <Box bg="gray.50" h="100vh" color="black" pt="12em">
-      <Container bg="white" boxShadow="sm" p="6">
-        <Stack spacing="4" direction="column">
+    <Box h="100vh" color="black" pt="5em">
+      <Container bg="white" p="6">
+        <Stack spacing="4" direction="column" maxWidth={400} align="center">
           <Center>
-            <Heading size="lg">
-              <Trans>Sign in</Trans>
+            <Heading size="lg" mb="2em">
+              <Trans>Login</Trans>
             </Heading>
           </Center>
 
@@ -70,10 +69,11 @@ export const SigninPage: React.FC = () => {
                     {({ field, meta }: FieldProps) => {
                       return (
                         <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                          <FormLabel>
-                            <Trans>Email address</Trans>
-                          </FormLabel>
-                          <Input placeholder={t`Email`} {...field} />
+                          <Input
+                            variant="signUpInput"
+                            placeholder={t`Email`}
+                            {...field}
+                          />
                           <FormErrorMessage>{meta.error}</FormErrorMessage>
                         </FormControl>
                       );
@@ -82,13 +82,11 @@ export const SigninPage: React.FC = () => {
                   <Field name="password">
                     {({ field, meta }: FieldProps) => (
                       <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                        <FormLabel>
-                          <Trans>Password</Trans>
-                        </FormLabel>
                         <Input
                           type="password"
                           placeholder={t`Password`}
                           {...field}
+                          variant="signUpInput"
                         />
                         <FormErrorMessage>{meta.error}</FormErrorMessage>
                       </FormControl>
@@ -104,8 +102,10 @@ export const SigninPage: React.FC = () => {
                     type="submit"
                     colorScheme="teal"
                     isLoading={isSubmitting}
+                    variant="outline"
+                    mt="2em"
                   >
-                    <Trans>Sign in</Trans>
+                    <Trans>login</Trans>
                   </Button>
                 </Stack>
               </Form>
@@ -113,9 +113,8 @@ export const SigninPage: React.FC = () => {
           </Formik>
 
           <Text fontSize="sm" align="right">
-            <Trans>Not a member? </Trans>{" "}
-            <Link color="teal.500" to="/signup" as={RouterLink}>
-              <Trans>Sign up</Trans>
+            <Link to="/signup" as={RouterLink}>
+              <Trans>Those who have not yet registered as a member</Trans>
             </Link>
           </Text>
         </Stack>
