@@ -37,12 +37,16 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get("profile")
   @UseInterceptors(ClassSerializerInterceptor)
-  @SerializeOptions({ excludeExtraneousValues: true })
+  @SerializeOptions({ excludeExtraneousValues: true, groups: ["includeSales"] })
   async getProfile(
     @UserSession() session: Session
   ): Promise<UserProfileEntity> {
-    const user = await this.authService.getUser(session);
-    return new UserProfileEntity(user);
+    const profile = await this.authService.getUserProfile(session);
+    const salesManager = await this.authService.getSalesMember(
+      session.jwt,
+      profile.salesManagerId
+    );
+    return new UserProfileEntity(profile, salesManager);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -54,7 +58,7 @@ export class AuthController {
     @UserSession() session: Session,
     @Body() body: UpdateUserDto
   ) {
-    const user = await this.authService.updateUser(session, body);
-    return new UserProfileEntity(user);
+    const profile = await this.authService.updateUserProfile(session, body);
+    return new UserProfileEntity(profile);
   }
 }

@@ -50,7 +50,7 @@ msgstr "Arguments:"
 msgid "Available symbols (half-width)"
 msgstr "Available symbols (half-width)"
 
-#: src/pages/profile.tsx:413
+#: src/pages/profile.tsx:417
 msgid "Browse"
 msgstr "Browse"
 
@@ -88,7 +88,7 @@ msgstr "Completed"
 #~ msgid "Confirm password"
 #~ msgstr "Confirm password"
 
-#: src/pages/profile.tsx:389
+#: src/pages/profile.tsx:393
 msgid "Contact us"
 msgstr "Contact us"
 
@@ -96,7 +96,7 @@ msgstr "Contact us"
 msgid "Contents of inquiry"
 msgstr "Contents of inquiry"
 
-#: src/pages/profile.tsx:395
+#: src/pages/profile.tsx:399
 msgid "Contract Information"
 msgstr "Contract Information"
 
@@ -124,7 +124,7 @@ msgstr "Date"
 msgid "Day"
 msgstr "Day"
 
-#: src/pages/profile.tsx:399
+#: src/pages/profile.tsx:403
 msgid "Dear 111"
 msgstr "Dear 111"
 
@@ -218,6 +218,10 @@ msgstr "Executions"
 msgid "Expiration timeout:"
 msgstr "Expiration timeout:"
 
+#: src/pages/profile.tsx:375
+msgid "FAX: {0}"
+msgstr "FAX: {0}"
+
 #: src/pages/executions.tsx:156
 msgid "Filters:"
 msgstr "Filters:"
@@ -238,7 +242,7 @@ msgstr "For account holders"
 msgid "Fr"
 msgstr "Fr"
 
-#: src/pages/profile.tsx:403
+#: src/pages/profile.tsx:407
 msgid "Free Trial Plan"
 msgstr "Free Trial Plan"
 
@@ -296,7 +300,7 @@ msgstr "Information is collected from various management screens such as malls a
 msgid "Input argument: {name}"
 msgstr "Input argument: {name}"
 
-#: src/pages/profile.tsx:371
+#: src/pages/profile.tsx:369
 msgid "Inquiries about RPA"
 msgstr "Inquiries about RPA"
 
@@ -315,6 +319,10 @@ msgstr "Invoked at:"
 #: src/pages/sign-in.tsx:42
 msgid "Login"
 msgstr "Login"
+
+#: src/pages/profile.tsx:378
+msgid "MAIL: {0}"
+msgstr "MAIL: {0}"
 
 #: src/components/scheduler-form.tsx:352
 msgid "Minute"
@@ -441,7 +449,7 @@ msgstr "Repeat finish:"
 msgid "Repeat interval:"
 msgstr "Repeat interval:"
 
-#: src/pages/profile.tsx:409
+#: src/pages/profile.tsx:413
 msgid "Report Results"
 msgstr "Report Results"
 
@@ -532,6 +540,10 @@ msgstr "Su"
 #: src/pages/scheduler.tsx:186
 msgid "Success"
 msgstr "Success"
+
+#: src/pages/profile.tsx:372
+msgid "TEL: {0}"
+msgstr "TEL: {0}"
 
 #: src/components/layout.tsx:17
 msgid "Templates"
@@ -717,8 +729,8 @@ msgid "timeout"
 msgstr "timeout"
 
 #: src/pages/profile.tsx:364
-msgid "{0}"
-msgstr "{0}"
+#~ msgid "{0}"
+#~ msgstr "{0}"
 
 #: src/components/sidebar.tsx:70
 msgid "{children}"

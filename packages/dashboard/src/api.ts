@@ -115,6 +115,13 @@ export type Profile = {
   username: string;
   phone?: string;
   salesManagerId: string;
+  salesManager?: {
+    _id: string;
+    phone: string;
+    fax: string;
+    email: string;
+    name: string;
+  };
 };
 
 export type UpdatableProfile = Omit<Profile, "_id" | "salesManagerId">;

@@ -50,7 +50,7 @@ msgstr ""
 msgid "Available symbols (half-width)"
 msgstr ""
 
-#: src/pages/profile.tsx:413
+#: src/pages/profile.tsx:417
 msgid "Browse"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 #~ msgid "Confirm password"
 #~ msgstr ""
 
-#: src/pages/profile.tsx:389
+#: src/pages/profile.tsx:393
 msgid "Contact us"
 msgstr ""
 
@@ -96,7 +96,7 @@ msgstr ""
 msgid "Contents of inquiry"
 msgstr ""
 
-#: src/pages/profile.tsx:395
+#: src/pages/profile.tsx:399
 msgid "Contract Information"
 msgstr ""
 
@@ -124,7 +124,7 @@ msgstr ""
 msgid "Day"
 msgstr ""
 
-#: src/pages/profile.tsx:399
+#: src/pages/profile.tsx:403
 msgid "Dear 111"
 msgstr ""
 
@@ -218,6 +218,10 @@ msgstr "処刑"
 msgid "Expiration timeout:"
 msgstr ""
 
+#: src/pages/profile.tsx:375
+msgid "FAX: {0}"
+msgstr ""
+
 #: src/pages/executions.tsx:156
 msgid "Filters:"
 msgstr ""
@@ -238,7 +242,7 @@ msgstr ""
 msgid "Fr"
 msgstr ""
 
-#: src/pages/profile.tsx:403
+#: src/pages/profile.tsx:407
 msgid "Free Trial Plan"
 msgstr ""
 
@@ -294,7 +298,7 @@ msgstr ""
 msgid "Input argument: {name}"
 msgstr ""
 
-#: src/pages/profile.tsx:371
+#: src/pages/profile.tsx:369
 msgid "Inquiries about RPA"
 msgstr ""
 
@@ -312,6 +316,10 @@ msgstr ""
 
 #: src/pages/sign-in.tsx:42
 msgid "Login"
+msgstr ""
+
+#: src/pages/profile.tsx:378
+msgid "MAIL: {0}"
 msgstr ""
 
 #: src/components/scheduler-form.tsx:352
@@ -439,7 +447,7 @@ msgstr ""
 msgid "Repeat interval:"
 msgstr ""
 
-#: src/pages/profile.tsx:409
+#: src/pages/profile.tsx:413
 msgid "Report Results"
 msgstr ""
 
@@ -529,6 +537,10 @@ msgstr ""
 
 #: src/pages/scheduler.tsx:186
 msgid "Success"
+msgstr ""
+
+#: src/pages/profile.tsx:372
+msgid "TEL: {0}"
 msgstr ""
 
 #: src/components/layout.tsx:17
@@ -715,8 +727,8 @@ msgid "timeout"
 msgstr ""
 
 #: src/pages/profile.tsx:364
-msgid "{0}"
-msgstr ""
+#~ msgid "{0}"
+#~ msgstr ""
 
 #: src/components/sidebar.tsx:70
 msgid "{children}"

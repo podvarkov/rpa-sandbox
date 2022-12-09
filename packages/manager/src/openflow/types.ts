@@ -77,3 +77,10 @@ export type Profile = Entity<{
   phone?: string;
   salesManagerId: string;
 }>;
+
+export type SalesManager = Entity<{
+  phone: string;
+  fax: string;
+  email: string;
+  name: string;
+}>;

@@ -361,18 +361,22 @@ export const ProfilePage: React.FC = () => {
                 </Text>
               </Heading>
               <Text fontSize="16px" py={4}>
-                <Trans>
-                  {"salesManager " + Math.floor(Math.random() * 10)}
-                </Trans>
+                {profile?.salesManager?.name}
               </Text>
               <Box fontSize="12px">
                 {/* <Text>RPAに関するお問い合わせ</Text> */}
                 <Text>
                   <Trans>Inquiries about RPA</Trans>
                 </Text>
-                <Text>TEL:00-0000-0000</Text>
-                <Text>FAX:00-0000-0000</Text>
-                <Text> MAIL:00000@00.com</Text>
+                <Text>
+                  <Trans>TEL: {profile?.salesManager?.phone}</Trans>
+                </Text>
+                <Text>
+                  <Trans>FAX: {profile?.salesManager?.fax}</Trans>
+                </Text>
+                <Text>
+                  <Trans>MAIL: {profile?.salesManager?.email}</Trans>
+                </Text>
               </Box>
 
               <Button

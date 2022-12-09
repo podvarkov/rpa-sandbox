@@ -6,7 +6,7 @@ import * as axios from "axios";
 import { TokenUser } from "@openiap/openflow-api";
 import { OpenflowService } from "../openflow/openflow.service";
 import { UpdateUserDto } from "src/auth/update-user.dto";
-import { Profile } from "src/openflow/types";
+import { Profile, SalesManager } from "src/openflow/types";
 
 export type Session = {
   user: Pick<
@@ -55,8 +55,8 @@ export class AuthService {
     return this.openflowService.createUser({ username, password });
   }
 
-  async updateUser(session: Session, data: UpdateUserDto) {
-    const oldUser = await this.getUser(session);
+  async updateUserProfile(session: Session, data: UpdateUserDto) {
+    const oldUser = await this.getUserProfile(session);
     if (!oldUser) throw new BadRequestException("User not found");
 
     return this.openflowService.updateOne(
@@ -66,8 +66,17 @@ export class AuthService {
     );
   }
 
-  async getUser(session: Session) {
+  async getSalesMember(jwt: string, id: string) {
     return this.openflowService
+      .queryCollection<SalesManager>(jwt, {
+        query: { _id: id, _type: "sales" },
+        collectionname: "entities",
+      })
+      .then((data) => data[0]);
+  }
+
+  async getUserProfile(session: Session) {
+    const userProfile = await this.openflowService
       .queryCollection<Profile>(session.jwt, {
         collectionname: "users",
         query: { _id: session.user._id },
@@ -82,5 +91,9 @@ export class AuthService {
         ],
       })
       .then((data) => data[0]);
+
+    if (!userProfile) throw new BadRequestException("User profile not found!");
+
+    return userProfile;
   }
 }

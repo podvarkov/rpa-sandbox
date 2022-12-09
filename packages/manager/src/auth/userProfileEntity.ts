@@ -1,4 +1,5 @@
 import { Expose } from "class-transformer";
+import { SalesManager } from "src/openflow/types";
 
 export class UserProfileEntity {
   @Expose()
@@ -22,7 +23,14 @@ export class UserProfileEntity {
   @Expose()
   salesManagerId = "";
 
-  constructor(partial: Partial<UserProfileEntity>) {
+  @Expose({ groups: ["includeSales"] })
+  salesManager?: unknown;
+
+  constructor(
+    partial: Partial<UserProfileEntity>,
+    salesManager?: SalesManager
+  ) {
     Object.assign(this, partial);
+    this.salesManager = salesManager;
   }
 }
