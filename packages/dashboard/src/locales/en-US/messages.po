@@ -13,6 +13,14 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/pages/beta-rpa.tsx:40
+msgid "*Beta version only supports Rakuten"
+msgstr "*Beta version only supports Rakuten"
+
+#: src/pages/scheduler.tsx:275
+msgid "Add event"
+msgstr "Add event"
+
 #: src/components/parameter-form-field.tsx:78
 msgid "Add field"
 msgstr "Add field"
@@ -25,6 +33,7 @@ msgstr "All workflows"
 msgid "Any status"
 msgstr "Any status"
 
+#: src/pages/scheduler.tsx:113
 #: src/pages/workflows.tsx:96
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr "Are you sure? You can not undo this action afterwards."
@@ -33,9 +42,17 @@ msgstr "Are you sure? You can not undo this action afterwards."
 msgid "Arguments:"
 msgstr "Arguments:"
 
+#: src/pages/mypage.tsx:354
+msgid "Browse"
+msgstr "Browse"
+
 #: src/pages/templates.tsx:50
 msgid "Can not create workflow"
 msgstr "Can not create workflow"
+
+#: src/pages/scheduler.tsx:71
+msgid "Can not delete event"
+msgstr "Can not delete event"
 
 #: src/pages/workflows.tsx:56
 msgid "Can not delete workflow"
@@ -45,6 +62,7 @@ msgstr "Can not delete workflow"
 msgid "Can not edit workflow"
 msgstr "Can not edit workflow"
 
+#: src/pages/scheduler.tsx:125
 #: src/pages/workflows.tsx:108
 msgid "Cancel"
 msgstr "Cancel"
@@ -58,6 +76,18 @@ msgstr "Completed"
 msgid "Confirm password"
 msgstr "Confirm password"
 
+#: src/pages/mypage.tsx:330
+msgid "Contact us"
+msgstr "Contact us"
+
+#: src/pages/mypage.tsx:204
+msgid "Contents of inquiry"
+msgstr "Contents of inquiry"
+
+#: src/pages/mypage.tsx:336
+msgid "Contract Information"
+msgstr "Contract Information"
+
 #: src/pages/sign-up.tsx:132
 msgid "Create account"
 msgstr "Create account"
@@ -66,13 +96,43 @@ msgstr "Create account"
 msgid "Create workflow"
 msgstr "Create workflow"
 
+#: src/pages/scheduler.tsx:217
+msgid "Created"
+msgstr "Created"
+
+#: src/components/scheduler-form.tsx:298
+msgid "Custom..."
+msgstr "Custom..."
+
+#: src/components/scheduler-form.tsx:433
+msgid "Date"
+msgstr "Date"
+
+#: src/components/scheduler-form.tsx:358
+msgid "Day"
+msgstr "Day"
+
+#: src/pages/mypage.tsx:340
+msgid "Dear 111"
+msgstr "Dear 111"
+
+#: src/pages/scheduler.tsx:135
 #: src/pages/workflows.tsx:118
 msgid "Delete"
 msgstr "Delete"
 
+#: src/pages/scheduler.tsx:109
 #: src/pages/workflows.tsx:92
 msgid "Delete workflow"
 msgstr "Delete workflow"
+
+#: src/pages/beta-rpa.tsx:107
+msgid "Desired delivery date of the robot"
+msgstr "Desired delivery date of the robot"
+
+#: src/components/scheduler-form.tsx:277
+msgid "Do not repeat"
+msgstr "Do not repeat"
 
 #: src/pages/sign-in.tsx:76
 #: src/pages/sign-up.tsx:85
@@ -84,6 +144,14 @@ msgstr "Email"
 msgid "Email address"
 msgstr "Email address"
 
+#: src/components/scheduler-form.tsx:212
+msgid "Enter event title"
+msgstr "Enter event title"
+
+#: src/pages/mall-info.tsx:39
+msgid "Enter your Rakuten member ID and password."
+msgstr "Enter your Rakuten member ID and password."
+
 #: src/pages/executions.tsx:34
 msgid "Error"
 msgstr "Error"
@@ -91,6 +159,30 @@ msgstr "Error"
 #: src/pages/execution-details.tsx:121
 msgid "Error:"
 msgstr "Error:"
+
+#: src/pages/scheduler.tsx:58
+msgid "Event deleted"
+msgstr "Event deleted"
+
+#: src/components/scheduler-form.tsx:286
+msgid "Every day"
+msgstr "Every day"
+
+#: src/components/scheduler-form.tsx:283
+msgid "Every hour"
+msgstr "Every hour"
+
+#: src/components/scheduler-form.tsx:280
+msgid "Every minute"
+msgstr "Every minute"
+
+#: src/components/scheduler-form.tsx:292
+msgid "Every month"
+msgstr "Every month"
+
+#: src/components/scheduler-form.tsx:289
+msgid "Every week"
+msgstr "Every week"
 
 #: src/pages/workflow-runner.tsx:141
 msgid "Execute"
@@ -104,7 +196,8 @@ msgstr "Execution details"
 msgid "Execution with {0} id not found"
 msgstr "Execution with {0} id not found"
 
-#: src/components/layout.tsx:34
+#: src/components/layout.tsx:25
+#: src/components/sidebar.tsx:34
 msgid "Executions"
 msgstr "Executions"
 
@@ -120,13 +213,34 @@ msgstr "Filters:"
 msgid "Finished"
 msgstr "Finished"
 
-#: src/pages/execution-details.tsx:144
+#: src/pages/execution-details.tsx:150
 msgid "Finished at:"
 msgstr "Finished at:"
+
+#: src/components/scheduler-form.tsx:383
+msgid "Fr"
+msgstr "Fr"
+
+#: src/pages/mypage.tsx:344
+msgid "Free Trial Plan"
+msgstr "Free Trial Plan"
 
 #: src/pages/sign-up.tsx:140
 msgid "Have an account?"
 msgstr "Have an account?"
+
+#: src/components/sidebar.tsx:32
+msgid "Home"
+msgstr "Home"
+
+#: src/components/scheduler-form.tsx:355
+msgid "Hour"
+msgstr "Hour"
+
+#: src/pages/mall-info.tsx:32
+#: src/pages/mall-info.tsx:42
+msgid "ID"
+msgstr "ID"
 
 #: src/pages/execution-details.tsx:73
 msgid "ID:"
@@ -136,9 +250,17 @@ msgstr "ID:"
 msgid "Idle"
 msgstr "Idle"
 
+#: src/pages/mypage.tsx:301
+msgid "In charge of your company"
+msgstr "In charge of your company"
+
 #: src/pages/executions.tsx:38
 msgid "In progress"
 msgstr "In progress"
+
+#: src/pages/beta-rpa.tsx:114
+msgid "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
+msgstr "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
 
 #: src/components/workflow-form.tsx:79
 #~ msgid "Input argument"
@@ -153,6 +275,10 @@ msgstr "In progress"
 msgid "Input argument: {name}"
 msgstr "Input argument: {name}"
 
+#: src/pages/mypage.tsx:312
+msgid "Inquiries about RPA"
+msgstr "Inquiries about RPA"
+
 #: src/pages/executions.tsx:32
 msgid "Invoke failed"
 msgstr "Invoke failed"
@@ -161,18 +287,47 @@ msgstr "Invoke failed"
 msgid "Invoked"
 msgstr "Invoked"
 
-#: src/pages/execution-details.tsx:136
+#: src/pages/execution-details.tsx:139
 msgid "Invoked at:"
 msgstr "Invoked at:"
+
+#: src/components/scheduler-form.tsx:352
+msgid "Minute"
+msgstr "Minute"
+
+#: src/components/scheduler-form.tsx:379
+msgid "Mo"
+msgstr "Mo"
+
+#: src/pages/scheduler.tsx:220
+msgid "Modified"
+msgstr "Modified"
+
+#: src/components/scheduler-form.tsx:364
+msgid "Month"
+msgstr "Month"
+
+#: src/pages/beta-rpa.tsx:31
+msgid "Monthly report creation"
+msgstr "Monthly report creation"
 
 #: src/pages/sign-in.tsx:61
 #: src/pages/sign-up.tsx:67
 msgid "Must be a valid email"
 msgstr "Must be a valid email"
 
+#: src/components/scheduler-form.tsx:429
+msgid "Never"
+msgstr "Never"
+
 #: src/pages/templates.tsx:90
 msgid "New workflow"
 msgstr "New workflow"
+
+#: src/pages/executions.tsx:252
+#: src/pages/scheduler.tsx:229
+msgid "No data available"
+msgstr "No data available"
 
 #: src/pages/templates.tsx:136
 #: src/pages/workflows.tsx:168
@@ -210,13 +365,82 @@ msgstr "Password"
 msgid "Passwords must match"
 msgstr "Passwords must match"
 
+#: src/pages/mypage.tsx:137
+msgid "Phone Number"
+msgstr "Phone Number"
+
+#: src/pages/mall-info.tsx:29
+msgid "Please enter your R-Login ID and password."
+msgstr "Please enter your R-Login ID and password."
+
+#: src/pages/mypage.tsx:237
+msgid "Profile registration"
+msgstr "Profile registration"
+
 #: src/pages/executions.tsx:37
 msgid "Queued"
 msgstr "Queued"
 
+#: src/pages/beta-rpa.tsx:56
+msgid "Rakuten monthly report creation"
+msgstr "Rakuten monthly report creation"
+
+#: src/pages/mypage.tsx:247
+#: src/pages/mypage.tsx:272
+msgid "Registration / Editing"
+msgstr "Registration / Editing"
+
+#: src/components/scheduler-form.tsx:403
+msgid "Repeat finish:"
+msgstr "Repeat finish:"
+
+#: src/components/scheduler-form.tsx:309
+msgid "Repeat interval:"
+msgstr "Repeat interval:"
+
+#: src/pages/mypage.tsx:350
+msgid "Report Results"
+msgstr "Report Results"
+
+#: src/pages/beta-rpa.tsx:95
+msgid "Report data end date"
+msgstr "Report data end date"
+
+#: src/pages/beta-rpa.tsx:87
+msgid "Report data start date"
+msgstr "Report data start date"
+
+#: src/components/sidebar.tsx:36
+msgid "Report download"
+msgstr "Report download"
+
+#: src/components/sidebar.tsx:33
+msgid "Reporting"
+msgstr "Reporting"
+
 #: src/pages/workflows.tsx:180
 msgid "Run workflow"
 msgstr "Run workflow"
+
+#: src/components/scheduler-form.tsx:384
+msgid "Sa"
+msgstr "Sa"
+
+#: src/components/scheduler-form.tsx:466
+msgid "Save"
+msgstr "Save"
+
+#: src/components/sidebar.tsx:35
+msgid "Schedule"
+msgstr "Schedule"
+
+#: src/pages/scheduler.tsx:155
+msgid "Schedule execution"
+msgstr "Schedule execution"
+
+#: src/pages/beta-rpa.tsx:36
+msgid "Select the robot you want to run."
+msgstr "Select the robot you want to run."
 
 #: src/pages/sign-in.tsx:43
 #: src/pages/sign-in.tsx:108
@@ -224,7 +448,7 @@ msgstr "Run workflow"
 msgid "Sign in"
 msgstr "Sign in"
 
-#: src/components/layout.tsx:94
+#: src/components/layout.tsx:85
 msgid "Sign out"
 msgstr "Sign out"
 
@@ -233,6 +457,7 @@ msgstr "Sign out"
 msgid "Sign up"
 msgstr "Sign up"
 
+#: src/pages/scheduler.tsx:197
 #: src/pages/sign-up.tsx:58
 msgid "Something goes wrong"
 msgstr "Something goes wrong"
@@ -253,12 +478,29 @@ msgstr "Status"
 msgid "Status:"
 msgstr "Status:"
 
-#: src/components/layout.tsx:26
+#: src/pages/mypage.tsx:261
+msgid "Store Information Registration"
+msgstr "Store Information Registration"
+
+#: src/components/scheduler-form.tsx:385
+msgid "Su"
+msgstr "Su"
+
+#: src/pages/scheduler.tsx:186
+msgid "Success"
+msgstr "Success"
+
+#: src/components/layout.tsx:17
 msgid "Templates"
 msgstr "Templates"
 
+#: src/components/scheduler-form.tsx:382
+msgid "Th"
+msgstr "Th"
+
 #: src/pages/execution-details.tsx:47
 #: src/pages/executions.tsx:137
+#: src/pages/scheduler.tsx:88
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:68
 msgid "There was an error while loading"
@@ -280,6 +522,14 @@ msgstr "This field is required"
 msgid "Timeout"
 msgstr "Timeout"
 
+#: src/pages/scheduler.tsx:214
+msgid "Title"
+msgstr "Title"
+
+#: src/components/scheduler-form.tsx:380
+msgid "Tu"
+msgstr "Tu"
+
 #: src/components/workflow-form.tsx:101
 msgid "Update workflow"
 msgstr "Update workflow"
@@ -291,6 +541,18 @@ msgstr "Use template"
 #: src/pages/sign-up.tsx:57
 msgid "User {0} already exists"
 msgstr "User {0} already exists"
+
+#: src/components/scheduler-form.tsx:381
+msgid "We"
+msgstr "We"
+
+#: src/components/scheduler-form.tsx:361
+msgid "Week"
+msgstr "Week"
+
+#: src/components/scheduler-form.tsx:295
+msgid "Work days"
+msgstr "Work days"
 
 #: src/pages/executions.tsx:222
 msgid "Workflow"
@@ -330,7 +592,7 @@ msgstr "Workflow with {0} id not found"
 msgid "Workflow:"
 msgstr "Workflow:"
 
-#: src/components/layout.tsx:30
+#: src/components/layout.tsx:21
 msgid "Workflows"
 msgstr "Workflows"
 
@@ -338,27 +600,70 @@ msgstr "Workflows"
 msgid "Wrong password or username"
 msgstr "Wrong password or username"
 
+#: src/pages/beta-rpa.tsx:72
+msgid "Yahoo! monthly report creation"
+msgstr "Yahoo! monthly report creation"
+
 #: src/pages/workflows.tsx:79
 msgid "Your workflows will be listed here"
 msgstr "Your workflows will be listed here"
+
+#: src/pages/beta-rpa.tsx:148
+#: src/pages/mall-info.tsx:64
+msgid "back"
+msgstr "back"
 
 #: src/pages/workflow-runner.tsx:84
 msgid "error"
 msgstr "error"
 
+#: src/pages/beta-rpa.tsx:133
+msgid "execution"
+msgstr "execution"
+
+#: src/pages/mypage.tsx:197
+msgid "inquiry"
+msgstr "inquiry"
+
+#: src/pages/mypage.tsx:67
+#: src/pages/mypage.tsx:90
+msgid "name"
+msgstr "name"
+
+#: src/pages/mall-info.tsx:33
+#: src/pages/mall-info.tsx:43
+msgid "password"
+msgstr "password"
+
 #: src/pages/workflow-runner.tsx:72
 msgid "queued"
 msgstr "queued"
+
+#: src/pages/mall-info.tsx:47
+msgid "register"
+msgstr "register"
+
+#: src/pages/mypage.tsx:217
+msgid "send"
+msgstr "send"
+
+#: src/pages/mypage.tsx:77
+msgid "surname"
+msgstr "surname"
 
 #: src/components/workflow-form.tsx:94
 #: src/pages/workflow-runner.tsx:120
 msgid "timeout"
 msgstr "timeout"
 
-#: src/pages/execution-details.tsx:73
-#~ msgid "{0}"
-#~ msgstr "{0}"
+#: src/pages/mypage.tsx:305
+msgid "{0}"
+msgstr "{0}"
 
-#: src/components/layout.tsx:51
+#: src/components/sidebar.tsx:70
+msgid "{children}"
+msgstr "{children}"
+
+#: src/components/layout.tsx:42
 msgid "© 2022 Coreus RPA. All rights reserved"
 msgstr "© 2022 Coreus RPA. All rights reserved"
