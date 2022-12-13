@@ -209,7 +209,7 @@ msgid "Execution with {0} id not found"
 msgstr ""
 
 #: src/components/layout.tsx:25
-#: src/components/sidebar.tsx:34
+#: src/components/sidebar.tsx:35
 msgid "Executions"
 msgstr "処刑"
 
@@ -253,7 +253,7 @@ msgstr ""
 #~ msgid "Have an account?"
 #~ msgstr ""
 
-#: src/components/sidebar.tsx:32
+#: src/components/sidebar.tsx:33
 msgid "Home"
 msgstr ""
 
@@ -462,11 +462,11 @@ msgstr ""
 msgid "Report data start date"
 msgstr ""
 
-#: src/components/sidebar.tsx:36
+#: src/components/sidebar.tsx:37
 msgid "Report download"
 msgstr ""
 
-#: src/components/sidebar.tsx:33
+#: src/components/sidebar.tsx:34
 msgid "Reporting"
 msgstr ""
 
@@ -482,7 +482,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: src/components/sidebar.tsx:35
+#: src/components/sidebar.tsx:36
 msgid "Schedule"
 msgstr ""
 
@@ -547,6 +547,7 @@ msgid "TEL: {0}"
 msgstr ""
 
 #: src/components/layout.tsx:17
+#: src/components/sidebar.tsx:38
 msgid "Templates"
 msgstr "テンプレート"
 
@@ -654,6 +655,7 @@ msgid "Workflow:"
 msgstr ""
 
 #: src/components/layout.tsx:21
+#: src/components/sidebar.tsx:39
 msgid "Workflows"
 msgstr "ワークフロー"
 
@@ -733,7 +735,7 @@ msgstr ""
 #~ msgid "{0}"
 #~ msgstr ""
 
-#: src/components/sidebar.tsx:70
+#: src/components/sidebar.tsx:73
 msgid "{children}"
 msgstr ""
 

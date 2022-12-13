@@ -19,6 +19,7 @@ import {
   FaRegChartBar,
   FaCodeBranch,
   FaCalendarDay,
+  FaFileImport,
 } from "react-icons/fa";
 import { Outlet, NavLink as ReactLink } from "react-router-dom";
 import Header from "./header";
@@ -33,7 +34,9 @@ const LinkItems: Array<LinkItemProps> = [
   { name: t`Reporting`, icon: FaRegChartBar, to: "/beta-rpa" },
   { name: t`Executions`, icon: FaCodeBranch, to: "/executions" },
   { name: t`Schedule`, icon: FaCalendarDay, to: "/schedule" },
-  { name: t`Report download`, icon: FaCloudDownloadAlt, to: "/workflows" },
+  { name: t`Report download`, icon: FaCloudDownloadAlt, to: "/report" },
+  { name: t`Templates`, icon: FaFileImport, to: "/templates" },
+  { name: t`Workflows`, icon: FaRegChartBar, to: "/workflows" },
 ];
 
 interface NavItemProps extends FlexProps {

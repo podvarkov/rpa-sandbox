@@ -209,7 +209,7 @@ msgid "Execution with {0} id not found"
 msgstr "Execution with {0} id not found"
 
 #: src/components/layout.tsx:25
-#: src/components/sidebar.tsx:34
+#: src/components/sidebar.tsx:35
 msgid "Executions"
 msgstr "Executions"
 
@@ -253,7 +253,7 @@ msgstr "Go to login screen"
 #~ msgid "Have an account?"
 #~ msgstr "Have an account?"
 
-#: src/components/sidebar.tsx:32
+#: src/components/sidebar.tsx:33
 msgid "Home"
 msgstr "Home"
 
@@ -464,11 +464,11 @@ msgstr "Report data end date"
 msgid "Report data start date"
 msgstr "Report data start date"
 
-#: src/components/sidebar.tsx:36
+#: src/components/sidebar.tsx:37
 msgid "Report download"
 msgstr "Report download"
 
-#: src/components/sidebar.tsx:33
+#: src/components/sidebar.tsx:34
 msgid "Reporting"
 msgstr "Reporting"
 
@@ -484,7 +484,7 @@ msgstr "Sa"
 msgid "Save"
 msgstr "Save"
 
-#: src/components/sidebar.tsx:35
+#: src/components/sidebar.tsx:36
 msgid "Schedule"
 msgstr "Schedule"
 
@@ -549,6 +549,7 @@ msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
 #: src/components/layout.tsx:17
+#: src/components/sidebar.tsx:38
 msgid "Templates"
 msgstr "Templates"
 
@@ -656,6 +657,7 @@ msgid "Workflow:"
 msgstr "Workflow:"
 
 #: src/components/layout.tsx:21
+#: src/components/sidebar.tsx:39
 msgid "Workflows"
 msgstr "Workflows"
 
@@ -735,7 +737,7 @@ msgstr "timeout"
 #~ msgid "{0}"
 #~ msgstr "{0}"
 
-#: src/components/sidebar.tsx:70
+#: src/components/sidebar.tsx:73
 msgid "{children}"
 msgstr "{children}"
 
