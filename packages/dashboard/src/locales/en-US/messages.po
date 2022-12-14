@@ -38,7 +38,7 @@ msgid "Any status"
 msgstr "Any status"
 
 #: src/pages/scheduler.tsx:113
-#: src/pages/workflows.tsx:96
+#: src/pages/workflows.tsx:100
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr "Are you sure? You can not undo this action afterwards."
 
@@ -62,7 +62,7 @@ msgstr "Can not create workflow"
 msgid "Can not delete event"
 msgstr "Can not delete event"
 
-#: src/pages/workflows.tsx:56
+#: src/pages/workflows.tsx:60
 msgid "Can not delete workflow"
 msgstr "Can not delete workflow"
 
@@ -75,7 +75,7 @@ msgid "Can not update profile"
 msgstr "Can not update profile"
 
 #: src/pages/scheduler.tsx:125
-#: src/pages/workflows.tsx:108
+#: src/pages/workflows.tsx:112
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -128,12 +128,12 @@ msgid "Dear 111"
 msgstr "Dear 111"
 
 #: src/pages/scheduler.tsx:135
-#: src/pages/workflows.tsx:118
+#: src/pages/workflows.tsx:122
 msgid "Delete"
 msgstr "Delete"
 
 #: src/pages/scheduler.tsx:109
-#: src/pages/workflows.tsx:92
+#: src/pages/workflows.tsx:96
 msgid "Delete workflow"
 msgstr "Delete workflow"
 
@@ -196,7 +196,7 @@ msgstr "Every month"
 msgid "Every week"
 msgstr "Every week"
 
-#: src/pages/workflow-runner.tsx:141
+#: src/pages/workflow-runner.tsx:140
 msgid "Execute"
 msgstr "Execute"
 
@@ -370,7 +370,7 @@ msgid "No data available"
 msgstr "No data available"
 
 #: src/pages/templates.tsx:136
-#: src/pages/workflows.tsx:168
+#: src/pages/workflows.tsx:172
 msgid "No description"
 msgstr "No description"
 
@@ -472,7 +472,7 @@ msgstr "Report download"
 msgid "Reporting"
 msgstr "Reporting"
 
-#: src/pages/workflows.tsx:180
+#: src/pages/workflows.tsx:216
 msgid "Run workflow"
 msgstr "Run workflow"
 
@@ -562,7 +562,7 @@ msgstr "Th"
 #: src/pages/profile.tsx:200
 #: src/pages/scheduler.tsx:88
 #: src/pages/templates.tsx:62
-#: src/pages/workflows.tsx:68
+#: src/pages/workflows.tsx:72
 msgid "There was an error while loading"
 msgstr "There was an error while loading"
 
@@ -582,7 +582,7 @@ msgstr "Those who have not yet registered as a member"
 
 #: src/components/workflow-form.tsx:92
 #: src/pages/executions.tsx:35
-#: src/pages/workflow-runner.tsx:116
+#: src/pages/workflow-runner.tsx:115
 msgid "Timeout"
 msgstr "Timeout"
 
@@ -626,7 +626,7 @@ msgstr "Workflow"
 msgid "Workflow created"
 msgstr "Workflow created"
 
-#: src/pages/workflows.tsx:43
+#: src/pages/workflows.tsx:47
 msgid "Workflow deleted"
 msgstr "Workflow deleted"
 
@@ -673,7 +673,7 @@ msgstr "Yahoo! monthly report creation"
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 msgstr "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 
-#: src/pages/workflows.tsx:79
+#: src/pages/workflows.tsx:83
 msgid "Your workflows will be listed here"
 msgstr "Your workflows will be listed here"
 
@@ -686,7 +686,8 @@ msgstr "Your workflows will be listed here"
 msgid "back"
 msgstr "back"
 
-#: src/pages/workflow-runner.tsx:84
+#: src/pages/workflow-runner.tsx:83
+#: src/pages/workflows.tsx:205
 msgid "error"
 msgstr "error"
 
@@ -712,6 +713,7 @@ msgid "password"
 msgstr "password"
 
 #: src/pages/workflow-runner.tsx:72
+#: src/pages/workflows.tsx:192
 msgid "queued"
 msgstr "queued"
 
@@ -729,7 +731,7 @@ msgid "surname"
 msgstr "surname"
 
 #: src/components/workflow-form.tsx:94
-#: src/pages/workflow-runner.tsx:120
+#: src/pages/workflow-runner.tsx:119
 msgid "timeout"
 msgstr "timeout"
 

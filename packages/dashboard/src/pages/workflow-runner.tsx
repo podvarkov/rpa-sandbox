@@ -67,12 +67,11 @@ export const WorkflowRunnerPage: React.FC = () => {
               onSubmit={(values, actions) => {
                 void api
                   .executeWorkflow(values)
-                  .then((res) => {
+                  .then(() => {
                     setStatus({
                       message: t`queued`,
                       status: "info",
                     });
-                    actions.setFieldValue("arguments", res.data);
                   })
                   .catch((e: AxiosError<{ message: string | string[] }>) => {
                     console.error(e);

@@ -16,6 +16,7 @@ import {
   HStack,
   IconButton,
   Text,
+  useBoolean,
   useToast,
 } from "@chakra-ui/react";
 import { api, Workflow } from "../api";
@@ -23,10 +24,13 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { t, Trans } from "@lingui/macro";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { AxiosError } from "axios";
 
 export const WorkflowsPage: React.FC = () => {
   const toast = useToast();
   const navigate = useNavigate();
+  const [isExecuting, { on: startExecuting, off: stopExecuting }] =
+    useBoolean(false);
   const { data: workflows, error } = useQuery("workflows", ({ signal }) =>
     api.getWorkflows(signal)
   );
@@ -173,8 +177,40 @@ export const WorkflowsPage: React.FC = () => {
                 variant="outline"
                 rounded="sm"
                 colorScheme="teal"
+                isLoading={isExecuting}
                 onClick={() => {
-                  navigate(`execute/${wf._id}`);
+                  startExecuting();
+                  void api
+                    .executeWorkflow({
+                      workflowId: wf._id,
+                      templateId: wf.templateId,
+                      arguments: wf.defaultArguments || {},
+                      expiration: wf.expiration,
+                    })
+                    .then(() => {
+                      toast({
+                        title: t`queued`,
+                        status: "info",
+                        duration: 1000,
+                        position: "top-right",
+                      });
+                    })
+                    .catch((e: AxiosError<{ message: string | string[] }>) => {
+                      console.error(e);
+                      toast({
+                        title: e.response?.data.message
+                          ? Array.isArray(e.response?.data.message)
+                            ? e.response?.data.message.join("\n")
+                            : e.response?.data.message
+                          : t`error`,
+                        status: "error",
+                        duration: 1000,
+                        position: "top-right",
+                      });
+                    })
+                    .finally(() => {
+                      stopExecuting();
+                    });
                 }}
               >
                 <Trans>Run workflow</Trans>
