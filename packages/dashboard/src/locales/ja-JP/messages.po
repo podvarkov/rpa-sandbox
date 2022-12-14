@@ -21,7 +21,7 @@ msgstr ""
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 msgstr ""
 
-#: src/pages/scheduler.tsx:272
+#: src/pages/scheduler.tsx:233
 msgid "Add event"
 msgstr ""
 
@@ -37,9 +37,7 @@ msgstr ""
 msgid "Any status"
 msgstr ""
 
-#: src/pages/reports.tsx:94
-#: src/pages/scheduler.tsx:111
-#: src/pages/workflows.tsx:100
+#: src/components/confirm-dialog.tsx:49
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr ""
 
@@ -59,15 +57,15 @@ msgstr ""
 msgid "Can not create workflow"
 msgstr ""
 
-#: src/pages/scheduler.tsx:71
+#: src/pages/scheduler.tsx:65
 msgid "Can not delete event"
 msgstr ""
 
-#: src/pages/reports.tsx:59
+#: src/pages/reports.tsx:52
 msgid "Can not delete report"
 msgstr ""
 
-#: src/pages/workflows.tsx:60
+#: src/pages/workflows.tsx:54
 msgid "Can not delete workflow"
 msgstr ""
 
@@ -79,14 +77,20 @@ msgstr ""
 msgid "Can not update profile"
 msgstr ""
 
-#: src/pages/reports.tsx:106
-#: src/pages/scheduler.tsx:123
-#: src/pages/workflows.tsx:112
+#: src/components/confirm-dialog.tsx:60
 msgid "Cancel"
 msgstr ""
 
 #: src/pages/executions.tsx:33
 msgid "Completed"
+msgstr ""
+
+#: src/components/confirm-dialog.tsx:71
+msgid "Confirm"
+msgstr ""
+
+#: src/components/confirm-dialog.tsx:44
+msgid "Confirm action"
 msgstr ""
 
 #: src/pages/sign-up.tsx:117
@@ -113,8 +117,8 @@ msgstr ""
 msgid "Create workflow"
 msgstr ""
 
-#: src/pages/reports.tsx:131
-#: src/pages/scheduler.tsx:214
+#: src/pages/reports.tsx:91
+#: src/pages/scheduler.tsx:175
 msgid "Created"
 msgstr ""
 
@@ -137,18 +141,18 @@ msgstr ""
 #: src/pages/reports.tsx:116
 #: src/pages/scheduler.tsx:133
 #: src/pages/workflows.tsx:122
-msgid "Delete"
-msgstr ""
+#~ msgid "Delete"
+#~ msgstr ""
 
-#: src/pages/scheduler.tsx:107
+#: src/pages/scheduler.tsx:98
 msgid "Delete event"
 msgstr ""
 
-#: src/pages/reports.tsx:90
+#: src/pages/reports.tsx:80
 msgid "Delete report"
 msgstr ""
 
-#: src/pages/workflows.tsx:96
+#: src/pages/workflows.tsx:87
 msgid "Delete workflow"
 msgstr ""
 
@@ -187,7 +191,7 @@ msgstr ""
 msgid "Error:"
 msgstr ""
 
-#: src/pages/scheduler.tsx:58
+#: src/pages/scheduler.tsx:52
 msgid "Event deleted"
 msgstr ""
 
@@ -344,7 +348,7 @@ msgstr ""
 msgid "Mo"
 msgstr ""
 
-#: src/pages/scheduler.tsx:217
+#: src/pages/scheduler.tsx:178
 msgid "Modified"
 msgstr ""
 
@@ -366,7 +370,7 @@ msgid "Must match pattern"
 msgstr ""
 
 #: src/pages/profile.tsx:86
-#: src/pages/reports.tsx:128
+#: src/pages/reports.tsx:88
 msgid "Name"
 msgstr ""
 
@@ -379,13 +383,13 @@ msgid "New workflow"
 msgstr ""
 
 #: src/pages/executions.tsx:252
-#: src/pages/reports.tsx:140
-#: src/pages/scheduler.tsx:226
+#: src/pages/reports.tsx:100
+#: src/pages/scheduler.tsx:187
 msgid "No data available"
 msgstr ""
 
 #: src/pages/templates.tsx:136
-#: src/pages/workflows.tsx:172
+#: src/pages/workflows.tsx:133
 msgid "No description"
 msgstr ""
 
@@ -479,7 +483,7 @@ msgstr ""
 msgid "Report data start date"
 msgstr ""
 
-#: src/pages/reports.tsx:46
+#: src/pages/reports.tsx:39
 msgid "Report deleted"
 msgstr ""
 
@@ -491,7 +495,7 @@ msgstr ""
 msgid "Reporting"
 msgstr ""
 
-#: src/pages/workflows.tsx:216
+#: src/pages/workflows.tsx:177
 msgid "Run workflow"
 msgstr ""
 
@@ -507,7 +511,7 @@ msgstr ""
 msgid "Schedule"
 msgstr ""
 
-#: src/pages/scheduler.tsx:153
+#: src/pages/scheduler.tsx:114
 msgid "Schedule execution"
 msgstr ""
 
@@ -530,7 +534,7 @@ msgstr ""
 msgid "Sign up"
 msgstr ""
 
-#: src/pages/scheduler.tsx:194
+#: src/pages/scheduler.tsx:155
 #: src/pages/sign-up.tsx:58
 msgid "Something goes wrong"
 msgstr ""
@@ -559,7 +563,7 @@ msgstr ""
 msgid "Su"
 msgstr ""
 
-#: src/pages/scheduler.tsx:183
+#: src/pages/scheduler.tsx:144
 msgid "Success"
 msgstr ""
 
@@ -579,10 +583,10 @@ msgstr ""
 #: src/pages/execution-details.tsx:47
 #: src/pages/executions.tsx:137
 #: src/pages/profile.tsx:200
-#: src/pages/reports.tsx:71
-#: src/pages/scheduler.tsx:88
+#: src/pages/reports.tsx:64
+#: src/pages/scheduler.tsx:82
 #: src/pages/templates.tsx:62
-#: src/pages/workflows.tsx:72
+#: src/pages/workflows.tsx:66
 msgid "There was an error while loading"
 msgstr ""
 
@@ -606,7 +610,7 @@ msgstr ""
 msgid "Timeout"
 msgstr ""
 
-#: src/pages/scheduler.tsx:211
+#: src/pages/scheduler.tsx:172
 msgid "Title"
 msgstr ""
 
@@ -646,7 +650,7 @@ msgstr ""
 msgid "Workflow created"
 msgstr ""
 
-#: src/pages/workflows.tsx:47
+#: src/pages/workflows.tsx:41
 msgid "Workflow deleted"
 msgstr ""
 
@@ -693,7 +697,7 @@ msgstr ""
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 msgstr ""
 
-#: src/pages/workflows.tsx:83
+#: src/pages/workflows.tsx:77
 msgid "Your workflows will be listed here"
 msgstr ""
 
@@ -707,7 +711,7 @@ msgid "back"
 msgstr ""
 
 #: src/pages/workflow-runner.tsx:83
-#: src/pages/workflows.tsx:205
+#: src/pages/workflows.tsx:166
 msgid "error"
 msgstr ""
 
@@ -733,7 +737,7 @@ msgid "password"
 msgstr ""
 
 #: src/pages/workflow-runner.tsx:72
-#: src/pages/workflows.tsx:192
+#: src/pages/workflows.tsx:153
 msgid "queued"
 msgstr ""
 
@@ -755,7 +759,7 @@ msgstr ""
 msgid "timeout"
 msgstr ""
 
-#: src/pages/reports.tsx:148
+#: src/pages/reports.tsx:108
 msgid "{0}"
 msgstr ""
 

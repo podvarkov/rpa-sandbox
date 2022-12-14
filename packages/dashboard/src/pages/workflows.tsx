@@ -1,11 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
   Avatar,
   Box,
   Button,
@@ -19,12 +13,13 @@ import {
   useBoolean,
   useToast,
 } from "@chakra-ui/react";
-import { api, Workflow } from "../api";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { t, Trans } from "@lingui/macro";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
+import { api, Workflow } from "../api";
+import { ConfirmDialog } from "../components/confirm-dialog";
 
 export const WorkflowsPage: React.FC = () => {
   const toast = useToast();
@@ -36,7 +31,6 @@ export const WorkflowsPage: React.FC = () => {
   );
   const client = useQueryClient();
   const [deleteIntent, setDeleteIntent] = useState<string>();
-  const cancelRef = useRef(null);
   const mutation = useMutation(
     async () => {
       return deleteIntent ? api.deleteWorkflow(deleteIntent) : undefined;
@@ -85,46 +79,13 @@ export const WorkflowsPage: React.FC = () => {
     </Center>
   ) : (
     <>
-      <AlertDialog
+      <ConfirmDialog
         isOpen={!!deleteIntent}
-        leastDestructiveRef={cancelRef}
         onClose={() => setDeleteIntent(undefined)}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              <Trans>Delete workflow</Trans>
-            </AlertDialogHeader>
-
-            <AlertDialogBody>
-              <Trans>
-                Are you sure? You can not undo this action afterwards.
-              </Trans>
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button
-                ref={cancelRef}
-                onClick={() => {
-                  setDeleteIntent(undefined);
-                }}
-              >
-                <Trans>Cancel</Trans>
-              </Button>
-              <Button
-                isLoading={mutation.isLoading}
-                colorScheme="red"
-                ml={3}
-                onClick={() => {
-                  mutation.mutate();
-                }}
-              >
-                <Trans>Delete</Trans>
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+        onOk={() => mutation.mutate()}
+        loading={mutation.isLoading}
+        headerText={t`Delete workflow`}
+      />
 
       <Flex alignItems="baseline" flexWrap={"wrap"}>
         {workflows?.map((wf) => (

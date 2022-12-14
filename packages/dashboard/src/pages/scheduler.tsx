@@ -1,13 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { api, ScheduledEvent } from "../api";
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
   Box,
   Button,
   Heading,
@@ -28,10 +21,12 @@ import {
   useBoolean,
   useToast,
 } from "@chakra-ui/react";
-import { t, Trans } from "@lingui/macro";
-import { SchedulerForm } from "../components/scheduler-form";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { format } from "date-fns";
+import { t, Trans } from "@lingui/macro";
+import { api, ScheduledEvent } from "../api";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { SchedulerForm } from "../components/scheduler-form";
+import { ConfirmDialog } from "../components/confirm-dialog";
 
 export const SchedulerPage: React.FC = () => {
   const {
@@ -47,7 +42,6 @@ export const SchedulerPage: React.FC = () => {
 
   const client = useQueryClient();
   const [deleteIntent, setDeleteIntent] = useState<string>();
-  const cancelRef = useRef(null);
   const mutation = useMutation(
     async () => {
       return deleteIntent ? api.deleteEvent(deleteIntent) : undefined;
@@ -96,46 +90,13 @@ export const SchedulerPage: React.FC = () => {
 
   return (
     <Box bg="white" px={6}>
-      <AlertDialog
+      <ConfirmDialog
         isOpen={!!deleteIntent}
-        leastDestructiveRef={cancelRef}
         onClose={() => setDeleteIntent(undefined)}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              <Trans>Delete event</Trans>
-            </AlertDialogHeader>
-
-            <AlertDialogBody>
-              <Trans>
-                Are you sure? You can not undo this action afterwards.
-              </Trans>
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button
-                ref={cancelRef}
-                onClick={() => {
-                  setDeleteIntent(undefined);
-                }}
-              >
-                <Trans>Cancel</Trans>
-              </Button>
-              <Button
-                isLoading={mutation.isLoading}
-                colorScheme="red"
-                ml={3}
-                onClick={() => {
-                  mutation.mutate();
-                }}
-              >
-                <Trans>Delete</Trans>
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+        onOk={() => mutation.mutate()}
+        loading={mutation.isLoading}
+        headerText={t`Delete event`}
+      />
 
       <Modal
         size="lg"

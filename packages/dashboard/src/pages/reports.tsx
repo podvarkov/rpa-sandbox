@@ -1,14 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
   Box,
-  Button,
   HStack,
   IconButton,
   Table,
@@ -25,6 +18,7 @@ import { format } from "date-fns";
 import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 import { api, ScheduledEvent } from "../api";
 import { useAuth } from "../components/auth-provider";
+import { ConfirmDialog } from "../components/confirm-dialog";
 
 export const ReportsPage: React.FC = () => {
   const { error, data: reports } = useQuery("reports", ({ signal }) =>
@@ -35,7 +29,6 @@ export const ReportsPage: React.FC = () => {
 
   const client = useQueryClient();
   const [deleteIntent, setDeleteIntent] = useState<string>();
-  const cancelRef = useRef(null);
   const mutation = useMutation(
     async () => {
       return deleteIntent ? api.deleteReport(deleteIntent) : undefined;
@@ -79,46 +72,13 @@ export const ReportsPage: React.FC = () => {
 
   return (
     <Box bg="white" px={6}>
-      <AlertDialog
+      <ConfirmDialog
         isOpen={!!deleteIntent}
-        leastDestructiveRef={cancelRef}
+        loading={mutation.isLoading}
         onClose={() => setDeleteIntent(undefined)}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              <Trans>Delete report</Trans>
-            </AlertDialogHeader>
-
-            <AlertDialogBody>
-              <Trans>
-                Are you sure? You can not undo this action afterwards.
-              </Trans>
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button
-                ref={cancelRef}
-                onClick={() => {
-                  setDeleteIntent(undefined);
-                }}
-              >
-                <Trans>Cancel</Trans>
-              </Button>
-              <Button
-                isLoading={mutation.isLoading}
-                colorScheme="red"
-                ml={3}
-                onClick={() => {
-                  mutation.mutate();
-                }}
-              >
-                <Trans>Delete</Trans>
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+        onOk={() => mutation.mutate()}
+        headerText={t`Delete report`}
+      />
 
       <TableContainer bg="gray.50">
         <Table size="md">
