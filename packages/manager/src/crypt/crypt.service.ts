@@ -73,10 +73,10 @@ export class CryptService {
     return this._rootToken;
   }
 
-  generateToken(params: { id: string; username: string }) {
+  generateToken(params: { _id: string; username: string }) {
     const tokenUser: TokenUser = new TokenUser();
     tokenUser._type = "user";
-    tokenUser._id = params.id;
+    tokenUser._id = params._id;
     tokenUser.name = params.username;
     tokenUser.username = params.username;
     tokenUser.roles = [new Rolemember("users", WellknownIds.users)];

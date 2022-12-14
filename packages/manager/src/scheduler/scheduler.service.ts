@@ -106,7 +106,7 @@ export class SchedulerService {
       if (nextRunAt && nextRunAt.getTime() === ts.getTime()) {
         const sessionUser = {
           username: event._createdby,
-          id: event._createdbyid,
+          _id: event._createdbyid,
         };
         const jwt = this.cryptService.generateToken(sessionUser);
         const workflow = await this.workflowsService

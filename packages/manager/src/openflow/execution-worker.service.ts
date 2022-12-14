@@ -204,7 +204,7 @@ export class ExecutionWorkerService {
         data: {
           ...workflow.arguments,
           session_id: session.user._id,
-          session_username: session.user.name,
+          session_username: session.user.username,
         },
       },
       expiration: workflow.expiration,
