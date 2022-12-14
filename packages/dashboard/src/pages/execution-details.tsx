@@ -8,18 +8,18 @@ import {
   Container,
   Heading,
   HStack,
-  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import { executionStatuses } from "./executions";
 import { format } from "date-fns";
+import { executionStatuses } from "./executions";
+import { useToast } from "../components/use-toast";
 
 export const ExecutionDetailsPage: React.FC = () => {
   const params = useParams<{ id: string }>();
   const { i18n } = useLingui();
-  const toast = useToast();
+  const { errorMessage } = useToast();
 
   const {
     data: execution,
@@ -43,12 +43,7 @@ export const ExecutionDetailsPage: React.FC = () => {
 
   useEffect(() => {
     if (error) {
-      toast({
-        title: t`There was an error while loading`,
-        status: "error",
-        position: "top-right",
-        duration: 1000,
-      });
+      errorMessage(t`There was an error while loading`);
       console.error(error);
     }
   }, [error]);

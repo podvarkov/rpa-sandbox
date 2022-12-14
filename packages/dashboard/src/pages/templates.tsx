@@ -15,16 +15,16 @@ import {
   ModalOverlay,
   Text,
   UnorderedList,
-  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { t, Trans } from "@lingui/macro";
-import { api, WorkflowTemplate } from "../api";
-import { WorkflowForm, WorkflowFormValues } from "../components/workflow-form";
 import { useMutation, useQuery } from "react-query";
+import { api, WorkflowTemplate } from "../api";
+import { useToast } from "../components/use-toast";
+import { WorkflowForm, WorkflowFormValues } from "../components/workflow-form";
 
 export const TemplatesPage: React.FC = () => {
-  const toast = useToast();
+  const { errorMessage, successMessage } = useToast();
   const { error, data: templates } = useQuery("templates", ({ signal }) =>
     api.getTemplates(signal)
   );
@@ -36,34 +36,19 @@ export const TemplatesPage: React.FC = () => {
     },
     {
       onSuccess: () => {
-        toast({
-          title: t`Workflow created`,
-          status: "success",
-          position: "top-right",
-          duration: 1000,
-        });
+        successMessage(t`Workflow created`);
         setSelectedTemplate(undefined);
       },
       onError: (e) => {
         console.error(e);
-        toast({
-          title: t`Can not create workflow`,
-          status: "error",
-          position: "top-right",
-          duration: 1000,
-        });
+        errorMessage(t`Can not create workflow`);
       },
     }
   );
 
   useEffect(() => {
     if (error) {
-      toast({
-        title: t`There was an error while loading`,
-        status: "error",
-        position: "top-right",
-        duration: 1000,
-      });
+      errorMessage(t`There was an error while loading`);
     }
   }, [error]);
 

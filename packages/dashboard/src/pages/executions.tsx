@@ -11,11 +11,9 @@ import {
   Thead,
   Tooltip,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
-import { api } from "../api";
 import { defineMessage, t, Trans } from "@lingui/macro";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useLingui } from "@lingui/react";
@@ -26,6 +24,8 @@ import {
   ChevronUpIcon,
 } from "@chakra-ui/icons";
 import { format } from "date-fns";
+import { api } from "../api";
+import { useToast } from "../components/use-toast";
 
 /* eslint-disable string-to-lingui/missing-lingui-transformation */
 export const executionStatuses = {
@@ -121,7 +121,7 @@ export const ExecutionsPage: React.FC = () => {
     ({ signal }) => api.getWorkflows(signal)
   );
 
-  const toast = useToast();
+  const { errorMessage } = useToast();
 
   const setOrder = (column: string, sortDirection: string) => {
     setParams((state) => {
@@ -133,12 +133,7 @@ export const ExecutionsPage: React.FC = () => {
 
   useEffect(() => {
     if (executionsError || workflowsError) {
-      toast({
-        title: t`There was an error while loading`,
-        status: "error",
-        position: "top-right",
-        duration: 1000,
-      });
+      errorMessage(t`There was an error while loading`);
       console.error(executionsError, workflowsError);
     }
   }, [executionsError, workflowsError]);

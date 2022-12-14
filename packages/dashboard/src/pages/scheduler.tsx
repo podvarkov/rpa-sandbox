@@ -19,14 +19,14 @@ import {
   Thead,
   Tr,
   useBoolean,
-  useToast,
 } from "@chakra-ui/react";
 import { format } from "date-fns";
 import { t, Trans } from "@lingui/macro";
-import { api, ScheduledEvent } from "../api";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { api, ScheduledEvent } from "../api";
 import { SchedulerForm } from "../components/scheduler-form";
 import { ConfirmDialog } from "../components/confirm-dialog";
+import { useToast } from "../components/use-toast";
 
 export const SchedulerPage: React.FC = () => {
   const {
@@ -38,7 +38,7 @@ export const SchedulerPage: React.FC = () => {
   });
   const [isOpen, { on, off }] = useBoolean(false);
   const [editIntent, setEditIntent] = useState<ScheduledEvent>();
-  const toast = useToast();
+  const { errorMessage, successMessage } = useToast();
 
   const client = useQueryClient();
   const [deleteIntent, setDeleteIntent] = useState<string>();
@@ -48,12 +48,7 @@ export const SchedulerPage: React.FC = () => {
     },
     {
       onSuccess: (data) => {
-        toast({
-          title: t`Event deleted`,
-          status: "success",
-          position: "top-right",
-          duration: 1000,
-        });
+        successMessage(t`Event deleted`);
         setDeleteIntent(undefined);
         client.setQueryData<ScheduledEvent[]>("events", (res) =>
           (res || []).filter(({ _id }) => data?.id !== _id)
@@ -61,12 +56,7 @@ export const SchedulerPage: React.FC = () => {
       },
       onError: (e) => {
         console.error(e);
-        toast({
-          title: t`Can not delete event`,
-          status: "error",
-          position: "top-right",
-          duration: 1000,
-        });
+        errorMessage(t`Can not delete event`);
       },
     }
   );
@@ -78,12 +68,7 @@ export const SchedulerPage: React.FC = () => {
 
   useEffect(() => {
     if (error || workflowsError) {
-      toast({
-        title: t`There was an error while loading`,
-        status: "error",
-        position: "top-right",
-        duration: 1000,
-      });
+      errorMessage(t`There was an error while loading`);
       console.error(error, workflowsError);
     }
   }, [error, workflowsError]);
@@ -140,23 +125,13 @@ export const SchedulerPage: React.FC = () => {
                 return api
                   .upsertEvent(values)
                   .then(() => {
-                    toast({
-                      title: t`Success`,
-                      status: "success",
-                      position: "top-right",
-                      duration: 1000,
-                    });
+                    successMessage(t`Success`);
                     setEditIntent(undefined);
                     off();
                     return refetch();
                   })
                   .catch(() => {
-                    toast({
-                      title: t`Something goes wrong`,
-                      status: "error",
-                      position: "top-right",
-                      duration: 1000,
-                    });
+                    errorMessage(t`Something goes wrong`);
                   });
               }}
               workflows={workflows || []}

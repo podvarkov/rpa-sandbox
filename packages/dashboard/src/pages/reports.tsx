@@ -11,7 +11,6 @@ import {
   Th,
   Thead,
   Tr,
-  useToast,
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
 import { format } from "date-fns";
@@ -19,12 +18,13 @@ import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
 import { api, ScheduledEvent } from "../api";
 import { useAuth } from "../components/auth-provider";
 import { ConfirmDialog } from "../components/confirm-dialog";
+import { useToast } from "../components/use-toast";
 
 export const ReportsPage: React.FC = () => {
   const { error, data: reports } = useQuery("reports", ({ signal }) =>
     api.getReports(signal)
   );
-  const toast = useToast();
+  const { errorMessage, successMessage } = useToast();
   const auth = useAuth();
 
   const client = useQueryClient();
@@ -35,12 +35,7 @@ export const ReportsPage: React.FC = () => {
     },
     {
       onSuccess: (data) => {
-        toast({
-          title: t`Report deleted`,
-          status: "success",
-          position: "top-right",
-          duration: 1000,
-        });
+        successMessage(t`Report deleted`);
         setDeleteIntent(undefined);
         client.setQueryData<ScheduledEvent[]>("reports", (res) =>
           (res || []).filter(({ _id }) => data?.id !== _id)
@@ -48,24 +43,14 @@ export const ReportsPage: React.FC = () => {
       },
       onError: (e) => {
         console.error(e);
-        toast({
-          title: t`Can not delete report`,
-          status: "error",
-          position: "top-right",
-          duration: 1000,
-        });
+        errorMessage(t`Can not delete report`);
       },
     }
   );
 
   useEffect(() => {
     if (error) {
-      toast({
-        title: t`There was an error while loading`,
-        status: "error",
-        position: "top-right",
-        duration: 1000,
-      });
+      errorMessage(t`There was an error while loading`);
       console.error(error);
     }
   }, [error]);

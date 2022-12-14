@@ -11,7 +11,6 @@ import {
   IconButton,
   Text,
   useBoolean,
-  useToast,
 } from "@chakra-ui/react";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
@@ -20,9 +19,10 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
 import { api, Workflow } from "../api";
 import { ConfirmDialog } from "../components/confirm-dialog";
+import { useToast } from "../components/use-toast";
 
 export const WorkflowsPage: React.FC = () => {
-  const toast = useToast();
+  const { infoMessage, errorMessage, successMessage } = useToast();
   const navigate = useNavigate();
   const [isExecuting, { on: startExecuting, off: stopExecuting }] =
     useBoolean(false);
@@ -37,12 +37,7 @@ export const WorkflowsPage: React.FC = () => {
     },
     {
       onSuccess: (data) => {
-        toast({
-          title: t`Workflow deleted`,
-          status: "success",
-          position: "top-right",
-          duration: 1000,
-        });
+        successMessage(t`Workflow deleted`);
         setDeleteIntent(undefined);
         client.setQueryData<Workflow[]>("workflows", (res) =>
           (res || []).filter(({ _id }) => data?.id !== _id)
@@ -50,24 +45,14 @@ export const WorkflowsPage: React.FC = () => {
       },
       onError: (e) => {
         console.error(e);
-        toast({
-          title: t`Can not delete workflow`,
-          status: "error",
-          position: "top-right",
-          duration: 1000,
-        });
+        errorMessage(t`Can not delete workflow`);
       },
     }
   );
 
   useEffect(() => {
     if (error) {
-      toast({
-        title: t`There was an error while loading`,
-        status: "error",
-        position: "top-right",
-        duration: 1000,
-      });
+      errorMessage(t`There was an error while loading`);
     }
   }, [error]);
 
@@ -149,25 +134,17 @@ export const WorkflowsPage: React.FC = () => {
                       expiration: wf.expiration,
                     })
                     .then(() => {
-                      toast({
-                        title: t`queued`,
-                        status: "info",
-                        duration: 1000,
-                        position: "top-right",
-                      });
+                      infoMessage(t`queued`);
                     })
                     .catch((e: AxiosError<{ message: string | string[] }>) => {
                       console.error(e);
-                      toast({
-                        title: e.response?.data.message
+                      errorMessage(
+                        e.response?.data.message
                           ? Array.isArray(e.response?.data.message)
                             ? e.response?.data.message.join("\n")
                             : e.response?.data.message
-                          : t`error`,
-                        status: "error",
-                        duration: 1000,
-                        position: "top-right",
-                      });
+                          : t`error`
+                      );
                     })
                     .finally(() => {
                       stopExecuting();

@@ -1,21 +1,15 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  Box,
-  Center,
-  Container,
-  Heading,
-  useToast,
-  VStack,
-} from "@chakra-ui/react";
-import { api } from "../api";
+import { Box, Center, Container, Heading, VStack } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
 import { useMutation, useQuery, useQueryClient } from "react-query";
+import { api } from "../api";
 import { WorkflowForm, WorkflowFormValues } from "../components/workflow-form";
+import { useToast } from "../components/use-toast";
 
 export const EditWorkflowPage: React.FC = () => {
   const params = useParams<{ id: string }>();
-  const toast = useToast();
+  const { errorMessage, successMessage } = useToast();
   const client = useQueryClient();
   const navigate = useNavigate();
   const { data: workflow, isFetching } = useQuery(
@@ -32,12 +26,7 @@ export const EditWorkflowPage: React.FC = () => {
     },
     {
       onSuccess: (data, variables) => {
-        toast({
-          title: t`Workflow updated`,
-          status: "success",
-          position: "top-right",
-          duration: 1000,
-        });
+        successMessage(t`Workflow updated`);
 
         client.removeQueries(["workflows", variables._id]);
         client.removeQueries("workflows");
@@ -45,12 +34,7 @@ export const EditWorkflowPage: React.FC = () => {
       },
       onError: (e) => {
         console.error(e);
-        toast({
-          title: t`Can not edit workflow`,
-          status: "error",
-          position: "top-right",
-          duration: 1000,
-        });
+        errorMessage(t`Can not edit workflow`);
       },
     }
   );

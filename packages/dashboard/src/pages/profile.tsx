@@ -20,7 +20,6 @@ import {
   Text,
   Textarea,
   useDisclosure,
-  useToast,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
@@ -32,6 +31,7 @@ import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useMutation, useQuery } from "react-query";
 import { api, UpdatableProfile } from "../api";
+import { useToast } from "../components/use-toast";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -168,27 +168,17 @@ export const ProfilePage: React.FC = () => {
   } = useQuery("profile", ({ signal }) => {
     return api.getProfile(signal);
   });
-  const toast = useToast();
+  const { errorMessage, successMessage } = useToast();
 
   const mutation = useMutation(
     (data: UpdatableProfile) => api.updateProfile(data),
     {
       onError: (e) => {
         console.error(e);
-        toast({
-          title: t`Can not update profile`,
-          status: "error",
-          position: "top-right",
-          duration: 1000,
-        });
+        errorMessage(t`Can not update profile`);
       },
       onSuccess: () => {
-        toast({
-          title: t`Profile updated`,
-          status: "success",
-          position: "top-right",
-          duration: 1000,
-        });
+        successMessage(t`Profile updated`);
         refetch();
       },
     }
@@ -196,12 +186,7 @@ export const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     if (error) {
-      toast({
-        title: t`There was an error while loading`,
-        status: "error",
-        position: "top-right",
-        duration: 1000,
-      });
+      errorMessage(t`There was an error while loading`);
     }
   }, [error]);
 
