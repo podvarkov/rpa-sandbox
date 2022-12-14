@@ -104,10 +104,11 @@ export class SchedulerService {
       const nextRunAt = this.parseDate(rule.after(ts, true));
 
       if (nextRunAt && nextRunAt.getTime() === ts.getTime()) {
-        const jwt = this.cryptService.generateToken({
+        const sessionUser = {
           username: event._createdby,
           id: event._createdbyid,
-        });
+        };
+        const jwt = this.cryptService.generateToken(sessionUser);
         const workflow = await this.workflowsService
           .findOne(jwt, event.workflowId)
           .then((wf) => {
@@ -118,7 +119,11 @@ export class SchedulerService {
             entity.expiration = wf.expiration;
             return entity;
           });
-        this.eventEmitter.emit("workflow.queued", jwt, workflow);
+        this.eventEmitter.emit(
+          "workflow.queued",
+          { jwt, user: sessionUser },
+          workflow
+        );
         this.logger.log({
           message: `Workflow with id:${workflow.workflowId} queued`,
           eventId: event._id,

@@ -94,8 +94,6 @@ export const SchedulerPage: React.FC = () => {
     }
   }, [error, workflowsError]);
 
-  // todo edit event
-
   return (
     <Box bg="white" px={6}>
       <AlertDialog
@@ -106,7 +104,7 @@ export const SchedulerPage: React.FC = () => {
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              <Trans>Delete workflow</Trans>
+              <Trans>Delete event</Trans>
             </AlertDialogHeader>
 
             <AlertDialogBody>

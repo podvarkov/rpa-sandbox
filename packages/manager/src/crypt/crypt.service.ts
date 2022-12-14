@@ -38,7 +38,7 @@ export class CryptService {
     return decrypted.toString();
   }
 
-  private createRootToken(): string {
+  private createRootUser(): TokenUser {
     const user: User = new User();
     user._type = "user";
     user.name = "root";
@@ -57,6 +57,11 @@ export class CryptService {
     tokenUser.selectedcustomerid = user.selectedcustomerid;
     tokenUser.dblocked = user.dblocked;
 
+    return tokenUser;
+  }
+  private createRootToken(): string {
+    const tokenUser = this.createRootUser();
+
     return jwt.sign({ data: tokenUser }, this.config.OPENFLOW_AES_SECRET, {
       expiresIn: "365d",
     });
@@ -64,7 +69,8 @@ export class CryptService {
 
   get rootToken(): string {
     if (this._rootToken) return this._rootToken;
-    return this.createRootToken();
+    this._rootToken = this.createRootToken();
+    return this._rootToken;
   }
 
   generateToken(params: { id: string; username: string }) {

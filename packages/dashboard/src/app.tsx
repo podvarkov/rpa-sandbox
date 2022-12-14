@@ -13,6 +13,7 @@ import { EditWorkflowPage } from "./pages/workflow-edit";
 import { WorkflowRunnerPage } from "./pages/workflow-runner";
 import { WorkflowsPage } from "./pages/workflows";
 import { SchedulerPage } from "./pages/scheduler";
+import { ReportsPage } from "./pages/reports";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
         <Route path="/executions/:id" element={<ExecutionDetailsPage />} />
         <Route path="/executions" element={<ExecutionsPage />} />
         <Route path="/schedule" element={<SchedulerPage />} />
+        <Route path="/reports" element={<ReportsPage />} />
         <Route path="/*" element={<Navigate to="/workflows" />} />
       </Route>
 

@@ -7,6 +7,7 @@ import { OnEvent } from "@nestjs/event-emitter";
 import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
 import { Execution } from "./types";
 import { OpenflowService } from "src/openflow/openflow.service";
+import { Session } from "src/auth/auth.service";
 
 @Injectable()
 export class ExecutionWorkerService {
@@ -109,7 +110,7 @@ export class ExecutionWorkerService {
     ws.on("message", async (data) => {
       try {
         const socketMessage = SocketMessage.fromjson(data.toString());
-        this.logger.debug({
+        this.logger.log({
           message: "message received",
           socketMessage,
         });
@@ -125,6 +126,7 @@ export class ExecutionWorkerService {
 
           const socketData = this.openflowService.parseMessageData<{
             correlationId: string;
+            error?: string;
             data: {
               command: Execution["status"];
               workflowid: string;
@@ -145,6 +147,11 @@ export class ExecutionWorkerService {
 
           if (socketData.data.command === "invokesuccess") {
             executionContext.invokedAt = timestamp;
+          }
+
+          if (socketData.error) {
+            executionContext.error = socketData.error;
+            executionContext.status = "error";
           }
 
           if (
@@ -172,7 +179,10 @@ export class ExecutionWorkerService {
   }
 
   @OnEvent("workflow.queued")
-  async handleWorkflowQueuedEvent(jwt: string, workflow: ExecuteWorkflowDto) {
+  async handleWorkflowQueuedEvent(
+    session: Session,
+    workflow: ExecuteWorkflowDto
+  ) {
     const robotId = await this.getRobotId(this.config.OPENFLOW_ROBOT_USERNAME);
     const executionContext: Partial<Execution> = {
       robotId,
@@ -191,7 +201,11 @@ export class ExecutionWorkerService {
       data: {
         command: "invoke",
         workflowid: workflow.templateId,
-        data: workflow.arguments,
+        data: {
+          ...workflow.arguments,
+          session_id: session.user._id,
+          session_username: session.user.name,
+        },
       },
       expiration: workflow.expiration,
     });
@@ -203,7 +217,7 @@ export class ExecutionWorkerService {
     executionContext.status = "queued";
     executionContext._id = queueMessageData.correlationId;
     this.contexts[executionContext._id] = await this.openflowService.insertOne(
-      jwt,
+      session.jwt,
       executionContext
     );
     this.ws.send(JSON.stringify(queueMsg));

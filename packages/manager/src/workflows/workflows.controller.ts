@@ -28,7 +28,7 @@ export class WorkflowsController {
     @UserSession() session: Session,
     @Body() body: ExecuteWorkflowDto
   ) {
-    return this.workflowsService.execute(session.jwt, body);
+    return this.workflowsService.execute(session, body);
   }
 
   @Get()

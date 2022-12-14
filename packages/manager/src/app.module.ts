@@ -2,6 +2,7 @@ import { Module, Logger } from "@nestjs/common";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { EventEmitterModule } from "@nestjs/event-emitter";
 import { join } from "path";
+import { ScheduleModule } from "@nestjs/schedule";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { ConfigModule } from "./config/config.module";
@@ -11,7 +12,7 @@ import { TemplatesModule } from "./templates/templates.module";
 import { WorkflowsModule } from "./workflows/workflows.module";
 import { ExecutionsModule } from "./executions/executions.module";
 import { SchedulerModule } from "./scheduler/scheduler.module";
-import { ScheduleModule } from "@nestjs/schedule";
+import { ReportsModule } from "./reports/reports.module";
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ScheduleModule } from "@nestjs/schedule";
     SchedulerModule,
     EventEmitterModule.forRoot(),
     ScheduleModule.forRoot(),
+    ReportsModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

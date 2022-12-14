@@ -126,6 +126,20 @@ export type Profile = {
 
 export type UpdatableProfile = Omit<Profile, "_id" | "salesManagerId">;
 
+export type File = {
+  _id: string;
+  length: number;
+  chunkSize: number;
+  uploadDate: string;
+  filename: string;
+  contentType: string;
+  metadata: {
+    filename: string;
+    path: string;
+    name: string;
+  };
+};
+
 type AuthStateChangedCb = (user: Session) => void;
 
 class Api {
@@ -275,6 +289,18 @@ class Api {
   updateProfile(profile: UpdatableProfile) {
     return this.axios
       .post<Profile>("auth/profile", profile)
+      .then(({ data }) => data);
+  }
+
+  getReports(signal?: AbortSignal) {
+    return this.axios
+      .get<File[]>("reports", { signal })
+      .then(({ data }) => data);
+  }
+
+  deleteReport(id: string) {
+    return this.axios
+      .delete<{ id: string }>(`reports/${id}`)
       .then(({ data }) => data);
   }
 }

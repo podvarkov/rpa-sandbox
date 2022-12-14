@@ -8,11 +8,16 @@ import { ExtractJwt, Strategy } from "passport-jwt";
 import { ConfigProvider } from "../config/config.provider";
 import { Session } from "./auth.service";
 
+const jwtFromRequest = ExtractJwt.fromExtractors([
+  ExtractJwt.fromAuthHeaderAsBearerToken(),
+  ExtractJwt.fromUrlQueryParameter("token"),
+]);
+
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly config: ConfigProvider) {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest,
       ignoreExpiration: false,
       secretOrKey: config.OPENFLOW_AES_SECRET,
     });
@@ -29,7 +34,7 @@ export class JwtAuthGuard extends AuthGuard("jwt") {}
 export const UserSession = createParamDecorator(
   (data: unknown, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest();
-    const token = ExtractJwt.fromAuthHeaderAsBearerToken()(request);
+    const token = jwtFromRequest(request);
     return { user: request.user, jwt: token } as Session;
   }
 );

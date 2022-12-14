@@ -21,7 +21,7 @@ msgstr "*Beta version only supports Rakuten"
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 msgstr "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 
-#: src/pages/scheduler.tsx:274
+#: src/pages/scheduler.tsx:272
 msgid "Add event"
 msgstr "Add event"
 
@@ -37,7 +37,8 @@ msgstr "All workflows"
 msgid "Any status"
 msgstr "Any status"
 
-#: src/pages/scheduler.tsx:113
+#: src/pages/reports.tsx:94
+#: src/pages/scheduler.tsx:111
 #: src/pages/workflows.tsx:100
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr "Are you sure? You can not undo this action afterwards."
@@ -62,6 +63,10 @@ msgstr "Can not create workflow"
 msgid "Can not delete event"
 msgstr "Can not delete event"
 
+#: src/pages/reports.tsx:59
+msgid "Can not delete report"
+msgstr "Can not delete report"
+
 #: src/pages/workflows.tsx:60
 msgid "Can not delete workflow"
 msgstr "Can not delete workflow"
@@ -74,7 +79,8 @@ msgstr "Can not edit workflow"
 msgid "Can not update profile"
 msgstr "Can not update profile"
 
-#: src/pages/scheduler.tsx:125
+#: src/pages/reports.tsx:106
+#: src/pages/scheduler.tsx:123
 #: src/pages/workflows.tsx:112
 msgid "Cancel"
 msgstr "Cancel"
@@ -107,7 +113,8 @@ msgstr "Contract Information"
 msgid "Create workflow"
 msgstr "Create workflow"
 
-#: src/pages/scheduler.tsx:216
+#: src/pages/reports.tsx:131
+#: src/pages/scheduler.tsx:214
 msgid "Created"
 msgstr "Created"
 
@@ -127,12 +134,20 @@ msgstr "Day"
 msgid "Dear 111"
 msgstr "Dear 111"
 
-#: src/pages/scheduler.tsx:135
+#: src/pages/reports.tsx:116
+#: src/pages/scheduler.tsx:133
 #: src/pages/workflows.tsx:122
 msgid "Delete"
 msgstr "Delete"
 
-#: src/pages/scheduler.tsx:109
+#: src/pages/scheduler.tsx:107
+msgid "Delete event"
+msgstr "Delete event"
+
+#: src/pages/reports.tsx:90
+msgid "Delete report"
+msgstr "Delete report"
+
 #: src/pages/workflows.tsx:96
 msgid "Delete workflow"
 msgstr "Delete workflow"
@@ -331,7 +346,7 @@ msgstr "Minute"
 msgid "Mo"
 msgstr "Mo"
 
-#: src/pages/scheduler.tsx:219
+#: src/pages/scheduler.tsx:217
 msgid "Modified"
 msgstr "Modified"
 
@@ -353,6 +368,7 @@ msgid "Must match pattern"
 msgstr "Must match pattern"
 
 #: src/pages/profile.tsx:86
+#: src/pages/reports.tsx:128
 msgid "Name"
 msgstr "Name"
 
@@ -365,7 +381,8 @@ msgid "New workflow"
 msgstr "New workflow"
 
 #: src/pages/executions.tsx:252
-#: src/pages/scheduler.tsx:228
+#: src/pages/reports.tsx:140
+#: src/pages/scheduler.tsx:226
 msgid "No data available"
 msgstr "No data available"
 
@@ -464,6 +481,10 @@ msgstr "Report data end date"
 msgid "Report data start date"
 msgstr "Report data start date"
 
+#: src/pages/reports.tsx:46
+msgid "Report deleted"
+msgstr "Report deleted"
+
 #: src/components/sidebar.tsx:37
 msgid "Report download"
 msgstr "Report download"
@@ -488,7 +509,7 @@ msgstr "Save"
 msgid "Schedule"
 msgstr "Schedule"
 
-#: src/pages/scheduler.tsx:155
+#: src/pages/scheduler.tsx:153
 msgid "Schedule execution"
 msgstr "Schedule execution"
 
@@ -511,7 +532,7 @@ msgstr "Sign out"
 msgid "Sign up"
 msgstr "Sign up"
 
-#: src/pages/scheduler.tsx:196
+#: src/pages/scheduler.tsx:194
 #: src/pages/sign-up.tsx:58
 msgid "Something goes wrong"
 msgstr "Something goes wrong"
@@ -540,7 +561,7 @@ msgstr "Store Information Registration"
 msgid "Su"
 msgstr "Su"
 
-#: src/pages/scheduler.tsx:185
+#: src/pages/scheduler.tsx:183
 msgid "Success"
 msgstr "Success"
 
@@ -560,6 +581,7 @@ msgstr "Th"
 #: src/pages/execution-details.tsx:47
 #: src/pages/executions.tsx:137
 #: src/pages/profile.tsx:200
+#: src/pages/reports.tsx:71
 #: src/pages/scheduler.tsx:88
 #: src/pages/templates.tsx:62
 #: src/pages/workflows.tsx:72
@@ -586,7 +608,7 @@ msgstr "Those who have not yet registered as a member"
 msgid "Timeout"
 msgstr "Timeout"
 
-#: src/pages/scheduler.tsx:213
+#: src/pages/scheduler.tsx:211
 msgid "Title"
 msgstr "Title"
 
@@ -735,9 +757,9 @@ msgstr "surname"
 msgid "timeout"
 msgstr "timeout"
 
-#: src/pages/profile.tsx:364
-#~ msgid "{0}"
-#~ msgstr "{0}"
+#: src/pages/reports.tsx:148
+msgid "{0}"
+msgstr "{0}"
 
 #: src/components/sidebar.tsx:73
 msgid "{children}"

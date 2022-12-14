@@ -34,7 +34,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: t`Reporting`, icon: FaRegChartBar, to: "/beta-rpa" },
   { name: t`Executions`, icon: FaCodeBranch, to: "/executions" },
   { name: t`Schedule`, icon: FaCalendarDay, to: "/schedule" },
-  { name: t`Report download`, icon: FaCloudDownloadAlt, to: "/report" },
+  { name: t`Report download`, icon: FaCloudDownloadAlt, to: "/reports" },
   { name: t`Templates`, icon: FaFileImport, to: "/templates" },
   { name: t`Workflows`, icon: FaRegChartBar, to: "/workflows" },
 ];

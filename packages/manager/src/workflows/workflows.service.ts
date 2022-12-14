@@ -6,6 +6,7 @@ import { CryptService } from "../crypt/crypt.service";
 import { EncryptedUserWorkflow } from "../openflow/types";
 import { TemplatesService } from "../templates/templates.service";
 import { EventEmitter2 } from "@nestjs/event-emitter";
+import { Session } from "src/auth/auth.service";
 
 @Injectable()
 export class WorkflowsService {
@@ -71,8 +72,8 @@ export class WorkflowsService {
     return null;
   }
 
-  execute(jwt: string, body: ExecuteWorkflowDto) {
-    this.eventEmitter.emit("workflow.queued", jwt, body);
+  execute(session: Session, body: ExecuteWorkflowDto) {
+    this.eventEmitter.emit("workflow.queued", session, body);
     return { status: "queued" };
   }
 }
