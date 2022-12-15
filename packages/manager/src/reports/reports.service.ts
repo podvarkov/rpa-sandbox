@@ -10,6 +10,8 @@ import { ConfigProvider } from "../config/config.provider";
 import { Session } from "../auth/auth.service";
 import * as axios from "axios";
 import { AxiosError } from "axios";
+import { GetReportsQueryParamsDto } from "src/reports/get-reports-query-params.dto";
+import { QueryOptions } from "@openiap/openflow-api";
 
 @Injectable()
 export class ReportsService {
@@ -20,11 +22,22 @@ export class ReportsService {
     private readonly config: ConfigProvider
   ) {}
 
-  findAll(session: Session, query = {}) {
-    return this.openflowService.queryCollection(this.cryptService.rootToken, {
+  findAll(session: Session, query = {}, params?: GetReportsQueryParamsDto) {
+    const options: QueryOptions = {
       collectionname: "files",
       query: { "metadata.path": session.user._id, ...query },
-    });
+    };
+
+    if (params) {
+      options.top = params.top;
+      options.skip = params.skip;
+      options.orderby = { [params.orderBy]: params.direction };
+    }
+
+    return this.openflowService.queryCollection(
+      this.cryptService.rootToken,
+      options
+    );
   }
 
   async checkExistence(session: Session, id: string) {

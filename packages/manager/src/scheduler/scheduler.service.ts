@@ -8,6 +8,8 @@ import { Cron, CronExpression } from "@nestjs/schedule";
 import { CryptService } from "../crypt/crypt.service";
 import { WorkflowsService } from "../workflows/workflows.service";
 import { ExecuteWorkflowDto } from "../workflows/execute-workflow.dto";
+import { GetEventsQueryParamsDto } from "src/scheduler/get-events-query-params.dto";
+import { QueryOptions } from "@openiap/openflow-api";
 
 @Injectable()
 export class SchedulerService {
@@ -19,14 +21,22 @@ export class SchedulerService {
     private readonly eventEmitter: EventEmitter2
   ) {}
 
-  findEvents(jwt: string, query = {}) {
-    return this.openflowService.queryCollection<ScheduledEvent>(jwt, {
+  findEvents(jwt: string, query = {}, params?: GetEventsQueryParamsDto) {
+    const options: QueryOptions = {
       collectionname: "entities",
       query: {
         _type: "scheduled_event",
         ...query,
       },
-    });
+    };
+
+    if (params) {
+      options.top = params.top;
+      options.skip = params.skip;
+      options.orderby = { [params.orderBy]: params.direction };
+    }
+
+    return this.openflowService.queryCollection<ScheduledEvent>(jwt, options);
   }
 
   findEvent(jwt: string, id: string) {

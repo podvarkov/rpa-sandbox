@@ -110,7 +110,7 @@ export class ExecutionWorkerService {
     ws.on("message", async (data) => {
       try {
         const socketMessage = SocketMessage.fromjson(data.toString());
-        this.logger.log({
+        this.logger.debug({
           message: "message received",
           socketMessage,
         });

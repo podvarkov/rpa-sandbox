@@ -27,15 +27,27 @@ import { api, ScheduledEvent } from "../api";
 import { SchedulerForm } from "../components/scheduler-form";
 import { ConfirmDialog } from "../components/confirm-dialog";
 import { useToast } from "../components/use-toast";
+import { Pagination, usePagination } from "../components/table";
 
 export const SchedulerPage: React.FC = () => {
+  const [total, setTotal] = useState(0);
+  const { top, skip, prev, next } = usePagination({ total });
   const {
     data: events,
     error,
     refetch,
-  } = useQuery("events", ({ signal }) => api.getEvents(signal), {
-    keepPreviousData: true,
-  });
+  } = useQuery(
+    ["events", { skip, top }],
+    ({ signal }) => api.getEvents(signal, { skip, top }),
+    {
+      keepPreviousData: true,
+    }
+  );
+
+  useEffect(() => {
+    setTotal(events?.length || 0);
+  }, [events]);
+
   const [isOpen, { on, off }] = useBoolean(false);
   const [editIntent, setEditIntent] = useState<ScheduledEvent>();
   const { errorMessage, successMessage } = useToast();
@@ -202,6 +214,13 @@ export const SchedulerPage: React.FC = () => {
             )}
           </Tbody>
         </Table>
+        <Pagination
+          total={total}
+          next={next}
+          prev={prev}
+          skip={skip}
+          top={top}
+        />
       </TableContainer>
 
       <Button onClick={on} mt={8}>

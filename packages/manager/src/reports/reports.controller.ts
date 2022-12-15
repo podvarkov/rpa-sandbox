@@ -1,15 +1,29 @@
-import { Controller, Delete, Get, Param, UseGuards } from "@nestjs/common";
+import {
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Query,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from "@nestjs/common";
 import { ReportsService } from "./reports.service";
 import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";
 import { Session } from "../auth/auth.service";
+import { GetReportsQueryParamsDto } from "src/reports/get-reports-query-params.dto";
 
 @Controller("api/reports")
 export class ReportsController {
   constructor(private readonly reportService: ReportsService) {}
   @Get()
   @UseGuards(JwtAuthGuard)
-  findAll(@UserSession() session: Session) {
-    return this.reportService.findAll(session);
+  @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
+  findAll(
+    @UserSession() session: Session,
+    @Query() queryParams: GetReportsQueryParamsDto
+  ) {
+    return this.reportService.findAll(session, {}, queryParams);
   }
 
   @Get("download/:id")

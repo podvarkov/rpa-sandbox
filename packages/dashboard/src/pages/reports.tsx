@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import {
   Box,
   HStack,
@@ -15,31 +15,45 @@ import {
 import { t, Trans } from "@lingui/macro";
 import { format } from "date-fns";
 import { DeleteIcon, DownloadIcon } from "@chakra-ui/icons";
-import { api, ScheduledEvent } from "../api";
+import { api } from "../api";
 import { useAuth } from "../components/auth-provider";
 import { ConfirmDialog } from "../components/confirm-dialog";
 import { useToast } from "../components/use-toast";
+import { Pagination, usePagination } from "../components/table";
 
+// todo pagination here and scheduler
 export const ReportsPage: React.FC = () => {
-  const { error, data: reports } = useQuery("reports", ({ signal }) =>
-    api.getReports(signal)
+  const [total, setTotal] = useState(0);
+  const { top, skip, prev, next } = usePagination({
+    total,
+  });
+
+  const {
+    error,
+    data: reports,
+    refetch,
+  } = useQuery(
+    ["reports", { top, skip }],
+    ({ signal }) => api.getReports(signal, { top, skip }),
+    { keepPreviousData: true }
   );
+
+  useEffect(() => {
+    setTotal(reports?.length || 0);
+  }, [reports]);
+
   const { errorMessage, successMessage } = useToast();
   const auth = useAuth();
 
-  const client = useQueryClient();
   const [deleteIntent, setDeleteIntent] = useState<string>();
   const mutation = useMutation(
     async () => {
       return deleteIntent ? api.deleteReport(deleteIntent) : undefined;
     },
     {
-      onSuccess: (data) => {
+      onSuccess: () => {
         successMessage(t`Report deleted`);
-        setDeleteIntent(undefined);
-        client.setQueryData<ScheduledEvent[]>("reports", (res) =>
-          (res || []).filter(({ _id }) => data?.id !== _id)
-        );
+        return refetch().then(() => setDeleteIntent(undefined));
       },
       onError: (e) => {
         console.error(e);
@@ -126,6 +140,7 @@ export const ReportsPage: React.FC = () => {
           </Tbody>
         </Table>
       </TableContainer>
+      <Pagination top={top} skip={skip} total={total} next={next} prev={prev} />
     </Box>
   );
 };

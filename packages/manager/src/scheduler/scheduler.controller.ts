@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -13,6 +14,7 @@ import { SchedulerService } from "./scheduler.service";
 import { UpsertEventDto } from "src/scheduler/upsert-event.dto";
 import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";
 import { Session } from "../auth/auth.service";
+import { GetEventsQueryParamsDto } from "src/scheduler/get-events-query-params.dto";
 
 @Controller("api/schedule")
 export class SchedulerController {
@@ -20,8 +22,12 @@ export class SchedulerController {
 
   @Get("/events")
   @UseGuards(JwtAuthGuard)
-  findAll(@UserSession() session: Session) {
-    return this.schedulerService.findEvents(session.jwt);
+  @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
+  findAll(
+    @UserSession() session: Session,
+    @Query() queryParams: GetEventsQueryParamsDto
+  ) {
+    return this.schedulerService.findEvents(session.jwt, {}, queryParams);
   }
 
   @Get("/events/:id")

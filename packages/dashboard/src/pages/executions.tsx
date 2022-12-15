@@ -1,31 +1,24 @@
 import {
   Box,
-  IconButton,
   Select,
   Stack,
   Table,
   TableContainer,
   Tbody,
   Td,
-  Th,
   Thead,
   Tooltip,
   Tr,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { defineMessage, t, Trans } from "@lingui/macro";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useLingui } from "@lingui/react";
-import {
-  ChevronRightIcon,
-  ChevronLeftIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@chakra-ui/icons";
 import { format } from "date-fns";
 import { api } from "../api";
 import { useToast } from "../components/use-toast";
+import { Pagination, TSorter, usePagination } from "../components/table";
 
 /* eslint-disable string-to-lingui/missing-lingui-transformation */
 export const executionStatuses = {
@@ -40,41 +33,12 @@ export const executionStatuses = {
 };
 /* eslint-enable string-to-lingui/missing-lingui-transformation */
 
-const TSorter: React.FC<{
-  orderBy: string;
-  direction: string;
-  column: string;
-  title: string;
-  onChange: (key: string, direction: string) => void;
-}> = ({ orderBy, direction, column, onChange, title }) => {
-  return (
-    <Th
-      textColor="whitesmoke"
-      py={4}
-      cursor="pointer"
-      onClick={() => {
-        onChange(
-          column,
-          orderBy === column ? (direction === "asc" ? "desc" : "asc") : "asc"
-        );
-      }}
-    >
-      <span>{title}</span>
-      {orderBy === column ? (
-        direction === "asc" ? (
-          <ChevronDownIcon />
-        ) : (
-          <ChevronUpIcon />
-        )
-      ) : null}
-    </Th>
-  );
-};
-
 export const ExecutionsPage: React.FC = () => {
   const [params, setParams] = useSearchParams();
-  const top = Number.parseInt(params.get("top") || "20");
-  const skip = Number.parseInt(params.get("skip") || "0");
+  const [total, setTotal] = useState(0);
+  const { top, skip, next, prev } = usePagination({
+    total,
+  });
   const workflowId = params.get("workflowId");
   const status = params.get("status");
   const orderBy = params.get("orderBy") || "startedAt";
@@ -90,7 +54,7 @@ export const ExecutionsPage: React.FC = () => {
       state.set("orderBy", orderBy);
       return state;
     });
-  }, [top, skip, params.get("top"), params.get("skip")]);
+  }, [top, skip]);
 
   const { i18n } = useLingui();
   const { data: executions, error: executionsError } = useQuery(
@@ -137,6 +101,10 @@ export const ExecutionsPage: React.FC = () => {
       console.error(executionsError, workflowsError);
     }
   }, [executionsError, workflowsError]);
+
+  useEffect(() => {
+    setTotal(executions?.length || 0);
+  }, [executions]);
 
   return (
     <Box px={6}>
@@ -293,36 +261,8 @@ export const ExecutionsPage: React.FC = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <Stack bg="white" p={2} w="100%" direction="row" justifyContent="end">
-        <IconButton
-          variant="ghost"
-          aria-label="prev"
-          disabled={skip - top < 0}
-          onClick={() => {
-            setParams((state) => {
-              state.set("skip", (skip - top).toString());
-              return state;
-            });
-          }}
-        >
-          <ChevronLeftIcon />
-        </IconButton>
-        <IconButton
-          variant="ghost"
-          aria-label="next"
-          disabled={
-            !executions || executions.length < top || executions.length === 0
-          }
-          onClick={() => {
-            setParams((state) => {
-              state.set("skip", (skip + top).toString());
-              return state;
-            });
-          }}
-        >
-          <ChevronRightIcon />
-        </IconButton>
-      </Stack>
+
+      <Pagination top={top} skip={skip} total={total} next={next} prev={prev} />
     </Box>
   );
 };

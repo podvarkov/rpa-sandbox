@@ -141,6 +141,7 @@ export type File = {
 };
 
 type AuthStateChangedCb = (user: Session) => void;
+type PaginationParams = { top: number; skip: number };
 
 class Api {
   private axios: AxiosInstance;
@@ -245,9 +246,7 @@ class Api {
 
   getExecutions(
     signal?: AbortSignal,
-    params?: {
-      top: number;
-      skip: number;
+    params?: PaginationParams & {
       workflowId: string | null;
       status: string | null;
       orderBy: string | null;
@@ -265,9 +264,9 @@ class Api {
       .then(({ data }) => data);
   }
 
-  getEvents(signal?: AbortSignal) {
+  getEvents(signal?: AbortSignal, params?: PaginationParams) {
     return this.axios
-      .get<ScheduledEvent[]>("schedule/events", { signal })
+      .get<ScheduledEvent[]>("schedule/events", { signal, params })
       .then(({ data }) => data);
   }
   upsertEvent(params: EventFormValues) {
@@ -292,9 +291,9 @@ class Api {
       .then(({ data }) => data);
   }
 
-  getReports(signal?: AbortSignal) {
+  getReports(signal?: AbortSignal, params?: PaginationParams) {
     return this.axios
-      .get<File[]>("reports", { signal })
+      .get<File[]>("reports", { signal, params })
       .then(({ data }) => data);
   }
 
