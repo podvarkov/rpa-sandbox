@@ -28,6 +28,8 @@ export class TemplatesService {
           _created_by: 1,
           description: 1,
           Parameters: 1,
+          logoSrc: 1,
+          humanReadableName: 1,
         },
         collectionname: "openrpa",
       })

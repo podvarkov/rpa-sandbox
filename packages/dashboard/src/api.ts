@@ -28,6 +28,8 @@ export type WorkflowTemplate = {
   projectandname?: string;
   projectid?: string;
   description?: string;
+  logoSrc?: string;
+  humanReadableName?: string;
   name: string;
   _type: string;
   _modified: string;

@@ -50,7 +50,7 @@ export const WorkflowForm: React.FC<{
                     <FormLabel>
                       <Trans>Workflow name:</Trans>
                     </FormLabel>
-                    <Input {...field} />
+                    <Input {...field} variant="default" />
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
                   </FormControl>
                 );
@@ -64,7 +64,11 @@ export const WorkflowForm: React.FC<{
                     <FormLabel>
                       <Trans>Workflow description:</Trans>
                     </FormLabel>
-                    <Input placeholder={t`Optional description`} {...field} />
+                    <Input
+                      placeholder={t`Optional description`}
+                      {...field}
+                      variant="default"
+                    />
                     <FormErrorMessage>{meta.error}</FormErrorMessage>
                   </FormControl>
                 );
@@ -91,13 +95,22 @@ export const WorkflowForm: React.FC<{
                   <FormLabel>
                     <Trans>Timeout</Trans>
                   </FormLabel>
-                  <Input type="number" placeholder={t`timeout`} {...field} />
+                  <Input
+                    type="number"
+                    placeholder={t`timeout`}
+                    {...field}
+                    variant="default"
+                  />
                   <FormErrorMessage>{meta.error}</FormErrorMessage>
                 </FormControl>
               )}
             </Field>
 
-            <Button isLoading={isSubmitting} type="submit" colorScheme="teal">
+            <Button
+              isLoading={isSubmitting}
+              type="submit"
+              variant={"submitBtn"}
+            >
               {initialValues._id ? t`Update workflow` : t`Create workflow`}
             </Button>
           </Stack>

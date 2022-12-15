@@ -35,16 +35,21 @@ const ParameterFormField: React.FC<{
         </FormLabel>
       ) : null}
       {type === ParametersType.STRING ? (
-        <Input placeholder={placeholder} {...field} />
+        <Input placeholder={placeholder} {...field} variant="default" />
       ) : null}
       {type === ParametersType.OBJECT ? (
-        <Input placeholder={placeholder} {...field} />
+        <Input placeholder={placeholder} {...field} variant="default" />
       ) : null}
       {type === ParametersType.NUMBER ? (
-        <Input type={"number"} placeholder={placeholder} {...field} />
+        <Input
+          type={"number"}
+          placeholder={placeholder}
+          {...field}
+          variant="default"
+        />
       ) : null}
       {type === ParametersType.BOOLEAN ? (
-        <Checkbox {...field} isChecked={!!field.value}>
+        <Checkbox {...field} isChecked={!!field.value} variant="default">
           {placeholder}
         </Checkbox>
       ) : null}
@@ -92,7 +97,6 @@ const ParameterArrayFormField: React.FC<{
                     />
                     {disabled ? null : (
                       <IconButton
-                        variant="outline"
                         aria-label={
                           /* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */
                           "Delete"

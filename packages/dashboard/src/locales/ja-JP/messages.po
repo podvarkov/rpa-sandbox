@@ -25,7 +25,7 @@ msgstr ""
 msgid "Add event"
 msgstr ""
 
-#: src/components/parameter-form-field.tsx:78
+#: src/components/parameter-form-field.tsx:83
 msgid "Add field"
 msgstr "フィールドを追加"
 
@@ -53,7 +53,7 @@ msgstr ""
 msgid "Browse"
 msgstr ""
 
-#: src/pages/templates.tsx:44
+#: src/pages/templates.tsx:79
 msgid "Can not create workflow"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgstr ""
 #~ msgid "Create account"
 #~ msgstr ""
 
-#: src/components/workflow-form.tsx:101
+#: src/components/workflow-form.tsx:114
 msgid "Create workflow"
 msgstr ""
 
@@ -311,8 +311,8 @@ msgstr ""
 #~ msgid "Input argument: {key}"
 #~ msgstr ""
 
-#: src/components/workflow-form.tsx:81
-#: src/components/workflow-form.tsx:82
+#: src/components/workflow-form.tsx:85
+#: src/components/workflow-form.tsx:86
 msgid "Input argument: {name}"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: src/pages/templates.tsx:75
+#: src/pages/templates.tsx:113
 msgid "New workflow"
 msgstr ""
 
@@ -388,16 +388,15 @@ msgstr ""
 msgid "No data available"
 msgstr ""
 
-#: src/pages/templates.tsx:121
 #: src/pages/workflows.tsx:118
 msgid "No description"
 msgstr ""
 
 #: src/pages/templates.tsx:134
-msgid "No parameters"
-msgstr ""
+#~ msgid "No parameters"
+#~ msgstr ""
 
-#: src/pages/templates.tsx:58
+#: src/pages/templates.tsx:93
 msgid "No templates found"
 msgstr ""
 
@@ -405,7 +404,7 @@ msgstr ""
 #~ msgid "Not a member?"
 #~ msgstr ""
 
-#: src/components/workflow-form.tsx:67
+#: src/components/workflow-form.tsx:68
 msgid "Optional description"
 msgstr ""
 
@@ -585,7 +584,7 @@ msgstr ""
 #: src/pages/profile.tsx:189
 #: src/pages/reports.tsx:67
 #: src/pages/scheduler.tsx:83
-#: src/pages/templates.tsx:51
+#: src/pages/templates.tsx:86
 #: src/pages/workflows.tsx:55
 msgid "There was an error while loading"
 msgstr ""
@@ -604,7 +603,7 @@ msgstr ""
 msgid "Those who have not yet registered as a member"
 msgstr ""
 
-#: src/components/workflow-form.tsx:92
+#: src/components/workflow-form.tsx:96
 #: src/pages/executions.tsx:28
 #: src/pages/workflow-runner.tsx:115
 msgid "Timeout"
@@ -618,13 +617,13 @@ msgstr ""
 msgid "Tu"
 msgstr ""
 
-#: src/components/workflow-form.tsx:101
+#: src/components/workflow-form.tsx:114
 msgid "Update workflow"
 msgstr ""
 
 #: src/pages/templates.tsx:148
-msgid "Use template"
-msgstr ""
+#~ msgid "Use template"
+#~ msgstr ""
 
 #: src/pages/sign-up.tsx:57
 msgid "User {0} already exists"
@@ -646,7 +645,7 @@ msgstr ""
 msgid "Workflow"
 msgstr ""
 
-#: src/pages/templates.tsx:39
+#: src/pages/templates.tsx:74
 msgid "Workflow created"
 msgstr ""
 
@@ -754,7 +753,7 @@ msgstr ""
 msgid "surname"
 msgstr ""
 
-#: src/components/workflow-form.tsx:94
+#: src/components/workflow-form.tsx:100
 #: src/pages/workflow-runner.tsx:119
 msgid "timeout"
 msgstr ""

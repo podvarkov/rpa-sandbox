@@ -1,20 +1,17 @@
 import {
   Avatar,
   Box,
-  Button,
   Center,
-  Divider,
   Flex,
   Heading,
   HStack,
-  ListItem,
+  Image,
   Modal,
   ModalBody,
   ModalContent,
   ModalHeader,
   ModalOverlay,
   Text,
-  UnorderedList,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { t, Trans } from "@lingui/macro";
@@ -22,6 +19,44 @@ import { useMutation, useQuery } from "react-query";
 import { api, WorkflowTemplate } from "../api";
 import { useToast } from "../components/use-toast";
 import { WorkflowForm, WorkflowFormValues } from "../components/workflow-form";
+
+const TemplatePreview: React.FC<
+  Pick<WorkflowTemplate, "name" | "humanReadableName" | "logoSrc"> & {
+    onClick: () => void;
+  }
+> = ({ name, logoSrc, humanReadableName, onClick }) => {
+  return (
+    <HStack
+      onClick={onClick}
+      cursor="pointer"
+      _hover={{
+        bg: "gray.50",
+      }}
+      border="1px"
+      borderColor="borderColors.main"
+      borderRadius={10}
+      alignItems="center"
+      p={2}
+      ml={25}
+      mb={25}
+      mr={0}
+      spacing={2}
+      w={["100%", "100%", "100%", "45%", "30%", "23%"]}
+      maxW={["100%", "100%", "100%", "45%", "30%", "23%"]}
+      bg="white"
+    >
+      <Box>
+        <Image
+          objectFit="contain"
+          boxSize={"4rem"}
+          alt="logo"
+          src={logoSrc || "/default-rpa-logo.png"}
+        />
+      </Box>
+      <Text fontSize="lg">{humanReadableName || name}</Text>
+    </HStack>
+  );
+};
 
 export const TemplatesPage: React.FC = () => {
   const { errorMessage, successMessage } = useToast();
@@ -70,7 +105,10 @@ export const TemplatesPage: React.FC = () => {
           <ModalContent>
             <ModalHeader>
               <HStack>
-                <Avatar size={"sm"} src="/wf-icon.png" />
+                <Avatar
+                  size={"sm"}
+                  src={selectedTemplate.logoSrc || "/default-rpa-logo.png"}
+                />
                 <Heading fontFamily={"roboto"} size={"md"}>
                   <Trans>New workflow</Trans>
                 </Heading>
@@ -97,58 +135,15 @@ export const TemplatesPage: React.FC = () => {
         </Modal>
       ) : null}
 
-      <Flex alignItems="baseline" flexWrap={"wrap"}>
+      <Flex mt={3} flexWrap="wrap" alignItems="baseline">
         {templates?.map((template) => (
-          <Box
-            m={2}
-            flexShrink={0}
-            flexGrow={0}
-            w={[null, null, "47%", "30%", "24%"]}
-            maxW={[null, null, "47%", "30%", "24%"]}
-            bg="white"
+          <TemplatePreview
+            onClick={() => setSelectedTemplate(template)}
             key={template._id}
-            boxShadow={"sm"}
-            _hover={{ boxShadow: "md" }}
-          >
-            <HStack p={4}>
-              <Avatar size={"sm"} src="/wf-icon.png" />
-              <Heading fontFamily={"roboto"} size={"md"}>
-                {template.name}
-              </Heading>
-            </HStack>
-            <Divider />
-            <Box p={4} fontFamily={"roboto"}>
-              <Text mb={4}>{template.description || t`No description `}</Text>
-              {template.Parameters?.length ? (
-                <UnorderedList>
-                  {template?.Parameters?.filter(
-                    ({ direction }) => direction === "in"
-                  )?.map((param) => (
-                    <ListItem key={param.name}>
-                      {param.name} - {param.type}
-                    </ListItem>
-                  ))}
-                </UnorderedList>
-              ) : (
-                <Text>
-                  <Trans>No parameters</Trans>
-                </Text>
-              )}
-            </Box>
-            <Box textAlign="right" px={4} pb={4}>
-              <Button
-                size="sm"
-                variant="outline"
-                rounded="sm"
-                colorScheme="teal"
-                onClick={() => {
-                  setSelectedTemplate(template);
-                }}
-              >
-                <Trans>Use template</Trans>
-              </Button>
-            </Box>
-          </Box>
+            name={template.name}
+            humanReadableName={template.humanReadableName}
+            logoSrc={template.logoSrc}
+          />
         ))}
       </Flex>
     </>
