@@ -44,8 +44,9 @@ const TemplatePreview: React.FC<
       w={["100%", "100%", "100%", "45%", "30%", "23%"]}
       maxW={["100%", "100%", "100%", "45%", "30%", "23%"]}
       bg="white"
+      minW={0}
     >
-      <Box>
+      <Box flexShrink={0}>
         <Image
           objectFit="contain"
           boxSize={"4rem"}
@@ -53,7 +54,15 @@ const TemplatePreview: React.FC<
           src={logoSrc || "/default-rpa-logo.png"}
         />
       </Box>
-      <Text fontSize="lg">{humanReadableName || name}</Text>
+      <Text
+        fontSize="lg"
+        overflow="hidden"
+        textOverflow="ellipsis"
+        whiteSpace="nowrap"
+        flexGrow={1}
+      >
+        {humanReadableName || name}
+      </Text>
     </HStack>
   );
 };

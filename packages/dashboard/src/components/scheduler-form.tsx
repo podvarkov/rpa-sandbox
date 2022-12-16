@@ -66,15 +66,13 @@ const frequencies = {
 
 const getPreset = (
   freq: string
-):
-  | {
-      interval: number | undefined;
-      freq: number | undefined;
-      byweekday: number[] | undefined;
-      until: Date | undefined;
-      preset: string;
-    }
-  | undefined => {
+): {
+  interval: number | undefined;
+  freq: number | undefined;
+  byweekday: number[] | undefined;
+  until: Date | undefined;
+  preset: string;
+} => {
   switch (freq) {
     case "MINUTELY":
       return {
@@ -124,6 +122,7 @@ const getPreset = (
         byweekday: [1, 2, 3, 4, 5],
         until: undefined,
       };
+    default:
     case "NO_REPEAT":
       return {
         preset: "NO_REPEAT",
@@ -157,6 +156,23 @@ export type EventFormValues = {
   };
 };
 
+export const createDefaultEvent = ({
+  workflowId,
+  name,
+}: {
+  workflowId: string;
+  name: string;
+}): EventFormValues => {
+  return {
+    workflowId,
+    name,
+    rrule: {
+      dtstart: new Date(),
+      ...getPreset("NO_REPEAT"),
+    },
+  };
+};
+
 export const SchedulerForm: React.FC<{
   onSubmit: (values: EventFormValues) => Promise<unknown>;
   workflows: Workflow[];
@@ -176,15 +192,7 @@ export const SchedulerForm: React.FC<{
                   : undefined,
               },
             }
-          : ({
-              workflowId: workflows[0]?._id,
-              name: "",
-              rrule: {
-                // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                dtstart: new Date(),
-                ...getPreset("NO_REPEAT"),
-              },
-            } as EventFormValues)
+          : createDefaultEvent({ workflowId: workflows[0]?._id, name: "" })
       }
       onSubmit={(values, actions) => {
         onSubmit({

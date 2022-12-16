@@ -53,7 +53,7 @@ msgstr "Available symbols (half-width)"
 msgid "Browse"
 msgstr "Browse"
 
-#: src/pages/templates.tsx:79
+#: src/pages/templates.tsx:88
 msgid "Can not create workflow"
 msgstr "Can not create workflow"
 
@@ -65,7 +65,7 @@ msgstr "Can not delete event"
 msgid "Can not delete report"
 msgstr "Can not delete report"
 
-#: src/pages/workflows.tsx:48
+#: src/pages/workflows.tsx:62
 msgid "Can not delete workflow"
 msgstr "Can not delete workflow"
 
@@ -122,15 +122,15 @@ msgstr "Create workflow"
 msgid "Created"
 msgstr "Created"
 
-#: src/components/scheduler-form.tsx:298
+#: src/components/scheduler-form.tsx:306
 msgid "Custom..."
 msgstr "Custom..."
 
-#: src/components/scheduler-form.tsx:433
+#: src/components/scheduler-form.tsx:441
 msgid "Date"
 msgstr "Date"
 
-#: src/components/scheduler-form.tsx:358
+#: src/components/scheduler-form.tsx:366
 msgid "Day"
 msgstr "Day"
 
@@ -138,11 +138,9 @@ msgstr "Day"
 msgid "Dear 111"
 msgstr "Dear 111"
 
-#: src/pages/reports.tsx:116
-#: src/pages/scheduler.tsx:133
-#: src/pages/workflows.tsx:122
-#~ msgid "Delete"
-#~ msgstr "Delete"
+#: src/pages/workflows.tsx:239
+msgid "Delete"
+msgstr "Delete"
 
 #: src/pages/scheduler.tsx:95
 msgid "Delete event"
@@ -152,7 +150,7 @@ msgstr "Delete event"
 msgid "Delete report"
 msgstr "Delete report"
 
-#: src/pages/workflows.tsx:72
+#: src/pages/workflows.tsx:124
 msgid "Delete workflow"
 msgstr "Delete workflow"
 
@@ -160,9 +158,13 @@ msgstr "Delete workflow"
 msgid "Desired delivery date of the robot"
 msgstr "Desired delivery date of the robot"
 
-#: src/components/scheduler-form.tsx:277
+#: src/components/scheduler-form.tsx:285
 msgid "Do not repeat"
 msgstr "Do not repeat"
+
+#: src/pages/workflows.tsx:236
+msgid "Edit"
+msgstr "Edit"
 
 #: src/pages/profile.tsx:142
 #: src/pages/sign-in.tsx:74
@@ -175,7 +177,7 @@ msgstr "Email"
 #~ msgid "Email address"
 #~ msgstr "Email address"
 
-#: src/components/scheduler-form.tsx:212
+#: src/components/scheduler-form.tsx:220
 msgid "Enter event title"
 msgstr "Enter event title"
 
@@ -195,29 +197,33 @@ msgstr "Error:"
 msgid "Event deleted"
 msgstr "Event deleted"
 
-#: src/components/scheduler-form.tsx:286
+#: src/components/scheduler-form.tsx:294
 msgid "Every day"
 msgstr "Every day"
 
-#: src/components/scheduler-form.tsx:283
+#: src/components/scheduler-form.tsx:291
 msgid "Every hour"
 msgstr "Every hour"
 
-#: src/components/scheduler-form.tsx:280
+#: src/components/scheduler-form.tsx:288
 msgid "Every minute"
 msgstr "Every minute"
 
-#: src/components/scheduler-form.tsx:292
+#: src/components/scheduler-form.tsx:300
 msgid "Every month"
 msgstr "Every month"
 
-#: src/components/scheduler-form.tsx:289
+#: src/components/scheduler-form.tsx:297
 msgid "Every week"
 msgstr "Every week"
 
 #: src/pages/workflow-runner.tsx:140
 msgid "Execute"
 msgstr "Execute"
+
+#: src/pages/workflows.tsx:181
+msgid "Execute workflow"
+msgstr "Execute workflow"
 
 #: src/pages/execution-details.tsx:64
 msgid "Execution details"
@@ -256,7 +262,7 @@ msgstr "Finished at:"
 msgid "For account holders"
 msgstr "For account holders"
 
-#: src/components/scheduler-form.tsx:383
+#: src/components/scheduler-form.tsx:391
 msgid "Fr"
 msgstr "Fr"
 
@@ -276,7 +282,7 @@ msgstr "Go to login screen"
 msgid "Home"
 msgstr "Home"
 
-#: src/components/scheduler-form.tsx:355
+#: src/components/scheduler-form.tsx:363
 msgid "Hour"
 msgstr "Hour"
 
@@ -342,11 +348,11 @@ msgstr "Login"
 msgid "MAIL: {0}"
 msgstr "MAIL: {0}"
 
-#: src/components/scheduler-form.tsx:352
+#: src/components/scheduler-form.tsx:360
 msgid "Minute"
 msgstr "Minute"
 
-#: src/components/scheduler-form.tsx:379
+#: src/components/scheduler-form.tsx:387
 msgid "Mo"
 msgstr "Mo"
 
@@ -354,7 +360,7 @@ msgstr "Mo"
 msgid "Modified"
 msgstr "Modified"
 
-#: src/components/scheduler-form.tsx:364
+#: src/components/scheduler-form.tsx:372
 msgid "Month"
 msgstr "Month"
 
@@ -376,11 +382,11 @@ msgstr "Must match pattern"
 msgid "Name"
 msgstr "Name"
 
-#: src/components/scheduler-form.tsx:429
+#: src/components/scheduler-form.tsx:437
 msgid "Never"
 msgstr "Never"
 
-#: src/pages/templates.tsx:113
+#: src/pages/templates.tsx:122
 msgid "New workflow"
 msgstr "New workflow"
 
@@ -391,14 +397,14 @@ msgid "No data available"
 msgstr "No data available"
 
 #: src/pages/workflows.tsx:118
-msgid "No description"
-msgstr "No description"
+#~ msgid "No description"
+#~ msgstr "No description"
 
 #: src/pages/templates.tsx:134
 #~ msgid "No parameters"
 #~ msgstr "No parameters"
 
-#: src/pages/templates.tsx:93
+#: src/pages/templates.tsx:102
 msgid "No templates found"
 msgstr "No templates found"
 
@@ -464,11 +470,11 @@ msgstr "Rakuten monthly report creation"
 msgid "Registration / Editing"
 msgstr "Registration / Editing"
 
-#: src/components/scheduler-form.tsx:403
+#: src/components/scheduler-form.tsx:411
 msgid "Repeat finish:"
 msgstr "Repeat finish:"
 
-#: src/components/scheduler-form.tsx:309
+#: src/components/scheduler-form.tsx:317
 msgid "Repeat interval:"
 msgstr "Repeat interval:"
 
@@ -497,24 +503,30 @@ msgid "Reporting"
 msgstr "Reporting"
 
 #: src/pages/workflows.tsx:154
-msgid "Run workflow"
-msgstr "Run workflow"
+#~ msgid "Run workflow"
+#~ msgstr "Run workflow"
 
-#: src/components/scheduler-form.tsx:384
+#: src/components/scheduler-form.tsx:392
 msgid "Sa"
 msgstr "Sa"
 
-#: src/components/scheduler-form.tsx:466
+#: src/components/scheduler-form.tsx:474
 msgid "Save"
 msgstr "Save"
 
 #: src/components/sidebar.tsx:36
+#: src/pages/workflows.tsx:229
 msgid "Schedule"
 msgstr "Schedule"
 
 #: src/pages/scheduler.tsx:111
+#: src/pages/workflows.tsx:93
 msgid "Schedule execution"
 msgstr "Schedule execution"
+
+#: src/pages/workflows.tsx:104
+msgid "Scheduled"
+msgstr "Scheduled"
 
 #: src/pages/beta-rpa.tsx:36
 msgid "Select the robot you want to run."
@@ -537,6 +549,7 @@ msgstr "Sign up"
 
 #: src/pages/scheduler.tsx:146
 #: src/pages/sign-up.tsx:58
+#: src/pages/workflows.tsx:107
 msgid "Something goes wrong"
 msgstr "Something goes wrong"
 
@@ -560,7 +573,7 @@ msgstr "Status:"
 msgid "Store Information Registration"
 msgstr "Store Information Registration"
 
-#: src/components/scheduler-form.tsx:385
+#: src/components/scheduler-form.tsx:393
 msgid "Su"
 msgstr "Su"
 
@@ -577,7 +590,7 @@ msgstr "TEL: {0}"
 msgid "Templates"
 msgstr "Templates"
 
-#: src/components/scheduler-form.tsx:382
+#: src/components/scheduler-form.tsx:390
 msgid "Th"
 msgstr "Th"
 
@@ -586,8 +599,8 @@ msgstr "Th"
 #: src/pages/profile.tsx:189
 #: src/pages/reports.tsx:67
 #: src/pages/scheduler.tsx:83
-#: src/pages/templates.tsx:86
-#: src/pages/workflows.tsx:55
+#: src/pages/templates.tsx:95
+#: src/pages/workflows.tsx:69
 msgid "There was an error while loading"
 msgstr "There was an error while loading"
 
@@ -615,7 +628,7 @@ msgstr "Timeout"
 msgid "Title"
 msgstr "Title"
 
-#: src/components/scheduler-form.tsx:380
+#: src/components/scheduler-form.tsx:388
 msgid "Tu"
 msgstr "Tu"
 
@@ -631,15 +644,15 @@ msgstr "Update workflow"
 msgid "User {0} already exists"
 msgstr "User {0} already exists"
 
-#: src/components/scheduler-form.tsx:381
+#: src/components/scheduler-form.tsx:389
 msgid "We"
 msgstr "We"
 
-#: src/components/scheduler-form.tsx:361
+#: src/components/scheduler-form.tsx:369
 msgid "Week"
 msgstr "Week"
 
-#: src/components/scheduler-form.tsx:295
+#: src/components/scheduler-form.tsx:303
 msgid "Work days"
 msgstr "Work days"
 
@@ -647,11 +660,11 @@ msgstr "Work days"
 msgid "Workflow"
 msgstr "Workflow"
 
-#: src/pages/templates.tsx:74
+#: src/pages/templates.tsx:83
 msgid "Workflow created"
 msgstr "Workflow created"
 
-#: src/pages/workflows.tsx:40
+#: src/pages/workflows.tsx:54
 msgid "Workflow deleted"
 msgstr "Workflow deleted"
 
@@ -698,7 +711,7 @@ msgstr "Yahoo! monthly report creation"
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 msgstr "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 
-#: src/pages/workflows.tsx:62
+#: src/pages/workflows.tsx:76
 msgid "Your workflows will be listed here"
 msgstr "Your workflows will be listed here"
 
@@ -712,7 +725,7 @@ msgid "back"
 msgstr "back"
 
 #: src/pages/workflow-runner.tsx:83
-#: src/pages/workflows.tsx:146
+#: src/pages/workflows.tsx:204
 msgid "error"
 msgstr "error"
 
@@ -738,7 +751,7 @@ msgid "password"
 msgstr "password"
 
 #: src/pages/workflow-runner.tsx:72
-#: src/pages/workflows.tsx:137
+#: src/pages/workflows.tsx:194
 msgid "queued"
 msgstr "queued"
 

@@ -1,36 +1,50 @@
 import React, { useEffect, useState } from "react";
 import {
-  Avatar,
   Box,
-  Button,
   Center,
-  Divider,
   Flex,
   Heading,
   HStack,
+  Icon,
   IconButton,
+  Image,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   Text,
-  useBoolean,
+  Tooltip,
 } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { t, Trans } from "@lingui/macro";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
+import { FaEllipsisV, FaPlay } from "react-icons/fa";
 import { api, Workflow } from "../api";
 import { ConfirmDialog } from "../components/confirm-dialog";
 import { useToast } from "../components/use-toast";
+import {
+  createDefaultEvent,
+  EventFormValues,
+  SchedulerForm,
+} from "../components/scheduler-form";
 
 export const WorkflowsPage: React.FC = () => {
   const { infoMessage, errorMessage, successMessage } = useToast();
   const navigate = useNavigate();
-  const [isExecuting, { on: startExecuting, off: stopExecuting }] =
-    useBoolean(false);
+  const [executionId, setExecutionId] = useState<string>();
+  const [deleteIntent, setDeleteIntent] = useState<string>();
+  const [scheduleIntent, setScheduleIntent] = useState<EventFormValues>();
+
   const { data: workflows, error } = useQuery("workflows", ({ signal }) =>
     api.getWorkflows(signal)
   );
   const client = useQueryClient();
-  const [deleteIntent, setDeleteIntent] = useState<string>();
   const mutation = useMutation(
     async () => {
       return deleteIntent ? api.deleteWorkflow(deleteIntent) : undefined;
@@ -64,6 +78,44 @@ export const WorkflowsPage: React.FC = () => {
     </Center>
   ) : (
     <>
+      <Modal
+        size="lg"
+        isOpen={!!scheduleIntent}
+        onClose={() => {
+          setScheduleIntent(undefined);
+        }}
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <HStack>
+              <Heading size={"md"}>
+                <Trans>Schedule execution</Trans>
+              </Heading>
+            </HStack>
+          </ModalHeader>
+          <ModalBody>
+            <SchedulerForm
+              event={scheduleIntent}
+              onSubmit={(values) => {
+                return api
+                  .upsertEvent(values)
+                  .then(() => {
+                    successMessage(t`Scheduled`);
+                  })
+                  .catch(() => {
+                    errorMessage(t`Something goes wrong`);
+                  })
+                  .finally(() => {
+                    setScheduleIntent(undefined);
+                  });
+              }}
+              workflows={workflows || []}
+            />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
       <ConfirmDialog
         isOpen={!!deleteIntent}
         onClose={() => setDeleteIntent(undefined)}
@@ -72,90 +124,126 @@ export const WorkflowsPage: React.FC = () => {
         headerText={t`Delete workflow`}
       />
 
-      <Flex alignItems="baseline" flexWrap={"wrap"}>
-        {workflows?.map((wf) => (
-          <Box
-            m={2}
-            flexShrink={0}
-            flexGrow={1}
-            w={[null, null, "47%", "30%", "24%"]}
-            maxW={[null, null, "47%", "30%", "24%"]}
-            bg="white"
-            key={wf._id}
-            boxShadow={"sm"}
-            _hover={{ boxShadow: "md" }}
-          >
-            <HStack p={4}>
-              <Avatar size={"sm"} src="/wf-icon.png" />
-              <Heading flex={1} fontFamily={"roboto"} size={"md"}>
-                {wf.name}
-              </Heading>
-              <IconButton
-                size="xs"
-                variant="outline"
-                aria-label={
-                  /* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */
-                  "Edit"
-                }
-                onClick={() => {
-                  navigate(wf._id);
-                }}
-                icon={<EditIcon />}
-              />
-              <IconButton
-                size="xs"
-                variant="outline"
-                aria-label={
-                  /* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */
-                  "Delete"
-                }
-                onClick={() => setDeleteIntent(wf._id)}
-                icon={<DeleteIcon />}
-              />
+      <Flex mt={3} flexWrap="wrap" alignItems="baseline">
+        {workflows?.map((workflow) => {
+          return (
+            <HStack
+              minW={0}
+              key={workflow._id}
+              cursor="pointer"
+              _hover={{
+                bg: "gray.50",
+              }}
+              border="1px"
+              borderColor="borderColors.main"
+              borderRadius={10}
+              alignItems="center"
+              p={2}
+              ml={25}
+              mb={25}
+              mr={0}
+              spacing={2}
+              w={["100%", "100%", "100%", "45%", "30%", "23%"]}
+              maxW={["100%", "100%", "100%", "45%", "30%", "23%"]}
+              bg="white"
+            >
+              <Box flexShrink={0}>
+                <Image
+                  objectFit="contain"
+                  boxSize={"4rem"}
+                  alt="logo"
+                  src={"/default-rpa-logo.png"}
+                />
+              </Box>
+              <Tooltip label={workflow.description} aria-label="description">
+                <Text
+                  fontSize="lg"
+                  overflow="hidden"
+                  textOverflow="ellipsis"
+                  whiteSpace="nowrap"
+                  flexGrow={1}
+                >
+                  {workflow.name}
+                </Text>
+              </Tooltip>
+
+              <HStack spacing={0}>
+                <IconButton
+                  size="sm"
+                  variant="ghost"
+                  aria-label="execute"
+                  isLoading={workflow._id === executionId}
+                  disabled={workflow._id === executionId}
+                  icon={
+                    <Icon
+                      as={FaPlay}
+                      color="bgColors.main"
+                      title={t`Execute workflow`}
+                    />
+                  }
+                  onClick={() => {
+                    setExecutionId(workflow._id);
+                    void api
+                      .executeWorkflow({
+                        workflowId: workflow._id,
+                        templateId: workflow.templateId,
+                        arguments: workflow.defaultArguments || {},
+                        expiration: workflow.expiration,
+                      })
+                      .then(() => {
+                        infoMessage(t`queued`);
+                      })
+                      .catch(
+                        (e: AxiosError<{ message: string | string[] }>) => {
+                          console.error(e);
+                          errorMessage(
+                            e.response?.data.message
+                              ? Array.isArray(e.response?.data.message)
+                                ? e.response?.data.message.join("\n")
+                                : e.response?.data.message
+                              : t`error`
+                          );
+                        }
+                      )
+                      .finally(() => {
+                        setExecutionId(undefined);
+                      });
+                  }}
+                />
+
+                <Menu>
+                  <MenuButton lineHeight={4}>
+                    <Icon as={FaEllipsisV} color={"gray.400"} />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem
+                      onClick={() =>
+                        setScheduleIntent(
+                          createDefaultEvent({
+                            workflowId: workflow._id,
+                            name: workflow.name,
+                          })
+                        )
+                      }
+                    >
+                      <Trans>Schedule</Trans>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={() => {
+                        navigate(workflow._id);
+                      }}
+                    >
+                      <Trans>Edit</Trans>
+                    </MenuItem>
+                    <MenuItem onClick={() => setDeleteIntent(workflow._id)}>
+                      <Trans>Delete</Trans>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              </HStack>
             </HStack>
-            <Divider />
-            <Box p={4} fontFamily={"roboto"}>
-              <Text mb={4}>{wf.description || t`No description`}</Text>
-            </Box>
-            <Box textAlign="right" px={4} pb={4}>
-              <Button
-                size="sm"
-                variant="outline"
-                rounded="sm"
-                colorScheme="teal"
-                isLoading={isExecuting}
-                onClick={() => {
-                  startExecuting();
-                  void api
-                    .executeWorkflow({
-                      workflowId: wf._id,
-                      templateId: wf.templateId,
-                      arguments: wf.defaultArguments || {},
-                      expiration: wf.expiration,
-                    })
-                    .then(() => {
-                      infoMessage(t`queued`);
-                    })
-                    .catch((e: AxiosError<{ message: string | string[] }>) => {
-                      console.error(e);
-                      errorMessage(
-                        e.response?.data.message
-                          ? Array.isArray(e.response?.data.message)
-                            ? e.response?.data.message.join("\n")
-                            : e.response?.data.message
-                          : t`error`
-                      );
-                    })
-                    .finally(() => {
-                      stopExecuting();
-                    });
-                }}
-              >
-                <Trans>Run workflow</Trans>
-              </Button>
-            </Box>
-          </Box>
-        ))}
+          );
+        })}
       </Flex>
     </>
   );
