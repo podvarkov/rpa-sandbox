@@ -4,6 +4,7 @@ import {
   Divider,
   FormControl,
   FormErrorMessage,
+  FormHelperText,
   Grid,
   GridItem,
   Heading,
@@ -30,8 +31,10 @@ import { RiCheckFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useMutation, useQuery } from "react-query";
+import { AxiosError } from "axios";
 import { api, UpdatableProfile } from "../api";
 import { useToast } from "../components/use-toast";
+import { useAuth } from "../components/auth-provider";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -139,7 +142,7 @@ const ProfileInfoFields: React.FC = () => {
         </Field>
       </HorizontalFormField>
 
-      <HorizontalFormField title={t`Email`} required readonly>
+      <HorizontalFormField title={t`Email`} required>
         <Field name="username">
           {({ field, meta }: FieldProps) => (
             <FormControl isInvalid={!!(meta.touched && meta.error)}>
@@ -149,6 +152,9 @@ const ProfileInfoFields: React.FC = () => {
                 variant="default"
               />
               <FormErrorMessage>{meta.error}</FormErrorMessage>
+              <FormHelperText>
+                <Trans>Changing email will lead to sign out </Trans>
+              </FormHelperText>
             </FormControl>
           )}
         </Field>
@@ -169,13 +175,17 @@ export const ProfilePage: React.FC = () => {
     return api.getProfile(signal);
   });
   const { errorMessage, successMessage } = useToast();
+  const { signout } = useAuth();
 
   const mutation = useMutation(
     (data: UpdatableProfile) => api.updateProfile(data),
     {
-      onError: (e) => {
-        console.error(e);
-        errorMessage(t`Can not update profile`);
+      onError: (e: AxiosError) => {
+        errorMessage(
+          e.response?.status
+            ? t`User with such email already exists`
+            : t`Can not update profile`
+        );
       },
       onSuccess: () => {
         successMessage(t`Profile updated`);
@@ -296,13 +306,14 @@ export const ProfilePage: React.FC = () => {
                       phone: profile.phone,
                       username: profile.username,
                     }}
-                    onSubmit={(
-                      values: UpdatableProfile,
-                      { setSubmitting, setValues }
-                    ) => {
+                    onSubmit={(values: UpdatableProfile, { setSubmitting }) => {
                       mutation
                         .mutateAsync(values)
-                        .then((data) => setValues(data))
+                        .then((data) => {
+                          if (data.username !== profile.username) {
+                            signout();
+                          }
+                        })
                         .finally(() => {
                           setSubmitting(false);
                         });

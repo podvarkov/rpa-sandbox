@@ -10,6 +10,7 @@ import {
   ClassSerializerInterceptor,
   UseInterceptors,
   SerializeOptions,
+  BadRequestException,
 } from "@nestjs/common";
 import { LocalAuthGuard } from "./local.strategy";
 import { AuthService, Session } from "./auth.service";
@@ -41,7 +42,10 @@ export class AuthController {
   async getProfile(
     @UserSession() session: Session
   ): Promise<UserProfileEntity> {
-    const profile = await this.authService.getUserProfile(session);
+    const profile = await this.authService.getUserProfile(session.jwt, {
+      _id: session.user._id,
+    });
+    if (!profile) throw new BadRequestException("User profile not found!");
     const salesManager = await this.authService.getSalesMember(
       profile.salesManagerId
     );

@@ -1,4 +1,9 @@
-import { BadRequestException, Injectable, Logger } from "@nestjs/common";
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  Logger,
+} from "@nestjs/common";
 import { ConfigProvider } from "../config/config.provider";
 import { CookieJar } from "tough-cookie";
 import * as axiosCookieJarSupport from "axios-cookiejar-support";
@@ -67,11 +72,24 @@ export class AuthService {
   }
 
   async updateUserProfile(session: Session, data: UpdateProfileDto) {
-    const oldUser = await this.getUserProfile(session);
+    const oldUser = await this.getUserProfile(session.jwt, {
+      _id: session.user._id,
+    });
     if (!oldUser) throw new BadRequestException("User not found");
+    if (oldUser.username !== data.username) {
+      const exists = await this.getUserProfile(this.cryptService.rootToken, {
+        username: data.username,
+      });
+      if (exists) throw new ConflictException();
+      return this.openflowService.updateOne(
+        this.cryptService.rootToken,
+        { ...oldUser, ...data },
+        "users"
+      );
+    }
 
     return this.openflowService.updateOne(
-      session.jwt,
+      this.cryptService.rootToken,
       { ...oldUser, ...data },
       "users"
     );
@@ -91,25 +109,12 @@ export class AuthService {
     );
   }
 
-  async getUserProfile(session: Session) {
-    const userProfile = await this.openflowService
-      .queryCollection<Profile>(session.jwt, {
+  async getUserProfile(jwt: string, query: { [key: string]: string }) {
+    return await this.openflowService
+      .queryCollection<Profile>(jwt, {
         collectionname: "users",
-        query: { _id: session.user._id },
-        projection: [
-          "username",
-          "name",
-          "surname",
-          "phone",
-          "furiganaSurname",
-          "furiganaMay",
-          "salesManagerId",
-        ],
+        query,
       })
       .then((data) => data[0]);
-
-    if (!userProfile) throw new BadRequestException("User profile not found!");
-
-    return userProfile;
   }
 }

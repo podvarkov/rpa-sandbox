@@ -49,7 +49,7 @@ msgstr "Arguments:"
 msgid "Available symbols (half-width)"
 msgstr "Available symbols (half-width)"
 
-#: src/pages/profile.tsx:402
+#: src/pages/profile.tsx:413
 msgid "Browse"
 msgstr "Browse"
 
@@ -73,13 +73,17 @@ msgstr "Can not delete workflow"
 msgid "Can not edit workflow"
 msgstr "Can not edit workflow"
 
-#: src/pages/profile.tsx:178
+#: src/pages/profile.tsx:187
 msgid "Can not update profile"
 msgstr "Can not update profile"
 
 #: src/components/confirm-dialog.tsx:60
 msgid "Cancel"
 msgstr "Cancel"
+
+#: src/pages/profile.tsx:156
+msgid "Changing email will lead to sign out"
+msgstr "Changing email will lead to sign out"
 
 #: src/pages/executions.tsx:26
 msgid "Completed"
@@ -97,15 +101,15 @@ msgstr "Confirm action"
 msgid "Confirm password"
 msgstr "Confirm password"
 
-#: src/pages/profile.tsx:378
+#: src/pages/profile.tsx:389
 msgid "Contact us"
 msgstr "Contact us"
 
-#: src/pages/profile.tsx:207
+#: src/pages/profile.tsx:217
 msgid "Contents of inquiry"
 msgstr "Contents of inquiry"
 
-#: src/pages/profile.tsx:384
+#: src/pages/profile.tsx:395
 msgid "Contract Information"
 msgstr "Contract Information"
 
@@ -134,7 +138,7 @@ msgstr "Date"
 msgid "Day"
 msgstr "Day"
 
-#: src/pages/profile.tsx:388
+#: src/pages/profile.tsx:399
 msgid "Dear 111"
 msgstr "Dear 111"
 
@@ -166,7 +170,7 @@ msgstr "Do not repeat"
 msgid "Edit"
 msgstr "Edit"
 
-#: src/pages/profile.tsx:142
+#: src/pages/profile.tsx:145
 #: src/pages/sign-in.tsx:74
 #: src/pages/sign-up.tsx:89
 msgid "Email"
@@ -242,7 +246,7 @@ msgstr "Executions"
 msgid "Expiration timeout:"
 msgstr "Expiration timeout:"
 
-#: src/pages/profile.tsx:360
+#: src/pages/profile.tsx:371
 msgid "FAX: {0}"
 msgstr "FAX: {0}"
 
@@ -266,7 +270,7 @@ msgstr "For account holders"
 msgid "Fr"
 msgstr "Fr"
 
-#: src/pages/profile.tsx:392
+#: src/pages/profile.tsx:403
 msgid "Free Trial Plan"
 msgstr "Free Trial Plan"
 
@@ -299,7 +303,7 @@ msgstr "ID:"
 msgid "Idle"
 msgstr "Idle"
 
-#: src/pages/profile.tsx:345
+#: src/pages/profile.tsx:356
 msgid "In charge of your company"
 msgstr "In charge of your company"
 
@@ -324,7 +328,7 @@ msgstr "Information is collected from various management screens such as malls a
 msgid "Input argument: {name}"
 msgstr "Input argument: {name}"
 
-#: src/pages/profile.tsx:354
+#: src/pages/profile.tsx:365
 msgid "Inquiries about RPA"
 msgstr "Inquiries about RPA"
 
@@ -344,7 +348,7 @@ msgstr "Invoked at:"
 msgid "Login"
 msgstr "Login"
 
-#: src/pages/profile.tsx:363
+#: src/pages/profile.tsx:374
 msgid "MAIL: {0}"
 msgstr "MAIL: {0}"
 
@@ -377,7 +381,7 @@ msgstr "Must be a valid email"
 msgid "Must match pattern"
 msgstr "Must match pattern"
 
-#: src/pages/profile.tsx:86
+#: src/pages/profile.tsx:89
 #: src/pages/reports.tsx:87
 msgid "Name"
 msgstr "Name"
@@ -437,7 +441,7 @@ msgstr "Passwords must match"
 #~ msgid "Phone Number"
 #~ msgstr "Phone Number"
 
-#: src/pages/profile.tsx:129
+#: src/pages/profile.tsx:132
 msgid "Phone number"
 msgstr "Phone number"
 
@@ -449,11 +453,11 @@ msgstr "Please enter your R-Login ID and password."
 msgid "Profile"
 msgstr "Profile"
 
-#: src/pages/profile.tsx:240
+#: src/pages/profile.tsx:250
 msgid "Profile registration"
 msgstr "Profile registration"
 
-#: src/pages/profile.tsx:181
+#: src/pages/profile.tsx:191
 msgid "Profile updated"
 msgstr "Profile updated"
 
@@ -465,8 +469,8 @@ msgstr "Queued"
 msgid "Rakuten monthly report creation"
 msgstr "Rakuten monthly report creation"
 
-#: src/pages/profile.tsx:250
-#: src/pages/profile.tsx:275
+#: src/pages/profile.tsx:260
+#: src/pages/profile.tsx:285
 msgid "Registration / Editing"
 msgstr "Registration / Editing"
 
@@ -478,7 +482,7 @@ msgstr "Repeat finish:"
 msgid "Repeat interval:"
 msgstr "Repeat interval:"
 
-#: src/pages/profile.tsx:398
+#: src/pages/profile.tsx:409
 msgid "Report Results"
 msgstr "Report Results"
 
@@ -569,7 +573,7 @@ msgstr "Status"
 msgid "Status:"
 msgstr "Status:"
 
-#: src/pages/profile.tsx:264
+#: src/pages/profile.tsx:274
 msgid "Store Information Registration"
 msgstr "Store Information Registration"
 
@@ -581,7 +585,7 @@ msgstr "Su"
 msgid "Success"
 msgstr "Success"
 
-#: src/pages/profile.tsx:357
+#: src/pages/profile.tsx:368
 msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
@@ -596,7 +600,7 @@ msgstr "Th"
 
 #: src/pages/execution-details.tsx:46
 #: src/pages/executions.tsx:100
-#: src/pages/profile.tsx:189
+#: src/pages/profile.tsx:199
 #: src/pages/reports.tsx:67
 #: src/pages/scheduler.tsx:83
 #: src/pages/templates.tsx:95
@@ -639,6 +643,10 @@ msgstr "Update workflow"
 #: src/pages/templates.tsx:148
 #~ msgid "Use template"
 #~ msgstr "Use template"
+
+#: src/pages/profile.tsx:186
+msgid "User with such email already exists"
+msgstr "User with such email already exists"
 
 #: src/pages/sign-up.tsx:57
 msgid "User {0} already exists"
@@ -733,7 +741,7 @@ msgstr "error"
 msgid "execution"
 msgstr "execution"
 
-#: src/pages/profile.tsx:200
+#: src/pages/profile.tsx:210
 msgid "inquiry"
 msgstr "inquiry"
 
@@ -741,7 +749,7 @@ msgstr "inquiry"
 msgid "login"
 msgstr "login"
 
-#: src/pages/profile.tsx:101
+#: src/pages/profile.tsx:104
 msgid "name"
 msgstr "name"
 
@@ -760,11 +768,11 @@ msgstr "queued"
 msgid "register"
 msgstr "register"
 
-#: src/pages/profile.tsx:220
+#: src/pages/profile.tsx:230
 msgid "send"
 msgstr "send"
 
-#: src/pages/profile.tsx:91
+#: src/pages/profile.tsx:94
 msgid "surname"
 msgstr "surname"
 
