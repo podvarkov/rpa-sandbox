@@ -303,7 +303,7 @@ export const SchedulerForm: React.FC<{
                       <Trans>Work days</Trans>
                     </option>
                     <option value="CUSTOM">
-                      <Trans>Custom...</Trans>
+                      <Trans>Custom</Trans>
                     </option>
                   </Select>
                 </HStack>

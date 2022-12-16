@@ -127,8 +127,12 @@ msgid "Created"
 msgstr ""
 
 #: src/components/scheduler-form.tsx:306
-msgid "Custom..."
+msgid "Custom"
 msgstr ""
+
+#: src/components/scheduler-form.tsx:306
+#~ msgid "Custom..."
+#~ msgstr ""
 
 #: src/components/scheduler-form.tsx:441
 msgid "Date"
