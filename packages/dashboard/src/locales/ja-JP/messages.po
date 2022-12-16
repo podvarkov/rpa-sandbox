@@ -3,9 +3,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-11 11:57+0500\n"
-"PO-Revision-Date: 2022-11-17 07:28+0000\n"
-"Last-Translator: admin <zeroone@founder-z.com>\n"
-"Language-Team: Japanese <http://weblate.beta.thezeroone.io/projects/coreuse-rpa/dashboard/ja/>\n"
+"PO-Revision-Date: 2022-12-16 14:45+0000\n"
+"Last-Translator: test-user <i.snova.bebebe@gmail.coms>\n"
+"Language-Team: Japanese <http://weblate.beta.thezeroone.io/projects/"
+"coreuse-rpa/dashboard/ja/>\n"
 "Language: ja-JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -15,7 +16,7 @@ msgstr ""
 
 #: src/pages/beta-rpa.tsx:40
 msgid "*Beta version only supports Rakuten"
-msgstr ""
+msgstr "※ベータ版は楽天のみ対応"
 
 #: src/pages/sign-up.tsx:139
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
@@ -113,7 +114,6 @@ msgstr ""
 msgid "Contract Information"
 msgstr ""
 
-#: src/pages/sign-up.tsx:132
 #~ msgid "Create account"
 #~ msgstr ""
 
@@ -130,7 +130,6 @@ msgstr ""
 msgid "Custom"
 msgstr ""
 
-#: src/components/scheduler-form.tsx:306
 #~ msgid "Custom..."
 #~ msgstr ""
 
@@ -180,8 +179,6 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: src/pages/sign-in.tsx:74
-#: src/pages/sign-up.tsx:83
 #~ msgid "Email address"
 #~ msgstr ""
 
@@ -282,7 +279,6 @@ msgstr ""
 msgid "Go to login screen"
 msgstr ""
 
-#: src/pages/sign-up.tsx:140
 #~ msgid "Have an account?"
 #~ msgstr ""
 
@@ -402,11 +398,9 @@ msgstr ""
 msgid "No data available"
 msgstr ""
 
-#: src/pages/workflows.tsx:118
 #~ msgid "No description"
 #~ msgstr ""
 
-#: src/pages/templates.tsx:134
 #~ msgid "No parameters"
 #~ msgstr ""
 
@@ -414,7 +408,6 @@ msgstr ""
 msgid "No templates found"
 msgstr ""
 
-#: src/pages/sign-in.tsx:116
 #~ msgid "Not a member?"
 #~ msgstr ""
 
@@ -439,7 +432,6 @@ msgstr ""
 msgid "Passwords must match"
 msgstr ""
 
-#: src/pages/mypage.tsx:137
 #~ msgid "Phone Number"
 #~ msgstr ""
 
@@ -508,7 +500,6 @@ msgstr ""
 msgid "Reporting"
 msgstr ""
 
-#: src/pages/workflows.tsx:154
 #~ msgid "Run workflow"
 #~ msgstr ""
 
@@ -538,9 +529,6 @@ msgstr ""
 msgid "Select the robot you want to run."
 msgstr ""
 
-#: src/pages/sign-in.tsx:43
-#: src/pages/sign-in.tsx:108
-#: src/pages/sign-up.tsx:142
 #~ msgid "Sign in"
 #~ msgstr ""
 
@@ -642,7 +630,6 @@ msgstr ""
 msgid "Update workflow"
 msgstr ""
 
-#: src/pages/templates.tsx:148
 #~ msgid "Use template"
 #~ msgstr ""
 
@@ -695,8 +682,6 @@ msgstr ""
 msgid "Workflow with {0} id not found"
 msgstr ""
 
-#: src/pages/workflow-edit.tsx:63
-#: src/pages/workflow-runner.tsx:47
 #~ msgid "Workflow with {0} not found"
 #~ msgstr ""
 
@@ -725,7 +710,6 @@ msgstr ""
 msgid "Your workflows will be listed here"
 msgstr ""
 
-#: src/pages/sign-up.tsx:121
 #~ msgid "_ ! # $ ~ ^ @"
 #~ msgstr ""
 
