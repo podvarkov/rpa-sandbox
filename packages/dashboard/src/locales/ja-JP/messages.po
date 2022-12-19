@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-11 11:57+0500\n"
-"PO-Revision-Date: 2022-12-16 14:45+0000\n"
+"PO-Revision-Date: 2022-12-21 10:36+0000\n"
 "Last-Translator: test-user <i.snova.bebebe@gmail.coms>\n"
 "Language-Team: Japanese <http://weblate.beta.thezeroone.io/projects/coreuse-rpa/dashboard/ja/>\n"
 "Language: ja-JP\n"
@@ -20,10 +20,12 @@ msgstr "※ベータ版は楽天のみ対応"
 #: src/pages/sign-up.tsx:139
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 msgstr ""
+"*ログインID、生年月日、電話番号、氏名など、お客様の個人情報に関連する文字列や、第三者に推測されやすい簡易な文字列（例：password）をパスワードに"
+"設定しないようにしてください。"
 
 #: src/pages/scheduler.tsx:227
 msgid "Add event"
-msgstr ""
+msgstr "イベントを追加"
 
 #: src/components/parameter-form-field.tsx:83
 msgid "Add field"
@@ -31,211 +33,211 @@ msgstr "フィールドを追加"
 
 #: src/pages/executions.tsx:139
 msgid "All workflows"
-msgstr ""
+msgstr "すべてのワークフロー"
 
 #: src/pages/executions.tsx:166
 msgid "Any status"
-msgstr ""
+msgstr "任意のステータス"
 
 #: src/components/confirm-dialog.tsx:49
 msgid "Are you sure? You can not undo this action afterwards."
-msgstr ""
+msgstr "本気ですか？後でこのアクションを元に戻すことはできません。"
 
 #: src/pages/execution-details.tsx:98
 msgid "Arguments:"
-msgstr ""
+msgstr "引数:"
 
 #: src/pages/sign-up.tsx:135
 msgid "Available symbols (half-width)"
-msgstr ""
+msgstr "Available symbols (half-width)"
 
 #: src/pages/profile.tsx:413
 msgid "Browse"
-msgstr ""
+msgstr "ブラウズ"
 
 #: src/pages/templates.tsx:88
 msgid "Can not create workflow"
-msgstr ""
+msgstr "ワークフローを作成できません"
 
 #: src/pages/scheduler.tsx:71
 msgid "Can not delete event"
-msgstr ""
+msgstr "イベントを削除できません"
 
 #: src/pages/reports.tsx:60
 msgid "Can not delete report"
-msgstr ""
+msgstr "レポートを削除できません"
 
 #: src/pages/workflows.tsx:62
 msgid "Can not delete workflow"
-msgstr ""
+msgstr "ワークフローを削除できません"
 
 #: src/pages/workflow-edit.tsx:37
 msgid "Can not edit workflow"
-msgstr ""
+msgstr "ワークフローを編集できません"
 
 #: src/pages/profile.tsx:187
 msgid "Can not update profile"
-msgstr ""
+msgstr "プロフィールを更新できません"
 
 #: src/components/confirm-dialog.tsx:60
 msgid "Cancel"
-msgstr ""
+msgstr "取り消し"
 
 #: src/pages/profile.tsx:156
 msgid "Changing email will lead to sign out"
-msgstr ""
+msgstr "メールアドレスを変更するとサインアウトします"
 
 #: src/pages/executions.tsx:26
 msgid "Completed"
-msgstr ""
+msgstr "完了"
 
 #: src/components/confirm-dialog.tsx:71
 msgid "Confirm"
-msgstr ""
+msgstr "確認"
 
 #: src/components/confirm-dialog.tsx:44
 msgid "Confirm action"
-msgstr ""
+msgstr "アクションを確認"
 
 #: src/pages/sign-up.tsx:117
 msgid "Confirm password"
-msgstr ""
+msgstr "パスワードを認証する"
 
 #: src/pages/profile.tsx:389
 msgid "Contact us"
-msgstr ""
+msgstr "お問い合わせ"
 
 #: src/pages/profile.tsx:217
 msgid "Contents of inquiry"
-msgstr ""
+msgstr "お問い合わせ内容"
 
 #: src/pages/profile.tsx:395
 msgid "Contract Information"
-msgstr ""
+msgstr "契約情報"
 
 #~ msgid "Create account"
 #~ msgstr ""
 
 #: src/components/workflow-form.tsx:114
 msgid "Create workflow"
-msgstr ""
+msgstr "ワークフローの作成"
 
 #: src/pages/reports.tsx:90
 #: src/pages/scheduler.tsx:162
 msgid "Created"
-msgstr ""
+msgstr "作成した"
 
 #: src/components/scheduler-form.tsx:306
 msgid "Custom"
-msgstr ""
+msgstr "カスタム"
 
 #~ msgid "Custom..."
 #~ msgstr ""
 
 #: src/components/scheduler-form.tsx:441
 msgid "Date"
-msgstr ""
+msgstr "日にち"
 
 #: src/components/scheduler-form.tsx:366
 msgid "Day"
-msgstr ""
+msgstr "日"
 
 #: src/pages/profile.tsx:399
 msgid "Dear 111"
-msgstr ""
+msgstr "親愛なる111"
 
 #: src/pages/workflows.tsx:239
 msgid "Delete"
-msgstr ""
+msgstr "消去"
 
 #: src/pages/scheduler.tsx:95
 msgid "Delete event"
-msgstr ""
+msgstr "予定を削除"
 
 #: src/pages/reports.tsx:79
 msgid "Delete report"
-msgstr ""
+msgstr "レポートを削除"
 
 #: src/pages/workflows.tsx:124
 msgid "Delete workflow"
-msgstr ""
+msgstr "ワークフローの削除"
 
 #: src/pages/beta-rpa.tsx:107
 msgid "Desired delivery date of the robot"
-msgstr ""
+msgstr "ロボットのお届け希望日"
 
 #: src/components/scheduler-form.tsx:285
 msgid "Do not repeat"
-msgstr ""
+msgstr "繰り返さない"
 
 #: src/pages/workflows.tsx:236
 msgid "Edit"
-msgstr ""
+msgstr "編集"
 
 #: src/pages/profile.tsx:145
 #: src/pages/sign-in.tsx:74
 #: src/pages/sign-up.tsx:89
 msgid "Email"
-msgstr ""
+msgstr "メールアドレス"
 
 #~ msgid "Email address"
 #~ msgstr ""
 
 #: src/components/scheduler-form.tsx:220
 msgid "Enter event title"
-msgstr ""
+msgstr "イベントタイトルを入力"
 
 #: src/pages/mall-info.tsx:39
 msgid "Enter your Rakuten member ID and password."
-msgstr ""
+msgstr "楽天会員IDとパスワードを入力"
 
 #: src/pages/executions.tsx:27
 msgid "Error"
-msgstr ""
+msgstr "エラー"
 
 #: src/pages/execution-details.tsx:116
 msgid "Error:"
-msgstr ""
+msgstr "エラー："
 
 #: src/pages/scheduler.tsx:63
 msgid "Event deleted"
-msgstr ""
+msgstr "イベントを削除しました"
 
 #: src/components/scheduler-form.tsx:294
 msgid "Every day"
-msgstr ""
+msgstr "毎日"
 
 #: src/components/scheduler-form.tsx:291
 msgid "Every hour"
-msgstr ""
+msgstr "毎時"
 
 #: src/components/scheduler-form.tsx:288
 msgid "Every minute"
-msgstr ""
+msgstr "毎分"
 
 #: src/components/scheduler-form.tsx:300
 msgid "Every month"
-msgstr ""
+msgstr "毎月"
 
 #: src/components/scheduler-form.tsx:297
 msgid "Every week"
-msgstr ""
+msgstr "毎週"
 
 #: src/pages/workflow-runner.tsx:140
 msgid "Execute"
-msgstr ""
+msgstr "実行する"
 
 #: src/pages/workflows.tsx:181
 msgid "Execute workflow"
-msgstr ""
+msgstr "ワークフローの実行"
 
 #: src/pages/execution-details.tsx:64
 msgid "Execution details"
-msgstr ""
+msgstr "実行の詳細"
 
 #: src/pages/execution-details.tsx:56
 msgid "Execution with {0} id not found"
-msgstr ""
+msgstr "{0} ID での実行が見つかりません"
 
 #: src/components/layout.tsx:25
 #: src/components/sidebar.tsx:35
@@ -244,7 +246,7 @@ msgstr "処刑"
 
 #: src/pages/execution-details.tsx:92
 msgid "Expiration timeout:"
-msgstr ""
+msgstr "有効期限切れ:"
 
 #: src/pages/profile.tsx:371
 msgid "FAX: {0}"
@@ -252,42 +254,42 @@ msgstr ""
 
 #: src/pages/executions.tsx:119
 msgid "Filters:"
-msgstr ""
+msgstr "フィルター:"
 
 #: src/pages/executions.tsx:199
 msgid "Finished"
-msgstr ""
+msgstr "終了した"
 
 #: src/pages/execution-details.tsx:145
 msgid "Finished at:"
-msgstr ""
+msgstr "終了時刻:"
 
 #: src/pages/sign-up.tsx:179
 msgid "For account holders"
-msgstr ""
+msgstr "口座保有者向け"
 
 #: src/components/scheduler-form.tsx:391
 msgid "Fr"
-msgstr ""
+msgstr "神父"
 
 #: src/pages/profile.tsx:403
 msgid "Free Trial Plan"
-msgstr ""
+msgstr "無料お試しプラン"
 
 #: src/pages/sign-up.tsx:186
 msgid "Go to login screen"
-msgstr ""
+msgstr "ログイン画面へ"
 
 #~ msgid "Have an account?"
 #~ msgstr ""
 
 #: src/components/sidebar.tsx:33
 msgid "Home"
-msgstr ""
+msgstr "家"
 
 #: src/components/scheduler-form.tsx:363
 msgid "Hour"
-msgstr ""
+msgstr "時間"
 
 #: src/pages/mall-info.tsx:32
 #: src/pages/mall-info.tsx:42
@@ -304,15 +306,16 @@ msgstr ""
 
 #: src/pages/profile.tsx:356
 msgid "In charge of your company"
-msgstr ""
+msgstr "御社担当"
 
 #: src/pages/executions.tsx:31
 msgid "In progress"
-msgstr ""
+msgstr "進行中"
 
 #: src/pages/beta-rpa.tsx:114
 msgid "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
 msgstr ""
+"モールやアクセス解析など、各種管理画面から情報を収集します。反映されない場合、各種管理画面への反映が遅れることがあります。時間をおいて再度お試しください。"
 
 #~ msgid "Input argument"
 #~ msgstr ""
@@ -323,79 +326,79 @@ msgstr ""
 #: src/components/workflow-form.tsx:85
 #: src/components/workflow-form.tsx:86
 msgid "Input argument: {name}"
-msgstr ""
+msgstr "入力引数です。{名前}。"
 
 #: src/pages/profile.tsx:365
 msgid "Inquiries about RPA"
-msgstr ""
+msgstr "RPAに関するお問い合わせ"
 
 #: src/pages/executions.tsx:25
 msgid "Invoke failed"
-msgstr ""
+msgstr "呼び出しに失敗"
 
 #: src/pages/executions.tsx:29
 msgid "Invoked"
-msgstr ""
+msgstr "インボークド"
 
 #: src/pages/execution-details.tsx:134
 msgid "Invoked at:"
-msgstr ""
+msgstr "で呼び出される。"
 
 #: src/pages/sign-in.tsx:42
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #: src/pages/profile.tsx:374
 msgid "MAIL: {0}"
-msgstr ""
+msgstr "MAIL: {0}"
 
 #: src/components/scheduler-form.tsx:360
 msgid "Minute"
-msgstr ""
+msgstr "分"
 
 #: src/components/scheduler-form.tsx:387
 msgid "Mo"
-msgstr ""
+msgstr "モ"
 
 #: src/pages/scheduler.tsx:165
 msgid "Modified"
-msgstr ""
+msgstr "モディファイド"
 
 #: src/components/scheduler-form.tsx:372
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 #: src/pages/beta-rpa.tsx:31
 msgid "Monthly report creation"
-msgstr ""
+msgstr "月次レポート作成"
 
 #: src/pages/sign-in.tsx:60
 #: src/pages/sign-up.tsx:67
 msgid "Must be a valid email"
-msgstr ""
+msgstr "有効な電子メールである必要があります"
 
 #: src/pages/sign-up.tsx:71
 msgid "Must match pattern"
-msgstr ""
+msgstr "パターンと一致する必要がある"
 
 #: src/pages/profile.tsx:89
 #: src/pages/reports.tsx:87
 msgid "Name"
-msgstr ""
+msgstr "パターンと一致する必要がある"
 
 #: src/components/scheduler-form.tsx:437
 msgid "Never"
-msgstr ""
+msgstr "決して"
 
 #: src/pages/templates.tsx:122
 msgid "New workflow"
-msgstr ""
+msgstr "新しいワークフロー"
 
 #: src/pages/executions.tsx:215
 #: src/pages/reports.tsx:99
 #: src/pages/scheduler.tsx:174
 msgid "No data available"
-msgstr ""
+msgstr "データなし"
 
 #~ msgid "No description"
 #~ msgstr ""
@@ -405,99 +408,99 @@ msgstr ""
 
 #: src/pages/templates.tsx:102
 msgid "No templates found"
-msgstr ""
+msgstr "テンプレートが見つかりません"
 
 #~ msgid "Not a member?"
 #~ msgstr ""
 
 #: src/components/workflow-form.tsx:68
 msgid "Optional description"
-msgstr ""
+msgstr "オプションの説明"
 
 #: src/pages/execution-details.tsx:107
 msgid "Output:"
-msgstr ""
+msgstr "出力します。"
 
 #: src/pages/sign-in.tsx:87
 #: src/pages/sign-up.tsx:103
 msgid "Password"
-msgstr ""
+msgstr "パスワード"
 
 #: src/pages/sign-up.tsx:128
 msgid "Password must be 8 characters or more and 32 characters or less. You can use single-byte alphanumeric characters and the following symbols."
-msgstr ""
+msgstr "パスワードは8文字以上、32文字以下で設定してください。使用できる文字は、半角英数字と次の記号です。"
 
 #: src/pages/sign-up.tsx:73
 msgid "Passwords must match"
-msgstr ""
+msgstr "パスワードが一致すること"
 
 #~ msgid "Phone Number"
 #~ msgstr ""
 
 #: src/pages/profile.tsx:132
 msgid "Phone number"
-msgstr ""
+msgstr "電話番号"
 
 #: src/pages/mall-info.tsx:29
 msgid "Please enter your R-Login ID and password."
-msgstr ""
+msgstr "R-LoginのID、パスワードを入力してください。"
 
 #: src/components/header.tsx:97
 msgid "Profile"
-msgstr ""
+msgstr "プロフィール"
 
 #: src/pages/profile.tsx:250
 msgid "Profile registration"
-msgstr ""
+msgstr "プロフィール登録"
 
 #: src/pages/profile.tsx:191
 msgid "Profile updated"
-msgstr ""
+msgstr "プロフィール更新"
 
 #: src/pages/executions.tsx:30
 msgid "Queued"
-msgstr ""
+msgstr "キューイング"
 
 #: src/pages/beta-rpa.tsx:56
 msgid "Rakuten monthly report creation"
-msgstr ""
+msgstr "楽天月報作成"
 
 #: src/pages/profile.tsx:260
 #: src/pages/profile.tsx:285
 msgid "Registration / Editing"
-msgstr ""
+msgstr "登録・編集"
 
 #: src/components/scheduler-form.tsx:411
 msgid "Repeat finish:"
-msgstr ""
+msgstr "リピート仕上げ。"
 
 #: src/components/scheduler-form.tsx:317
 msgid "Repeat interval:"
-msgstr ""
+msgstr "インターバルを繰り返す。"
 
 #: src/pages/profile.tsx:409
 msgid "Report Results"
-msgstr ""
+msgstr "報告結果"
 
 #: src/pages/beta-rpa.tsx:95
 msgid "Report data end date"
-msgstr ""
+msgstr "レポートデータ終了日"
 
 #: src/pages/beta-rpa.tsx:87
 msgid "Report data start date"
-msgstr ""
+msgstr "レポートデータ開始日"
 
 #: src/pages/reports.tsx:55
 msgid "Report deleted"
-msgstr ""
+msgstr "レポート削除"
 
 #: src/components/sidebar.tsx:37
 msgid "Report download"
-msgstr ""
+msgstr "レポートダウンロード"
 
 #: src/components/sidebar.tsx:34
 msgid "Reporting"
-msgstr ""
+msgstr "報告書作成"
 
 #~ msgid "Run workflow"
 #~ msgstr ""
@@ -508,25 +511,25 @@ msgstr ""
 
 #: src/components/scheduler-form.tsx:474
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: src/components/sidebar.tsx:36
 #: src/pages/workflows.tsx:229
 msgid "Schedule"
-msgstr ""
+msgstr "スケジュール"
 
 #: src/pages/scheduler.tsx:111
 #: src/pages/workflows.tsx:93
 msgid "Schedule execution"
-msgstr ""
+msgstr "スケジュール実行"
 
 #: src/pages/workflows.tsx:104
 msgid "Scheduled"
-msgstr ""
+msgstr "予定"
 
 #: src/pages/beta-rpa.tsx:36
 msgid "Select the robot you want to run."
-msgstr ""
+msgstr "実行したいロボットを選択します。"
 
 #~ msgid "Sign in"
 #~ msgstr ""
@@ -534,37 +537,37 @@ msgstr ""
 #: src/components/header.tsx:100
 #: src/components/layout.tsx:85
 msgid "Sign out"
-msgstr ""
+msgstr "サインアウト"
 
 #: src/pages/sign-up.tsx:41
 msgid "Sign up"
-msgstr ""
+msgstr "会員登録"
 
 #: src/pages/scheduler.tsx:146
 #: src/pages/sign-up.tsx:58
 #: src/pages/workflows.tsx:107
 msgid "Something goes wrong"
-msgstr ""
+msgstr "何かが間違っている"
 
 #: src/pages/executions.tsx:192
 msgid "Started"
-msgstr ""
+msgstr "開始"
 
 #: src/pages/execution-details.tsx:123
 msgid "Started at:"
-msgstr ""
+msgstr "でスタート。"
 
 #: src/pages/executions.tsx:206
 msgid "Status"
-msgstr ""
+msgstr "ステータス"
 
 #: src/pages/execution-details.tsx:80
 msgid "Status:"
-msgstr ""
+msgstr "状態です。"
 
 #: src/pages/profile.tsx:274
 msgid "Store Information Registration"
-msgstr ""
+msgstr "店舗情報登録"
 
 #: src/components/scheduler-form.tsx:393
 msgid "Su"
@@ -572,11 +575,11 @@ msgstr ""
 
 #: src/pages/scheduler.tsx:140
 msgid "Success"
-msgstr ""
+msgstr "成功"
 
 #: src/pages/profile.tsx:368
 msgid "TEL: {0}"
-msgstr ""
+msgstr "TEL: {0}"
 
 #: src/components/layout.tsx:17
 #: src/components/sidebar.tsx:38
@@ -595,7 +598,7 @@ msgstr ""
 #: src/pages/templates.tsx:95
 #: src/pages/workflows.tsx:69
 msgid "There was an error while loading"
-msgstr ""
+msgstr "を読み込む際にエラーが発生しました。"
 
 #: src/components/workflow-form.tsx:39
 #: src/pages/sign-in.tsx:61
@@ -605,21 +608,21 @@ msgstr ""
 #: src/pages/sign-up.tsx:74
 #: src/pages/workflow-runner.tsx:59
 msgid "This field is required"
-msgstr ""
+msgstr "このフィールドは必須です"
 
 #: src/pages/sign-in.tsx:117
 msgid "Those who have not yet registered as a member"
-msgstr ""
+msgstr "会員登録がお済みでない方"
 
 #: src/components/workflow-form.tsx:96
 #: src/pages/executions.tsx:28
 #: src/pages/workflow-runner.tsx:115
 msgid "Timeout"
-msgstr ""
+msgstr "タイムアウト"
 
 #: src/pages/scheduler.tsx:159
 msgid "Title"
-msgstr ""
+msgstr "タイトル"
 
 #: src/components/scheduler-form.tsx:388
 msgid "Tu"
@@ -627,18 +630,18 @@ msgstr ""
 
 #: src/components/workflow-form.tsx:114
 msgid "Update workflow"
-msgstr ""
+msgstr "ワークフローの更新"
 
 #~ msgid "Use template"
 #~ msgstr ""
 
 #: src/pages/profile.tsx:186
 msgid "User with such email already exists"
-msgstr ""
+msgstr "そのようなメールアドレスを持つユーザーはすでに存在する"
 
 #: src/pages/sign-up.tsx:57
 msgid "User {0} already exists"
-msgstr ""
+msgstr "ユーザー{0}はすでに存在す"
 
 #: src/components/scheduler-form.tsx:389
 msgid "We"
@@ -646,47 +649,47 @@ msgstr ""
 
 #: src/components/scheduler-form.tsx:369
 msgid "Week"
-msgstr ""
+msgstr "週間"
 
 #: src/components/scheduler-form.tsx:303
 msgid "Work days"
-msgstr ""
+msgstr "勤務日数"
 
 #: src/pages/executions.tsx:185
 msgid "Workflow"
-msgstr ""
+msgstr "ワークフロー"
 
 #: src/pages/templates.tsx:83
 msgid "Workflow created"
-msgstr ""
+msgstr "作成したワークフロー"
 
 #: src/pages/workflows.tsx:54
 msgid "Workflow deleted"
-msgstr ""
+msgstr "ワークフローを削除"
 
 #: src/components/workflow-form.tsx:65
 msgid "Workflow description:"
-msgstr ""
+msgstr "ワークフローの説明。"
 
 #: src/components/workflow-form.tsx:51
 msgid "Workflow name:"
-msgstr ""
+msgstr "ワークフロー名。"
 
 #: src/pages/workflow-edit.tsx:29
 msgid "Workflow updated"
-msgstr ""
+msgstr "ワークフローを更新"
 
 #: src/pages/workflow-edit.tsx:47
 #: src/pages/workflow-runner.tsx:47
 msgid "Workflow with {0} id not found"
-msgstr ""
+msgstr "{0}のIDを持つワークフローが見つかりません"
 
 #~ msgid "Workflow with {0} not found"
 #~ msgstr ""
 
 #: src/pages/execution-details.tsx:74
 msgid "Workflow:"
-msgstr ""
+msgstr "ワークフロー"
 
 #: src/components/layout.tsx:21
 #: src/components/sidebar.tsx:39
@@ -695,19 +698,21 @@ msgstr "ワークフロー"
 
 #: src/pages/sign-in.tsx:52
 msgid "Wrong password or username"
-msgstr ""
+msgstr "パスワードまたはユーザー名が間違っている"
 
 #: src/pages/beta-rpa.tsx:72
 msgid "Yahoo! monthly report creation"
-msgstr ""
+msgstr "Yahoo!月次レポート作成"
 
 #: src/pages/sign-up.tsx:148
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 msgstr ""
+"ドメイン指定受信などの受信拒否設定をしている場合、受信できないことがあります。設定を解除するか、以下のドメインからのメールを受信できるように設定後に手続き"
+"を行ってください。"
 
 #: src/pages/workflows.tsx:76
 msgid "Your workflows will be listed here"
-msgstr ""
+msgstr "ワークフローはここに表示されます。"
 
 #~ msgid "_ ! # $ ~ ^ @"
 #~ msgstr ""
@@ -715,56 +720,56 @@ msgstr ""
 #: src/pages/beta-rpa.tsx:148
 #: src/pages/mall-info.tsx:64
 msgid "back"
-msgstr ""
+msgstr "裏面"
 
 #: src/pages/workflow-runner.tsx:83
 #: src/pages/workflows.tsx:204
 msgid "error"
-msgstr ""
+msgstr "失態"
 
 #: src/pages/beta-rpa.tsx:133
 msgid "execution"
-msgstr ""
+msgstr "仕置"
 
 #: src/pages/profile.tsx:210
 msgid "inquiry"
-msgstr ""
+msgstr "問合せ"
 
 #: src/pages/sign-in.tsx:108
 msgid "login"
-msgstr ""
+msgstr "ログイン"
 
 #: src/pages/profile.tsx:104
 msgid "name"
-msgstr ""
+msgstr "名前"
 
 #: src/pages/mall-info.tsx:33
 #: src/pages/mall-info.tsx:43
 msgid "password"
-msgstr ""
+msgstr "暗証番号"
 
 #: src/pages/workflow-runner.tsx:72
 #: src/pages/workflows.tsx:194
 msgid "queued"
-msgstr ""
+msgstr "待ち行列"
 
 #: src/pages/mall-info.tsx:47
 #: src/pages/sign-up.tsx:170
 msgid "register"
-msgstr ""
+msgstr "レジスタ"
 
 #: src/pages/profile.tsx:230
 msgid "send"
-msgstr ""
+msgstr "おくる"
 
 #: src/pages/profile.tsx:94
 msgid "surname"
-msgstr ""
+msgstr "苗字"
 
 #: src/components/workflow-form.tsx:100
 #: src/pages/workflow-runner.tsx:119
 msgid "timeout"
-msgstr ""
+msgstr "タイムアウト"
 
 #: src/pages/reports.tsx:107
 msgid "{0}"
@@ -772,8 +777,8 @@ msgstr ""
 
 #: src/components/sidebar.tsx:73
 msgid "{children}"
-msgstr ""
+msgstr "{子供たち}"
 
 #: src/components/layout.tsx:42
 msgid "© 2022 Coreus RPA. All rights reserved"
-msgstr ""
+msgstr "© 2022 コアスRPA. 無断転載を禁じます"
