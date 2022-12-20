@@ -33,5 +33,5 @@ jobs:
         with:
           context: .
           tags: |
-            ghcr.io/founder-z/jidoca-2:latest
+            ghcr.io/founder-z/coreus-rpa:latest
           push: true
