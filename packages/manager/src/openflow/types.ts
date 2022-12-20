@@ -46,6 +46,7 @@ export type Execution = Entity<{
   arguments: { [key: string]: unknown };
   output?: { [key: string]: unknown };
   error: string | null;
+  robotId: string;
   workflowId: string;
   templateId: string;
 }>;
