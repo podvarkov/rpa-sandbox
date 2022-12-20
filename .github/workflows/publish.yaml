@@ -16,5 +16,7 @@ jobs:
           yarn install --frozen-lockfile
 
       - name: Build
+        env:
+          CI: false
         run: |
           npx lerna run build
