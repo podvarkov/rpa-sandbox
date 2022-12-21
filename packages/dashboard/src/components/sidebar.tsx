@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import {
   Box,
   BoxProps,
@@ -11,7 +11,8 @@ import {
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { t, Trans } from "@lingui/macro";
+import { defineMessage } from "@lingui/macro";
+import { useLingui } from "@lingui/react";
 import { IconType } from "react-icons";
 import { AiFillHome } from "react-icons/ai";
 import {
@@ -23,28 +24,71 @@ import {
 } from "react-icons/fa";
 import { Outlet, NavLink as ReactLink } from "react-router-dom";
 import Header from "./header";
+import { MessageDescriptor } from "@lingui/core";
 
 interface LinkItemProps {
-  name: string;
+  id: string;
+  name: MessageDescriptor;
   icon: IconType;
   to: string;
 }
+/* eslint-disable string-to-lingui/missing-lingui-transformation */
 const LinkItems: Array<LinkItemProps> = [
-  { name: t`Home`, icon: AiFillHome, to: "/home" },
-  { name: t`Reporting`, icon: FaRegChartBar, to: "/beta-rpa" },
-  { name: t`Executions`, icon: FaCodeBranch, to: "/executions" },
-  { name: t`Schedule`, icon: FaCalendarDay, to: "/schedule" },
-  { name: t`Report download`, icon: FaCloudDownloadAlt, to: "/reports" },
-  { name: t`Templates`, icon: FaFileImport, to: "/templates" },
-  { name: t`Workflows`, icon: FaRegChartBar, to: "/workflows" },
+  {
+    name: defineMessage({ message: "Home" }),
+    icon: AiFillHome,
+    to: "/home",
+    id: "home",
+  },
+  {
+    name: defineMessage({ message: "Reporting" }),
+    icon: FaRegChartBar,
+    to: "/beta-rpa",
+    id: "reporting",
+  },
+  {
+    name: defineMessage({ message: "Executions" }),
+    id: "executions",
+    icon: FaCodeBranch,
+    to: "/executions",
+  },
+  {
+    name: defineMessage({ message: "Schedule" }),
+    id: "schedule",
+    icon: FaCalendarDay,
+    to: "/schedule",
+  },
+  {
+    name: defineMessage({ message: "Report download" }),
+    id: "report",
+    icon: FaCloudDownloadAlt,
+    to: "/reports",
+  },
+  {
+    name: defineMessage({ message: "Templates" }),
+    id: "templates",
+    icon: FaFileImport,
+    to: "/templates",
+  },
+  {
+    name: defineMessage({ message: "Workflows" }),
+    id: "workflows",
+    icon: FaRegChartBar,
+    to: "/workflows",
+  },
 ];
+/* eslint-enable string-to-lingui/missing-lingui-transformation */
 
 interface NavItemProps extends FlexProps {
   icon: IconType;
-  children: string;
   to: string;
 }
-const NavItem = ({ icon, to, children, ...rest }: NavItemProps) => {
+const NavItem: React.FC<PropsWithChildren<NavItemProps>> = ({
+  icon,
+  to,
+  children,
+  ...rest
+}) => {
   return (
     <ReactLink to={to} style={{ textDecoration: "none" }}>
       {({ isActive }) => (
@@ -70,7 +114,7 @@ const NavItem = ({ icon, to, children, ...rest }: NavItemProps) => {
               as={icon}
             />
           )}
-          <Trans>{children}</Trans>
+          {children}
         </Flex>
       )}
     </ReactLink>
@@ -78,6 +122,7 @@ const NavItem = ({ icon, to, children, ...rest }: NavItemProps) => {
 };
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const { i18n } = useLingui();
   return (
     <Box
       transition="3s ease"
@@ -96,8 +141,8 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem to={link.to} key={link.name} icon={link.icon}>
-          {link.name}
+        <NavItem to={link.to} key={link.id} icon={link.icon}>
+          {i18n._(link.name)}
         </NavItem>
       ))}
     </Box>
