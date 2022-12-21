@@ -145,13 +145,7 @@ export type File = {
 type AuthStateChangedCb = (user: Session) => void;
 type PaginationParams = { top: number; skip: number };
 
-export type SendInquiry = {
-  surname: string;
-  name: string;
-  furiganaSurname: string;
-  furiganaMay: string;
-  phone: string;
-  username: string;
+export type SendInquiryParams = UpdatableProfile & {
   inquiry: string;
 };
 
@@ -314,13 +308,9 @@ class Api {
       .delete<{ id: string }>(`reports/${id}`)
       .then(({ data }) => data);
   }
-  SendInquiryToManager(profileInfoAndMsg: SendInquiry) {
-    console.log(profileInfoAndMsg);
+  sendInquiryToManager(profileInfoAndMsg: SendInquiryParams) {
     return this.axios
-      .post(
-        "https://coreus-rpa.dev.app.thezeroone.io/api/wf/webhook/240d7e1e-2382-49f0-a314-5554c89496b9",
-        profileInfoAndMsg
-      )
+      .post("inquire", profileInfoAndMsg)
       .then(({ data }) => data);
   }
 }

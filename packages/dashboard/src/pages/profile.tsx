@@ -32,7 +32,7 @@ import { RiCheckFill } from "react-icons/ri";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { api, UpdatableProfile } from "../api";
+import { api, SendInquiryParams, UpdatableProfile } from "../api";
 import { useAuth } from "../components/auth-provider";
 import { useToast } from "../components/use-toast";
 
@@ -83,7 +83,9 @@ const HorizontalFormField: React.FC<
     </HStack>
   );
 };
-const ProfileInfoFields: React.FC = () => {
+const ProfileInfoFields: React.FC<{ readonlyUsername: boolean }> = ({
+  readonlyUsername = false,
+}) => {
   return (
     <>
       <HorizontalFormField title={t`Name`} required>
@@ -142,7 +144,11 @@ const ProfileInfoFields: React.FC = () => {
         </Field>
       </HorizontalFormField>
 
-      <HorizontalFormField title={t`Email`} required>
+      <HorizontalFormField
+        title={t`Email`}
+        required
+        readonly={readonlyUsername}
+      >
         <Field name="username">
           {({ field, meta }: FieldProps) => (
             <FormControl isInvalid={!!(meta.touched && meta.error)}>
@@ -206,7 +212,7 @@ export const ProfilePage: React.FC = () => {
         <ModalOverlay bg="bgColors.modalBg" />
         <ModalContent>
           <ModalHeader fontSize="sm">
-            <Trans>inquiry</Trans>
+            <Trans>Inquiry</Trans>
           </ModalHeader>
           <ModalCloseButton />
           <Divider />
@@ -222,23 +228,28 @@ export const ProfilePage: React.FC = () => {
                   username: profile.username,
                   inquiry: "",
                 }}
-                onSubmit={(values: any, { setSubmitting, setValues }) => {
+                onSubmit={(values: SendInquiryParams, { setSubmitting }) => {
                   mutation
                     .mutateAsync(values)
-                    .then((data) => {
-                      setValues(data);
+                    .then(() => api.sendInquiryToManager(values))
+                    .catch((e) => {
+                      console.error(e);
+                      errorMessage(t`Something goes wrong`);
                     })
-                    .then(() => api.SendInquiryToManager(values))
                     .finally(() => {
                       setSubmitting(false);
+                      onClose();
                     });
                 }}
-                validationSchema={Yup.object(profileValidationSchema)}
+                validationSchema={Yup.object({
+                  ...profileValidationSchema,
+                  inquiry: Yup.string().required(),
+                })}
               >
                 <Form>
                   <Stack spacing="6">
-                    <ProfileInfoFields />
-                    <HorizontalFormField title={t`inquiry`}>
+                    <ProfileInfoFields readonlyUsername />
+                    <HorizontalFormField title={t`Inquiry`} required>
                       <Field name="inquiry">
                         {({ field, meta }: FieldProps) => {
                           return (
@@ -246,7 +257,7 @@ export const ProfilePage: React.FC = () => {
                               isInvalid={!!(meta.touched && meta.error)}
                             >
                               <Textarea
-                                placeholder={t`inquiry`}
+                                placeholder={t`Inquiry`}
                                 {...field}
                                 size="sm"
                               />
@@ -362,7 +373,7 @@ export const ProfilePage: React.FC = () => {
                     {({ isSubmitting, dirty }) => (
                       <Form>
                         <Stack spacing="6">
-                          <ProfileInfoFields />
+                          <ProfileInfoFields readonlyUsername={false} />
                           <Button
                             type="submit"
                             variant="submitBtn"
@@ -421,6 +432,7 @@ export const ProfilePage: React.FC = () => {
                 width="100%"
                 bg="bgColors.primary"
                 color="white"
+                disabled={!profile}
               >
                 <Trans>Contact us</Trans>
               </Button>

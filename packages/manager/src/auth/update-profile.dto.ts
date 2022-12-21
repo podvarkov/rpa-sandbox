@@ -25,3 +25,9 @@ export class UpdateProfileDto {
   @IsString()
   furiganaMay: string;
 }
+
+export class SendInquiryDto extends UpdateProfileDto {
+  @IsString()
+  @IsNotEmpty()
+  inquiry: string;
+}
