@@ -35,7 +35,7 @@ export const SigninPage: React.FC = () => {
 
   return (
     <Box h="100vh" color="black" pt="5em">
-      <Container bg="white" p="6">
+      <Container bg="white" p="3">
         <Stack spacing="4" direction="column" maxWidth={400} align="center">
           <Center>
             <Heading size="lg" mb="2em">
@@ -112,10 +112,13 @@ export const SigninPage: React.FC = () => {
             )}
           </Formik>
 
-          <Text fontSize="sm" align="right">
+          <Text fontSize="sm" align="right" color="textColors.blue">
             <Link to="/signup" as={RouterLink}>
               <Trans>Those who have not yet registered as a member</Trans>
             </Link>
+          </Text>
+          <Text fontSize="sm" align="right" color="textColors.blue">
+            <Trans>If you forgot your password, click here</Trans>
           </Text>
         </Stack>
       </Container>

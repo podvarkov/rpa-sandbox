@@ -1,7 +1,7 @@
-import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
@@ -15,7 +15,7 @@ import { theme } from "./theme";
 
 const queryClient = new QueryClient();
 
-const Component = () => {
+const Component: React.FC = () => {
   return (
     <I18nProvider i18n={i18n}>
       <AuthProvider>

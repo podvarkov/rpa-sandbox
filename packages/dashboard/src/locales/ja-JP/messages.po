@@ -13,15 +13,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.5.2\n"
 
-#: src/pages/beta-rpa.tsx:40
+#: src/pages/beta-rpa.tsx:39
 msgid "*Beta version only supports Rakuten"
 msgstr "※ベータ版は楽天のみ対応"
 
 #: src/pages/sign-up.tsx:139
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
-msgstr ""
-"*ログインID、生年月日、電話番号、氏名など、お客様の個人情報に関連する文字列や、第三者に推測されやすい簡易な文字列（例：password）をパスワードに"
-"設定しないようにしてください。"
+msgstr "*ログインID、生年月日、電話番号、氏名など、お客様の個人情報に関連する文字列や、第三者に推測されやすい簡易な文字列（例：password）をパスワードに設定しないようにしてください。"
 
 #: src/pages/scheduler.tsx:227
 msgid "Add event"
@@ -51,7 +49,7 @@ msgstr "引数:"
 msgid "Available symbols (half-width)"
 msgstr "Available symbols (half-width)"
 
-#: src/pages/profile.tsx:413
+#: src/pages/profile.tsx:444
 msgid "Browse"
 msgstr "ブラウズ"
 
@@ -75,7 +73,7 @@ msgstr "ワークフローを削除できません"
 msgid "Can not edit workflow"
 msgstr "ワークフローを編集できません"
 
-#: src/pages/profile.tsx:187
+#: src/pages/profile.tsx:186
 msgid "Can not update profile"
 msgstr "プロフィールを更新できません"
 
@@ -103,15 +101,14 @@ msgstr "アクションを確認"
 msgid "Confirm password"
 msgstr "パスワードを認証する"
 
-#: src/pages/profile.tsx:389
+#: src/pages/profile.tsx:425
 msgid "Contact us"
 msgstr "お問い合わせ"
 
-#: src/pages/profile.tsx:217
-msgid "Contents of inquiry"
-msgstr "お問い合わせ内容"
+#~ msgid "Contents of inquiry"
+#~ msgstr ">>>>>>> Stashed changes"
 
-#: src/pages/profile.tsx:395
+#: src/pages/profile.tsx:430
 msgid "Contract Information"
 msgstr "契約情報"
 
@@ -142,7 +139,7 @@ msgstr "日にち"
 msgid "Day"
 msgstr "日"
 
-#: src/pages/profile.tsx:399
+#: src/pages/profile.tsx:433
 msgid "Dear 111"
 msgstr "親愛なる111"
 
@@ -162,7 +159,7 @@ msgstr "レポートを削除"
 msgid "Delete workflow"
 msgstr "ワークフローの削除"
 
-#: src/pages/beta-rpa.tsx:107
+#: src/pages/beta-rpa.tsx:105
 msgid "Desired delivery date of the robot"
 msgstr "ロボットのお届け希望日"
 
@@ -239,7 +236,7 @@ msgstr "実行の詳細"
 msgid "Execution with {0} id not found"
 msgstr "{0} ID での実行が見つかりません"
 
-#: src/components/layout.tsx:25
+#: src/components/layout.tsx:34
 #: src/components/sidebar.tsx:35
 msgid "Executions"
 msgstr "処刑"
@@ -248,7 +245,7 @@ msgstr "処刑"
 msgid "Expiration timeout:"
 msgstr "有効期限切れ:"
 
-#: src/pages/profile.tsx:371
+#: src/pages/profile.tsx:408
 msgid "FAX: {0}"
 msgstr ""
 
@@ -264,7 +261,7 @@ msgstr "終了した"
 msgid "Finished at:"
 msgstr "終了時刻:"
 
-#: src/pages/sign-up.tsx:179
+#: src/pages/sign-up.tsx:186
 msgid "For account holders"
 msgstr "口座保有者向け"
 
@@ -272,11 +269,11 @@ msgstr "口座保有者向け"
 msgid "Fr"
 msgstr "神父"
 
-#: src/pages/profile.tsx:403
+#: src/pages/profile.tsx:436
 msgid "Free Trial Plan"
 msgstr "無料お試しプラン"
 
-#: src/pages/sign-up.tsx:186
+#: src/pages/sign-up.tsx:193
 msgid "Go to login screen"
 msgstr "ログイン画面へ"
 
@@ -304,7 +301,11 @@ msgstr ""
 msgid "Idle"
 msgstr ""
 
-#: src/pages/profile.tsx:356
+#: src/pages/sign-in.tsx:121
+msgid "If you forgot your password, click here"
+msgstr ""
+
+#: src/pages/profile.tsx:394
 msgid "In charge of your company"
 msgstr "御社担当"
 
@@ -312,10 +313,9 @@ msgstr "御社担当"
 msgid "In progress"
 msgstr "進行中"
 
-#: src/pages/beta-rpa.tsx:114
+#: src/pages/beta-rpa.tsx:118
 msgid "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
-msgstr ""
-"モールやアクセス解析など、各種管理画面から情報を収集します。反映されない場合、各種管理画面への反映が遅れることがあります。時間をおいて再度お試しください。"
+msgstr "モールやアクセス解析など、各種管理画面から情報を収集します。反映されない場合、各種管理画面への反映が遅れることがあります。時間をおいて再度お試しください。"
 
 #~ msgid "Input argument"
 #~ msgstr ""
@@ -328,7 +328,7 @@ msgstr ""
 msgid "Input argument: {name}"
 msgstr "入力引数です。{名前}。"
 
-#: src/pages/profile.tsx:365
+#: src/pages/profile.tsx:402
 msgid "Inquiries about RPA"
 msgstr "RPAに関するお問い合わせ"
 
@@ -348,7 +348,7 @@ msgstr "で呼び出される。"
 msgid "Login"
 msgstr "ログイン"
 
-#: src/pages/profile.tsx:374
+#: src/pages/profile.tsx:411
 msgid "MAIL: {0}"
 msgstr "MAIL: {0}"
 
@@ -368,7 +368,7 @@ msgstr "モディファイド"
 msgid "Month"
 msgstr "月"
 
-#: src/pages/beta-rpa.tsx:31
+#: src/pages/beta-rpa.tsx:32
 msgid "Monthly report creation"
 msgstr "月次レポート作成"
 
@@ -441,6 +441,10 @@ msgstr "パスワードが一致すること"
 msgid "Phone number"
 msgstr "電話番号"
 
+#: src/pages/sign-up.tsx:157
+msgid "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
+msgstr ""
+
 #: src/pages/mall-info.tsx:29
 msgid "Please enter your R-Login ID and password."
 msgstr "R-LoginのID、パスワードを入力してください。"
@@ -449,11 +453,11 @@ msgstr "R-LoginのID、パスワードを入力してください。"
 msgid "Profile"
 msgstr "プロフィール"
 
-#: src/pages/profile.tsx:250
+#: src/pages/profile.tsx:291
 msgid "Profile registration"
 msgstr "プロフィール登録"
 
-#: src/pages/profile.tsx:191
+#: src/pages/profile.tsx:190
 msgid "Profile updated"
 msgstr "プロフィール更新"
 
@@ -461,12 +465,12 @@ msgstr "プロフィール更新"
 msgid "Queued"
 msgstr "キューイング"
 
-#: src/pages/beta-rpa.tsx:56
+#: src/pages/beta-rpa.tsx:55
 msgid "Rakuten monthly report creation"
 msgstr "楽天月報作成"
 
-#: src/pages/profile.tsx:260
-#: src/pages/profile.tsx:285
+#: src/pages/profile.tsx:301
+#: src/pages/profile.tsx:324
 msgid "Registration / Editing"
 msgstr "登録・編集"
 
@@ -478,15 +482,15 @@ msgstr "リピート仕上げ。"
 msgid "Repeat interval:"
 msgstr "インターバルを繰り返す。"
 
-#: src/pages/profile.tsx:409
+#: src/pages/profile.tsx:441
 msgid "Report Results"
 msgstr "報告結果"
 
-#: src/pages/beta-rpa.tsx:95
+#: src/pages/beta-rpa.tsx:93
 msgid "Report data end date"
 msgstr "レポートデータ終了日"
 
-#: src/pages/beta-rpa.tsx:87
+#: src/pages/beta-rpa.tsx:81
 msgid "Report data start date"
 msgstr "レポートデータ開始日"
 
@@ -529,13 +533,20 @@ msgstr "予定"
 
 #: src/pages/beta-rpa.tsx:36
 msgid "Select the robot you want to run."
-msgstr "実行したいロボットを選択します。"
+msgstr "実行したいロボットを選択します。<<<<<<< Updated upstream======="
 
+#: src/pages/profile.tsx:268
+msgid "Send&Save"
+msgstr ""
+
+#: src/pages/sign-in.tsx:43
+#: src/pages/sign-in.tsx:108
+#: src/pages/sign-up.tsx:142
 #~ msgid "Sign in"
 #~ msgstr ""
 
 #: src/components/header.tsx:100
-#: src/components/layout.tsx:85
+#: src/components/layout.tsx:94
 msgid "Sign out"
 msgstr "サインアウト"
 
@@ -565,7 +576,7 @@ msgstr "ステータス"
 msgid "Status:"
 msgstr "状態です。"
 
-#: src/pages/profile.tsx:274
+#: src/pages/profile.tsx:314
 msgid "Store Information Registration"
 msgstr "店舗情報登録"
 
@@ -577,11 +588,11 @@ msgstr ""
 msgid "Success"
 msgstr "成功"
 
-#: src/pages/profile.tsx:368
+#: src/pages/profile.tsx:405
 msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
-#: src/components/layout.tsx:17
+#: src/components/layout.tsx:26
 #: src/components/sidebar.tsx:38
 msgid "Templates"
 msgstr "テンプレート"
@@ -592,7 +603,7 @@ msgstr ""
 
 #: src/pages/execution-details.tsx:46
 #: src/pages/executions.tsx:100
-#: src/pages/profile.tsx:199
+#: src/pages/profile.tsx:198
 #: src/pages/reports.tsx:67
 #: src/pages/scheduler.tsx:83
 #: src/pages/templates.tsx:95
@@ -635,7 +646,7 @@ msgstr "ワークフローの更新"
 #~ msgid "Use template"
 #~ msgstr ""
 
-#: src/pages/profile.tsx:186
+#: src/pages/profile.tsx:185
 msgid "User with such email already exists"
 msgstr "そのようなメールアドレスを持つユーザーはすでに存在する"
 
@@ -691,7 +702,7 @@ msgstr "{0}のIDを持つワークフローが見つかりません"
 msgid "Workflow:"
 msgstr "ワークフロー"
 
-#: src/components/layout.tsx:21
+#: src/components/layout.tsx:30
 #: src/components/sidebar.tsx:39
 msgid "Workflows"
 msgstr "ワークフロー"
@@ -700,15 +711,13 @@ msgstr "ワークフロー"
 msgid "Wrong password or username"
 msgstr "パスワードまたはユーザー名が間違っている"
 
-#: src/pages/beta-rpa.tsx:72
+#: src/pages/beta-rpa.tsx:70
 msgid "Yahoo! monthly report creation"
 msgstr "Yahoo!月次レポート作成"
 
 #: src/pages/sign-up.tsx:148
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
-msgstr ""
-"ドメイン指定受信などの受信拒否設定をしている場合、受信できないことがあります。設定を解除するか、以下のドメインからのメールを受信できるように設定後に手続き"
-"を行ってください。"
+msgstr "ドメイン指定受信などの受信拒否設定をしている場合、受信できないことがあります。設定を解除するか、以下のドメインからのメールを受信できるように設定後に手続きを行ってください。"
 
 #: src/pages/workflows.tsx:76
 msgid "Your workflows will be listed here"
@@ -717,7 +726,7 @@ msgstr "ワークフローはここに表示されます。"
 #~ msgid "_ ! # $ ~ ^ @"
 #~ msgstr ""
 
-#: src/pages/beta-rpa.tsx:148
+#: src/pages/beta-rpa.tsx:150
 #: src/pages/mall-info.tsx:64
 msgid "back"
 msgstr "裏面"
@@ -727,11 +736,13 @@ msgstr "裏面"
 msgid "error"
 msgstr "失態"
 
-#: src/pages/beta-rpa.tsx:133
+#: src/pages/beta-rpa.tsx:136
 msgid "execution"
 msgstr "仕置"
 
-#: src/pages/profile.tsx:210
+#: src/pages/profile.tsx:209
+#: src/pages/profile.tsx:241
+#: src/pages/profile.tsx:249
 msgid "inquiry"
 msgstr "問合せ"
 
@@ -754,13 +765,12 @@ msgid "queued"
 msgstr "待ち行列"
 
 #: src/pages/mall-info.tsx:47
-#: src/pages/sign-up.tsx:170
+#: src/pages/sign-up.tsx:177
 msgid "register"
 msgstr "レジスタ"
 
-#: src/pages/profile.tsx:230
-msgid "send"
-msgstr "おくる"
+#~ msgid "send"
+#~ msgstr ">>>>>>> Stashed changes"
 
 #: src/pages/profile.tsx:94
 msgid "surname"
@@ -779,6 +789,6 @@ msgstr ""
 msgid "{children}"
 msgstr "{子供たち}"
 
-#: src/components/layout.tsx:42
+#: src/components/layout.tsx:51
 msgid "© 2022 Coreus RPA. All rights reserved"
 msgstr "© 2022 コアスRPA. 無断転載を禁じます"

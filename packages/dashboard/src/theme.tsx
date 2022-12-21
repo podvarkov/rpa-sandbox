@@ -76,7 +76,7 @@ export const theme = extendTheme({
     textColors: {
       main: "rgb(134, 134, 134)",
       onhover: "#4BB0FF",
-      // ...
+      blue: "rgb(0, 175, 255)",
       500: "#333333",
     },
     borderColors: {

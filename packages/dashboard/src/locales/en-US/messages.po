@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/beta-rpa.tsx:40
+#: src/pages/beta-rpa.tsx:39
 msgid "*Beta version only supports Rakuten"
 msgstr "*Beta version only supports Rakuten"
 
@@ -49,7 +49,7 @@ msgstr "Arguments:"
 msgid "Available symbols (half-width)"
 msgstr "Available symbols (half-width)"
 
-#: src/pages/profile.tsx:413
+#: src/pages/profile.tsx:444
 msgid "Browse"
 msgstr "Browse"
 
@@ -73,7 +73,7 @@ msgstr "Can not delete workflow"
 msgid "Can not edit workflow"
 msgstr "Can not edit workflow"
 
-#: src/pages/profile.tsx:187
+#: src/pages/profile.tsx:186
 msgid "Can not update profile"
 msgstr "Can not update profile"
 
@@ -101,15 +101,15 @@ msgstr "Confirm action"
 msgid "Confirm password"
 msgstr "Confirm password"
 
-#: src/pages/profile.tsx:389
+#: src/pages/profile.tsx:425
 msgid "Contact us"
 msgstr "Contact us"
 
 #: src/pages/profile.tsx:217
-msgid "Contents of inquiry"
-msgstr "Contents of inquiry"
+#~ msgid "Contents of inquiry"
+#~ msgstr "Contents of inquiry"
 
-#: src/pages/profile.tsx:395
+#: src/pages/profile.tsx:430
 msgid "Contract Information"
 msgstr "Contract Information"
 
@@ -142,7 +142,7 @@ msgstr "Date"
 msgid "Day"
 msgstr "Day"
 
-#: src/pages/profile.tsx:399
+#: src/pages/profile.tsx:433
 msgid "Dear 111"
 msgstr "Dear 111"
 
@@ -162,7 +162,7 @@ msgstr "Delete report"
 msgid "Delete workflow"
 msgstr "Delete workflow"
 
-#: src/pages/beta-rpa.tsx:107
+#: src/pages/beta-rpa.tsx:105
 msgid "Desired delivery date of the robot"
 msgstr "Desired delivery date of the robot"
 
@@ -241,7 +241,7 @@ msgstr "Execution details"
 msgid "Execution with {0} id not found"
 msgstr "Execution with {0} id not found"
 
-#: src/components/layout.tsx:25
+#: src/components/layout.tsx:34
 #: src/components/sidebar.tsx:35
 msgid "Executions"
 msgstr "Executions"
@@ -250,7 +250,7 @@ msgstr "Executions"
 msgid "Expiration timeout:"
 msgstr "Expiration timeout:"
 
-#: src/pages/profile.tsx:371
+#: src/pages/profile.tsx:408
 msgid "FAX: {0}"
 msgstr "FAX: {0}"
 
@@ -266,7 +266,7 @@ msgstr "Finished"
 msgid "Finished at:"
 msgstr "Finished at:"
 
-#: src/pages/sign-up.tsx:179
+#: src/pages/sign-up.tsx:186
 msgid "For account holders"
 msgstr "For account holders"
 
@@ -274,11 +274,11 @@ msgstr "For account holders"
 msgid "Fr"
 msgstr "Fr"
 
-#: src/pages/profile.tsx:403
+#: src/pages/profile.tsx:436
 msgid "Free Trial Plan"
 msgstr "Free Trial Plan"
 
-#: src/pages/sign-up.tsx:186
+#: src/pages/sign-up.tsx:193
 msgid "Go to login screen"
 msgstr "Go to login screen"
 
@@ -307,7 +307,11 @@ msgstr "ID:"
 msgid "Idle"
 msgstr "Idle"
 
-#: src/pages/profile.tsx:356
+#: src/pages/sign-in.tsx:121
+msgid "If you forgot your password, click here"
+msgstr "If you forgot your password, click here"
+
+#: src/pages/profile.tsx:394
 msgid "In charge of your company"
 msgstr "In charge of your company"
 
@@ -315,7 +319,7 @@ msgstr "In charge of your company"
 msgid "In progress"
 msgstr "In progress"
 
-#: src/pages/beta-rpa.tsx:114
+#: src/pages/beta-rpa.tsx:118
 msgid "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
 msgstr "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
 
@@ -332,7 +336,7 @@ msgstr "Information is collected from various management screens such as malls a
 msgid "Input argument: {name}"
 msgstr "Input argument: {name}"
 
-#: src/pages/profile.tsx:365
+#: src/pages/profile.tsx:402
 msgid "Inquiries about RPA"
 msgstr "Inquiries about RPA"
 
@@ -352,7 +356,7 @@ msgstr "Invoked at:"
 msgid "Login"
 msgstr "Login"
 
-#: src/pages/profile.tsx:374
+#: src/pages/profile.tsx:411
 msgid "MAIL: {0}"
 msgstr "MAIL: {0}"
 
@@ -372,7 +376,7 @@ msgstr "Modified"
 msgid "Month"
 msgstr "Month"
 
-#: src/pages/beta-rpa.tsx:31
+#: src/pages/beta-rpa.tsx:32
 msgid "Monthly report creation"
 msgstr "Monthly report creation"
 
@@ -449,6 +453,10 @@ msgstr "Passwords must match"
 msgid "Phone number"
 msgstr "Phone number"
 
+#: src/pages/sign-up.tsx:157
+msgid "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
+msgstr "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
+
 #: src/pages/mall-info.tsx:29
 msgid "Please enter your R-Login ID and password."
 msgstr "Please enter your R-Login ID and password."
@@ -457,11 +465,11 @@ msgstr "Please enter your R-Login ID and password."
 msgid "Profile"
 msgstr "Profile"
 
-#: src/pages/profile.tsx:250
+#: src/pages/profile.tsx:291
 msgid "Profile registration"
 msgstr "Profile registration"
 
-#: src/pages/profile.tsx:191
+#: src/pages/profile.tsx:190
 msgid "Profile updated"
 msgstr "Profile updated"
 
@@ -469,12 +477,12 @@ msgstr "Profile updated"
 msgid "Queued"
 msgstr "Queued"
 
-#: src/pages/beta-rpa.tsx:56
+#: src/pages/beta-rpa.tsx:55
 msgid "Rakuten monthly report creation"
 msgstr "Rakuten monthly report creation"
 
-#: src/pages/profile.tsx:260
-#: src/pages/profile.tsx:285
+#: src/pages/profile.tsx:301
+#: src/pages/profile.tsx:324
 msgid "Registration / Editing"
 msgstr "Registration / Editing"
 
@@ -486,15 +494,15 @@ msgstr "Repeat finish:"
 msgid "Repeat interval:"
 msgstr "Repeat interval:"
 
-#: src/pages/profile.tsx:409
+#: src/pages/profile.tsx:441
 msgid "Report Results"
 msgstr "Report Results"
 
-#: src/pages/beta-rpa.tsx:95
+#: src/pages/beta-rpa.tsx:93
 msgid "Report data end date"
 msgstr "Report data end date"
 
-#: src/pages/beta-rpa.tsx:87
+#: src/pages/beta-rpa.tsx:81
 msgid "Report data start date"
 msgstr "Report data start date"
 
@@ -540,6 +548,10 @@ msgstr "Scheduled"
 msgid "Select the robot you want to run."
 msgstr "Select the robot you want to run."
 
+#: src/pages/profile.tsx:268
+msgid "Send&Save"
+msgstr "Send&Save"
+
 #: src/pages/sign-in.tsx:43
 #: src/pages/sign-in.tsx:108
 #: src/pages/sign-up.tsx:142
@@ -547,7 +559,7 @@ msgstr "Select the robot you want to run."
 #~ msgstr "Sign in"
 
 #: src/components/header.tsx:100
-#: src/components/layout.tsx:85
+#: src/components/layout.tsx:94
 msgid "Sign out"
 msgstr "Sign out"
 
@@ -577,7 +589,7 @@ msgstr "Status"
 msgid "Status:"
 msgstr "Status:"
 
-#: src/pages/profile.tsx:274
+#: src/pages/profile.tsx:314
 msgid "Store Information Registration"
 msgstr "Store Information Registration"
 
@@ -589,11 +601,11 @@ msgstr "Su"
 msgid "Success"
 msgstr "Success"
 
-#: src/pages/profile.tsx:368
+#: src/pages/profile.tsx:405
 msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
-#: src/components/layout.tsx:17
+#: src/components/layout.tsx:26
 #: src/components/sidebar.tsx:38
 msgid "Templates"
 msgstr "Templates"
@@ -604,7 +616,7 @@ msgstr "Th"
 
 #: src/pages/execution-details.tsx:46
 #: src/pages/executions.tsx:100
-#: src/pages/profile.tsx:199
+#: src/pages/profile.tsx:198
 #: src/pages/reports.tsx:67
 #: src/pages/scheduler.tsx:83
 #: src/pages/templates.tsx:95
@@ -648,7 +660,7 @@ msgstr "Update workflow"
 #~ msgid "Use template"
 #~ msgstr "Use template"
 
-#: src/pages/profile.tsx:186
+#: src/pages/profile.tsx:185
 msgid "User with such email already exists"
 msgstr "User with such email already exists"
 
@@ -706,7 +718,7 @@ msgstr "Workflow with {0} id not found"
 msgid "Workflow:"
 msgstr "Workflow:"
 
-#: src/components/layout.tsx:21
+#: src/components/layout.tsx:30
 #: src/components/sidebar.tsx:39
 msgid "Workflows"
 msgstr "Workflows"
@@ -715,7 +727,7 @@ msgstr "Workflows"
 msgid "Wrong password or username"
 msgstr "Wrong password or username"
 
-#: src/pages/beta-rpa.tsx:72
+#: src/pages/beta-rpa.tsx:70
 msgid "Yahoo! monthly report creation"
 msgstr "Yahoo! monthly report creation"
 
@@ -731,7 +743,7 @@ msgstr "Your workflows will be listed here"
 #~ msgid "_ ! # $ ~ ^ @"
 #~ msgstr "_ ! # $ ~ ^ @"
 
-#: src/pages/beta-rpa.tsx:148
+#: src/pages/beta-rpa.tsx:150
 #: src/pages/mall-info.tsx:64
 msgid "back"
 msgstr "back"
@@ -741,11 +753,13 @@ msgstr "back"
 msgid "error"
 msgstr "error"
 
-#: src/pages/beta-rpa.tsx:133
+#: src/pages/beta-rpa.tsx:136
 msgid "execution"
 msgstr "execution"
 
-#: src/pages/profile.tsx:210
+#: src/pages/profile.tsx:209
+#: src/pages/profile.tsx:241
+#: src/pages/profile.tsx:249
 msgid "inquiry"
 msgstr "inquiry"
 
@@ -768,13 +782,13 @@ msgid "queued"
 msgstr "queued"
 
 #: src/pages/mall-info.tsx:47
-#: src/pages/sign-up.tsx:170
+#: src/pages/sign-up.tsx:177
 msgid "register"
 msgstr "register"
 
-#: src/pages/profile.tsx:230
-msgid "send"
-msgstr "send"
+#: src/pages/profile.tsx:220
+#~ msgid "send"
+#~ msgstr "send"
 
 #: src/pages/profile.tsx:94
 msgid "surname"
@@ -793,6 +807,6 @@ msgstr "{0}"
 msgid "{children}"
 msgstr "{children}"
 
-#: src/components/layout.tsx:42
+#: src/components/layout.tsx:51
 msgid "© 2022 Coreus RPA. All rights reserved"
 msgstr "© 2022 Coreus RPA. All rights reserved"

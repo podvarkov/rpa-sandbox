@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Divider,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormHelperText,
@@ -14,7 +15,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
   ModalHeader,
   ModalOverlay,
   Stack,
@@ -25,16 +25,16 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
+import { AxiosError } from "axios";
 import { Field, FieldProps, Form, Formik } from "formik";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import { RiCheckFill } from "react-icons/ri";
+import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { useMutation, useQuery } from "react-query";
-import { AxiosError } from "axios";
 import { api, UpdatableProfile } from "../api";
-import { useToast } from "../components/use-toast";
 import { useAuth } from "../components/auth-provider";
+import { useToast } from "../components/use-toast";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -165,7 +165,6 @@ const ProfileInfoFields: React.FC = () => {
 
 export const ProfilePage: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     data: profile,
@@ -203,7 +202,7 @@ export const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay bg="bgColors.modalBg" />
         <ModalContent>
           <ModalHeader fontSize="sm">
@@ -212,24 +211,67 @@ export const ProfilePage: React.FC = () => {
           <ModalCloseButton />
           <Divider />
           <ModalBody py={6}>
-            <Heading size="md">
-              <Text>
-                <Trans>Contents of inquiry</Trans>
-              </Text>
-            </Heading>
-            <Box mt={2}>
-              <Textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                size="sm"
-              />
-            </Box>
+            {profile ? (
+              <Formik
+                initialValues={{
+                  surname: profile.surname,
+                  name: profile.name,
+                  furiganaSurname: profile.furiganaSurname,
+                  furiganaMay: profile.furiganaMay,
+                  phone: profile.phone,
+                  username: profile.username,
+                  inquiry: "",
+                }}
+                onSubmit={(values: any, { setSubmitting, setValues }) => {
+                  mutation
+                    .mutateAsync(values)
+                    .then((data) => {
+                      setValues(data);
+                    })
+                    .then(() => api.SendInquiryToManager(values))
+                    .finally(() => {
+                      setSubmitting(false);
+                    });
+                }}
+                validationSchema={Yup.object(profileValidationSchema)}
+              >
+                <Form>
+                  <Stack spacing="6">
+                    <ProfileInfoFields />
+                    <HorizontalFormField title={t`inquiry`}>
+                      <Field name="inquiry">
+                        {({ field, meta }: FieldProps) => {
+                          return (
+                            <FormControl
+                              isInvalid={!!(meta.touched && meta.error)}
+                            >
+                              <Textarea
+                                placeholder={t`inquiry`}
+                                {...field}
+                                size="sm"
+                              />
+                              <FormErrorMessage>{meta.error}</FormErrorMessage>
+                            </FormControl>
+                          );
+                        }}
+                      </Field>
+                    </HorizontalFormField>
+                  </Stack>
+                  <Flex justify="right" w="100%" mt="4">
+                    <Button
+                      variant="outline"
+                      shadow="sm"
+                      type="submit"
+                      px={8}
+                      borderRadius={20}
+                    >
+                      <Trans>Send&Save</Trans>
+                    </Button>
+                  </Flex>
+                </Form>
+              </Formik>
+            ) : null}
           </ModalBody>
-          <ModalFooter>
-            <Button variant="outline" shadow="sm" px={8} borderRadius={20}>
-              <Trans>send</Trans>
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
       <Grid templateColumns="repeat(5, 1fr)" gap={4} px={2}>
@@ -245,7 +287,6 @@ export const ProfilePage: React.FC = () => {
                 flexDirection="column"
               >
                 <Heading as="h6" size="xs">
-                  {/* <Text>プロフィール登録</Text> */}
                   <Text>
                     <Trans>Profile registration</Trans>
                   </Text>
@@ -269,7 +310,6 @@ export const ProfilePage: React.FC = () => {
                 flexDirection="column"
               >
                 <Heading as="h6" size="xs">
-                  {/* <Text>店舗情報登録</Text> */}
                   <Text>
                     <Trans>Store Information Registration</Trans>
                   </Text>
@@ -281,7 +321,6 @@ export const ProfilePage: React.FC = () => {
                   onClick={() => navigate("/mallinfo")}
                   size="xs"
                 >
-                  {/* 登録・編集 */}
                   <Trans>Registration / Editing</Trans>
                 </Button>
               </WrapItem>
@@ -324,7 +363,6 @@ export const ProfilePage: React.FC = () => {
                       <Form>
                         <Stack spacing="6">
                           <ProfileInfoFields />
-
                           <Button
                             type="submit"
                             variant="submitBtn"
@@ -360,7 +398,6 @@ export const ProfilePage: React.FC = () => {
                 {profile?.salesManager?.name}
               </Text>
               <Box fontSize="12px">
-                {/* <Text>RPAに関するお問い合わせ</Text> */}
                 <Text>
                   <Trans>Inquiries about RPA</Trans>
                 </Text>
@@ -385,31 +422,25 @@ export const ProfilePage: React.FC = () => {
                 bg="bgColors.primary"
                 color="white"
               >
-                {/* お問い合わせはこちら */}
                 <Trans>Contact us</Trans>
               </Button>
             </Box>
             <Box p={4} my={2} border="1px" borderColor="borderColors.main">
               <Text fontSize="14px" mb={2}>
-                {/* ご契約情報 */}
                 <Trans>Contract Information</Trans>
               </Text>
               <Text fontSize="12px" color="textColors.main">
-                {/* 111様 */}
                 <Trans>Dear 111</Trans>
               </Text>
               <Text fontSize="12px" color="textColors.main">
-                {/* お試し無料プラン */}
                 <Trans>Free Trial Plan</Trans>
               </Text>
             </Box>
             <Box p={4} border="1px" borderColor="borderColors.main">
               <Text fontSize="16px" mb={2} color="textColors.main">
-                {/* レポート結果 */}
                 <Trans>Report Results</Trans>
               </Text>
               <Text fontSize="14px" color="textColors.main">
-                {/* 閲覧 */}
                 <Trans>Browse</Trans>
               </Text>
             </Box>

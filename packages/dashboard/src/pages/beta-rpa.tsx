@@ -7,7 +7,6 @@ import {
   FormLabel,
   Heading,
   HStack,
-  Input,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -15,11 +14,14 @@ import { Trans } from "@lingui/macro";
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import "../components/datepicker.css";
 
 export const BetaRpa: React.FC = () => {
   const [isExecuted, setIsExecuted] = useState(false);
-
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(
+    new Date("2022/02/08")
+  );
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
 
   return (
     <Center>
@@ -27,16 +29,13 @@ export const BetaRpa: React.FC = () => {
         <Center flexDirection="column">
           <Heading size="sm">
             <Text fontSize="lg" pb="5" align="center">
-              {/* 月次レポート作成 */}
               <Trans>Monthly report creation</Trans>
             </Text>
           </Heading>
           <Text fontSize="xs">
-            {/* 実行したいロボットを選択してください。 */}
             <Trans>Select the robot you want to run.</Trans>
           </Text>
           <Text fontSize="xs">
-            {/* *β版では楽天のみ対応となります */}
             <Trans>*Beta version only supports Rakuten</Trans>
           </Text>
         </Center>
@@ -47,12 +46,12 @@ export const BetaRpa: React.FC = () => {
             borderRadius={10}
             alignItems="center"
             p={2}
+            _hover={{ boxShadow: "1px 2px 3px 1px #00B7EE" }}
           >
             <Box w={20}>
               <img width="100%" src="/rakuten_logo.png" />
             </Box>
             <Text fontSize="lg">
-              {/* 楽天月次レポート作成 */}
               <Trans>Rakuten monthly report creation</Trans>
             </Text>
           </Flex>
@@ -68,7 +67,6 @@ export const BetaRpa: React.FC = () => {
               <img width="100%" src="/yahoo_logo.png" />
             </Box>
             <Text fontSize="lg">
-              {/* Yahoo!月次レポート作成 */}
               <Trans>Yahoo! monthly report creation</Trans>
             </Text>
           </Flex>
@@ -76,37 +74,43 @@ export const BetaRpa: React.FC = () => {
 
         <Stack spacing="30px" maxWidth={400} mx="auto" mt={6}>
           <Heading size="md" textAlign="center">
-            <Text>
-              {/* 楽天 - 月次レポート作成 */}
-              Rakuten - Monthly Report Creation
-            </Text>
+            <Text>Rakuten - Monthly Report Creation</Text>
           </Heading>
           <FormControl as="fieldset">
             <FormLabel as="legend">
-              {/* レポートデータ開始日 */}
               <Trans> Report data start date</Trans>
             </FormLabel>
-            <Input type="date" />
-          </FormControl>
-
-          <FormControl as="fieldset">
-            <FormLabel as="legend">
-              {/* レポートデータ終了日 */}
-              <Trans>Report data end date</Trans>
-            </FormLabel>
-            {/* <Input type="date" /> */}
             <DatePicker
               selected={startDate}
-              onChange={(date: Date) => setStartDate(date)}
+              onChange={(date) => setStartDate(date)}
+              dateFormat="MM/yyyy"
+              showMonthYearPicker
             />
           </FormControl>
 
           <FormControl as="fieldset">
             <FormLabel as="legend">
-              {/* ロボット送付希望日 */}
+              <Trans>Report data end date</Trans>
+            </FormLabel>
+            <DatePicker
+              selected={endDate}
+              onChange={(date) => setEndDate(date)}
+              dateFormat="MM/yyyy"
+              showMonthYearPicker
+            />
+          </FormControl>
+
+          <FormControl as="fieldset">
+            <FormLabel as="legend">
               <Trans>Desired delivery date of the robot</Trans>
             </FormLabel>
-            <Input type="date" />
+            <DatePicker
+              selected={startDate}
+              onChange={(date) => date}
+              dateFormat="MM/yyyy"
+              showMonthYearPicker
+              wrapperClassName="react-datep-picker-wrapper"
+            />
           </FormControl>
 
           {isExecuted && (
@@ -129,7 +133,6 @@ export const BetaRpa: React.FC = () => {
                 setIsExecuted(true);
               }}
             >
-              {/* 登録 */}
               <Trans>execution</Trans>
             </Button>
           </Flex>
@@ -143,7 +146,6 @@ export const BetaRpa: React.FC = () => {
                 bg: "none",
               }}
             >
-              {/* 登録 */}
               <AiOutlineArrowLeft />
               <Trans> back</Trans>
             </Button>

@@ -1,7 +1,16 @@
 import {
-  Avatar, Box,
-  Flex, HStack,
-  Link, Menu, MenuButton, MenuItem, MenuList, Select, Text
+  Avatar,
+  Box,
+  Flex,
+  HStack,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Progress,
+  Select,
+  Text,
 } from "@chakra-ui/react";
 import { defineMessage, Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
@@ -53,7 +62,7 @@ export const Header: React.FC = () => {
     <Box bg={"white"} px={4} boxShadow="sm" mb="2px">
       <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
         <HStack spacing={8} alignItems={"center"}>
-          <Box w={32}>
+          <Box w={32} display={{ md: "block", sm: "none" }}>
             <img alt="logo" src="/logo.png" />
           </Box>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
@@ -115,7 +124,7 @@ const Layout: React.FC = () => {
     <>
       <Flex direction="column" h="100vh">
         <Header />
-        {/* {visible ? <Progress size="xs" isIndeterminate /> : null} */}
+        {visible ? <Progress size="xs" isIndeterminate /> : null}
 
         <Box p={4} bg="gray.50" h={"100%"}>
           <Outlet />

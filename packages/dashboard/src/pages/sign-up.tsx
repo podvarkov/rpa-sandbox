@@ -34,8 +34,8 @@ export const SignupPage: React.FC = () => {
 
   return (
     <Box h="100vh" color="black" pt="5em">
-      <Container maxW="2xl" bg="white" p="6">
-        <Stack spacing="4" direction="column" align="center">
+      <Container maxW="2xl" bg="white" p="3">
+        <Stack spacing="3" direction="column" align="center">
           <Center mb="4em">
             <Heading size="lg">
               <Trans>Sign up</Trans>
@@ -123,7 +123,7 @@ export const SignupPage: React.FC = () => {
                     </Field>
                   </Stack>
 
-                  <Box fontSize="14px">
+                  <Box fontSize="12px">
                     <Text>
                       <Trans>
                         Password must be 8 characters or more and 32 characters
@@ -153,6 +153,13 @@ export const SignupPage: React.FC = () => {
                         from the following domain.
                       </Trans>
                     </Text>
+                    <Text>
+                      <Trans>
+                        Please cancel the setting or proceed with the procedure
+                        after setting it so that you can receive emails from the
+                        following domains.
+                      </Trans>
+                    </Text>
                   </Box>
                   {error ? (
                     <Alert status="error">
@@ -160,7 +167,7 @@ export const SignupPage: React.FC = () => {
                       <AlertDescription>{error}</AlertDescription>
                     </Alert>
                   ) : null}
-                  <Box maxWidth={300} w="100%">
+                  <Box maxWidth={200} w="100%">
                     <Button
                       type="submit"
                       variant="outline"
@@ -174,7 +181,7 @@ export const SignupPage: React.FC = () => {
               </Form>
             )}
           </Formik>
-          <Stack maxWidth={300} w="100%" align="center" pt="2em">
+          <Stack maxWidth={200} w="100%" align="center" pt="2em">
             <Text fontSize="sm">
               <Trans>For account holders </Trans>{" "}
             </Text>
