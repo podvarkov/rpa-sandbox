@@ -85,7 +85,7 @@ export class SchedulerService {
   @Cron(CronExpression.EVERY_MINUTE)
   async executeScheduledWorkflows() {
     const ts = this.parseDate(Date());
-    this.logger.log({
+    this.logger.debug({
       ts,
       message: "Scheduled workflows cron started",
     });

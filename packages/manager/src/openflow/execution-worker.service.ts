@@ -45,16 +45,6 @@ export class ExecutionWorkerService {
     return this.robotId;
   }
 
-  private updateExecution(context: Partial<Execution>) {
-    this.openflowService
-      .updateOne(this.cryptService.rootToken, {
-        ...context,
-      })
-      .catch((error) => {
-        this.logger.error({ message: "can not update execution", error });
-      });
-  }
-
   initSocketConnection() {
     this.ws = new WebSocket(this.config.OPENFLOW_WS_URL);
     let pingInterval: NodeJS.Timer;
@@ -148,7 +138,10 @@ export class ExecutionWorkerService {
 
   @Cron(CronExpression.EVERY_30_SECONDS)
   async syncExecutions() {
-    console.log("sync started");
+    this.logger.debug({
+      message: "Sync executions cron started",
+    });
+
     const executions = await this.openflowService
       .queryCollection<Execution>(this.cryptService.rootToken, {
         collectionname: "entities",
