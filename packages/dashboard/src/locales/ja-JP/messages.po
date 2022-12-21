@@ -29,11 +29,11 @@ msgstr "イベントを追加"
 msgid "Add field"
 msgstr "フィールドを追加"
 
-#: src/pages/executions.tsx:139
+#: src/pages/executions.tsx:136
 msgid "All workflows"
 msgstr "すべてのワークフロー"
 
-#: src/pages/executions.tsx:166
+#: src/pages/executions.tsx:163
 msgid "Any status"
 msgstr "任意のステータス"
 
@@ -41,7 +41,7 @@ msgstr "任意のステータス"
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr "本気ですか？後でこのアクションを元に戻すことはできません。"
 
-#: src/pages/execution-details.tsx:98
+#: src/pages/execution-details.tsx:93
 msgid "Arguments:"
 msgstr "引数:"
 
@@ -85,7 +85,7 @@ msgstr "取り消し"
 msgid "Changing email will lead to sign out"
 msgstr "メールアドレスを変更するとサインアウトします"
 
-#: src/pages/executions.tsx:26
+#: src/pages/executions.tsx:25
 msgid "Completed"
 msgstr "完了"
 
@@ -188,11 +188,11 @@ msgstr "イベントタイトルを入力"
 msgid "Enter your Rakuten member ID and password."
 msgstr "楽天会員IDとパスワードを入力"
 
-#: src/pages/executions.tsx:27
+#: src/pages/executions.tsx:26
 msgid "Error"
 msgstr "エラー"
 
-#: src/pages/execution-details.tsx:116
+#: src/pages/execution-details.tsx:111
 msgid "Error:"
 msgstr "エラー："
 
@@ -237,27 +237,27 @@ msgid "Execution with {0} id not found"
 msgstr "{0} ID での実行が見つかりません"
 
 #: src/components/layout.tsx:34
-#: src/components/sidebar.tsx:35
+#: src/components/sidebar.tsx:50
 msgid "Executions"
 msgstr "処刑"
 
 #: src/pages/execution-details.tsx:92
-msgid "Expiration timeout:"
-msgstr "有効期限切れ:"
+#~ msgid "Expiration timeout:"
+#~ msgstr "有効期限切れ:"
 
 #: src/pages/profile.tsx:408
 msgid "FAX: {0}"
 msgstr ""
 
-#: src/pages/executions.tsx:119
+#: src/pages/executions.tsx:116
 msgid "Filters:"
 msgstr "フィルター:"
 
-#: src/pages/executions.tsx:199
+#: src/pages/executions.tsx:196
 msgid "Finished"
 msgstr "終了した"
 
-#: src/pages/execution-details.tsx:145
+#: src/pages/execution-details.tsx:129
 msgid "Finished at:"
 msgstr "終了時刻:"
 
@@ -280,7 +280,7 @@ msgstr "ログイン画面へ"
 #~ msgid "Have an account?"
 #~ msgstr ""
 
-#: src/components/sidebar.tsx:33
+#: src/components/sidebar.tsx:38
 msgid "Home"
 msgstr "家"
 
@@ -298,8 +298,8 @@ msgid "ID:"
 msgstr ""
 
 #: src/pages/executions.tsx:32
-msgid "Idle"
-msgstr ""
+#~ msgid "Idle"
+#~ msgstr ""
 
 #: src/pages/sign-in.tsx:121
 msgid "If you forgot your password, click here"
@@ -309,7 +309,7 @@ msgstr ""
 msgid "In charge of your company"
 msgstr "御社担当"
 
-#: src/pages/executions.tsx:31
+#: src/pages/executions.tsx:29
 msgid "In progress"
 msgstr "進行中"
 
@@ -333,16 +333,16 @@ msgid "Inquiries about RPA"
 msgstr "RPAに関するお問い合わせ"
 
 #: src/pages/executions.tsx:25
-msgid "Invoke failed"
-msgstr "呼び出しに失敗"
+#~ msgid "Invoke failed"
+#~ msgstr "呼び出しに失敗"
 
 #: src/pages/executions.tsx:29
-msgid "Invoked"
-msgstr "インボークド"
+#~ msgid "Invoked"
+#~ msgstr "インボークド"
 
 #: src/pages/execution-details.tsx:134
-msgid "Invoked at:"
-msgstr "で呼び出される。"
+#~ msgid "Invoked at:"
+#~ msgstr "で呼び出される。"
 
 #: src/pages/sign-in.tsx:42
 msgid "Login"
@@ -394,7 +394,7 @@ msgstr "決して"
 msgid "New workflow"
 msgstr "新しいワークフロー"
 
-#: src/pages/executions.tsx:215
+#: src/pages/executions.tsx:212
 #: src/pages/reports.tsx:99
 #: src/pages/scheduler.tsx:174
 msgid "No data available"
@@ -417,7 +417,7 @@ msgstr "テンプレートが見つかりません"
 msgid "Optional description"
 msgstr "オプションの説明"
 
-#: src/pages/execution-details.tsx:107
+#: src/pages/execution-details.tsx:102
 msgid "Output:"
 msgstr "出力します。"
 
@@ -461,7 +461,7 @@ msgstr "プロフィール登録"
 msgid "Profile updated"
 msgstr "プロフィール更新"
 
-#: src/pages/executions.tsx:30
+#: src/pages/executions.tsx:28
 msgid "Queued"
 msgstr "キューイング"
 
@@ -498,11 +498,11 @@ msgstr "レポートデータ開始日"
 msgid "Report deleted"
 msgstr "レポート削除"
 
-#: src/components/sidebar.tsx:37
+#: src/components/sidebar.tsx:62
 msgid "Report download"
 msgstr "レポートダウンロード"
 
-#: src/components/sidebar.tsx:34
+#: src/components/sidebar.tsx:44
 msgid "Reporting"
 msgstr "報告書作成"
 
@@ -517,7 +517,7 @@ msgstr ""
 msgid "Save"
 msgstr "保存"
 
-#: src/components/sidebar.tsx:36
+#: src/components/sidebar.tsx:56
 #: src/pages/workflows.tsx:229
 msgid "Schedule"
 msgstr "スケジュール"
@@ -560,15 +560,15 @@ msgstr "会員登録"
 msgid "Something goes wrong"
 msgstr "何かが間違っている"
 
-#: src/pages/executions.tsx:192
+#: src/pages/executions.tsx:189
 msgid "Started"
 msgstr "開始"
 
-#: src/pages/execution-details.tsx:123
+#: src/pages/execution-details.tsx:118
 msgid "Started at:"
 msgstr "でスタート。"
 
-#: src/pages/executions.tsx:206
+#: src/pages/executions.tsx:203
 msgid "Status"
 msgstr "ステータス"
 
@@ -593,7 +593,7 @@ msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
 #: src/components/layout.tsx:26
-#: src/components/sidebar.tsx:38
+#: src/components/sidebar.tsx:68
 msgid "Templates"
 msgstr "テンプレート"
 
@@ -602,7 +602,7 @@ msgid "Th"
 msgstr ""
 
 #: src/pages/execution-details.tsx:46
-#: src/pages/executions.tsx:100
+#: src/pages/executions.tsx:97
 #: src/pages/profile.tsx:198
 #: src/pages/reports.tsx:67
 #: src/pages/scheduler.tsx:83
@@ -626,7 +626,7 @@ msgid "Those who have not yet registered as a member"
 msgstr "会員登録がお済みでない方"
 
 #: src/components/workflow-form.tsx:96
-#: src/pages/executions.tsx:28
+#: src/pages/executions.tsx:27
 #: src/pages/workflow-runner.tsx:115
 msgid "Timeout"
 msgstr "タイムアウト"
@@ -666,7 +666,7 @@ msgstr "週間"
 msgid "Work days"
 msgstr "勤務日数"
 
-#: src/pages/executions.tsx:185
+#: src/pages/executions.tsx:182
 msgid "Workflow"
 msgstr "ワークフロー"
 
@@ -703,7 +703,7 @@ msgid "Workflow:"
 msgstr "ワークフロー"
 
 #: src/components/layout.tsx:30
-#: src/components/sidebar.tsx:39
+#: src/components/sidebar.tsx:74
 msgid "Workflows"
 msgstr "ワークフロー"
 
@@ -786,8 +786,8 @@ msgid "{0}"
 msgstr ""
 
 #: src/components/sidebar.tsx:73
-msgid "{children}"
-msgstr "{子供たち}"
+#~ msgid "{children}"
+#~ msgstr "{子供たち}"
 
 #: src/components/layout.tsx:51
 msgid "© 2022 Coreus RPA. All rights reserved"

@@ -8,15 +8,15 @@ import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
 import { Execution } from "./types";
 import { OpenflowService } from "src/openflow/openflow.service";
 import { Session } from "src/auth/auth.service";
+import { Cron, CronExpression } from "@nestjs/schedule";
 
 @Injectable()
 export class ExecutionWorkerService {
-  private contexts: { [key: string]: Partial<Execution> } = {};
   private robotId: string | null;
   private ws: WebSocket;
   private readonly logger = new Logger(ExecutionWorkerService.name);
-  private queue = "coreus.backend.executions";
-  public queueInitialized = false;
+  private queue = "coreus.backend";
+  private EXPIRATION = 60 * 5 * 1000;
   constructor(
     private readonly config: ConfigProvider,
     private readonly cryptService: CryptService,
@@ -80,14 +80,12 @@ export class ExecutionWorkerService {
         socketMessage.replyto === registerQueueMsg.id
       ) {
         // queue is registered
-        this.queueInitialized = true;
         this.logger.log("worker queue registered");
         // init ping command interval
         pingInterval = setInterval(() => {
           this.ws.send(JSON.stringify(SocketMessage.fromcommand("ping")));
-        }, 10_000);
+        }, 3_000);
         this.logger.log("ping interval initialized");
-        this.listenQueue(this.ws);
         this.logger.log("listener initialized");
       }
     });
@@ -106,78 +104,6 @@ export class ExecutionWorkerService {
     });
   }
 
-  listenQueue(ws: WebSocket) {
-    ws.on("message", async (data) => {
-      try {
-        const socketMessage = SocketMessage.fromjson(data.toString());
-        this.logger.debug({
-          message: "message received",
-          socketMessage,
-        });
-        if (socketMessage.command === "error") {
-          this.logger.error({
-            message: "error message received",
-            socketMessage,
-          });
-        }
-
-        if (socketMessage.command === "queuemessage") {
-          const timestamp = new Date();
-
-          const socketData = this.openflowService.parseMessageData<{
-            correlationId: string;
-            error?: string;
-            data: {
-              command: Execution["status"];
-              workflowid: string;
-              data: { [key: string]: unknown };
-            };
-          }>(socketMessage.data);
-
-          const executionContext =
-            this.contexts[socketData.correlationId] ||
-            (await this.openflowService
-              .queryCollection<Execution>(this.cryptService.rootToken, {
-                query: { _id: socketData.correlationId },
-                collectionname: "entities",
-              })
-              .then((executions) => executions[0]));
-
-          executionContext.status = socketData.data.command;
-
-          if (socketData.data.command === "invokesuccess") {
-            executionContext.invokedAt = timestamp;
-          }
-
-          if (socketData.error) {
-            executionContext.error = socketData.error;
-            executionContext.status = "error";
-          }
-
-          if (
-            ["timeout", "invokefailed", "error"].includes(
-              socketData.data.command
-            )
-          ) {
-            executionContext.finishedAt = timestamp;
-            executionContext.error =
-              (socketData.data.data.Message as string) ||
-              socketData.data.command;
-          }
-
-          if (socketData.data.command === "invokecompleted") {
-            executionContext.finishedAt = timestamp;
-            executionContext.output = socketData.data.data;
-          }
-
-          this.updateExecution(executionContext);
-        }
-      } catch (error) {
-        this.logger.error({ message: "can not process ws message", error });
-      }
-    });
-  }
-
   @OnEvent("workflow.queued")
   async handleWorkflowQueuedEvent(
     session: Session,
@@ -190,15 +116,15 @@ export class ExecutionWorkerService {
       _type: "user_execution",
       workflowId: workflow.workflowId,
       templateId: workflow.templateId,
-      expiration: workflow.expiration,
     };
 
     const [queueMessageData] = QueueMessage.parse({
       jwt: this.cryptService.rootToken,
       priority: 2,
       queuename: robotId,
-      replyto: "coreus.backend.executions",
+      replyto: this.queue,
       data: {
+        expiration: this.EXPIRATION,
         command: "invoke",
         workflowid: workflow.templateId,
         data: {
@@ -207,7 +133,6 @@ export class ExecutionWorkerService {
           session_username: session.user.username,
         },
       },
-      expiration: workflow.expiration,
     });
     const queueMsg = SocketMessage.fromcommand("queuemessage");
     queueMsg.data = JSON.stringify(queueMessageData);
@@ -216,10 +141,74 @@ export class ExecutionWorkerService {
     executionContext.correlationId = queueMessageData.correlationId;
     executionContext.status = "queued";
     executionContext._id = queueMessageData.correlationId;
-    this.contexts[executionContext._id] = await this.openflowService.insertOne(
-      session.jwt,
-      executionContext
-    );
+
+    await this.openflowService.insertOne(session.jwt, executionContext);
     this.ws.send(JSON.stringify(queueMsg));
+  }
+
+  @Cron(CronExpression.EVERY_30_SECONDS)
+  async syncExecutions() {
+    console.log("sync started");
+    const executions = await this.openflowService
+      .queryCollection<Execution>(this.cryptService.rootToken, {
+        collectionname: "entities",
+        query: { _type: "user_execution", finishedAt: { $exists: false } },
+      })
+      .then((data) =>
+        data.reduce(
+          (acc, el) => ({ ...acc, [el._id]: el }),
+          {} as { [key: string]: Execution }
+        )
+      );
+
+    const rpaInstances = await this.openflowService.queryCollection<{
+      isCompleted: boolean;
+      hasError: boolean;
+      errormessage: string;
+      _created: Date;
+      _modified: Date;
+      correlationId: string;
+    }>(this.cryptService.rootToken, {
+      collectionname: "openrpa_instances",
+      query: { correlationId: { $in: Object.keys(executions) } },
+    });
+
+    for (const rpaInstance of rpaInstances) {
+      const execution = executions[rpaInstance.correlationId];
+      if (execution) {
+        execution.finishedAt = rpaInstance._modified;
+        execution.error = rpaInstance.hasError
+          ? rpaInstance.errormessage
+          : null;
+        if (rpaInstance.hasError) {
+          execution.status = "error";
+        } else {
+          execution.status = rpaInstance.isCompleted
+            ? "invokecompleted"
+            : "invokesuccess";
+        }
+
+        await this.openflowService.updateOne(
+          this.cryptService.rootToken,
+          execution
+        );
+        delete executions[execution._id];
+      }
+    }
+
+    // check for expired
+    for (const execution of Object.values(executions)) {
+      if (
+        new Date().getTime() - new Date(execution.startedAt).getTime() >
+        this.EXPIRATION
+      ) {
+        execution.finishedAt = new Date();
+        execution.status = "timeout";
+        await this.openflowService.updateOne(
+          this.cryptService.rootToken,
+          execution
+        );
+      }
+    }
   }
 }

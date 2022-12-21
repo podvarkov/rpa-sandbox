@@ -87,12 +87,7 @@ export const ExecutionDetailsPage: React.FC = () => {
                 )}
               </Box>
             </HStack>
-            <HStack spacing={4} w="100%">
-              <Box flex={0.2}>
-                <Trans>Expiration timeout:</Trans>
-              </Box>
-              <Box flex={1}>{execution.expiration}</Box>
-            </HStack>
+
             <HStack spacing={4} w="100%">
               <Box flex={0.2}>
                 <Trans>Arguments:</Trans>
@@ -126,17 +121,6 @@ export const ExecutionDetailsPage: React.FC = () => {
                 {execution.startedAt
                   ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
                     format(new Date(execution.startedAt), "Pp")
-                  : null}
-              </Box>
-            </HStack>
-            <HStack spacing={4} w="100%">
-              <Box flex={0.2}>
-                <Trans>Invoked at:</Trans>
-              </Box>
-              <Box flex={1}>
-                {execution.invokedAt
-                  ? // eslint-disable-next-line string-to-lingui/missing-lingui-transformation
-                    format(new Date(execution.invokedAt), "Pp")
                   : null}
               </Box>
             </HStack>

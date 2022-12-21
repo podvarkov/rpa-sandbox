@@ -22,14 +22,11 @@ import { Pagination, TSorter, usePagination } from "../components/table";
 
 /* eslint-disable string-to-lingui/missing-lingui-transformation */
 export const executionStatuses = {
-  invokefailed: defineMessage({ message: "Invoke failed" }),
   invokecompleted: defineMessage({ message: "Completed" }),
   error: defineMessage({ message: "Error" }),
   timeout: defineMessage({ message: "Timeout" }),
-  queued: defineMessage({ message: "Invoked" }),
-  invoke: defineMessage({ message: "Queued" }),
+  queued: defineMessage({ message: "Queued" }),
   invokesuccess: defineMessage({ message: "In progress" }),
-  invokeidle: defineMessage({ message: "Idle" }),
 };
 /* eslint-enable string-to-lingui/missing-lingui-transformation */
 

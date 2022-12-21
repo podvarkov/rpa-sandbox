@@ -29,11 +29,11 @@ msgstr "Add event"
 msgid "Add field"
 msgstr "Add field"
 
-#: src/pages/executions.tsx:139
+#: src/pages/executions.tsx:136
 msgid "All workflows"
 msgstr "All workflows"
 
-#: src/pages/executions.tsx:166
+#: src/pages/executions.tsx:163
 msgid "Any status"
 msgstr "Any status"
 
@@ -41,7 +41,7 @@ msgstr "Any status"
 msgid "Are you sure? You can not undo this action afterwards."
 msgstr "Are you sure? You can not undo this action afterwards."
 
-#: src/pages/execution-details.tsx:98
+#: src/pages/execution-details.tsx:93
 msgid "Arguments:"
 msgstr "Arguments:"
 
@@ -85,7 +85,7 @@ msgstr "Cancel"
 msgid "Changing email will lead to sign out"
 msgstr "Changing email will lead to sign out"
 
-#: src/pages/executions.tsx:26
+#: src/pages/executions.tsx:25
 msgid "Completed"
 msgstr "Completed"
 
@@ -193,11 +193,11 @@ msgstr "Enter event title"
 msgid "Enter your Rakuten member ID and password."
 msgstr "Enter your Rakuten member ID and password."
 
-#: src/pages/executions.tsx:27
+#: src/pages/executions.tsx:26
 msgid "Error"
 msgstr "Error"
 
-#: src/pages/execution-details.tsx:116
+#: src/pages/execution-details.tsx:111
 msgid "Error:"
 msgstr "Error:"
 
@@ -242,27 +242,27 @@ msgid "Execution with {0} id not found"
 msgstr "Execution with {0} id not found"
 
 #: src/components/layout.tsx:34
-#: src/components/sidebar.tsx:35
+#: src/components/sidebar.tsx:50
 msgid "Executions"
 msgstr "Executions"
 
 #: src/pages/execution-details.tsx:92
-msgid "Expiration timeout:"
-msgstr "Expiration timeout:"
+#~ msgid "Expiration timeout:"
+#~ msgstr "Expiration timeout:"
 
 #: src/pages/profile.tsx:408
 msgid "FAX: {0}"
 msgstr "FAX: {0}"
 
-#: src/pages/executions.tsx:119
+#: src/pages/executions.tsx:116
 msgid "Filters:"
 msgstr "Filters:"
 
-#: src/pages/executions.tsx:199
+#: src/pages/executions.tsx:196
 msgid "Finished"
 msgstr "Finished"
 
-#: src/pages/execution-details.tsx:145
+#: src/pages/execution-details.tsx:129
 msgid "Finished at:"
 msgstr "Finished at:"
 
@@ -286,7 +286,7 @@ msgstr "Go to login screen"
 #~ msgid "Have an account?"
 #~ msgstr "Have an account?"
 
-#: src/components/sidebar.tsx:33
+#: src/components/sidebar.tsx:38
 msgid "Home"
 msgstr "Home"
 
@@ -304,8 +304,8 @@ msgid "ID:"
 msgstr "ID:"
 
 #: src/pages/executions.tsx:32
-msgid "Idle"
-msgstr "Idle"
+#~ msgid "Idle"
+#~ msgstr "Idle"
 
 #: src/pages/sign-in.tsx:121
 msgid "If you forgot your password, click here"
@@ -315,7 +315,7 @@ msgstr "If you forgot your password, click here"
 msgid "In charge of your company"
 msgstr "In charge of your company"
 
-#: src/pages/executions.tsx:31
+#: src/pages/executions.tsx:29
 msgid "In progress"
 msgstr "In progress"
 
@@ -341,16 +341,16 @@ msgid "Inquiries about RPA"
 msgstr "Inquiries about RPA"
 
 #: src/pages/executions.tsx:25
-msgid "Invoke failed"
-msgstr "Invoke failed"
+#~ msgid "Invoke failed"
+#~ msgstr "Invoke failed"
 
 #: src/pages/executions.tsx:29
-msgid "Invoked"
-msgstr "Invoked"
+#~ msgid "Invoked"
+#~ msgstr "Invoked"
 
 #: src/pages/execution-details.tsx:134
-msgid "Invoked at:"
-msgstr "Invoked at:"
+#~ msgid "Invoked at:"
+#~ msgstr "Invoked at:"
 
 #: src/pages/sign-in.tsx:42
 msgid "Login"
@@ -402,7 +402,7 @@ msgstr "Never"
 msgid "New workflow"
 msgstr "New workflow"
 
-#: src/pages/executions.tsx:215
+#: src/pages/executions.tsx:212
 #: src/pages/reports.tsx:99
 #: src/pages/scheduler.tsx:174
 msgid "No data available"
@@ -428,7 +428,7 @@ msgstr "No templates found"
 msgid "Optional description"
 msgstr "Optional description"
 
-#: src/pages/execution-details.tsx:107
+#: src/pages/execution-details.tsx:102
 msgid "Output:"
 msgstr "Output:"
 
@@ -473,7 +473,7 @@ msgstr "Profile registration"
 msgid "Profile updated"
 msgstr "Profile updated"
 
-#: src/pages/executions.tsx:30
+#: src/pages/executions.tsx:28
 msgid "Queued"
 msgstr "Queued"
 
@@ -510,11 +510,11 @@ msgstr "Report data start date"
 msgid "Report deleted"
 msgstr "Report deleted"
 
-#: src/components/sidebar.tsx:37
+#: src/components/sidebar.tsx:62
 msgid "Report download"
 msgstr "Report download"
 
-#: src/components/sidebar.tsx:34
+#: src/components/sidebar.tsx:44
 msgid "Reporting"
 msgstr "Reporting"
 
@@ -530,7 +530,7 @@ msgstr "Sa"
 msgid "Save"
 msgstr "Save"
 
-#: src/components/sidebar.tsx:36
+#: src/components/sidebar.tsx:56
 #: src/pages/workflows.tsx:229
 msgid "Schedule"
 msgstr "Schedule"
@@ -573,15 +573,15 @@ msgstr "Sign up"
 msgid "Something goes wrong"
 msgstr "Something goes wrong"
 
-#: src/pages/executions.tsx:192
+#: src/pages/executions.tsx:189
 msgid "Started"
 msgstr "Started"
 
-#: src/pages/execution-details.tsx:123
+#: src/pages/execution-details.tsx:118
 msgid "Started at:"
 msgstr "Started at:"
 
-#: src/pages/executions.tsx:206
+#: src/pages/executions.tsx:203
 msgid "Status"
 msgstr "Status"
 
@@ -606,7 +606,7 @@ msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
 #: src/components/layout.tsx:26
-#: src/components/sidebar.tsx:38
+#: src/components/sidebar.tsx:68
 msgid "Templates"
 msgstr "Templates"
 
@@ -615,7 +615,7 @@ msgid "Th"
 msgstr "Th"
 
 #: src/pages/execution-details.tsx:46
-#: src/pages/executions.tsx:100
+#: src/pages/executions.tsx:97
 #: src/pages/profile.tsx:198
 #: src/pages/reports.tsx:67
 #: src/pages/scheduler.tsx:83
@@ -639,7 +639,7 @@ msgid "Those who have not yet registered as a member"
 msgstr "Those who have not yet registered as a member"
 
 #: src/components/workflow-form.tsx:96
-#: src/pages/executions.tsx:28
+#: src/pages/executions.tsx:27
 #: src/pages/workflow-runner.tsx:115
 msgid "Timeout"
 msgstr "Timeout"
@@ -680,7 +680,7 @@ msgstr "Week"
 msgid "Work days"
 msgstr "Work days"
 
-#: src/pages/executions.tsx:185
+#: src/pages/executions.tsx:182
 msgid "Workflow"
 msgstr "Workflow"
 
@@ -719,7 +719,7 @@ msgid "Workflow:"
 msgstr "Workflow:"
 
 #: src/components/layout.tsx:30
-#: src/components/sidebar.tsx:39
+#: src/components/sidebar.tsx:74
 msgid "Workflows"
 msgstr "Workflows"
 
@@ -804,8 +804,8 @@ msgid "{0}"
 msgstr "{0}"
 
 #: src/components/sidebar.tsx:73
-msgid "{children}"
-msgstr "{children}"
+#~ msgid "{children}"
+#~ msgstr "{children}"
 
 #: src/components/layout.tsx:51
 msgid "© 2022 Coreus RPA. All rights reserved"

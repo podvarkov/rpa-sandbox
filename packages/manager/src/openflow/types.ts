@@ -31,7 +31,6 @@ export type EncryptedUserWorkflow = Omit<UserWorkflow, "defaultArguments"> & {
 };
 
 export type Execution = Entity<{
-  expiration: number;
   correlationId: string;
   status:
     | "timeout"
@@ -41,7 +40,6 @@ export type Execution = Entity<{
     | "queued"
     | "invokesuccess";
   startedAt: Date;
-  invokedAt: Date;
   finishedAt: Date;
   arguments: { [key: string]: unknown };
   output?: { [key: string]: unknown };
