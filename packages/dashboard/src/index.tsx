@@ -13,6 +13,10 @@ import { SigninPage } from "./pages/sign-in";
 import { SignupPage } from "./pages/sign-up";
 import { theme } from "./theme";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+window.buildSha = process.env.REACT_APP_BUILD_SHA;
+
 const queryClient = new QueryClient();
 
 const Component: React.FC = () => {

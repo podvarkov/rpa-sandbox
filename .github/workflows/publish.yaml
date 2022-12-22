@@ -18,6 +18,7 @@ jobs:
       - name: Build
         env:
           CI: false
+          REACT_APP_BUILD_SHA: ${{ github.sha }}
         run: |
           npx lerna run build
 
