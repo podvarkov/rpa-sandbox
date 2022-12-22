@@ -195,8 +195,9 @@ export class ExecutionWorkerService {
 
     // check for expired
     for (const execution of Object.values(executions)) {
+      const ts = new Date();
       if (
-        new Date().getTime() - new Date(execution.startedAt).getTime() >
+        ts.getTime() - new Date(execution.startedAt).getTime() >
         this.config.WORKFLOW_EXPIRATION
       ) {
         execution.finishedAt = new Date();
@@ -205,6 +206,13 @@ export class ExecutionWorkerService {
           this.cryptService.rootToken,
           execution
         );
+        this.logger.debug({
+          message: "execution timeout",
+          now: ts.getTime(),
+          started: new Date(execution.startedAt).getTime(),
+          expiration: this.config.WORKFLOW_EXPIRATION,
+          execution,
+        });
       }
     }
   }
