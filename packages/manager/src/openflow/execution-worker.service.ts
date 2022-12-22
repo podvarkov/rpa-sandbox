@@ -210,6 +210,7 @@ export class ExecutionWorkerService {
           message: "execution timeout",
           now: ts.getTime(),
           started: new Date(execution.startedAt).getTime(),
+          expiration: this.config.WORKFLOW_EXPIRATION,
           execution,
         });
       }
