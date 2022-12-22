@@ -16,6 +16,7 @@ import { theme } from "./theme";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 window.buildSha = process.env.REACT_APP_BUILD_SHA;
+console.log("build from image: %s", process.env.REACT_APP_BUILD_SHA);
 
 const queryClient = new QueryClient();
 

@@ -20,19 +20,19 @@ jobs:
           CI: false
           REACT_APP_BUILD_SHA: ${{ github.sha }}
         run: |
-          echo $REACT_APP_BUILD_SHA && npx lerna run build
+          npx lerna run build
 
-#      - name: Login to registry
-#        uses: docker/login-action@v1
-#        with:
-#          registry: ghcr.io
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.GITHUB_TOKEN }}
-#
-#      - name: Publish production image
-#        uses: docker/build-push-action@v2
-#        with:
-#          context: .
-#          tags: |
-#            ghcr.io/founder-z/coreus-rpa:latest
-#          push: true
+      - name: Login to registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish production image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          tags: |
+            ghcr.io/founder-z/coreus-rpa:latest
+          push: true
