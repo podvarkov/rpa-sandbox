@@ -154,6 +154,8 @@ export class ExecutionWorkerService {
         )
       );
 
+    if (Object.keys(executions).length === 0) return;
+
     const rpaInstances = await this.openflowService.queryCollection<{
       isCompleted: boolean;
       hasError: boolean;
@@ -169,10 +171,9 @@ export class ExecutionWorkerService {
     for (const rpaInstance of rpaInstances) {
       const execution = executions[rpaInstance.correlationId];
       if (execution) {
-        execution.finishedAt = rpaInstance._modified;
-        execution.error = rpaInstance.hasError
-          ? rpaInstance.errormessage
-          : null;
+        if (rpaInstance.isCompleted)
+          execution.finishedAt = rpaInstance._modified;
+
         if (rpaInstance.hasError) {
           execution.status = "error";
         } else {
@@ -180,6 +181,10 @@ export class ExecutionWorkerService {
             ? "invokecompleted"
             : "invokesuccess";
         }
+
+        execution.error = rpaInstance.hasError
+          ? rpaInstance.errormessage
+          : null;
 
         await this.openflowService.updateOne(
           this.cryptService.rootToken,
