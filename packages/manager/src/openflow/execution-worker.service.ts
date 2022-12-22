@@ -16,7 +16,6 @@ export class ExecutionWorkerService {
   private ws: WebSocket;
   private readonly logger = new Logger(ExecutionWorkerService.name);
   private queue = "coreus.backend";
-  private EXPIRATION = 60 * 5 * 1000;
   constructor(
     private readonly config: ConfigProvider,
     private readonly cryptService: CryptService,
@@ -113,8 +112,8 @@ export class ExecutionWorkerService {
       priority: 2,
       queuename: robotId,
       replyto: this.queue,
+      expiration: this.config.WORKFLOW_EXPIRATION,
       data: {
-        expiration: this.EXPIRATION,
         command: "invoke",
         workflowid: workflow.templateId,
         data: {
@@ -198,7 +197,7 @@ export class ExecutionWorkerService {
     for (const execution of Object.values(executions)) {
       if (
         new Date().getTime() - new Date(execution.startedAt).getTime() >
-        this.EXPIRATION
+        this.config.WORKFLOW_EXPIRATION
       ) {
         execution.finishedAt = new Date();
         execution.status = "timeout";

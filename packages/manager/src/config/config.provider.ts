@@ -22,6 +22,14 @@ export class ConfigProvider {
   OPENFLOW_URL!: string;
 
   /**
+   * ttl of workflow task in rabbitmq
+   * in ms
+   * */
+  @Transform(({ value }) => Number.parseInt(value))
+  @IsOptional()
+  WORKFLOW_EXPIRATION = 60 * 5 * 1000;
+
+  /**
    * Url of openaip websocket endpoint
    */
   get OPENFLOW_WS_URL(): string {
