@@ -14,6 +14,7 @@ import { WorkflowRunnerPage } from "./pages/workflow-runner";
 import { WorkflowsPage } from "./pages/workflows";
 import { SchedulerPage } from "./pages/scheduler";
 import { ReportsPage } from "./pages/reports";
+import { PricingPage } from "./pages/pricing";
 
 const App: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const App: React.FC = () => {
       <Route element={<SidebarWithHeader />}>
         <Route path="/templates" element={<TemplatesPage />} />
         <Route path="/workflows/execute/:id" element={<WorkflowRunnerPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/home" element={<Home />} />
         <Route path="/beta-rpa" element={<BetaRpa />} />

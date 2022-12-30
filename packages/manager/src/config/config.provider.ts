@@ -49,6 +49,15 @@ export class ConfigProvider {
    */
   @IsString()
   OPENFLOW_AES_SECRET!: string;
+
+  @IsString()
+  STRIPE_SECRET: string;
+
+  /**
+   * App domain for third party redirects
+   */
+  @IsString()
+  DOMAIN: string;
 }
 
 export const configFactory = {

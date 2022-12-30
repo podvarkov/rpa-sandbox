@@ -18,10 +18,14 @@ import { SignUpParamsDto } from "./sign-up-params.dto";
 import { JwtAuthGuard, UserSession } from "./jwt.strategy";
 import { UpdateProfileDto } from "./update-profile.dto";
 import { UserProfileEntity } from "./user-profile.entity";
+import { UsersService } from "../users/users.service";
 
 @Controller("api/auth")
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly usersService: UsersService
+  ) {}
 
   @UseGuards(LocalAuthGuard)
   @Post("signin")
@@ -32,7 +36,7 @@ export class AuthController {
   @UsePipes(new ValidationPipe())
   @Post("signup")
   signUp(@Body() params: SignUpParamsDto) {
-    return this.authService.createUser(params.username, params.password);
+    return this.usersService.createUser(params.username, params.password);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -42,11 +46,11 @@ export class AuthController {
   async getProfile(
     @UserSession() session: Session
   ): Promise<UserProfileEntity> {
-    const profile = await this.authService.getUserProfile(session.jwt, {
+    const profile = await this.usersService.getUser(session.jwt, {
       _id: session.user._id,
     });
     if (!profile) throw new BadRequestException("User profile not found!");
-    const salesManager = await this.authService.getSalesMember(
+    const salesManager = await this.usersService.getSalesMember(
       profile.salesManagerId
     );
     return new UserProfileEntity(profile, salesManager);
@@ -61,7 +65,7 @@ export class AuthController {
     @UserSession() session: Session,
     @Body() body: UpdateProfileDto
   ) {
-    const profile = await this.authService.updateUserProfile(session, body);
+    const profile = await this.usersService.updateUserProfile(session, body);
     return new UserProfileEntity(profile);
   }
 }

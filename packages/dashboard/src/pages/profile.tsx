@@ -21,9 +21,11 @@ import {
   Text,
   Textarea,
   useDisclosure,
+  VStack,
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
+import type { Stripe } from "stripe";
 import { t, Trans } from "@lingui/macro";
 import { AxiosError } from "axios";
 import { Field, FieldProps, Form, Formik } from "formik";
@@ -32,9 +34,10 @@ import { RiCheckFill } from "react-icons/ri";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { api, SendInquiryParams, UpdatableProfile } from "../api";
+import { api, Profile, SendInquiryParams, UpdatableProfile } from "../api";
 import { useAuth } from "../components/auth-provider";
 import { useToast } from "../components/use-toast";
+import { format } from "date-fns";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -169,16 +172,157 @@ const ProfileInfoFields: React.FC<{ readonlyUsername: boolean }> = ({
   );
 };
 
+const getPlanName = (id?: string): string | undefined => {
+  switch (id) {
+    case "prod_N2Eg0uXNtzdLhZ":
+      return t`Robotic A`;
+    case "prod_N2EgnuL10iGJZH":
+      return t`Robotic B`;
+    case "prod_N2EfDiqK1ZKFYK":
+      return t`Robotic C`;
+    case "prod_N2EebSaRJn9p5d":
+      return t`Premium`;
+    default:
+      return t`Free Trial Plan`;
+  }
+};
+const ContractInfo: React.FC<{
+  subscription: Stripe.Subscription | undefined;
+  username: string | undefined;
+}> = ({ subscription, username }) => {
+  const navigate = useNavigate();
+  const customer = subscription && (subscription.customer as Stripe.Customer);
+  const plan =
+    subscription && (subscription as unknown as Stripe.SubscriptionItem).plan;
+
+  return (
+    <VStack
+      spacing={4}
+      alignItems="flex-start"
+      p={4}
+      my={2}
+      border="1px"
+      borderColor="borderColors.main"
+    >
+      <Heading size="sm" mb={2}>
+        <Trans>Contract Information</Trans>
+      </Heading>
+
+      <HStack spacing={2} fontSize="14px">
+        <Text>
+          <Trans>User:</Trans>
+        </Text>
+        <Text>{customer?.email || username}</Text>
+      </HStack>
+
+      <HStack fontSize="14px" spacing={2}>
+        <Text>
+          <Trans>Plan:</Trans>
+        </Text>
+        <Text>{getPlanName(plan?.product as string)}</Text>
+      </HStack>
+
+      {subscription ? (
+        <>
+          <HStack fontSize="14px" spacing={2}>
+            <Text>
+              <Trans>Paid at:</Trans>
+            </Text>
+            <Text>
+              {format(new Date(subscription.current_period_start * 1000), "Pp")}
+            </Text>
+          </HStack>
+
+          <HStack fontSize="14px" spacing={2}>
+            <Text>
+              <Trans>Active till:</Trans>
+            </Text>
+            <Text>
+              {format(new Date(subscription.current_period_end * 1000), "Pp")}
+            </Text>
+          </HStack>
+        </>
+      ) : null}
+
+      <Button
+        borderRadius={20}
+        boxShadow="xs"
+        fontSize={12}
+        my={4}
+        width="100%"
+        bg="bgColors.primary"
+        color="white"
+        onClick={() => navigate("/pricing")}
+      >
+        <Trans>View plans</Trans>
+      </Button>
+    </VStack>
+  );
+};
+
+const ContactInfo: React.FC<{
+  profile?: Profile;
+  onContactFormOpen: () => void;
+}> = ({ profile, onContactFormOpen }) => {
+  return (
+    <Box p={4} border="1px" borderColor="borderColors.main" minHeight="200px">
+      <Heading size="sm">
+        <Trans>In charge of your company</Trans>
+      </Heading>
+
+      <Text fontSize="16px" py={4}>
+        {profile?.salesManager?.name}
+      </Text>
+
+      <VStack spacing={4} fontSize="14px" alignItems="flex-start">
+        <Heading size="sm">
+          <Trans>Inquiries about RPA</Trans>
+        </Heading>
+
+        <Text>
+          <Trans>TEL: {profile?.salesManager?.phone}</Trans>
+        </Text>
+
+        <Text>
+          <Trans>FAX: {profile?.salesManager?.fax}</Trans>
+        </Text>
+
+        <Text>
+          <Trans>MAIL: {profile?.salesManager?.email}</Trans>
+        </Text>
+      </VStack>
+
+      <Button
+        borderRadius={20}
+        boxShadow="xs"
+        fontSize={12}
+        my={4}
+        onClick={onContactFormOpen}
+        width="100%"
+        bg="bgColors.primary"
+        color="white"
+        disabled={!profile}
+      >
+        <Trans>Contact us</Trans>
+      </Button>
+    </Box>
+  );
+};
+
 export const ProfilePage: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     data: profile,
-    error,
+    error: profileError,
     refetch,
   } = useQuery("profile", ({ signal }) => {
     return api.getProfile(signal);
   });
+  const { data: subscription, error: subscriptionError } = useQuery(
+    "subscription",
+    () => api.getSubscriptionInfo()
+  );
   const { errorMessage, successMessage } = useToast();
   const { signout } = useAuth();
 
@@ -200,10 +344,10 @@ export const ProfilePage: React.FC = () => {
   );
 
   useEffect(() => {
-    if (error) {
+    if (profileError) {
       errorMessage(t`There was an error while loading`);
     }
-  }, [error]);
+  }, [profileError, subscriptionError]);
 
   const navigate = useNavigate();
   return (
@@ -312,6 +456,7 @@ export const ProfilePage: React.FC = () => {
                   <Trans>Registration / Editing</Trans>
                 </Button>
               </WrapItem>
+
               <WrapItem
                 w={{ sm: "100%", lg: "48%" }}
                 border="1px"
@@ -394,60 +539,12 @@ export const ProfilePage: React.FC = () => {
 
         <GridItem width="100%" colSpan={1} h="10">
           <Box>
-            <Box
-              p={4}
-              border="1px"
-              borderColor="borderColors.main"
-              minHeight="200px"
-            >
-              <Heading>
-                <Text fontSize="18px">
-                  <Trans>In charge of your company</Trans>
-                </Text>
-              </Heading>
-              <Text fontSize="16px" py={4}>
-                {profile?.salesManager?.name}
-              </Text>
-              <Box fontSize="12px">
-                <Text>
-                  <Trans>Inquiries about RPA</Trans>
-                </Text>
-                <Text>
-                  <Trans>TEL: {profile?.salesManager?.phone}</Trans>
-                </Text>
-                <Text>
-                  <Trans>FAX: {profile?.salesManager?.fax}</Trans>
-                </Text>
-                <Text>
-                  <Trans>MAIL: {profile?.salesManager?.email}</Trans>
-                </Text>
-              </Box>
+            <ContactInfo onContactFormOpen={() => onOpen()} profile={profile} />
+            <ContractInfo
+              subscription={subscription}
+              username={profile?.username}
+            />
 
-              <Button
-                borderRadius={20}
-                boxShadow="xs"
-                fontSize={12}
-                my={4}
-                onClick={onOpen}
-                width="100%"
-                bg="bgColors.primary"
-                color="white"
-                disabled={!profile}
-              >
-                <Trans>Contact us</Trans>
-              </Button>
-            </Box>
-            <Box p={4} my={2} border="1px" borderColor="borderColors.main">
-              <Text fontSize="14px" mb={2}>
-                <Trans>Contract Information</Trans>
-              </Text>
-              <Text fontSize="12px" color="textColors.main">
-                <Trans>Dear 111</Trans>
-              </Text>
-              <Text fontSize="12px" color="textColors.main">
-                <Trans>Free Trial Plan</Trans>
-              </Text>
-            </Box>
             <Box p={4} border="1px" borderColor="borderColors.main">
               <Text fontSize="16px" mb={2} color="textColors.main">
                 <Trans>Report Results</Trans>

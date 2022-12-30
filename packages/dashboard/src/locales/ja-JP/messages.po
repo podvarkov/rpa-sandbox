@@ -21,6 +21,18 @@ msgstr "※ベータ版は楽天のみ対応"
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 msgstr "*ログインID、生年月日、電話番号、氏名など、お客様の個人情報に関連する文字列や、第三者に推測されやすい簡易な文字列（例：password）をパスワードに設定しないようにしてください。"
 
+#: src/pages/pricing.tsx:98
+msgid "20 robots available"
+msgstr ""
+
+#: src/pages/pricing.tsx:110
+msgid "30 robots available"
+msgstr ""
+
+#: src/pages/profile.tsx:238
+msgid "Active till:"
+msgstr ""
+
 #: src/pages/scheduler.tsx:227
 msgid "Add event"
 msgstr "イベントを追加"
@@ -49,7 +61,7 @@ msgstr "引数:"
 msgid "Available symbols (half-width)"
 msgstr "Available symbols (half-width)"
 
-#: src/pages/profile.tsx:456
+#: src/pages/profile.tsx:553
 msgid "Browse"
 msgstr "ブラウズ"
 
@@ -73,7 +85,7 @@ msgstr "ワークフローを削除できません"
 msgid "Can not edit workflow"
 msgstr "ワークフローを編集できません"
 
-#: src/pages/profile.tsx:192
+#: src/pages/profile.tsx:336
 msgid "Can not update profile"
 msgstr "プロフィールを更新できません"
 
@@ -81,7 +93,7 @@ msgstr "プロフィールを更新できません"
 msgid "Cancel"
 msgstr "取り消し"
 
-#: src/pages/profile.tsx:162
+#: src/pages/profile.tsx:165
 msgid "Changing email will lead to sign out"
 msgstr "メールアドレスを変更するとサインアウトします"
 
@@ -101,14 +113,14 @@ msgstr "アクションを確認"
 msgid "Confirm password"
 msgstr "パスワードを認証する"
 
-#: src/pages/profile.tsx:437
+#: src/pages/profile.tsx:306
 msgid "Contact us"
 msgstr "お問い合わせ"
 
 #~ msgid "Contents of inquiry"
 #~ msgstr ">>>>>>> Stashed changes"
 
-#: src/pages/profile.tsx:442
+#: src/pages/profile.tsx:208
 msgid "Contract Information"
 msgstr "契約情報"
 
@@ -140,8 +152,8 @@ msgid "Day"
 msgstr "日"
 
 #: src/pages/profile.tsx:445
-msgid "Dear 111"
-msgstr "親愛なる111"
+#~ msgid "Dear 111"
+#~ msgstr "親愛なる111"
 
 #: src/pages/workflows.tsx:239
 msgid "Delete"
@@ -171,7 +183,7 @@ msgstr "繰り返さない"
 msgid "Edit"
 msgstr "編集"
 
-#: src/pages/profile.tsx:148
+#: src/pages/profile.tsx:151
 #: src/pages/sign-in.tsx:74
 #: src/pages/sign-up.tsx:89
 msgid "Email"
@@ -245,7 +257,7 @@ msgstr "処刑"
 #~ msgid "Expiration timeout:"
 #~ msgstr "有効期限切れ:"
 
-#: src/pages/profile.tsx:419
+#: src/pages/profile.tsx:287
 msgid "FAX: {0}"
 msgstr ""
 
@@ -269,7 +281,7 @@ msgstr "口座保有者向け"
 msgid "Fr"
 msgstr "神父"
 
-#: src/pages/profile.tsx:448
+#: src/pages/profile.tsx:186
 msgid "Free Trial Plan"
 msgstr "無料お試しプラン"
 
@@ -305,7 +317,7 @@ msgstr ""
 msgid "If you forgot your password, click here"
 msgstr ""
 
-#: src/pages/profile.tsx:405
+#: src/pages/profile.tsx:270
 msgid "In charge of your company"
 msgstr "御社担当"
 
@@ -328,13 +340,13 @@ msgstr "モールやアクセス解析など、各種管理画面から情報を
 msgid "Input argument: {name}"
 msgstr "入力引数です。{名前}。"
 
-#: src/pages/profile.tsx:413
+#: src/pages/profile.tsx:279
 msgid "Inquiries about RPA"
 msgstr "RPAに関するお問い合わせ"
 
-#: src/pages/profile.tsx:215
-#: src/pages/profile.tsx:252
-#: src/pages/profile.tsx:260
+#: src/pages/profile.tsx:359
+#: src/pages/profile.tsx:396
+#: src/pages/profile.tsx:404
 msgid "Inquiry"
 msgstr "問合せ"
 
@@ -354,7 +366,7 @@ msgstr "問合せ"
 msgid "Login"
 msgstr "ログイン"
 
-#: src/pages/profile.tsx:422
+#: src/pages/profile.tsx:291
 msgid "MAIL: {0}"
 msgstr "MAIL: {0}"
 
@@ -387,7 +399,7 @@ msgstr "有効な電子メールである必要があります"
 msgid "Must match pattern"
 msgstr "パターンと一致する必要がある"
 
-#: src/pages/profile.tsx:91
+#: src/pages/profile.tsx:94
 #: src/pages/reports.tsx:87
 msgid "Name"
 msgstr "パターンと一致する必要がある"
@@ -427,6 +439,10 @@ msgstr "オプションの説明"
 msgid "Output:"
 msgstr "出力します。"
 
+#: src/pages/profile.tsx:229
+msgid "Paid at:"
+msgstr ""
+
 #: src/pages/sign-in.tsx:87
 #: src/pages/sign-up.tsx:103
 msgid "Password"
@@ -443,9 +459,17 @@ msgstr "パスワードが一致すること"
 #~ msgid "Phone Number"
 #~ msgstr ""
 
-#: src/pages/profile.tsx:134
+#: src/pages/profile.tsx:137
 msgid "Phone number"
 msgstr "電話番号"
+
+#: src/pages/profile.tsx:220
+msgid "Plan:"
+msgstr ""
+
+#: src/pages/pricing.tsx:82
+msgid "Plans that fit your need"
+msgstr ""
 
 #: src/pages/sign-up.tsx:157
 msgid "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
@@ -455,15 +479,20 @@ msgstr ""
 msgid "Please enter your R-Login ID and password."
 msgstr "R-LoginのID、パスワードを入力してください。"
 
+#: src/pages/pricing.tsx:131
+#: src/pages/profile.tsx:184
+msgid "Premium"
+msgstr ""
+
 #: src/components/header.tsx:97
 msgid "Profile"
 msgstr "プロフィール"
 
-#: src/pages/profile.tsx:302
+#: src/pages/profile.tsx:446
 msgid "Profile registration"
 msgstr "プロフィール登録"
 
-#: src/pages/profile.tsx:196
+#: src/pages/profile.tsx:340
 msgid "Profile updated"
 msgstr "プロフィール更新"
 
@@ -475,8 +504,8 @@ msgstr "キューイング"
 msgid "Rakuten monthly report creation"
 msgstr "楽天月報作成"
 
-#: src/pages/profile.tsx:312
-#: src/pages/profile.tsx:335
+#: src/pages/profile.tsx:456
+#: src/pages/profile.tsx:480
 msgid "Registration / Editing"
 msgstr "登録・編集"
 
@@ -488,7 +517,7 @@ msgstr "リピート仕上げ。"
 msgid "Repeat interval:"
 msgstr "インターバルを繰り返す。"
 
-#: src/pages/profile.tsx:453
+#: src/pages/profile.tsx:550
 msgid "Report Results"
 msgstr "報告結果"
 
@@ -511,6 +540,21 @@ msgstr "レポートダウンロード"
 #: src/components/sidebar.tsx:44
 msgid "Reporting"
 msgstr "報告書作成"
+
+#: src/pages/pricing.tsx:95
+#: src/pages/profile.tsx:178
+msgid "Robotic A"
+msgstr ""
+
+#: src/pages/pricing.tsx:107
+#: src/pages/profile.tsx:180
+msgid "Robotic B"
+msgstr ""
+
+#: src/pages/pricing.tsx:119
+#: src/pages/profile.tsx:182
+msgid "Robotic C"
+msgstr ""
 
 #~ msgid "Run workflow"
 #~ msgstr ""
@@ -541,7 +585,7 @@ msgstr "予定"
 msgid "Select the robot you want to run."
 msgstr "実行したいロボットを選択します。<<<<<<< Updated upstream======="
 
-#: src/pages/profile.tsx:279
+#: src/pages/profile.tsx:423
 msgid "Send&Save"
 msgstr ""
 
@@ -560,7 +604,7 @@ msgstr "サインアウト"
 msgid "Sign up"
 msgstr "会員登録"
 
-#: src/pages/profile.tsx:237
+#: src/pages/profile.tsx:381
 #: src/pages/scheduler.tsx:146
 #: src/pages/sign-up.tsx:58
 #: src/pages/workflows.tsx:107
@@ -583,7 +627,7 @@ msgstr "ステータス"
 msgid "Status:"
 msgstr "状態です。"
 
-#: src/pages/profile.tsx:325
+#: src/pages/profile.tsx:470
 msgid "Store Information Registration"
 msgstr "店舗情報登録"
 
@@ -591,11 +635,15 @@ msgstr "店舗情報登録"
 msgid "Su"
 msgstr ""
 
+#: src/pages/pricing.tsx:68
+msgid "Subscribe"
+msgstr ""
+
 #: src/pages/scheduler.tsx:140
 msgid "Success"
 msgstr "成功"
 
-#: src/pages/profile.tsx:416
+#: src/pages/profile.tsx:283
 msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
@@ -610,7 +658,7 @@ msgstr ""
 
 #: src/pages/execution-details.tsx:46
 #: src/pages/executions.tsx:97
-#: src/pages/profile.tsx:204
+#: src/pages/profile.tsx:348
 #: src/pages/reports.tsx:67
 #: src/pages/scheduler.tsx:83
 #: src/pages/templates.tsx:95
@@ -653,13 +701,21 @@ msgstr "ワークフローの更新"
 #~ msgid "Use template"
 #~ msgstr ""
 
-#: src/pages/profile.tsx:191
+#: src/pages/profile.tsx:335
 msgid "User with such email already exists"
 msgstr "そのようなメールアドレスを持つユーザーはすでに存在する"
 
 #: src/pages/sign-up.tsx:57
 msgid "User {0} already exists"
 msgstr "ユーザー{0}はすでに存在す"
+
+#: src/pages/profile.tsx:213
+msgid "User:"
+msgstr ""
+
+#: src/pages/profile.tsx:257
+msgid "View plans"
+msgstr ""
 
 #: src/components/scheduler-form.tsx:389
 msgid "We"
@@ -733,10 +789,18 @@ msgstr "ワークフローはここに表示されます。"
 #~ msgid "_ ! # $ ~ ^ @"
 #~ msgstr ""
 
+#: src/pages/pricing.tsx:122
+msgid "all robots available"
+msgstr ""
+
 #: src/pages/beta-rpa.tsx:150
 #: src/pages/mall-info.tsx:64
 msgid "back"
 msgstr "裏面"
+
+#: src/pages/pricing.tsx:135
+msgid "dedicated support"
+msgstr ""
 
 #: src/pages/workflow-runner.tsx:83
 #: src/pages/workflows.tsx:204
@@ -747,11 +811,19 @@ msgstr "失態"
 msgid "execution"
 msgstr "仕置"
 
+#: src/pages/pricing.tsx:134
+msgid "full robots customization"
+msgstr ""
+
 #: src/pages/sign-in.tsx:108
 msgid "login"
 msgstr "ログイン"
 
-#: src/pages/profile.tsx:106
+#: src/pages/pricing.tsx:48
+msgid "mo"
+msgstr ""
+
+#: src/pages/profile.tsx:109
 msgid "name"
 msgstr "名前"
 
@@ -770,10 +842,14 @@ msgstr "待ち行列"
 msgid "register"
 msgstr "レジスタ"
 
+#: src/pages/pricing.tsx:133
+msgid "same as Robotic C"
+msgstr ""
+
 #~ msgid "send"
 #~ msgstr ">>>>>>> Stashed changes"
 
-#: src/pages/profile.tsx:96
+#: src/pages/profile.tsx:99
 msgid "surname"
 msgstr "苗字"
 
@@ -781,6 +857,18 @@ msgstr "苗字"
 #: src/pages/workflow-runner.tsx:119
 msgid "timeout"
 msgstr "タイムアウト"
+
+#: src/pages/pricing.tsx:97
+#: src/pages/pricing.tsx:109
+#: src/pages/pricing.tsx:121
+msgid "unlimited executions minutes"
+msgstr ""
+
+#: src/pages/pricing.tsx:99
+#: src/pages/pricing.tsx:111
+#: src/pages/pricing.tsx:123
+msgid "up to 3 simultaneously executions"
+msgstr ""
 
 #: src/pages/reports.tsx:107
 msgid "{0}"

@@ -1,4 +1,5 @@
 import { Frequency, Weekday } from "rrule";
+import { Rolemember } from "@openiap/openflow-api";
 
 type Entity<T> = T & {
   _id: string;
@@ -63,7 +64,7 @@ export type ScheduledEvent = Entity<{
   };
 }>;
 
-export type Profile = Entity<{
+export type User = Entity<{
   surname: string;
   name: string;
   furiganaSurname: string;
@@ -74,6 +75,11 @@ export type Profile = Entity<{
   username: string;
   phone?: string;
   salesManagerId: string;
+  stripeSubscriptionId?: string;
+  stripeCustomerId?: string;
+  stripeLastSessionId?: string;
+  stripeProductId?: string;
+  roles: Rolemember[];
 }>;
 
 export type SalesManager = Entity<{
