@@ -15,6 +15,7 @@ async function bootstrap() {
       transports: [new winston.transports.Console()],
       level: process.env.LOG_LEVEL || "info",
     }),
+    rawBody: true,
   });
   const port = app.get(ConfigProvider).PORT;
   await app.listen(port || 3000);

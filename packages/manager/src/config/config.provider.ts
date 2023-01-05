@@ -53,6 +53,9 @@ export class ConfigProvider {
   @IsString()
   STRIPE_SECRET: string;
 
+  @IsString()
+  STRIPE_WEBHOOK_SECRET: string;
+
   /**
    * App domain for third party redirects
    */

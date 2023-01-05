@@ -16,6 +16,10 @@ export class StripeService {
     private readonly cryptService: CryptService
   ) {}
 
+  constructEvent(body: Buffer, signature: string, endpointSecret: string) {
+    return this.stripe.webhooks.constructEvent(body, signature, endpointSecret);
+  }
+
   async getSubscription(session: Session) {
     const user = await this.usersService.getUser(session.jwt);
     if (user.stripeSubscriptionId) {

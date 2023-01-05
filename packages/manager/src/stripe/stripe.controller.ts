@@ -1,7 +1,9 @@
 import {
+  Body,
   Controller,
   Get,
   Param,
+  Post,
   Query,
   Redirect,
   UseGuards,
@@ -9,10 +11,16 @@ import {
 import { StripeService } from "./stripe.service";
 import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";
 import { Session } from "../auth/auth.service";
+import { StripeSignatureGuard } from "./stripe-signature.guard";
 
 @Controller()
 export class StripeController {
   constructor(private readonly stripeService: StripeService) {}
+  @Post("api/payments/webhook")
+  @UseGuards(StripeSignatureGuard)
+  testHooks(@Body() body: { [key: string]: unknown }) {
+    console.log("WEBHOOK BODY", body);
+  }
   @Get("payments")
   @Redirect("/profile", 303)
   async completeCheckoutSession(
