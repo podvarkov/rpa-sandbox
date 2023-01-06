@@ -241,21 +241,32 @@ const ContractInfo: React.FC<{
               {format(new Date(subscription.current_period_end * 1000), "Pp")}
             </Text>
           </HStack>
+
+          <HStack fontSize="14px" spacing={2}>
+            <Text>
+              <Trans>Status:</Trans>
+            </Text>
+            <Text>
+              {subscription.status === "active" ? t`Active` : t`Inactive`}
+            </Text>
+          </HStack>
         </>
       ) : null}
 
-      <Button
-        borderRadius={20}
-        boxShadow="xs"
-        fontSize={12}
-        my={4}
-        width="100%"
-        bg="bgColors.primary"
-        color="white"
-        onClick={() => navigate("/pricing")}
-      >
-        <Trans>View plans</Trans>
-      </Button>
+      {subscription?.status === "active" ? null : (
+        <Button
+          borderRadius={20}
+          boxShadow="xs"
+          fontSize={12}
+          my={4}
+          width="100%"
+          bg="bgColors.primary"
+          color="white"
+          onClick={() => navigate("/pricing")}
+        >
+          <Trans>View plans</Trans>
+        </Button>
+      )}
     </VStack>
   );
 };

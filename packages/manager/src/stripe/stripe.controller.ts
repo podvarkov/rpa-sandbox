@@ -8,6 +8,7 @@ import {
   Redirect,
   UseGuards,
 } from "@nestjs/common";
+import { Stripe } from "stripe";
 import { StripeService } from "./stripe.service";
 import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";
 import { Session } from "../auth/auth.service";
@@ -18,8 +19,12 @@ export class StripeController {
   constructor(private readonly stripeService: StripeService) {}
   @Post("api/payments/webhook")
   @UseGuards(StripeSignatureGuard)
-  testHooks(@Body() body: { [key: string]: unknown }) {
-    console.log("WEBHOOK BODY", body);
+  testHooks(@Body() event: Stripe.Event) {
+    switch (event.type) {
+      case "customer.subscription.deleted":
+        this.stripeService.removeSubscription(event.data.object["customer"]);
+    }
+    console.log("WEBHOOK BODY", event);
   }
   @Get("payments")
   @Redirect("/profile", 303)

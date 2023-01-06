@@ -15,6 +15,8 @@ import {
 import { FaCheckCircle } from "react-icons/fa";
 import { t, Trans } from "@lingui/macro";
 import { useAuth } from "../components/auth-provider";
+import { useQuery } from "react-query";
+import { api } from "../api";
 
 const PriceWrapper: React.FC<{
   price: number;
@@ -75,68 +77,78 @@ const PriceWrapper: React.FC<{
 };
 
 export const PricingPage: React.FC = () => {
-  return (
-    <Box py={12}>
-      <VStack spacing={2} textAlign="center">
-        <Heading as="h1" fontSize="4xl">
-          <Trans>Plans that fit your need</Trans>
-        </Heading>
-      </VStack>
-      <Stack
-        direction={{ sm: "column", base: "column", md: "row" }}
-        textAlign="center"
-        justify="center"
-        spacing={{ base: 4, lg: 10 }}
-        py={10}
-      >
-        <PriceWrapper
-          price={30000}
-          currency="¥"
-          title={t`Robotic A`}
-          descriptions={[
-            t`unlimited executions minutes`,
-            t`20 robots available`,
-            t`up to 3 simultaneously executions`,
-          ]}
-          priceId="price_1MIADXJnl8Mom13wfuenEQM2"
-        />
-
-        <PriceWrapper
-          price={50000}
-          currency="¥"
-          title={t`Robotic B`}
-          descriptions={[
-            t`unlimited executions minutes`,
-            t`30 robots available`,
-            t`up to 3 simultaneously executions`,
-          ]}
-          priceId="price_1MIACtJnl8Mom13wvqxfDuQM"
-        />
-
-        <PriceWrapper
-          price={70000}
-          currency="¥"
-          title={t`Robotic C`}
-          descriptions={[
-            t`unlimited executions minutes`,
-            t`all robots available`,
-            t`up to 3 simultaneously executions`,
-          ]}
-          priceId="price_1MIABrJnl8Mom13wnrqbFViW"
-        />
-
-        <PriceWrapper
-          price={200000}
-          currency="¥"
-          title={t`Premium`}
-          descriptions={[
-            t`same as Robotic C`,
-            t`full robots customization`,
-            t`dedicated support`,
-          ]}
-          priceId="price_1MIABFJnl8Mom13wFWEeFLxx"
-        />
-      </Stack>
-    </Box>
+  const { data: subscription, isFetching } = useQuery("subscription", () =>
+    api.getSubscriptionInfo()
   );
+
+  return !isFetching ? (
+    <Box py={12}>
+      {subscription && subscription.status === "active" ? (
+        <Trans>You already on a paid plan</Trans>
+      ) : (
+        <>
+          <VStack spacing={2} textAlign="center">
+            <Heading as="h1" fontSize="4xl">
+              <Trans>Plans that fit your need</Trans>
+            </Heading>
+          </VStack>
+          <Stack
+            direction={{ sm: "column", base: "column", md: "row" }}
+            textAlign="center"
+            justify="center"
+            spacing={{ base: 4, lg: 10 }}
+            py={10}
+          >
+            <PriceWrapper
+              price={30000}
+              currency="¥"
+              title={t`Robotic A`}
+              descriptions={[
+                t`unlimited executions minutes`,
+                t`20 robots available`,
+                t`up to 3 simultaneously executions`,
+              ]}
+              priceId="price_1MIADXJnl8Mom13wfuenEQM2"
+            />
+
+            <PriceWrapper
+              price={50000}
+              currency="¥"
+              title={t`Robotic B`}
+              descriptions={[
+                t`unlimited executions minutes`,
+                t`30 robots available`,
+                t`up to 3 simultaneously executions`,
+              ]}
+              priceId="price_1MIACtJnl8Mom13wvqxfDuQM"
+            />
+
+            <PriceWrapper
+              price={70000}
+              currency="¥"
+              title={t`Robotic C`}
+              descriptions={[
+                t`unlimited executions minutes`,
+                t`all robots available`,
+                t`up to 3 simultaneously executions`,
+              ]}
+              priceId="price_1MIABrJnl8Mom13wnrqbFViW"
+            />
+
+            <PriceWrapper
+              price={200000}
+              currency="¥"
+              title={t`Premium`}
+              descriptions={[
+                t`same as Robotic C`,
+                t`full robots customization`,
+                t`dedicated support`,
+              ]}
+              priceId="price_1MIABFJnl8Mom13wFWEeFLxx"
+            />
+          </Stack>
+        </>
+      )}
+    </Box>
+  ) : null;
 };

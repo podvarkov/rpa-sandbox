@@ -31,6 +31,16 @@ export class StripeService {
     return null;
   }
 
+  async removeSubscription(stripeCustomerId: string) {
+    const user = await this.usersService.getUser(this.cryptService.rootToken, {
+      stripeCustomerId,
+    });
+
+    if (user.stripeProductId) {
+      await this.usersService.removeRoleMember(user.stripeProductId, user);
+    }
+  }
+
   async updateStripeInfo(stripeSessionId: string) {
     const session = await this.stripe.checkout.sessions.retrieve(
       stripeSessionId,
