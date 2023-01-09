@@ -8,11 +8,12 @@ import {
   HStack,
   Icon,
   useColorModeValue,
+  useOutsideClick,
 } from "@chakra-ui/react";
 import { MessageDescriptor } from "@lingui/core";
 import { defineMessage } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
-import React, { PropsWithChildren, ReactNode, useState } from "react";
+import React, { PropsWithChildren, ReactNode, useRef, useState } from "react";
 import { IconType } from "react-icons";
 import { AiFillHome } from "react-icons/ai";
 import {
@@ -127,14 +128,22 @@ const NavItem: React.FC<PropsWithChildren<NavItemProps>> = ({
 
 export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
   const { i18n } = useLingui();
-  const [visible, setVisible] = useState<boolean>(false);
-  const [activeLink, setActiveLink] = useState<string>("home");
+  const [visible, setVisible] = useState(false);
+  const [activeLink, setActiveLink] = useState("home");
+
+  const subMenuRef = useRef<HTMLDivElement>(null);
+  useOutsideClick({
+    ref: subMenuRef,
+    handler: () => setVisible(false),
+  });
 
   console.log(activeLink);
 
-  const ClickHandler = (link: LinkItemProps) => {
-    if (link.subMenu != null) setActiveLink(link.id);
-    else setVisible(false);
+  const clickHandler = (link: LinkItemProps) => {
+    if (link.subMenu != null) {
+      setActiveLink(link.id);
+      setVisible(true);
+    } else setVisible(false);
   };
 
   return (
@@ -165,10 +174,12 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
                 to={link.to}
                 key={link.id}
                 icon={link.icon}
-                onClick={() => ClickHandler(link)}
+                onClick={() => clickHandler(link)}
                 onMouseOver={() => {
                   if (link.subMenu != null) {
                     setVisible(true);
+                  } else {
+                    setVisible(false);
                   }
                 }}
               >
@@ -178,6 +189,7 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
 
               {visible && link.subMenu != null && (
                 <Box
+                  ref={subMenuRef}
                   h="100vh"
                   right="-100%"
                   top="0"
@@ -187,10 +199,8 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
                   position="absolute"
                   transition="0.2s"
                 >
-                  <>
-                    <Flex h="20" justifyContent="space-between"></Flex>
-                    {link.id == activeLink && link.subMenu}
-                  </>
+                  <Flex h="20" justifyContent="space-between"></Flex>
+                  {link.subMenu}
                 </Box>
               )}
             </>

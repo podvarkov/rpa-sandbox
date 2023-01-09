@@ -46,11 +46,11 @@ const NavItem: React.FC<PropsWithChildren<NavItemProps>> = ({
 };
 
 export const RobotList: React.FC = (isActive) => {
-  const { error, data: Robots } = useQuery("templates", ({ signal }) =>
+  const { error, data: robots } = useQuery("templates", ({ signal }) =>
     api.getTemplates(signal)
   );
 
-  console.log(Robots, isActive, error);
+  console.log(robots, isActive, error);
 
   return (
     <HStack
@@ -70,7 +70,7 @@ export const RobotList: React.FC = (isActive) => {
         alignItems="center"
         className="myBox"
       >
-        {Robots?.map((item) => (
+        {robots?.map((item) => (
           <NavItem name={item.name} key={item._id} to={`robot/${item._id}`}>
             {item.name}
           </NavItem>
