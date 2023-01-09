@@ -98,6 +98,7 @@ export class ExecutionWorkerService {
     session: Session,
     workflow: ExecuteWorkflowDto
   ) {
+    //TODO restrict by subscription plan
     const robotId = await this.getRobotId(this.config.OPENFLOW_ROBOT_USERNAME);
     const executionContext: Partial<Execution> = {
       robotId,
