@@ -17,27 +17,27 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
+  SimpleGrid,
   Stack,
   Text,
   Textarea,
   useDisclosure,
   VStack,
-  Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import type { Stripe } from "stripe";
 import { t, Trans } from "@lingui/macro";
 import { AxiosError } from "axios";
+import { format } from "date-fns";
 import { Field, FieldProps, Form, Formik } from "formik";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 import { RiCheckFill } from "react-icons/ri";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import type { Stripe } from "stripe";
 import * as Yup from "yup";
 import { api, Profile, SendInquiryParams, UpdatableProfile } from "../api";
 import { useAuth } from "../components/auth-provider";
 import { useToast } from "../components/use-toast";
-import { format } from "date-fns";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -431,7 +431,7 @@ export const ProfilePage: React.FC = () => {
                       px={8}
                       borderRadius={20}
                     >
-                      <Trans>Send&Save</Trans>
+                      <Trans>Send</Trans>
                     </Button>
                   </Flex>
                 </Form>
@@ -440,12 +440,12 @@ export const ProfilePage: React.FC = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
+
       <Grid templateColumns="repeat(5, 1fr)" gap={4} px={2}>
         <GridItem colSpan={4} h="10">
-          <Box width="100%" maxWidth="600px" mx="auto">
-            <Wrap w="100%">
+          <Box w="100%" maxWidth="600px" mx="auto">
+            <SimpleGrid columns={{ base: 1, lg: 2 }} w="100%" gap={2}>
               <WrapItem
-                w={{ sm: "100%", lg: "48%" }}
                 border="1px"
                 borderColor="borderColors.main"
                 p="16px"
@@ -469,7 +469,6 @@ export const ProfilePage: React.FC = () => {
               </WrapItem>
 
               <WrapItem
-                w={{ sm: "100%", lg: "48%" }}
                 border="1px"
                 borderColor="borderColors.main"
                 p="16px"
@@ -491,7 +490,7 @@ export const ProfilePage: React.FC = () => {
                   <Trans>Registration / Editing</Trans>
                 </Button>
               </WrapItem>
-            </Wrap>
+            </SimpleGrid>
 
             {isVisible && (
               <Box
@@ -557,10 +556,10 @@ export const ProfilePage: React.FC = () => {
             />
 
             <Box p={4} border="1px" borderColor="borderColors.main">
-              <Text fontSize="16px" mb={2} color="textColors.main">
+              <Text fontSize="16px" mb={2}>
                 <Trans>Report Results</Trans>
               </Text>
-              <Text fontSize="14px" color="textColors.main">
+              <Text fontSize="14px">
                 <Trans>Browse</Trans>
               </Text>
             </Box>

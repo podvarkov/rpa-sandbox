@@ -1,27 +1,28 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  HStack,
-  Stack,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Center, Heading, Text } from "@chakra-ui/react";
 import { Trans } from "@lingui/macro";
-import React, { useState } from "react";
-import DatePicker from "react-datepicker";
-import { AiOutlineArrowLeft } from "react-icons/ai";
+import React from "react";
+import { useParams } from "react-router-dom";
 import "../components/datepicker.css";
+import { RobotForm } from "../components/robot-form";
+
+export type WorkflowFormValues = {
+  _id?: string;
+  name: string;
+  description?: string;
+  templateId: string;
+  expiration: number;
+  defaultArguments?: { [key: string]: unknown };
+};
 
 export const BetaRpa: React.FC = () => {
-  const [isExecuted, setIsExecuted] = useState(false);
-  const [startDate, setStartDate] = useState<Date | null>(
-    new Date("2022/02/08")
-  );
-  const [endDate, setEndDate] = useState<Date | null>(new Date());
+  // const [isExecuted, setIsExecuted] = useState(false);
+  // const [startDate, setStartDate] = useState<Date | null>(
+  //   new Date("2022/02/08")
+  // );
+  // const [endDate, setEndDate] = useState<Date | null>(new Date());
+
+  const { id } = useParams();
+  console.log(id);
 
   return (
     <Center>
@@ -32,14 +33,16 @@ export const BetaRpa: React.FC = () => {
               <Trans>Monthly report creation</Trans>
             </Text>
           </Heading>
-          <Text fontSize="xs">
+          <RobotForm robotId={id} />
+
+          {/* <Text fontSize="xs">
             <Trans>Select the robot you want to run.</Trans>
           </Text>
           <Text fontSize="xs">
             <Trans>*Beta version only supports Rakuten</Trans>
-          </Text>
+          </Text> */}
         </Center>
-        <HStack spacing={25} mt={3}>
+        {/* <HStack spacing={25} mt={3}>
           <Flex
             border="1px"
             borderColor="borderColors.main"
@@ -150,7 +153,7 @@ export const BetaRpa: React.FC = () => {
               <Trans> back</Trans>
             </Button>
           </Flex>
-        </Stack>
+        </Stack> */}
       </Box>
     </Center>
   );

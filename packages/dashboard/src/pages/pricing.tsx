@@ -1,22 +1,22 @@
-import React from "react";
 import {
   Box,
-  Stack,
-  HStack,
-  Heading,
-  Text,
-  VStack,
-  useColorModeValue,
-  List,
-  ListItem,
-  ListIcon,
   Button,
+  Heading,
+  HStack,
+  List,
+  ListIcon,
+  ListItem,
+  SimpleGrid,
+  Text,
+  useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
-import { FaCheckCircle } from "react-icons/fa";
 import { t, Trans } from "@lingui/macro";
-import { useAuth } from "../components/auth-provider";
+import React from "react";
+import { FaCheckCircle } from "react-icons/fa";
 import { useQuery } from "react-query";
 import { api } from "../api";
+import { useAuth } from "../components/auth-provider";
 
 const PriceWrapper: React.FC<{
   price: number;
@@ -31,7 +31,7 @@ const PriceWrapper: React.FC<{
       mb={4}
       shadow="base"
       borderWidth="1px"
-      alignSelf={{ base: "center", lg: "flex-start" }}
+      alignSelf={{ base: "center" }}
       borderColor={useColorModeValue("gray.200", "gray.500")}
       borderRadius={"xl"}
     >
@@ -54,6 +54,7 @@ const PriceWrapper: React.FC<{
       <VStack
         bg={useColorModeValue("gray.50", "gray.700")}
         py={4}
+        h="50%"
         borderBottomRadius={"xl"}
       >
         <List spacing={3} textAlign="start" px={12}>
@@ -92,11 +93,11 @@ export const PricingPage: React.FC = () => {
               <Trans>Plans that fit your need</Trans>
             </Heading>
           </VStack>
-          <Stack
+          {/* <Stack
             direction={{ sm: "column", base: "column", md: "row" }}
             textAlign="center"
             justify="center"
-            spacing={{ base: 4, lg: 10 }}
+            // spacing={{ base: 4, lg: 10 }}
             py={10}
           >
             <PriceWrapper
@@ -146,7 +147,57 @@ export const PricingPage: React.FC = () => {
               ]}
               priceId="price_1MIABFJnl8Mom13wFWEeFLxx"
             />
-          </Stack>
+          </Stack> */}
+          <SimpleGrid
+            columns={{ base: 1, sm: 2, md: 2, xl: 4 }}
+            gap="2"
+            py={10}
+          >
+            <PriceWrapper
+              price={30000}
+              currency="¥"
+              title={t`Robotic A`}
+              descriptions={[
+                t`unlimited executions minutes`,
+                t`20 robots available`,
+                t`up to 3 simultaneously executions`,
+              ]}
+              priceId="price_1MIADXJnl8Mom13wfuenEQM2"
+            />{" "}
+            <PriceWrapper
+              price={30000}
+              currency="¥"
+              title={t`Robotic A`}
+              descriptions={[
+                t`unlimited executions minutes`,
+                t`20 robots available`,
+                t`up to 3 simultaneously executions`,
+              ]}
+              priceId="price_1MIADXJnl8Mom13wfuenEQM2"
+            />{" "}
+            <PriceWrapper
+              price={30000}
+              currency="¥"
+              title={t`Robotic A`}
+              descriptions={[
+                t`unlimited executions minutes`,
+                t`20 robots available`,
+                t`up to 3 simultaneously executions`,
+              ]}
+              priceId="price_1MIADXJnl8Mom13wfuenEQM2"
+            />{" "}
+            <PriceWrapper
+              price={30000}
+              currency="¥"
+              title={t`Robotic A`}
+              descriptions={[
+                t`unlimited executions minutes`,
+                t`20 robots available`,
+                t`up to 3 simultaneously executions`,
+              ]}
+              priceId="price_1MIADXJnl8Mom13wfuenEQM2"
+            />
+          </SimpleGrid>
         </>
       )}
     </Box>

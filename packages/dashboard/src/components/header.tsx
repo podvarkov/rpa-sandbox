@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Avatar,
   Box,
@@ -13,20 +12,21 @@ import {
   Select,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Trans } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import { setDefaultOptions } from "date-fns";
+import React from "react";
+import { setDefaultLocale } from "react-datepicker";
 import { FiMenu } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { datefnsLocales, locales } from "../i18n";
 import { useAuth } from "./auth-provider";
-import { setDefaultLocale } from "react-datepicker";
-import { setDefaultOptions } from "date-fns";
-import { Trans } from "@lingui/macro";
 
 interface MobileProps extends FlexProps {
   onOpen: any;
 }
 
-export default function Header({ onOpen }: MobileProps) {
+export const Header: React.FC<MobileProps> = ({ onOpen }: MobileProps) => {
   const { signout } = useAuth();
   const navigate = useNavigate();
   const { i18n } = useLingui();
@@ -105,4 +105,4 @@ export default function Header({ onOpen }: MobileProps) {
       </HStack>
     </Flex>
   );
-}
+};

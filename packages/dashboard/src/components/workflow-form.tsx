@@ -1,6 +1,3 @@
-import React from "react";
-import { Field, FieldProps, Form, Formik } from "formik";
-import * as Yup from "yup";
 import {
   Button,
   FormControl,
@@ -10,6 +7,9 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
+import { Field, FieldProps, Form, Formik } from "formik";
+import React from "react";
+import * as Yup from "yup";
 import { WorkflowTemplate } from "../api";
 import { ParametersFormField } from "../components/parameter-form-field";
 
