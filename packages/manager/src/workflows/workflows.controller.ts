@@ -12,24 +12,14 @@ import {
 } from "@nestjs/common";
 import { Session } from "../auth/auth.service";
 import { JwtAuthGuard, UserSession } from "../auth/jwt.strategy";
-import { ExecuteWorkflowDto } from "./execute-workflow.dto";
 import { GetWorkflowQueryParamsDto } from "./get-workflow-query-params.dto";
 import { UpsertWorkflowDto } from "./upsert-workflow.dto";
 import { WorkflowsService } from "./workflows.service";
 
+//TODO restrict by subscription plan
 @Controller("api/workflows")
 export class WorkflowsController {
   constructor(private readonly workflowsService: WorkflowsService) {}
-
-  @Post("execute")
-  @UsePipes(new ValidationPipe({ whitelist: true }))
-  @UseGuards(JwtAuthGuard)
-  async execute(
-    @UserSession() session: Session,
-    @Body() body: ExecuteWorkflowDto
-  ) {
-    return this.workflowsService.execute(session, body);
-  }
 
   @Get()
   @UseGuards(JwtAuthGuard)

@@ -1,20 +1,16 @@
 import { Injectable } from "@nestjs/common";
 import { UpsertWorkflowDto } from "./upsert-workflow.dto";
 import { OpenflowService } from "../openflow/openflow.service";
-import { ExecuteWorkflowDto } from "./execute-workflow.dto";
 import { CryptService } from "../crypt/crypt.service";
 import { EncryptedUserWorkflow } from "../openflow/types";
 import { TemplatesService } from "../templates/templates.service";
-import { EventEmitter2 } from "@nestjs/event-emitter";
-import { Session } from "src/auth/auth.service";
 
 @Injectable()
 export class WorkflowsService {
   constructor(
     private readonly openflowService: OpenflowService,
     private readonly cryptService: CryptService,
-    private readonly templatesService: TemplatesService,
-    private readonly eventEmitter: EventEmitter2
+    private readonly templatesService: TemplatesService
   ) {}
 
   decryptArguments(workflow: EncryptedUserWorkflow) {
@@ -41,8 +37,8 @@ export class WorkflowsService {
     }
   }
 
-  findAll(jwt: string, query?: { [key: string]: unknown }) {
-    return this.openflowService
+  async findAll(jwt: string, query?: { [key: string]: unknown }) {
+    const workflows = await this.openflowService
       .queryCollection<EncryptedUserWorkflow>(jwt, {
         query: { ...query, _type: "user_workflow" },
         collectionname: "entities",
@@ -50,6 +46,18 @@ export class WorkflowsService {
       .then((workflows) =>
         workflows.map((workflow) => this.decryptArguments(workflow))
       );
+
+    // check for availability by user role(subscription plan)
+    const templateIds = await this.templatesService
+      .findAll(jwt, {
+        _id: { $in: workflows.map(({ templateId }) => templateId) },
+      })
+      .then((templates) => new Set(templates.map(({ _id }) => _id)));
+
+    return workflows.map((workflow) => ({
+      ...workflow,
+      disabled: !templateIds.has(workflow.templateId),
+    }));
   }
 
   findOne(jwt: string, id: string) {
@@ -70,10 +78,5 @@ export class WorkflowsService {
       return { ...workflow, template };
     }
     return null;
-  }
-
-  execute(session: Session, body: ExecuteWorkflowDto) {
-    this.eventEmitter.emit("workflow.queued", session, body);
-    return { status: "queued" };
   }
 }

@@ -21,16 +21,13 @@ msgstr ""
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 msgstr "*ログインID、生年月日、電話番号、氏名など、お客様の個人情報に関連する文字列や、第三者に推測されやすい簡易な文字列（例：password）をパスワードに設定しないようにしてください。"
 
-#: src/pages/pricing.tsx:162
-#: src/pages/pricing.tsx:173
-#: src/pages/pricing.tsx:184
-#: src/pages/pricing.tsx:195
+#: src/pages/pricing.tsx:107
 msgid "20 robots available"
 msgstr ""
 
-#: src/pages/pricing.tsx:120
-#~ msgid "30 robots available"
-#~ msgstr ""
+#: src/pages/pricing.tsx:118
+msgid "30 robots available"
+msgstr ""
 
 #: src/pages/profile.tsx:250
 msgid "Active"
@@ -40,7 +37,7 @@ msgstr ""
 msgid "Active till:"
 msgstr ""
 
-#: src/pages/scheduler.tsx:227
+#: src/pages/scheduler.tsx:228
 msgid "Add event"
 msgstr "イベントを追加"
 
@@ -76,7 +73,7 @@ msgstr "ブラウズ"
 msgid "Can not create workflow"
 msgstr "ワークフローを作成できません"
 
-#: src/pages/scheduler.tsx:71
+#: src/pages/scheduler.tsx:72
 msgid "Can not delete event"
 msgstr "イベントを削除できません"
 
@@ -84,7 +81,7 @@ msgstr "イベントを削除できません"
 msgid "Can not delete report"
 msgstr "レポートを削除できません"
 
-#: src/pages/workflows.tsx:62
+#: src/pages/workflows.tsx:47
 msgid "Can not delete workflow"
 msgstr "ワークフローを削除できません"
 
@@ -134,12 +131,12 @@ msgstr "契約情報"
 #~ msgid "Create account"
 #~ msgstr ""
 
-#: src/components/workflow-form.tsx:114
+#: src/components/workflow-form.tsx:97
 msgid "Create workflow"
 msgstr "ワークフローの作成"
 
 #: src/pages/reports.tsx:90
-#: src/pages/scheduler.tsx:162
+#: src/pages/scheduler.tsx:163
 msgid "Created"
 msgstr "作成した"
 
@@ -163,10 +160,10 @@ msgstr "日"
 #~ msgstr "親愛なる111"
 
 #: src/pages/workflows.tsx:239
-msgid "Delete"
-msgstr "消去"
+#~ msgid "Delete"
+#~ msgstr "消去"
 
-#: src/pages/scheduler.tsx:95
+#: src/pages/scheduler.tsx:96
 msgid "Delete event"
 msgstr "予定を削除"
 
@@ -174,7 +171,8 @@ msgstr "予定を削除"
 msgid "Delete report"
 msgstr "レポートを削除"
 
-#: src/pages/workflows.tsx:124
+#: src/pages/workflows.tsx:71
+#: src/pages/workflows.tsx:172
 msgid "Delete workflow"
 msgstr "ワークフローの削除"
 
@@ -187,8 +185,8 @@ msgid "Do not repeat"
 msgstr "繰り返さない"
 
 #: src/pages/workflows.tsx:236
-msgid "Edit"
-msgstr "編集"
+#~ msgid "Edit"
+#~ msgstr "編集"
 
 #: src/pages/profile.tsx:151
 #: src/pages/sign-in.tsx:74
@@ -240,10 +238,10 @@ msgid "Every week"
 msgstr "毎週"
 
 #: src/pages/workflow-runner.tsx:140
-msgid "Execute"
-msgstr "実行する"
+#~ msgid "Execute"
+#~ msgstr "実行する"
 
-#: src/pages/workflows.tsx:181
+#: src/pages/workflows.tsx:131
 msgid "Execute workflow"
 msgstr "ワークフローの実行"
 
@@ -255,7 +253,7 @@ msgstr "実行の詳細"
 msgid "Execution with {0} id not found"
 msgstr "{0} ID での実行が見つかりません"
 
-#: src/components/sidebar.tsx:52
+#: src/components/sidebar.tsx:53
 msgid "Executions"
 msgstr "処刑"
 
@@ -298,7 +296,7 @@ msgstr "ログイン画面へ"
 #~ msgid "Have an account?"
 #~ msgstr ""
 
-#: src/components/sidebar.tsx:39
+#: src/components/sidebar.tsx:40
 msgid "Home"
 msgstr "家"
 
@@ -388,7 +386,7 @@ msgstr "分"
 msgid "Mo"
 msgstr "モ"
 
-#: src/pages/scheduler.tsx:165
+#: src/pages/scheduler.tsx:166
 msgid "Modified"
 msgstr "モディファイド"
 
@@ -424,7 +422,7 @@ msgstr "新しいワークフロー"
 
 #: src/pages/executions.tsx:212
 #: src/pages/reports.tsx:99
-#: src/pages/scheduler.tsx:174
+#: src/pages/scheduler.tsx:175
 msgid "No data available"
 msgstr "データなし"
 
@@ -490,6 +488,7 @@ msgstr ""
 msgid "Please enter your R-Login ID and password."
 msgstr "R-LoginのID、パスワードを入力してください。"
 
+#: src/pages/pricing.tsx:137
 #: src/pages/profile.tsx:184
 msgid "Premium"
 msgstr ""
@@ -543,26 +542,25 @@ msgstr "報告結果"
 msgid "Report deleted"
 msgstr "レポート削除"
 
-#: src/components/sidebar.tsx:64
+#: src/components/sidebar.tsx:65
 msgid "Report download"
 msgstr "レポートダウンロード"
 
-#: src/components/sidebar.tsx:45
+#: src/components/sidebar.tsx:46
 msgid "Reporting"
 msgstr "報告書作成"
 
-#: src/pages/pricing.tsx:159
-#: src/pages/pricing.tsx:170
-#: src/pages/pricing.tsx:181
-#: src/pages/pricing.tsx:192
+#: src/pages/pricing.tsx:104
 #: src/pages/profile.tsx:178
 msgid "Robotic A"
 msgstr ""
 
+#: src/pages/pricing.tsx:115
 #: src/pages/profile.tsx:180
 msgid "Robotic B"
 msgstr ""
 
+#: src/pages/pricing.tsx:126
 #: src/pages/profile.tsx:182
 msgid "Robotic C"
 msgstr ""
@@ -578,19 +576,17 @@ msgstr ""
 msgid "Save"
 msgstr "保存"
 
-#: src/components/sidebar.tsx:58
-#: src/pages/workflows.tsx:229
+#: src/components/sidebar.tsx:59
 msgid "Schedule"
 msgstr "スケジュール"
 
-#: src/pages/scheduler.tsx:111
-#: src/pages/workflows.tsx:93
+#: src/pages/scheduler.tsx:112
 msgid "Schedule execution"
 msgstr "スケジュール実行"
 
 #: src/pages/workflows.tsx:104
-msgid "Scheduled"
-msgstr "予定"
+#~ msgid "Scheduled"
+#~ msgstr "予定"
 
 #: src/pages/beta-rpa.tsx:41
 #~ msgid "Select the robot you want to run."
@@ -619,9 +615,8 @@ msgid "Sign up"
 msgstr "会員登録"
 
 #: src/pages/profile.tsx:392
-#: src/pages/scheduler.tsx:146
+#: src/pages/scheduler.tsx:147
 #: src/pages/sign-up.tsx:58
-#: src/pages/workflows.tsx:107
 msgid "Something goes wrong"
 msgstr "何かが間違っている"
 
@@ -654,7 +649,7 @@ msgstr ""
 msgid "Subscribe"
 msgstr ""
 
-#: src/pages/scheduler.tsx:140
+#: src/pages/scheduler.tsx:141
 msgid "Success"
 msgstr "成功"
 
@@ -662,7 +657,7 @@ msgstr "成功"
 msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
-#: src/components/sidebar.tsx:70
+#: src/components/sidebar.tsx:71
 msgid "Templates"
 msgstr "テンプレート"
 
@@ -674,9 +669,9 @@ msgstr ""
 #: src/pages/executions.tsx:97
 #: src/pages/profile.tsx:359
 #: src/pages/reports.tsx:67
-#: src/pages/scheduler.tsx:83
+#: src/pages/scheduler.tsx:84
 #: src/pages/templates.tsx:95
-#: src/pages/workflows.tsx:69
+#: src/pages/workflows.tsx:54
 msgid "There was an error while loading"
 msgstr "を読み込む際にエラーが発生しました。"
 
@@ -686,7 +681,6 @@ msgstr "を読み込む際にエラーが発生しました。"
 #: src/pages/sign-up.tsx:68
 #: src/pages/sign-up.tsx:70
 #: src/pages/sign-up.tsx:74
-#: src/pages/workflow-runner.tsx:59
 msgid "This field is required"
 msgstr "このフィールドは必須です"
 
@@ -694,13 +688,11 @@ msgstr "このフィールドは必須です"
 msgid "Those who have not yet registered as a member"
 msgstr "会員登録がお済みでない方"
 
-#: src/components/workflow-form.tsx:96
 #: src/pages/executions.tsx:27
-#: src/pages/workflow-runner.tsx:115
 msgid "Timeout"
 msgstr "タイムアウト"
 
-#: src/pages/scheduler.tsx:159
+#: src/pages/scheduler.tsx:160
 msgid "Title"
 msgstr "タイトル"
 
@@ -708,7 +700,7 @@ msgstr "タイトル"
 msgid "Tu"
 msgstr ""
 
-#: src/components/workflow-form.tsx:114
+#: src/components/workflow-form.tsx:97
 msgid "Update workflow"
 msgstr "ワークフローの更新"
 
@@ -751,7 +743,7 @@ msgstr "ワークフロー"
 msgid "Workflow created"
 msgstr "作成したワークフロー"
 
-#: src/pages/workflows.tsx:54
+#: src/pages/workflows.tsx:39
 msgid "Workflow deleted"
 msgstr "ワークフローを削除"
 
@@ -770,7 +762,6 @@ msgid "Workflow updated"
 msgstr "ワークフローを更新"
 
 #: src/pages/workflow-edit.tsx:47
-#: src/pages/workflow-runner.tsx:47
 msgid "Workflow with {0} id not found"
 msgstr "{0}のIDを持つワークフローが見つかりません"
 
@@ -781,7 +772,7 @@ msgstr "{0}のIDを持つワークフローが見つかりません"
 msgid "Workflow:"
 msgstr "ワークフロー"
 
-#: src/components/sidebar.tsx:76
+#: src/components/sidebar.tsx:77
 msgid "Workflows"
 msgstr "ワークフロー"
 
@@ -801,27 +792,26 @@ msgstr ""
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 msgstr "ドメイン指定受信などの受信拒否設定をしている場合、受信できないことがあります。設定を解除するか、以下のドメインからのメールを受信できるように設定後に手続きを行ってください。"
 
-#: src/pages/workflows.tsx:76
+#: src/pages/workflows.tsx:61
 msgid "Your workflows will be listed here"
 msgstr "ワークフローはここに表示されます。"
 
 #~ msgid "_ ! # $ ~ ^ @"
 #~ msgstr ""
 
-#: src/pages/pricing.tsx:132
-#~ msgid "all robots available"
-#~ msgstr ""
+#: src/pages/pricing.tsx:129
+msgid "all robots available"
+msgstr ""
 
 #: src/pages/mall-info.tsx:64
 msgid "back"
 msgstr "裏面"
 
-#: src/pages/pricing.tsx:145
-#~ msgid "dedicated support"
-#~ msgstr ""
+#: src/pages/pricing.tsx:141
+msgid "dedicated support"
+msgstr ""
 
-#: src/pages/workflow-runner.tsx:83
-#: src/pages/workflows.tsx:204
+#: src/pages/workflows.tsx:155
 msgid "error"
 msgstr "失態"
 
@@ -829,9 +819,9 @@ msgstr "失態"
 #~ msgid "execution"
 #~ msgstr "仕置"
 
-#: src/pages/pricing.tsx:144
-#~ msgid "full robots customization"
-#~ msgstr ""
+#: src/pages/pricing.tsx:140
+msgid "full robots customization"
+msgstr ""
 
 #: src/pages/sign-in.tsx:108
 msgid "login"
@@ -850,8 +840,7 @@ msgstr "名前"
 msgid "password"
 msgstr "暗証番号"
 
-#: src/pages/workflow-runner.tsx:72
-#: src/pages/workflows.tsx:194
+#: src/pages/workflows.tsx:145
 msgid "queued"
 msgstr "待ち行列"
 
@@ -860,9 +849,9 @@ msgstr "待ち行列"
 msgid "register"
 msgstr "レジスタ"
 
-#: src/pages/pricing.tsx:143
-#~ msgid "same as Robotic C"
-#~ msgstr ""
+#: src/pages/pricing.tsx:139
+msgid "same as Robotic C"
+msgstr ""
 
 #~ msgid "send"
 #~ msgstr ">>>>>>> Stashed changes"
@@ -873,20 +862,18 @@ msgstr "苗字"
 
 #: src/components/workflow-form.tsx:100
 #: src/pages/workflow-runner.tsx:119
-msgid "timeout"
-msgstr "タイムアウト"
+#~ msgid "timeout"
+#~ msgstr "タイムアウト"
 
-#: src/pages/pricing.tsx:161
-#: src/pages/pricing.tsx:172
-#: src/pages/pricing.tsx:183
-#: src/pages/pricing.tsx:194
+#: src/pages/pricing.tsx:106
+#: src/pages/pricing.tsx:117
+#: src/pages/pricing.tsx:128
 msgid "unlimited executions minutes"
 msgstr ""
 
-#: src/pages/pricing.tsx:163
-#: src/pages/pricing.tsx:174
-#: src/pages/pricing.tsx:185
-#: src/pages/pricing.tsx:196
+#: src/pages/pricing.tsx:108
+#: src/pages/pricing.tsx:119
+#: src/pages/pricing.tsx:130
 msgid "up to 3 simultaneously executions"
 msgstr ""
 

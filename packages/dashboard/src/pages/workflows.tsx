@@ -8,15 +8,6 @@ import {
   Icon,
   IconButton,
   Image,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  ModalOverlay,
   Text,
   Tooltip,
 } from "@chakra-ui/react";
@@ -24,22 +15,16 @@ import { useNavigate } from "react-router-dom";
 import { t, Trans } from "@lingui/macro";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { AxiosError } from "axios";
-import { FaEllipsisV, FaPlay } from "react-icons/fa";
+import { FaPlay, FaTrash } from "react-icons/fa";
 import { api, Workflow } from "../api";
 import { ConfirmDialog } from "../components/confirm-dialog";
 import { useToast } from "../components/use-toast";
-import {
-  createDefaultEvent,
-  EventFormValues,
-  SchedulerForm,
-} from "../components/scheduler-form";
 
 export const WorkflowsPage: React.FC = () => {
   const { infoMessage, errorMessage, successMessage } = useToast();
   const navigate = useNavigate();
   const [executionId, setExecutionId] = useState<string>();
   const [deleteIntent, setDeleteIntent] = useState<string>();
-  const [scheduleIntent, setScheduleIntent] = useState<EventFormValues>();
 
   const { data: workflows, error } = useQuery("workflows", ({ signal }) =>
     api.getWorkflows(signal)
@@ -78,44 +63,6 @@ export const WorkflowsPage: React.FC = () => {
     </Center>
   ) : (
     <>
-      <Modal
-        size="lg"
-        isOpen={!!scheduleIntent}
-        onClose={() => {
-          setScheduleIntent(undefined);
-        }}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            <HStack>
-              <Heading size={"md"}>
-                <Trans>Schedule execution</Trans>
-              </Heading>
-            </HStack>
-          </ModalHeader>
-          <ModalBody>
-            <SchedulerForm
-              event={scheduleIntent}
-              onSubmit={(values) => {
-                return api
-                  .upsertEvent(values)
-                  .then(() => {
-                    successMessage(t`Scheduled`);
-                  })
-                  .catch(() => {
-                    errorMessage(t`Something goes wrong`);
-                  })
-                  .finally(() => {
-                    setScheduleIntent(undefined);
-                  });
-              }}
-              workflows={workflows || []}
-            />
-          </ModalBody>
-        </ModalContent>
-      </Modal>
-
       <ConfirmDialog
         isOpen={!!deleteIntent}
         onClose={() => setDeleteIntent(undefined)}
@@ -128,6 +75,9 @@ export const WorkflowsPage: React.FC = () => {
         {workflows?.map((workflow) => {
           return (
             <HStack
+              onClick={() => {
+                navigate(workflow._id);
+              }}
               minW={0}
               key={workflow._id}
               cursor="pointer"
@@ -173,7 +123,7 @@ export const WorkflowsPage: React.FC = () => {
                   variant="ghost"
                   aria-label="execute"
                   isLoading={workflow._id === executionId}
-                  disabled={workflow._id === executionId}
+                  disabled={workflow.disabled || workflow._id === executionId}
                   icon={
                     <Icon
                       as={FaPlay}
@@ -181,7 +131,8 @@ export const WorkflowsPage: React.FC = () => {
                       title={t`Execute workflow`}
                     />
                   }
-                  onClick={() => {
+                  onClick={(event) => {
+                    event.stopPropagation();
                     setExecutionId(workflow._id);
                     void api
                       .executeWorkflow({
@@ -211,35 +162,22 @@ export const WorkflowsPage: React.FC = () => {
                   }}
                 />
 
-                <Menu>
-                  <MenuButton lineHeight={4}>
-                    <Icon as={FaEllipsisV} color={"gray.400"} />
-                  </MenuButton>
-                  <MenuList>
-                    <MenuItem
-                      onClick={() =>
-                        setScheduleIntent(
-                          createDefaultEvent({
-                            workflowId: workflow._id,
-                            name: workflow.name,
-                          })
-                        )
-                      }
-                    >
-                      <Trans>Schedule</Trans>
-                    </MenuItem>
-                    <MenuItem
-                      onClick={() => {
-                        navigate(workflow._id);
-                      }}
-                    >
-                      <Trans>Edit</Trans>
-                    </MenuItem>
-                    <MenuItem onClick={() => setDeleteIntent(workflow._id)}>
-                      <Trans>Delete</Trans>
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
+                <IconButton
+                  size="sm"
+                  variant="ghost"
+                  aria-label="delete"
+                  icon={
+                    <Icon
+                      as={FaTrash}
+                      title={t`Delete workflow`}
+                      color="gray.500"
+                    />
+                  }
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setDeleteIntent(workflow._id);
+                  }}
+                />
               </HStack>
             </HStack>
           );

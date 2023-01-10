@@ -57,6 +57,7 @@ export type Workflow = {
   _createdbyid: string;
   _type: string;
   expiration: number;
+  disabled: boolean;
 };
 
 export type Execution = {
@@ -223,7 +224,7 @@ class Api {
 
   getWorkflowWithTemplate(id: string, signal?: AbortSignal) {
     return this.axios
-      .get<Workflow & { template: WorkflowTemplate }>(
+      .get<Workflow & { template: WorkflowTemplate | null }>(
         `workflows/${id}?withTemplate=true`,
         { signal }
       )
@@ -248,7 +249,7 @@ class Api {
     templateId: string;
     arguments: { [key: string]: unknown };
   }) {
-    return this.axios.post("workflows/execute", data);
+    return this.axios.post("executions", data);
   }
 
   getExecutions(

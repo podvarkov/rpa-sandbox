@@ -89,23 +89,6 @@ export const WorkflowForm: React.FC<{
                 />
               ))}
 
-            <Field name="expiration">
-              {({ field, meta }: FieldProps) => (
-                <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                  <FormLabel>
-                    <Trans>Timeout</Trans>
-                  </FormLabel>
-                  <Input
-                    type="number"
-                    placeholder={t`timeout`}
-                    {...field}
-                    variant="default"
-                  />
-                  <FormErrorMessage>{meta.error}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
-
             <Button
               isLoading={isSubmitting}
               type="submit"

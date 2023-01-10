@@ -7,7 +7,7 @@ import { ScheduledEvent } from "../openflow/types";
 import { Cron, CronExpression } from "@nestjs/schedule";
 import { CryptService } from "../crypt/crypt.service";
 import { WorkflowsService } from "../workflows/workflows.service";
-import { ExecuteWorkflowDto } from "../workflows/execute-workflow.dto";
+import { ExecuteWorkflowDto } from "../executions/execute-workflow.dto";
 import { GetEventsQueryParamsDto } from "src/scheduler/get-events-query-params.dto";
 import { QueryOptions } from "@openiap/openflow-api";
 

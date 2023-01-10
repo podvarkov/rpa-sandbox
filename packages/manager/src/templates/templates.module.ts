@@ -7,5 +7,6 @@ import { OpenflowModule } from "../openflow/openflow.module";
   imports: [OpenflowModule],
   providers: [TemplatesService],
   controllers: [TemplatesController],
+  exports: [TemplatesService],
 })
 export class TemplatesModule {}

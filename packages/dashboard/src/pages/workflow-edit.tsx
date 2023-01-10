@@ -56,7 +56,7 @@ export const EditWorkflowPage: React.FC = () => {
             </Heading>
             <WorkflowForm
               initialValues={workflow}
-              templateParameters={workflow.template.Parameters}
+              templateParameters={workflow?.template?.Parameters || []}
               onSubmit={(values) => mutation.mutateAsync(values)}
             />
           </VStack>

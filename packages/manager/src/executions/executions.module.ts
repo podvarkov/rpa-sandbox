@@ -1,11 +1,14 @@
 import { Module } from "@nestjs/common";
+import { OpenflowModule } from "../openflow/openflow.module";
 import { ExecutionsController } from "./executions.controller";
 import { ExecutionsService } from "./executions.service";
-import { OpenflowModule } from "../openflow/openflow.module";
+import { ExecutionWorkerService } from "./execution-worker.service";
+import { TemplatesModule } from "../templates/templates.module";
+import { CryptModule } from "src/crypt/crypt.module";
 
 @Module({
-  imports: [OpenflowModule],
+  imports: [OpenflowModule, TemplatesModule, CryptModule],
   controllers: [ExecutionsController],
-  providers: [ExecutionsService],
+  providers: [ExecutionsService, ExecutionWorkerService],
 })
 export class ExecutionsModule {}
