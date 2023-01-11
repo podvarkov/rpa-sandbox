@@ -43,7 +43,6 @@ export class UsersService {
         username: data.username,
       });
       if (exists) throw new ConflictException();
-      // todo update stripe customer email
     }
 
     return this.updateUser({ ...oldUser, ...data });

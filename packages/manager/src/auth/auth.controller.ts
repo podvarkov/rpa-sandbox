@@ -19,12 +19,14 @@ import { JwtAuthGuard, UserSession } from "./jwt.strategy";
 import { UpdateProfileDto } from "./update-profile.dto";
 import { UserProfileEntity } from "./user-profile.entity";
 import { UsersService } from "../users/users.service";
+import { StripeService } from "src/stripe/stripe.service";
 
 @Controller("api/auth")
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly stripeService: StripeService
   ) {}
 
   @UseGuards(LocalAuthGuard)
@@ -66,6 +68,9 @@ export class AuthController {
     @Body() body: UpdateProfileDto
   ) {
     const profile = await this.usersService.updateUserProfile(session, body);
+    await this.stripeService.updateCustomer(profile.stripeCustomerId, {
+      email: profile.username,
+    });
     return new UserProfileEntity(profile);
   }
 }

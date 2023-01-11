@@ -16,7 +16,6 @@ import { GetWorkflowQueryParamsDto } from "./get-workflow-query-params.dto";
 import { UpsertWorkflowDto } from "./upsert-workflow.dto";
 import { WorkflowsService } from "./workflows.service";
 
-//TODO restrict by subscription plan
 @Controller("api/workflows")
 export class WorkflowsController {
   constructor(private readonly workflowsService: WorkflowsService) {}

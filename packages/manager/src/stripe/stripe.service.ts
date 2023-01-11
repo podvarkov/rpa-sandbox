@@ -96,4 +96,11 @@ export class StripeService {
 
     return stripeSession.url;
   }
+
+  updateCustomer(
+    customerId: string,
+    updateParams: Stripe.CustomerUpdateParams
+  ) {
+    return this.stripe.customers.update(customerId, updateParams);
+  }
 }

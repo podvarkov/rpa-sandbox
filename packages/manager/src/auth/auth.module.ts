@@ -8,6 +8,7 @@ import { PassportModule } from "@nestjs/passport";
 import { OpenflowModule } from "../openflow/openflow.module";
 import { CryptModule } from "src/crypt/crypt.module";
 import { UsersModule } from "src/users/users.module";
+import { StripeModule } from "src/stripe/stripe.module";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { UsersModule } from "src/users/users.module";
     OpenflowModule,
     CryptModule,
     UsersModule,
+    StripeModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
