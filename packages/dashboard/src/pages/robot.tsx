@@ -15,11 +15,10 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import * as Yup from "yup";
 import { api } from "../api";
-import { RobotParametrs } from "../components/robot-parametrs";
+import { RobotParameters } from "../components/robot-parameters";
 
 export const BetaRpa: React.FC = () => {
   const { id } = useParams();
-  console.log(id);
 
   return id ? (
     <Center flexDirection="column" maxW="xl" mx="auto">
@@ -33,11 +32,12 @@ export const BetaRpa: React.FC = () => {
           name: "",
           description: "",
           templateId: id,
+          arguments: {},
         }}
         onSubmit={(values, actions) => {
-          console.log(values);
-          api.upsertWorkflow(values);
-          actions.setSubmitting(false);
+          api.upsertWorkflow(values).then(() => {
+            actions.setSubmitting(false);
+          });
         }}
         validationSchema={Yup.object({
           name: Yup.string().required(t`This field is required`),
@@ -81,7 +81,7 @@ export const BetaRpa: React.FC = () => {
                   );
                 }}
               </Field>
-              <RobotParametrs robotId={id} />{" "}
+              <RobotParameters robotId={id} />
               <Button
                 isLoading={isSubmitting}
                 px={10}

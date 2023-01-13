@@ -23,12 +23,11 @@ export type UserWorkflow = Entity<{
   description?: string;
   name: string;
   templateId: string;
-  defaultArguments?: { [key: string]: unknown };
-  expiration: number;
+  arguments?: { [key: string]: unknown };
 }>;
 
-export type EncryptedUserWorkflow = Omit<UserWorkflow, "defaultArguments"> & {
-  defaultArguments: string;
+export type EncryptedUserWorkflow = Omit<UserWorkflow, "arguments"> & {
+  arguments: string;
 };
 
 export type Execution = Entity<{

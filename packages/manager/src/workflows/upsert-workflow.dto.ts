@@ -24,7 +24,7 @@ export class UpsertWorkflowDto {
       return val !== "" && val != null ? { ...acc, [key]: val } : acc;
     }, {});
   })
-  defaultArguments: { [key: string]: unknown };
+  arguments: { [key: string]: unknown };
 
   @IsOptional()
   @IsString()

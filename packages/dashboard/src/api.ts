@@ -2,7 +2,6 @@ import { TokenUser } from "@openiap/openflow-api";
 import Axios, { AxiosInstance } from "axios";
 import type { Stripe } from "stripe";
 import { EventFormValues } from "./components/scheduler-form";
-import { WorkflowFormValues } from "./components/workflow-form";
 
 export type SigninParams = { username: string; password: string };
 export type Session = {
@@ -50,7 +49,7 @@ export type Workflow = {
   description?: string;
   name: string;
   templateId: string;
-  defaultArguments?: { [key: string]: unknown };
+  arguments: { [key: string]: unknown };
   _created: string;
   _modified: string;
   _createdby: string;
@@ -151,6 +150,14 @@ export type SendInquiryParams = UpdatableProfile & {
   inquiry: string;
 };
 
+export type UpsertWorkflowValues = {
+  _id?: string;
+  name: string;
+  description?: string;
+  templateId: string;
+  arguments: { [key: string]: unknown };
+};
+
 class Api {
   private axios: AxiosInstance;
   private session: Session = null;
@@ -231,7 +238,7 @@ class Api {
       .then(({ data }) => data);
   }
 
-  upsertWorkflow(params: WorkflowFormValues) {
+  upsertWorkflow(params: UpsertWorkflowValues) {
     return this.axios
       .post<Workflow>("workflows", params)
       .then(({ data }) => data);

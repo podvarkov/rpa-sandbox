@@ -125,10 +125,10 @@ export class SchedulerService {
             const entity = new ExecuteWorkflowDto();
             entity.workflowId = wf._id;
             entity.templateId = wf.templateId;
-            entity.arguments = wf.defaultArguments;
-            entity.expiration = wf.expiration;
+            entity.arguments = wf.arguments;
             return entity;
           });
+
         this.eventEmitter.emit(
           "workflow.queued",
           { jwt, user: sessionUser },

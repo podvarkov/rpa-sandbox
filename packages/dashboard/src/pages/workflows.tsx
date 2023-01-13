@@ -138,7 +138,7 @@ export const WorkflowsPage: React.FC = () => {
                       .executeWorkflow({
                         workflowId: workflow._id,
                         templateId: workflow.templateId,
-                        arguments: workflow.defaultArguments || {},
+                        arguments: workflow.arguments || {},
                         expiration: workflow.expiration,
                       })
                       .then(() => {

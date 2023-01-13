@@ -10,21 +10,13 @@ import { t, Trans } from "@lingui/macro";
 import { Field, FieldProps, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-import { WorkflowTemplate } from "../api";
+import { UpsertWorkflowValues, WorkflowTemplate } from "../api";
 import { ParametersFormField } from "../components/parameter-form-field";
-
-export type WorkflowFormValues = {
-  _id?: string;
-  name: string;
-  description?: string;
-  templateId: string;
-  defaultArguments?: { [key: string]: unknown };
-};
 
 export const WorkflowForm: React.FC<{
   templateParameters: WorkflowTemplate["Parameters"];
-  initialValues: WorkflowFormValues;
-  onSubmit: (values: WorkflowFormValues) => Promise<unknown>;
+  initialValues: UpsertWorkflowValues;
+  onSubmit: (values: UpsertWorkflowValues) => Promise<unknown>;
 }> = ({ initialValues, onSubmit, templateParameters }) => {
   return (
     <Formik

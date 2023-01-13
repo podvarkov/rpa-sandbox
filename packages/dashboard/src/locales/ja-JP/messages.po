@@ -131,7 +131,7 @@ msgstr "契約情報"
 #~ msgid "Create account"
 #~ msgstr ""
 
-#: src/components/workflow-form.tsx:96
+#: src/components/workflow-form.tsx:88
 msgid "Create workflow"
 msgstr "ワークフローの作成"
 
@@ -344,8 +344,8 @@ msgstr ""
 #~ msgid "Input argument: {key}"
 #~ msgstr ""
 
-#: src/components/workflow-form.tsx:84
-#: src/components/workflow-form.tsx:85
+#: src/components/workflow-form.tsx:76
+#: src/components/workflow-form.tsx:77
 msgid "Input argument: {name}"
 msgstr "入力引数です。{名前}。"
 
@@ -395,7 +395,7 @@ msgstr "モディファイド"
 msgid "Month"
 msgstr "月"
 
-#: src/pages/robot.tsx:28
+#: src/pages/robot.tsx:27
 msgid "Monthly report creation"
 msgstr "月次レポート作成"
 
@@ -448,7 +448,7 @@ msgstr "テンプレートが見つかりません"
 #~ msgid "Not a member?"
 #~ msgstr ""
 
-#: src/components/workflow-form.tsx:67
+#: src/components/workflow-form.tsx:59
 #: src/pages/robot.tsx:75
 msgid "Optional description"
 msgstr "オプションの説明"
@@ -539,11 +539,11 @@ msgstr "インターバルを繰り返す。"
 msgid "Report Results"
 msgstr "報告結果"
 
-#: src/components/robot-parametrs.tsx:42
+#: src/components/robot-parameters.tsx:41
 msgid "Report data end date"
 msgstr "レポートデータ終了日"
 
-#: src/components/robot-parametrs.tsx:19
+#: src/components/robot-parameters.tsx:19
 msgid "Report data start date"
 msgstr "レポートデータ開始日"
 
@@ -686,7 +686,7 @@ msgstr ""
 msgid "There was an error while loading"
 msgstr "を読み込む際にエラーが発生しました。"
 
-#: src/components/workflow-form.tsx:38
+#: src/components/workflow-form.tsx:30
 #: src/pages/robot.tsx:43
 #: src/pages/sign-in.tsx:61
 #: src/pages/sign-in.tsx:62
@@ -716,7 +716,7 @@ msgstr ""
 msgid "Tu"
 msgstr ""
 
-#: src/components/workflow-form.tsx:96
+#: src/components/workflow-form.tsx:88
 msgid "Update workflow"
 msgstr "ワークフローの更新"
 
@@ -763,12 +763,12 @@ msgstr "作成したワークフロー"
 msgid "Workflow deleted"
 msgstr "ワークフローを削除"
 
-#: src/components/workflow-form.tsx:64
+#: src/components/workflow-form.tsx:56
 #: src/pages/robot.tsx:72
 msgid "Workflow description:"
 msgstr "ワークフローの説明。"
 
-#: src/components/workflow-form.tsx:50
+#: src/components/workflow-form.tsx:42
 #: src/pages/robot.tsx:55
 msgid "Workflow name:"
 msgstr "ワークフロー名。"

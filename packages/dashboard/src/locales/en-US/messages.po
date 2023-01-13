@@ -132,7 +132,7 @@ msgstr "Contract Information"
 #~ msgid "Create account"
 #~ msgstr "Create account"
 
-#: src/components/workflow-form.tsx:96
+#: src/components/workflow-form.tsx:88
 msgid "Create workflow"
 msgstr "Create workflow"
 
@@ -351,8 +351,8 @@ msgstr "Inactive"
 #~ msgid "Input argument: {key}"
 #~ msgstr "Input argument: {key}"
 
-#: src/components/workflow-form.tsx:84
-#: src/components/workflow-form.tsx:85
+#: src/components/workflow-form.tsx:76
+#: src/components/workflow-form.tsx:77
 msgid "Input argument: {name}"
 msgstr "Input argument: {name}"
 
@@ -402,7 +402,7 @@ msgstr "Modified"
 msgid "Month"
 msgstr "Month"
 
-#: src/pages/robot.tsx:28
+#: src/pages/robot.tsx:27
 msgid "Monthly report creation"
 msgstr "Monthly report creation"
 
@@ -458,7 +458,7 @@ msgstr "No templates found"
 #~ msgid "Not a member?"
 #~ msgstr "Not a member?"
 
-#: src/components/workflow-form.tsx:67
+#: src/components/workflow-form.tsx:59
 #: src/pages/robot.tsx:75
 msgid "Optional description"
 msgstr "Optional description"
@@ -550,11 +550,11 @@ msgstr "Repeat interval:"
 msgid "Report Results"
 msgstr "Report Results"
 
-#: src/components/robot-parametrs.tsx:42
+#: src/components/robot-parameters.tsx:41
 msgid "Report data end date"
 msgstr "Report data end date"
 
-#: src/components/robot-parametrs.tsx:19
+#: src/components/robot-parameters.tsx:19
 msgid "Report data start date"
 msgstr "Report data start date"
 
@@ -698,7 +698,7 @@ msgstr "Th"
 msgid "There was an error while loading"
 msgstr "There was an error while loading"
 
-#: src/components/workflow-form.tsx:38
+#: src/components/workflow-form.tsx:30
 #: src/pages/robot.tsx:43
 #: src/pages/sign-in.tsx:61
 #: src/pages/sign-in.tsx:62
@@ -728,7 +728,7 @@ msgstr "Trial period"
 msgid "Tu"
 msgstr "Tu"
 
-#: src/components/workflow-form.tsx:96
+#: src/components/workflow-form.tsx:88
 msgid "Update workflow"
 msgstr "Update workflow"
 
@@ -776,12 +776,12 @@ msgstr "Workflow created"
 msgid "Workflow deleted"
 msgstr "Workflow deleted"
 
-#: src/components/workflow-form.tsx:64
+#: src/components/workflow-form.tsx:56
 #: src/pages/robot.tsx:72
 msgid "Workflow description:"
 msgstr "Workflow description:"
 
-#: src/components/workflow-form.tsx:50
+#: src/components/workflow-form.tsx:42
 #: src/pages/robot.tsx:55
 msgid "Workflow name:"
 msgstr "Workflow name:"

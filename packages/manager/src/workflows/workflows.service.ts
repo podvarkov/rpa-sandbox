@@ -16,24 +16,24 @@ export class WorkflowsService {
   decryptArguments(workflow: EncryptedUserWorkflow) {
     return {
       ...workflow,
-      defaultArguments: JSON.parse(
-        this.cryptService.decrypt(workflow.defaultArguments)
-      ),
+      arguments: JSON.parse(this.cryptService.decrypt(workflow.arguments)),
+    };
+  }
+
+  encryptArguments(workflow: UpsertWorkflowDto) {
+    return {
+      ...workflow,
+      arguments: this.cryptService.encrypt(JSON.stringify(workflow.arguments)),
     };
   }
 
   upsert(jwt: string, workflow: UpsertWorkflowDto) {
-    const workflowData = {
-      ...workflow,
-      defaultArguments: this.cryptService.encrypt(
-        JSON.stringify(workflow.defaultArguments)
-      ),
-    };
+    const encryptedWorkflow = this.encryptArguments(workflow);
 
     if (workflow._id) {
-      return this.openflowService.updateOne(jwt, workflowData);
+      return this.openflowService.updateOne(jwt, encryptedWorkflow);
     } else {
-      return this.openflowService.insertOne(jwt, workflowData);
+      return this.openflowService.insertOne(jwt, encryptedWorkflow);
     }
   }
 

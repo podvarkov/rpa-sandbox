@@ -4,14 +4,14 @@ import { Field, FieldProps } from "formik";
 import React from "react";
 import DatePicker from "react-datepicker";
 
-export const RobotParametrs: React.FC<{
+export const RobotParameters: React.FC<{
   robotId: string | undefined;
 }> = ({ robotId }) => {
   switch (robotId) {
     case "4bb5c65c-84f7-428b-a865-a19a7e0f7d75":
       return (
         <>
-          <Field name="defaultArguments.startedDate" required>
+          <Field name="arguments.startedDate" required>
             {({ field, meta, form }: FieldProps) => {
               return (
                 <FormControl as="fieldset">
@@ -21,7 +21,6 @@ export const RobotParametrs: React.FC<{
                   <div className="react-datepicker__field-wrapper">
                     <DatePicker
                       required
-                      minDate={new Date()}
                       dateFormat="MM/yyyy"
                       showMonthYearPicker
                       selected={field.value}
@@ -34,7 +33,7 @@ export const RobotParametrs: React.FC<{
               );
             }}
           </Field>
-          <Field name="defaultArguments.endDate" required>
+          <Field name="arguments.endDate" required>
             {({ field, meta, form }: FieldProps) => {
               return (
                 <FormControl as="fieldset">
@@ -44,7 +43,6 @@ export const RobotParametrs: React.FC<{
                   <div className="react-datepicker__field-wrapper">
                     <DatePicker
                       required
-                      minDate={new Date()}
                       dateFormat="MM/yyyy"
                       showMonthYearPicker
                       selected={field.value}
