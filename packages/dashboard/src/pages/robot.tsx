@@ -10,15 +10,36 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
+import { AxiosError } from "axios";
 import { Field, FieldProps, Form, Formik } from "formik";
 import React from "react";
+import { useMutation } from "react-query";
 import { useParams } from "react-router-dom";
 import * as Yup from "yup";
-import { api } from "../api";
+import { api, UpsertWorkflowValues } from "../api";
 import { RobotParameters } from "../components/robot-parameters";
+import { useToast } from "../components/use-toast";
 
 export const BetaRpa: React.FC = () => {
   const { id } = useParams();
+
+  const { errorMessage, successMessage } = useToast();
+
+  const mutation = useMutation(
+    (data: UpsertWorkflowValues) => api.upsertWorkflow(data),
+    {
+      onError: (e: AxiosError) => {
+        errorMessage(
+          e.response?.status
+            ? t`Somethin went wrong: ${e.response}`
+            : t`Can not create workflow`
+        );
+      },
+      onSuccess: () => {
+        successMessage(t`Workflow created successfully`);
+      },
+    }
+  );
 
   return id ? (
     <Center flexDirection="column" maxW="xl" mx="auto">
@@ -34,10 +55,16 @@ export const BetaRpa: React.FC = () => {
           templateId: id,
           arguments: {},
         }}
-        onSubmit={(values, actions) => {
-          api.upsertWorkflow(values).then(() => {
-            actions.setSubmitting(false);
-          });
+        onSubmit={(values: UpsertWorkflowValues, { setSubmitting }) => {
+          mutation
+            .mutateAsync(values)
+            .catch((e) => {
+              console.error(e);
+              errorMessage(t`Something goes wrong`);
+            })
+            .finally(() => {
+              setSubmitting(false);
+            });
         }}
         validationSchema={Yup.object({
           name: Yup.string().required(t`This field is required`),

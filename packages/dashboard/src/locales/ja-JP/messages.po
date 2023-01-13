@@ -69,6 +69,7 @@ msgstr "Available symbols (half-width)"
 msgid "Browse"
 msgstr "ブラウズ"
 
+#: src/pages/robot.tsx:35
 #: src/pages/templates.tsx:88
 msgid "Can not create workflow"
 msgstr "ワークフローを作成できません"
@@ -198,7 +199,7 @@ msgstr "メールアドレス"
 #~ msgstr ""
 
 #: src/components/scheduler-form.tsx:218
-#: src/pages/robot.tsx:60
+#: src/pages/robot.tsx:87
 msgid "Enter event title"
 msgstr "イベントタイトルを入力"
 
@@ -395,7 +396,7 @@ msgstr "モディファイド"
 msgid "Month"
 msgstr "月"
 
-#: src/pages/robot.tsx:27
+#: src/pages/robot.tsx:48
 msgid "Monthly report creation"
 msgstr "月次レポート作成"
 
@@ -449,7 +450,7 @@ msgstr "テンプレートが見つかりません"
 #~ msgstr ""
 
 #: src/components/workflow-form.tsx:59
-#: src/pages/robot.tsx:75
+#: src/pages/robot.tsx:102
 msgid "Optional description"
 msgstr "オプションの説明"
 
@@ -540,10 +541,12 @@ msgid "Report Results"
 msgstr "報告結果"
 
 #: src/components/robot-parameters.tsx:41
+#: src/components/robot-parametrs.tsx:42
 msgid "Report data end date"
 msgstr "レポートデータ終了日"
 
 #: src/components/robot-parameters.tsx:19
+#: src/components/robot-parametrs.tsx:19
 msgid "Report data start date"
 msgstr "レポートデータ開始日"
 
@@ -582,7 +585,7 @@ msgid "Sa"
 msgstr ""
 
 #: src/components/scheduler-form.tsx:472
-#: src/pages/robot.tsx:91
+#: src/pages/robot.tsx:118
 msgid "Save"
 msgstr "保存"
 
@@ -624,7 +627,12 @@ msgstr "サインアウト"
 msgid "Sign up"
 msgstr "会員登録"
 
+#: src/pages/robot.tsx:34
+msgid "Somethin went wrong: {0}"
+msgstr ""
+
 #: src/pages/profile.tsx:396
+#: src/pages/robot.tsx:63
 #: src/pages/scheduler.tsx:147
 #: src/pages/sign-up.tsx:58
 msgid "Something goes wrong"
@@ -687,7 +695,7 @@ msgid "There was an error while loading"
 msgstr "を読み込む際にエラーが発生しました。"
 
 #: src/components/workflow-form.tsx:30
-#: src/pages/robot.tsx:43
+#: src/pages/robot.tsx:70
 #: src/pages/sign-in.tsx:61
 #: src/pages/sign-in.tsx:62
 #: src/pages/sign-up.tsx:68
@@ -759,17 +767,21 @@ msgstr "ワークフロー"
 msgid "Workflow created"
 msgstr "作成したワークフロー"
 
+#: src/pages/robot.tsx:39
+msgid "Workflow created successfully"
+msgstr ""
+
 #: src/pages/workflows.tsx:39
 msgid "Workflow deleted"
 msgstr "ワークフローを削除"
 
 #: src/components/workflow-form.tsx:56
-#: src/pages/robot.tsx:72
+#: src/pages/robot.tsx:99
 msgid "Workflow description:"
 msgstr "ワークフローの説明。"
 
 #: src/components/workflow-form.tsx:42
-#: src/pages/robot.tsx:55
+#: src/pages/robot.tsx:82
 msgid "Workflow name:"
 msgstr "ワークフロー名。"
 
