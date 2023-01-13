@@ -18,7 +18,6 @@ export type WorkflowFormValues = {
   name: string;
   description?: string;
   templateId: string;
-  expiration: number;
   defaultArguments?: { [key: string]: unknown };
 };
 

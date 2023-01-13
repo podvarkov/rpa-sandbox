@@ -154,7 +154,7 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
       pos="fixed"
       h="full"
-      zIndex={999}
+      zIndex={99}
       {...rest}
     >
       <Flex h="full">
@@ -169,10 +169,9 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
             />
           </Flex>
           {LinkItems.map((link) => (
-            <>
+            <Box key={link.id}>
               <NavItem
                 to={link.to}
-                key={link.id}
                 icon={link.icon}
                 onClick={() => clickHandler(link)}
                 onMouseOver={() => {
@@ -203,7 +202,7 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
                   {link.subMenu}
                 </Box>
               )}
-            </>
+            </Box>
           ))}
         </Box>
       </Flex>

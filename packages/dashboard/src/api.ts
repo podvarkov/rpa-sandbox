@@ -1,8 +1,8 @@
 import { TokenUser } from "@openiap/openflow-api";
 import Axios, { AxiosInstance } from "axios";
+import type { Stripe } from "stripe";
 import { EventFormValues } from "./components/scheduler-form";
 import { WorkflowFormValues } from "./components/workflow-form";
-import type { Stripe } from "stripe";
 
 export type SigninParams = { username: string; password: string };
 export type Session = {

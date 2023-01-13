@@ -132,7 +132,7 @@ msgstr "Contract Information"
 #~ msgid "Create account"
 #~ msgstr "Create account"
 
-#: src/components/workflow-form.tsx:97
+#: src/components/workflow-form.tsx:96
 msgid "Create workflow"
 msgstr "Create workflow"
 
@@ -141,7 +141,7 @@ msgstr "Create workflow"
 msgid "Created"
 msgstr "Created"
 
-#: src/components/scheduler-form.tsx:306
+#: src/components/scheduler-form.tsx:304
 msgid "Custom"
 msgstr "Custom"
 
@@ -149,11 +149,11 @@ msgstr "Custom"
 #~ msgid "Custom..."
 #~ msgstr "Custom..."
 
-#: src/components/scheduler-form.tsx:441
+#: src/components/scheduler-form.tsx:439
 msgid "Date"
 msgstr "Date"
 
-#: src/components/scheduler-form.tsx:366
+#: src/components/scheduler-form.tsx:364
 msgid "Day"
 msgstr "Day"
 
@@ -182,7 +182,7 @@ msgstr "Delete workflow"
 #~ msgid "Desired delivery date of the robot"
 #~ msgstr "Desired delivery date of the robot"
 
-#: src/components/scheduler-form.tsx:285
+#: src/components/scheduler-form.tsx:283
 msgid "Do not repeat"
 msgstr "Do not repeat"
 
@@ -201,7 +201,8 @@ msgstr "Email"
 #~ msgid "Email address"
 #~ msgstr "Email address"
 
-#: src/components/scheduler-form.tsx:220
+#: src/components/scheduler-form.tsx:218
+#: src/pages/robot.tsx:60
 msgid "Enter event title"
 msgstr "Enter event title"
 
@@ -221,23 +222,23 @@ msgstr "Error:"
 msgid "Event deleted"
 msgstr "Event deleted"
 
-#: src/components/scheduler-form.tsx:294
+#: src/components/scheduler-form.tsx:292
 msgid "Every day"
 msgstr "Every day"
 
-#: src/components/scheduler-form.tsx:291
+#: src/components/scheduler-form.tsx:289
 msgid "Every hour"
 msgstr "Every hour"
 
-#: src/components/scheduler-form.tsx:288
+#: src/components/scheduler-form.tsx:286
 msgid "Every minute"
 msgstr "Every minute"
 
-#: src/components/scheduler-form.tsx:300
+#: src/components/scheduler-form.tsx:298
 msgid "Every month"
 msgstr "Every month"
 
-#: src/components/scheduler-form.tsx:297
+#: src/components/scheduler-form.tsx:295
 msgid "Every week"
 msgstr "Every week"
 
@@ -285,7 +286,7 @@ msgstr "Finished at:"
 msgid "For account holders"
 msgstr "For account holders"
 
-#: src/components/scheduler-form.tsx:391
+#: src/components/scheduler-form.tsx:389
 msgid "Fr"
 msgstr "Fr"
 
@@ -305,7 +306,7 @@ msgstr "Go to login screen"
 msgid "Home"
 msgstr "Home"
 
-#: src/components/scheduler-form.tsx:363
+#: src/components/scheduler-form.tsx:361
 msgid "Hour"
 msgstr "Hour"
 
@@ -350,8 +351,8 @@ msgstr "Inactive"
 #~ msgid "Input argument: {key}"
 #~ msgstr "Input argument: {key}"
 
+#: src/components/workflow-form.tsx:84
 #: src/components/workflow-form.tsx:85
-#: src/components/workflow-form.tsx:86
 msgid "Input argument: {name}"
 msgstr "Input argument: {name}"
 
@@ -385,11 +386,11 @@ msgstr "Login"
 msgid "MAIL: {0}"
 msgstr "MAIL: {0}"
 
-#: src/components/scheduler-form.tsx:360
+#: src/components/scheduler-form.tsx:358
 msgid "Minute"
 msgstr "Minute"
 
-#: src/components/scheduler-form.tsx:387
+#: src/components/scheduler-form.tsx:385
 msgid "Mo"
 msgstr "Mo"
 
@@ -397,11 +398,11 @@ msgstr "Mo"
 msgid "Modified"
 msgstr "Modified"
 
-#: src/components/scheduler-form.tsx:372
+#: src/components/scheduler-form.tsx:370
 msgid "Month"
 msgstr "Month"
 
-#: src/pages/beta-rpa.tsx:33
+#: src/pages/robot.tsx:28
 msgid "Monthly report creation"
 msgstr "Monthly report creation"
 
@@ -419,7 +420,7 @@ msgstr "Must match pattern"
 msgid "Name"
 msgstr "Name"
 
-#: src/components/scheduler-form.tsx:437
+#: src/components/scheduler-form.tsx:435
 msgid "Never"
 msgstr "Never"
 
@@ -449,8 +450,8 @@ msgstr "No templates found"
 #~ msgid "Not a member?"
 #~ msgstr "Not a member?"
 
-#: src/components/robot-form.tsx:59
-#: src/components/workflow-form.tsx:68
+#: src/components/workflow-form.tsx:67
+#: src/pages/robot.tsx:75
 msgid "Optional description"
 msgstr "Optional description"
 
@@ -529,11 +530,11 @@ msgstr "Queued"
 msgid "Registration / Editing"
 msgstr "Registration / Editing"
 
-#: src/components/scheduler-form.tsx:411
+#: src/components/scheduler-form.tsx:409
 msgid "Repeat finish:"
 msgstr "Repeat finish:"
 
-#: src/components/scheduler-form.tsx:317
+#: src/components/scheduler-form.tsx:315
 msgid "Repeat interval:"
 msgstr "Repeat interval:"
 
@@ -541,13 +542,13 @@ msgstr "Repeat interval:"
 msgid "Report Results"
 msgstr "Report Results"
 
-#: src/pages/beta-rpa.tsx:98
-#~ msgid "Report data end date"
-#~ msgstr "Report data end date"
+#: src/components/robot-parametrs.tsx:42
+msgid "Report data end date"
+msgstr "Report data end date"
 
-#: src/pages/beta-rpa.tsx:86
-#~ msgid "Report data start date"
-#~ msgstr "Report data start date"
+#: src/components/robot-parametrs.tsx:19
+msgid "Report data start date"
+msgstr "Report data start date"
 
 #: src/pages/reports.tsx:55
 msgid "Report deleted"
@@ -580,11 +581,12 @@ msgstr "Robotic C"
 #~ msgid "Run workflow"
 #~ msgstr "Run workflow"
 
-#: src/components/scheduler-form.tsx:392
+#: src/components/scheduler-form.tsx:390
 msgid "Sa"
 msgstr "Sa"
 
-#: src/components/scheduler-form.tsx:474
+#: src/components/scheduler-form.tsx:472
+#: src/pages/robot.tsx:91
 msgid "Save"
 msgstr "Save"
 
@@ -600,7 +602,7 @@ msgstr "Schedule execution"
 #~ msgid "Scheduled"
 #~ msgstr "Scheduled"
 
-#: src/pages/beta-rpa.tsx:41
+#: src/pages/beta-rpa.tsx:36
 #~ msgid "Select the robot you want to run."
 #~ msgstr "Select the robot you want to run."
 
@@ -653,7 +655,7 @@ msgstr "Status:"
 msgid "Store Information Registration"
 msgstr "Store Information Registration"
 
-#: src/components/scheduler-form.tsx:393
+#: src/components/scheduler-form.tsx:391
 msgid "Su"
 msgstr "Su"
 
@@ -673,7 +675,7 @@ msgstr "TEL: {0}"
 msgid "Templates"
 msgstr "Templates"
 
-#: src/components/scheduler-form.tsx:390
+#: src/components/scheduler-form.tsx:388
 msgid "Th"
 msgstr "Th"
 
@@ -687,7 +689,8 @@ msgstr "Th"
 msgid "There was an error while loading"
 msgstr "There was an error while loading"
 
-#: src/components/workflow-form.tsx:39
+#: src/components/workflow-form.tsx:38
+#: src/pages/robot.tsx:43
 #: src/pages/sign-in.tsx:61
 #: src/pages/sign-in.tsx:62
 #: src/pages/sign-up.tsx:68
@@ -708,11 +711,11 @@ msgstr "Timeout"
 msgid "Title"
 msgstr "Title"
 
-#: src/components/scheduler-form.tsx:388
+#: src/components/scheduler-form.tsx:386
 msgid "Tu"
 msgstr "Tu"
 
-#: src/components/workflow-form.tsx:97
+#: src/components/workflow-form.tsx:96
 msgid "Update workflow"
 msgstr "Update workflow"
 
@@ -736,15 +739,15 @@ msgstr "User:"
 msgid "View plans"
 msgstr "View plans"
 
-#: src/components/scheduler-form.tsx:389
+#: src/components/scheduler-form.tsx:387
 msgid "We"
 msgstr "We"
 
-#: src/components/scheduler-form.tsx:369
+#: src/components/scheduler-form.tsx:367
 msgid "Week"
 msgstr "Week"
 
-#: src/components/scheduler-form.tsx:303
+#: src/components/scheduler-form.tsx:301
 msgid "Work days"
 msgstr "Work days"
 
@@ -760,13 +763,13 @@ msgstr "Workflow created"
 msgid "Workflow deleted"
 msgstr "Workflow deleted"
 
-#: src/components/robot-form.tsx:56
-#: src/components/workflow-form.tsx:65
+#: src/components/workflow-form.tsx:64
+#: src/pages/robot.tsx:72
 msgid "Workflow description:"
 msgstr "Workflow description:"
 
-#: src/components/robot-form.tsx:42
-#: src/components/workflow-form.tsx:51
+#: src/components/workflow-form.tsx:50
+#: src/pages/robot.tsx:55
 msgid "Workflow name:"
 msgstr "Workflow name:"
 

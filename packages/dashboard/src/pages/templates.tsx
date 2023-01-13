@@ -13,8 +13,8 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
 import { t, Trans } from "@lingui/macro";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { api, WorkflowTemplate } from "../api";
 import { useToast } from "../components/use-toast";
@@ -130,7 +130,6 @@ export const TemplatesPage: React.FC = () => {
                   name: selectedTemplate.name,
                   templateId: selectedTemplate._id,
                   description: "",
-                  expiration: 60000,
                   defaultArguments: (selectedTemplate.Parameters || [])
                     .filter(({ direction }) => direction === "in")
                     .reduce((acc, param) => ({ ...acc, [param.name]: "" }), {}),

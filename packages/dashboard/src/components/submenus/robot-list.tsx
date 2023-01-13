@@ -45,12 +45,12 @@ const NavItem: React.FC<PropsWithChildren<NavItemProps>> = ({
   );
 };
 
-export const RobotList: React.FC = (isActive) => {
+export const RobotList: React.FC = ({ ...rest }) => {
   const { error, data: robots } = useQuery("templates", ({ signal }) =>
     api.getTemplates(signal)
   );
 
-  console.log(robots, isActive, error);
+  console.log(robots, error);
 
   return (
     <HStack
@@ -61,7 +61,7 @@ export const RobotList: React.FC = (isActive) => {
       // pos="fixed"
       h="full"
       className="robotList"
-      // {...rest}
+      {...rest}
     >
       <Box
         position="relative"

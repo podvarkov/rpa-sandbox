@@ -1,8 +1,8 @@
-import React from "react";
 import { Box, Drawer, DrawerContent, useDisclosure } from "@chakra-ui/react";
+import React from "react";
 import { Outlet } from "react-router-dom";
-import SidebarContent from "./sidebar";
 import { Header } from "./header";
+import SidebarContent from "./sidebar";
 
 export const Layout: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

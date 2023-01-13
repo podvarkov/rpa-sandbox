@@ -1,25 +1,25 @@
 import {
+  BadRequestException,
+  Body,
+  ClassSerializerInterceptor,
   Controller,
+  Get,
   Post,
   Request,
+  SerializeOptions,
   UseGuards,
+  UseInterceptors,
   UsePipes,
   ValidationPipe,
-  Body,
-  Get,
-  ClassSerializerInterceptor,
-  UseInterceptors,
-  SerializeOptions,
-  BadRequestException,
 } from "@nestjs/common";
-import { LocalAuthGuard } from "./local.strategy";
+import { StripeService } from "src/stripe/stripe.service";
+import { UsersService } from "../users/users.service";
 import { AuthService, Session } from "./auth.service";
-import { SignUpParamsDto } from "./sign-up-params.dto";
 import { JwtAuthGuard, UserSession } from "./jwt.strategy";
+import { LocalAuthGuard } from "./local.strategy";
+import { SignUpParamsDto } from "./sign-up-params.dto";
 import { UpdateProfileDto } from "./update-profile.dto";
 import { UserProfileEntity } from "./user-profile.entity";
-import { UsersService } from "../users/users.service";
-import { StripeService } from "src/stripe/stripe.service";
 
 @Controller("api/auth")
 export class AuthController {

@@ -22,9 +22,7 @@ import { t, Trans } from "@lingui/macro";
 import { Field, FieldProps, Form, Formik } from "formik";
 import React from "react";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { Workflow } from "../api";
-import "./datepicker.css";
 
 const CheckboxGroup: React.FC<{
   items: Array<{ value: string; title: string }>;

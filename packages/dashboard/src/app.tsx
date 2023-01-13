@@ -1,7 +1,8 @@
 import React from "react";
+import "react-datepicker/dist/react-datepicker.css";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/layout";
-import { BetaRpa } from "./pages/beta-rpa";
+import "./datepicker.css";
 import { ExecutionDetailsPage } from "./pages/execution-details";
 import { ExecutionsPage } from "./pages/executions";
 import { Home } from "./pages/home";
@@ -9,6 +10,7 @@ import { MallInfo } from "./pages/mall-info";
 import { PricingPage } from "./pages/pricing";
 import { ProfilePage } from "./pages/profile";
 import { ReportsPage } from "./pages/reports";
+import { BetaRpa } from "./pages/robot";
 import { SchedulerPage } from "./pages/scheduler";
 import { TemplatesPage } from "./pages/templates";
 import { EditWorkflowPage } from "./pages/workflow-edit";
