@@ -82,12 +82,16 @@ export class StripeService {
         client_reference_id: session.user._id,
       },
       mode: "subscription",
+      payment_method_collection: "always",
     };
 
     if (user.stripeCustomerId) {
       sessionOptions.customer = user.stripeCustomerId;
     } else {
       sessionOptions.customer_email = session.user.username;
+      sessionOptions.subscription_data = {
+        trial_period_days: this.configProvider.STRIPE_TRIAL_PERIOD_DAYS,
+      };
     }
 
     const stripeSession = await this.stripe.checkout.sessions.create({

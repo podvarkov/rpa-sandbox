@@ -183,7 +183,7 @@ const getPlanName = (id?: string): string | undefined => {
     case "prod_N2EebSaRJn9p5d":
       return t`Premium`;
     default:
-      return t`Free Trial Plan`;
+      return t`No subscription`;
   }
 };
 const ContractInfo: React.FC<{
@@ -226,7 +226,7 @@ const ContractInfo: React.FC<{
         <>
           <HStack fontSize="14px" spacing={2}>
             <Text>
-              <Trans>Paid at:</Trans>
+              <Trans>Started at:</Trans>
             </Text>
             <Text>
               {format(new Date(subscription.current_period_start * 1000), "Pp")}
@@ -235,7 +235,7 @@ const ContractInfo: React.FC<{
 
           <HStack fontSize="14px" spacing={2}>
             <Text>
-              <Trans>Active till:</Trans>
+              <Trans>Next invoice date:</Trans>
             </Text>
             <Text>
               {format(new Date(subscription.current_period_end * 1000), "Pp")}
@@ -247,13 +247,17 @@ const ContractInfo: React.FC<{
               <Trans>Status:</Trans>
             </Text>
             <Text>
-              {subscription.status === "active" ? t`Active` : t`Inactive`}
+              {subscription.status === "active"
+                ? t`Active`
+                : subscription.status === "trialing"
+                ? t`Trial period`
+                : t`Inactive`}
             </Text>
           </HStack>
         </>
       ) : null}
 
-      {subscription?.status === "active" ? null : (
+      {["active", "trialing"].includes(subscription?.status || "") ? null : (
         <Button
           borderRadius={20}
           boxShadow="xs"

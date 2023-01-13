@@ -57,6 +57,14 @@ export class ConfigProvider {
   STRIPE_WEBHOOK_SECRET: string;
 
   /**
+   * trial period for stripe subscriptions
+   * in days
+   * */
+  @Transform(({ value }) => Number.parseInt(value))
+  @IsOptional()
+  STRIPE_TRIAL_PERIOD_DAYS = 14;
+
+  /**
    * App domain for third party redirects
    */
   @IsString()
