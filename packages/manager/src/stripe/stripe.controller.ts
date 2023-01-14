@@ -53,6 +53,18 @@ export class StripeController {
     };
   }
 
+  @Get("payments/portal")
+  @UseGuards(JwtAuthGuard)
+  @Redirect("", 303)
+  async createPortalSession(
+    @Param("price") priceId: string,
+    @UserSession() session: Session
+  ) {
+    return {
+      url: await this.stripeService.createPortalSession(session),
+    };
+  }
+
   @Get("api/payments/subscription")
   @UseGuards(JwtAuthGuard)
   async getSubscription(@UserSession() session: Session) {

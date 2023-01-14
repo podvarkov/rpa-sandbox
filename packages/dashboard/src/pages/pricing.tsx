@@ -84,7 +84,7 @@ export const PricingPage: React.FC = () => {
 
   return !isFetching ? (
     <Box py={12}>
-      {subscription && subscription.status === "active" ? (
+      {subscription && ["active", "trialing"].includes(subscription.status) ? (
         <Trans>You already on a paid plan</Trans>
       ) : (
         <>

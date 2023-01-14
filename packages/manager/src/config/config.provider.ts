@@ -65,10 +65,10 @@ export class ConfigProvider {
   STRIPE_TRIAL_PERIOD_DAYS = 14;
 
   /**
-   * App domain for third party redirects
+   * App host for third party redirects
    */
   @IsString()
-  DOMAIN: string;
+  APP_HOST: string;
 }
 
 export const configFactory = {

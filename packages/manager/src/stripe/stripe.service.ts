@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { ForbiddenException, Injectable } from "@nestjs/common";
 import { Stripe } from "stripe";
 import { ConfigProvider } from "../config/config.provider";
 import { Session } from "../auth/auth.service";
@@ -71,11 +71,22 @@ export class StripeService {
       user
     );
   }
-  async createCheckoutSession(session: Session, price) {
-    const user = await this.usersService.getUser(session.jwt, {});
+
+  async createPortalSession(session: Session): Promise<string> {
+    const user = await this.usersService.getUser(session.jwt);
+    if (!user.stripeCustomerId) throw new ForbiddenException();
+    const portalSession = await this.stripe.billingPortal.sessions.create({
+      customer: user.stripeCustomerId,
+      return_url: `${this.configProvider.APP_HOST}/profile`,
+    });
+
+    return portalSession.url;
+  }
+  async createCheckoutSession(session: Session, price): Promise<string> {
+    const user = await this.usersService.getUser(session.jwt);
     const sessionOptions: Stripe.Checkout.SessionCreateParams = {
-      success_url: `${this.configProvider.DOMAIN}/payments?success=true&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${this.configProvider.DOMAIN}/payments?cancelled=true`,
+      success_url: `${this.configProvider.APP_HOST}/payments?success=true&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${this.configProvider.APP_HOST}/payments?cancelled=true`,
       line_items: [{ price, quantity: 1 }],
       client_reference_id: session.user._id,
       metadata: {

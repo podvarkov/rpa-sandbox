@@ -186,11 +186,11 @@ const getPlanName = (id?: string): string | undefined => {
       return t`No subscription`;
   }
 };
-const ContractInfo: React.FC<{
+const SubscriptionInfo: React.FC<{
   subscription: Stripe.Subscription | undefined;
-  username: string | undefined;
-}> = ({ subscription, username }) => {
+}> = ({ subscription }) => {
   const navigate = useNavigate();
+  const { session } = useAuth();
   const customer = subscription && (subscription.customer as Stripe.Customer);
   const plan =
     subscription && (subscription as unknown as Stripe.SubscriptionItem).plan;
@@ -212,7 +212,7 @@ const ContractInfo: React.FC<{
         <Text>
           <Trans>User:</Trans>
         </Text>
-        <Text>{customer?.email || username}</Text>
+        <Text>{customer?.email || session?.user.username}</Text>
       </HStack>
 
       <HStack fontSize="14px" spacing={2}>
@@ -229,15 +229,17 @@ const ContractInfo: React.FC<{
               <Trans>Started at:</Trans>
             </Text>
             <Text>
+              {/* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */}
               {format(new Date(subscription.current_period_start * 1000), "Pp")}
             </Text>
           </HStack>
 
           <HStack fontSize="14px" spacing={2}>
             <Text>
-              <Trans>Next invoice date:</Trans>
+              <Trans>Active till:</Trans>
             </Text>
             <Text>
+              {/* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */}
               {format(new Date(subscription.current_period_end * 1000), "Pp")}
             </Text>
           </HStack>
@@ -257,7 +259,23 @@ const ContractInfo: React.FC<{
         </>
       ) : null}
 
-      {["active", "trialing"].includes(subscription?.status || "") ? null : (
+      {["active", "trialing"].includes(subscription?.status || "") ? (
+        <Box w={"100%"}>
+          <a href={`/payments/portal?token=${session?.jwt}`}>
+            <Button
+              borderRadius={20}
+              boxShadow="xs"
+              fontSize={12}
+              my={4}
+              width="100%"
+              bg="bgColors.primary"
+              color="white"
+            >
+              <Trans>Manage</Trans>
+            </Button>
+          </a>
+        </Box>
+      ) : (
         <Button
           borderRadius={20}
           boxShadow="xs"
@@ -445,6 +463,7 @@ export const ProfilePage: React.FC = () => {
         </ModalContent>
       </Modal>
 
+      {/* eslint-disable-next-line string-to-lingui/missing-lingui-transformation */}
       <Grid templateColumns="repeat(5, 1fr)" gap={4} px={2}>
         <GridItem colSpan={4} h="10">
           <Box w="100%" maxWidth="600px" mx="auto">
@@ -554,10 +573,7 @@ export const ProfilePage: React.FC = () => {
         <GridItem width="100%" colSpan={1} h="10">
           <Box>
             <ContactInfo onContactFormOpen={() => onOpen()} profile={profile} />
-            <ContractInfo
-              subscription={subscription}
-              username={profile?.username}
-            />
+            <SubscriptionInfo subscription={subscription} />
 
             <Box p={4} border="1px" borderColor="borderColors.main">
               <Text fontSize="16px" mb={2}>
