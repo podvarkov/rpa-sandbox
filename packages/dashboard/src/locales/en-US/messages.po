@@ -514,7 +514,7 @@ msgstr "Please enter your R-Login ID and password."
 msgid "Premium"
 msgstr "Premium"
 
-#: src/components/header.tsx:97
+#: src/components/header.tsx:91
 msgid "Profile"
 msgstr "Profile"
 
@@ -632,7 +632,7 @@ msgstr "Send"
 #~ msgid "Sign in"
 #~ msgstr "Sign in"
 
-#: src/components/header.tsx:100
+#: src/components/header.tsx:94
 msgid "Sign out"
 msgstr "Sign out"
 

@@ -17,10 +17,10 @@ export const MallInfo: React.FC = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Header onOpen={null} />
+      <Header />
       <Center flexDirection="column">
         <Box w={20} my={2} borderRadius={5} overflow="hidden">
-          <img src="/rakuten_logo.png" />
+          <img src="/rakuten_logo.png" alt="robot-logo" />
         </Box>
 
         <Stack my={5} px={3}>

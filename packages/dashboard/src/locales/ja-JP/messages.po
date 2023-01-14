@@ -503,7 +503,7 @@ msgstr "R-LoginのID、パスワードを入力してください。"
 msgid "Premium"
 msgstr ""
 
-#: src/components/header.tsx:97
+#: src/components/header.tsx:91
 msgid "Profile"
 msgstr "プロフィール"
 
@@ -619,7 +619,7 @@ msgstr ""
 #~ msgid "Sign in"
 #~ msgstr ""
 
-#: src/components/header.tsx:100
+#: src/components/header.tsx:94
 msgid "Sign out"
 msgstr "サインアウト"
 
