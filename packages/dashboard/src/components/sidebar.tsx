@@ -129,15 +129,13 @@ const NavItem: React.FC<PropsWithChildren<NavItemProps>> = ({
 export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
   const { i18n } = useLingui();
   const [visible, setVisible] = useState(false);
-  const [activeLink, setActiveLink] = useState("home");
+  const [, setActiveLink] = useState("home");
 
   const subMenuRef = useRef<HTMLDivElement>(null);
   useOutsideClick({
     ref: subMenuRef,
     handler: () => setVisible(false),
   });
-
-  console.log(activeLink);
 
   const clickHandler = (link: LinkItemProps) => {
     if (link.subMenu != null) {

@@ -25,17 +25,21 @@ export class StripeController {
   @UseGuards(StripeSignatureGuard)
   async handleStripeEvent(@Body() event: Stripe.Event) {
     this.logger.debug({ message: "stripe webhook received", event });
-    switch (event.type) {
-      case "customer.subscription.deleted":
-        await this.stripeService.removeSubscription(
-          event.data.object["customer"]
-        );
-        break;
-      case "customer.subscription.updated":
-        await this.stripeService.updateSubscription(event.data);
-        break;
-      default:
-        this.logger.debug(`Unhandled stripe event: ${event.type}`);
+    try {
+      switch (event.type) {
+        case "customer.subscription.deleted":
+          await this.stripeService.removeSubscription(
+            event.data.object["customer"]
+          );
+          break;
+        case "customer.subscription.updated":
+          await this.stripeService.updateSubscription(event.data);
+          break;
+        default:
+          this.logger.debug(`Unhandled stripe event: ${event.type}`);
+      }
+    } catch (error) {
+      this.logger.error({ message: "Error processing stripe event", error });
     }
   }
   @Get("payments")

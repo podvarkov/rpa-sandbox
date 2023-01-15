@@ -48,27 +48,17 @@ export class StripeService {
     const eventProductId = (data.object as Stripe.SubscriptionItem).plan
       .product as string;
 
-    try {
-      const user = await this.usersService.getUser(
-        this.cryptService.rootToken,
-        {
-          stripeCustomerId: subscription.customer as string,
-        }
-      );
+    const user = await this.usersService.getUser(this.cryptService.rootToken, {
+      stripeCustomerId: subscription.customer as string,
+    });
 
-      // plan changed
-      if (user.stripeProductId !== eventProductId) {
-        await this.usersService.removeRoleMember(user.stripeProductId, user);
-        await this.usersService.addRoleMember(eventProductId, user);
-        user.stripeProductId = eventProductId;
-        await this.usersService.updateUser(user);
-        console.log("PLAN CHANGED");
-      }
-    } catch (e) {
-      console.error("Stripe webhook error", e);
+    // plan changed
+    if (user.stripeProductId !== eventProductId) {
+      await this.usersService.removeRoleMember(user.stripeProductId, user);
+      await this.usersService.addRoleMember(eventProductId, user);
+      user.stripeProductId = eventProductId;
+      await this.usersService.updateUser(user);
     }
-
-    console.log("STRIPE DATA", subscription);
   }
 
   async updateStripeInfo(stripeSessionId: string) {

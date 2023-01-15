@@ -46,11 +46,9 @@ const NavItem: React.FC<PropsWithChildren<NavItemProps>> = ({
 };
 
 export const RobotList: React.FC = ({ ...rest }) => {
-  const { error, data: robots } = useQuery("templates", ({ signal }) =>
+  const { data: robots } = useQuery("templates", ({ signal }) =>
     api.getTemplates(signal)
   );
-
-  console.log(robots, error);
 
   return (
     <HStack
