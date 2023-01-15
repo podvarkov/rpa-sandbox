@@ -23,8 +23,9 @@ export class StripeController {
     switch (event.type) {
       case "customer.subscription.deleted":
         this.stripeService.removeSubscription(event.data.object["customer"]);
+      case "customer.subscription.updated":
+        this.stripeService.updateSubscription(event.data);
     }
-    console.log("WEBHOOK BODY", event);
   }
   @Get("payments")
   @Redirect("/profile", 303)

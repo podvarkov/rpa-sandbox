@@ -66,7 +66,7 @@ export class UsersService {
     return await this.openflowService
       .queryCollection<User>(jwt, {
         collectionname: "users",
-        query,
+        query: { _type: "user", ...query },
       })
       .then((data) => data[0]);
   }
