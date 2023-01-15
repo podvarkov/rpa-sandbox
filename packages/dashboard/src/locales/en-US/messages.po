@@ -17,7 +17,7 @@ msgstr ""
 #~ msgid "*Beta version only supports Rakuten"
 #~ msgstr "*Beta version only supports Rakuten"
 
-#: src/pages/sign-up.tsx:139
+#: src/pages/sign-up.tsx:140
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 msgstr "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 
@@ -61,7 +61,7 @@ msgstr "Are you sure? You can not undo this action afterwards."
 msgid "Arguments:"
 msgstr "Arguments:"
 
-#: src/pages/sign-up.tsx:135
+#: src/pages/sign-up.tsx:136
 msgid "Available symbols (half-width)"
 msgstr "Available symbols (half-width)"
 
@@ -114,7 +114,7 @@ msgstr "Confirm"
 msgid "Confirm action"
 msgstr "Confirm action"
 
-#: src/pages/sign-up.tsx:117
+#: src/pages/sign-up.tsx:118
 msgid "Confirm password"
 msgstr "Confirm password"
 
@@ -192,8 +192,8 @@ msgstr "Do not repeat"
 #~ msgstr "Edit"
 
 #: src/pages/profile.tsx:151
-#: src/pages/sign-in.tsx:74
-#: src/pages/sign-up.tsx:89
+#: src/pages/sign-in.tsx:83
+#: src/pages/sign-up.tsx:90
 msgid "Email"
 msgstr "Email"
 
@@ -283,7 +283,7 @@ msgstr "Finished"
 msgid "Finished at:"
 msgstr "Finished at:"
 
-#: src/pages/sign-up.tsx:186
+#: src/pages/sign-up.tsx:187
 msgid "For account holders"
 msgstr "For account holders"
 
@@ -295,7 +295,7 @@ msgstr "Fr"
 #~ msgid "Free Trial Plan"
 #~ msgstr "Free Trial Plan"
 
-#: src/pages/sign-up.tsx:193
+#: src/pages/sign-up.tsx:194
 msgid "Go to login screen"
 msgstr "Go to login screen"
 
@@ -324,7 +324,7 @@ msgstr "ID:"
 #~ msgid "Idle"
 #~ msgstr "Idle"
 
-#: src/pages/sign-in.tsx:121
+#: src/pages/sign-in.tsx:130
 msgid "If you forgot your password, click here"
 msgstr "If you forgot your password, click here"
 
@@ -379,7 +379,7 @@ msgstr "Inquiry"
 #~ msgid "Invoked at:"
 #~ msgstr "Invoked at:"
 
-#: src/pages/sign-in.tsx:42
+#: src/pages/sign-in.tsx:48
 msgid "Login"
 msgstr "Login"
 
@@ -411,12 +411,12 @@ msgstr "Month"
 msgid "Monthly report creation"
 msgstr "Monthly report creation"
 
-#: src/pages/sign-in.tsx:60
-#: src/pages/sign-up.tsx:67
+#: src/pages/sign-in.tsx:69
+#: src/pages/sign-up.tsx:68
 msgid "Must be a valid email"
 msgstr "Must be a valid email"
 
-#: src/pages/sign-up.tsx:71
+#: src/pages/sign-up.tsx:72
 msgid "Must match pattern"
 msgstr "Must match pattern"
 
@@ -476,16 +476,16 @@ msgstr "Output:"
 #~ msgid "Paid at:"
 #~ msgstr "Paid at:"
 
-#: src/pages/sign-in.tsx:87
-#: src/pages/sign-up.tsx:103
+#: src/pages/sign-in.tsx:96
+#: src/pages/sign-up.tsx:104
 msgid "Password"
 msgstr "Password"
 
-#: src/pages/sign-up.tsx:128
+#: src/pages/sign-up.tsx:129
 msgid "Password must be 8 characters or more and 32 characters or less. You can use single-byte alphanumeric characters and the following symbols."
 msgstr "Password must be 8 characters or more and 32 characters or less. You can use single-byte alphanumeric characters and the following symbols."
 
-#: src/pages/sign-up.tsx:73
+#: src/pages/sign-up.tsx:74
 msgid "Passwords must match"
 msgstr "Passwords must match"
 
@@ -505,7 +505,7 @@ msgstr "Plan:"
 msgid "Plans that fit your need"
 msgstr "Plans that fit your need"
 
-#: src/pages/sign-up.tsx:157
+#: src/pages/sign-up.tsx:158
 msgid "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
 msgstr "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
 
@@ -651,7 +651,7 @@ msgstr "Somethin went wrong: {0}"
 #: src/pages/profile.tsx:414
 #: src/pages/robot.tsx:63
 #: src/pages/scheduler.tsx:147
-#: src/pages/sign-up.tsx:58
+#: src/pages/sign-up.tsx:59
 msgid "Something goes wrong"
 msgstr "Something goes wrong"
 
@@ -713,15 +713,15 @@ msgstr "There was an error while loading"
 
 #: src/components/workflow-form.tsx:30
 #: src/pages/robot.tsx:70
-#: src/pages/sign-in.tsx:61
-#: src/pages/sign-in.tsx:62
-#: src/pages/sign-up.tsx:68
-#: src/pages/sign-up.tsx:70
-#: src/pages/sign-up.tsx:74
+#: src/pages/sign-in.tsx:70
+#: src/pages/sign-in.tsx:71
+#: src/pages/sign-up.tsx:69
+#: src/pages/sign-up.tsx:71
+#: src/pages/sign-up.tsx:75
 msgid "This field is required"
 msgstr "This field is required"
 
-#: src/pages/sign-in.tsx:117
+#: src/pages/sign-in.tsx:126
 msgid "Those who have not yet registered as a member"
 msgstr "Those who have not yet registered as a member"
 
@@ -753,7 +753,7 @@ msgstr "Update workflow"
 msgid "User with such email already exists"
 msgstr "User with such email already exists"
 
-#: src/pages/sign-up.tsx:57
+#: src/pages/sign-up.tsx:58
 msgid "User {0} already exists"
 msgstr "User {0} already exists"
 
@@ -824,7 +824,7 @@ msgstr "Workflow:"
 msgid "Workflows"
 msgstr "Workflows"
 
-#: src/pages/sign-in.tsx:52
+#: src/pages/sign-in.tsx:61
 msgid "Wrong password or username"
 msgstr "Wrong password or username"
 
@@ -836,7 +836,7 @@ msgstr "Wrong password or username"
 msgid "You already on a paid plan"
 msgstr "You already on a paid plan"
 
-#: src/pages/sign-up.tsx:148
+#: src/pages/sign-up.tsx:149
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 msgstr "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 
@@ -878,7 +878,7 @@ msgstr "full robots customization"
 #~ msgid "inquiry"
 #~ msgstr "inquiry"
 
-#: src/pages/sign-in.tsx:108
+#: src/pages/sign-in.tsx:117
 msgid "login"
 msgstr "login"
 
@@ -900,7 +900,7 @@ msgid "queued"
 msgstr "queued"
 
 #: src/pages/mall-info.tsx:47
-#: src/pages/sign-up.tsx:177
+#: src/pages/sign-up.tsx:178
 msgid "register"
 msgstr "register"
 

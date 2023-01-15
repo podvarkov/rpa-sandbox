@@ -196,9 +196,7 @@ class Api {
   }
 
   public signUp(params: SigninParams) {
-    return this.axios
-      .post("auth/signup", params)
-      .then(() => this.signIn(params));
+    return this.axios.post("auth/signup", params).then(() => undefined);
   }
 
   onAuthStateChanged(cb: AuthStateChangedCb) {

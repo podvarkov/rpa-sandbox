@@ -17,7 +17,7 @@ msgstr ""
 #~ msgid "*Beta version only supports Rakuten"
 #~ msgstr "※ベータ版は楽天のみ対応"
 
-#: src/pages/sign-up.tsx:139
+#: src/pages/sign-up.tsx:140
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 msgstr "*ログインID、生年月日、電話番号、氏名など、お客様の個人情報に関連する文字列や、第三者に推測されやすい簡易な文字列（例：password）をパスワードに設定しないようにしてください。"
 
@@ -61,7 +61,7 @@ msgstr "本気ですか？後でこのアクションを元に戻すことはで
 msgid "Arguments:"
 msgstr "引数:"
 
-#: src/pages/sign-up.tsx:135
+#: src/pages/sign-up.tsx:136
 msgid "Available symbols (half-width)"
 msgstr "Available symbols (half-width)"
 
@@ -114,7 +114,7 @@ msgstr "確認"
 msgid "Confirm action"
 msgstr "アクションを確認"
 
-#: src/pages/sign-up.tsx:117
+#: src/pages/sign-up.tsx:118
 msgid "Confirm password"
 msgstr "パスワードを認証する"
 
@@ -190,8 +190,8 @@ msgstr "繰り返さない"
 #~ msgstr "編集"
 
 #: src/pages/profile.tsx:151
-#: src/pages/sign-in.tsx:74
-#: src/pages/sign-up.tsx:89
+#: src/pages/sign-in.tsx:83
+#: src/pages/sign-up.tsx:90
 msgid "Email"
 msgstr "メールアドレス"
 
@@ -279,7 +279,7 @@ msgstr "終了した"
 msgid "Finished at:"
 msgstr "終了時刻:"
 
-#: src/pages/sign-up.tsx:186
+#: src/pages/sign-up.tsx:187
 msgid "For account holders"
 msgstr "口座保有者向け"
 
@@ -291,7 +291,7 @@ msgstr "神父"
 #~ msgid "Free Trial Plan"
 #~ msgstr "無料お試しプラン"
 
-#: src/pages/sign-up.tsx:193
+#: src/pages/sign-up.tsx:194
 msgid "Go to login screen"
 msgstr "ログイン画面へ"
 
@@ -319,7 +319,7 @@ msgstr ""
 #~ msgid "Idle"
 #~ msgstr ""
 
-#: src/pages/sign-in.tsx:121
+#: src/pages/sign-in.tsx:130
 msgid "If you forgot your password, click here"
 msgstr ""
 
@@ -372,7 +372,7 @@ msgstr "問合せ"
 #~ msgid "Invoked at:"
 #~ msgstr "で呼び出される。"
 
-#: src/pages/sign-in.tsx:42
+#: src/pages/sign-in.tsx:48
 msgid "Login"
 msgstr "ログイン"
 
@@ -404,12 +404,12 @@ msgstr "月"
 msgid "Monthly report creation"
 msgstr "月次レポート作成"
 
-#: src/pages/sign-in.tsx:60
-#: src/pages/sign-up.tsx:67
+#: src/pages/sign-in.tsx:69
+#: src/pages/sign-up.tsx:68
 msgid "Must be a valid email"
 msgstr "有効な電子メールである必要があります"
 
-#: src/pages/sign-up.tsx:71
+#: src/pages/sign-up.tsx:72
 msgid "Must match pattern"
 msgstr "パターンと一致する必要がある"
 
@@ -466,16 +466,16 @@ msgstr "出力します。"
 #~ msgid "Paid at:"
 #~ msgstr ""
 
-#: src/pages/sign-in.tsx:87
-#: src/pages/sign-up.tsx:103
+#: src/pages/sign-in.tsx:96
+#: src/pages/sign-up.tsx:104
 msgid "Password"
 msgstr "パスワード"
 
-#: src/pages/sign-up.tsx:128
+#: src/pages/sign-up.tsx:129
 msgid "Password must be 8 characters or more and 32 characters or less. You can use single-byte alphanumeric characters and the following symbols."
 msgstr "パスワードは8文字以上、32文字以下で設定してください。使用できる文字は、半角英数字と次の記号です。"
 
-#: src/pages/sign-up.tsx:73
+#: src/pages/sign-up.tsx:74
 msgid "Passwords must match"
 msgstr "パスワードが一致すること"
 
@@ -494,7 +494,7 @@ msgstr ""
 msgid "Plans that fit your need"
 msgstr ""
 
-#: src/pages/sign-up.tsx:157
+#: src/pages/sign-up.tsx:158
 msgid "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
 msgstr ""
 
@@ -638,7 +638,7 @@ msgstr ""
 #: src/pages/profile.tsx:414
 #: src/pages/robot.tsx:63
 #: src/pages/scheduler.tsx:147
-#: src/pages/sign-up.tsx:58
+#: src/pages/sign-up.tsx:59
 msgid "Something goes wrong"
 msgstr "何かが間違っている"
 
@@ -700,15 +700,15 @@ msgstr "を読み込む際にエラーが発生しました。"
 
 #: src/components/workflow-form.tsx:30
 #: src/pages/robot.tsx:70
-#: src/pages/sign-in.tsx:61
-#: src/pages/sign-in.tsx:62
-#: src/pages/sign-up.tsx:68
-#: src/pages/sign-up.tsx:70
-#: src/pages/sign-up.tsx:74
+#: src/pages/sign-in.tsx:70
+#: src/pages/sign-in.tsx:71
+#: src/pages/sign-up.tsx:69
+#: src/pages/sign-up.tsx:71
+#: src/pages/sign-up.tsx:75
 msgid "This field is required"
 msgstr "このフィールドは必須です"
 
-#: src/pages/sign-in.tsx:117
+#: src/pages/sign-in.tsx:126
 msgid "Those who have not yet registered as a member"
 msgstr "会員登録がお済みでない方"
 
@@ -739,7 +739,7 @@ msgstr "ワークフローの更新"
 msgid "User with such email already exists"
 msgstr "そのようなメールアドレスを持つユーザーはすでに存在する"
 
-#: src/pages/sign-up.tsx:57
+#: src/pages/sign-up.tsx:58
 msgid "User {0} already exists"
 msgstr "ユーザー{0}はすでに存在す"
 
@@ -808,7 +808,7 @@ msgstr "ワークフロー"
 msgid "Workflows"
 msgstr "ワークフロー"
 
-#: src/pages/sign-in.tsx:52
+#: src/pages/sign-in.tsx:61
 msgid "Wrong password or username"
 msgstr "パスワードまたはユーザー名が間違っている"
 
@@ -820,7 +820,7 @@ msgstr "パスワードまたはユーザー名が間違っている"
 msgid "You already on a paid plan"
 msgstr ""
 
-#: src/pages/sign-up.tsx:148
+#: src/pages/sign-up.tsx:149
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 msgstr "ドメイン指定受信などの受信拒否設定をしている場合、受信できないことがあります。設定を解除するか、以下のドメインからのメールを受信できるように設定後に手続きを行ってください。"
 
@@ -855,7 +855,7 @@ msgstr "失態"
 msgid "full robots customization"
 msgstr ""
 
-#: src/pages/sign-in.tsx:108
+#: src/pages/sign-in.tsx:117
 msgid "login"
 msgstr "ログイン"
 
@@ -877,7 +877,7 @@ msgid "queued"
 msgstr "待ち行列"
 
 #: src/pages/mall-info.tsx:47
-#: src/pages/sign-up.tsx:177
+#: src/pages/sign-up.tsx:178
 msgid "register"
 msgstr "レジスタ"
 
