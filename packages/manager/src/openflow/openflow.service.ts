@@ -205,7 +205,6 @@ export class OpenflowService {
         name: data.username,
         username: data.username,
         newpassword: data.password,
-        sid: "",
         federationids: [],
         validated: true,
         emailvalidated: true,

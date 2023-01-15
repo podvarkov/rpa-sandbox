@@ -11,16 +11,16 @@ import { t, Trans } from "@lingui/macro";
 import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/header";
+import { Header } from "../components/header";
 
 export const MallInfo: React.FC = () => {
   const navigate = useNavigate();
   return (
     <>
-      <Header onOpen={null} />
+      <Header />
       <Center flexDirection="column">
         <Box w={20} my={2} borderRadius={5} overflow="hidden">
-          <img src="/rakuten_logo.png" />
+          <img src="/rakuten_logo.png" alt="robot-logo" />
         </Box>
 
         <Stack my={5} px={3}>

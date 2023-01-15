@@ -7,6 +7,8 @@ import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
 import { OpenflowModule } from "../openflow/openflow.module";
 import { CryptModule } from "src/crypt/crypt.module";
+import { UsersModule } from "src/users/users.module";
+import { StripeModule } from "src/stripe/stripe.module";
 
 @Module({
   imports: [
@@ -14,8 +16,11 @@ import { CryptModule } from "src/crypt/crypt.module";
     PassportModule,
     OpenflowModule,
     CryptModule,
+    UsersModule,
+    StripeModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
+  exports: [AuthService],
 })
 export class AuthModule {}

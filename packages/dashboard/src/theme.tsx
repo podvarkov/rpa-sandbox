@@ -24,6 +24,7 @@ const submitBtn = defineStyle({
 
 const outline = defineStyle({
   background: "none",
+  paddingBlock: 4,
   borderBottom: "1px",
   borderColor: "#33B4DE",
   color: "#33B4DE",

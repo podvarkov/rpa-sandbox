@@ -1,4 +1,5 @@
 import { Frequency, Weekday } from "rrule";
+import { Rolemember } from "@openiap/openflow-api";
 
 type Entity<T> = T & {
   _id: string;
@@ -22,12 +23,11 @@ export type UserWorkflow = Entity<{
   description?: string;
   name: string;
   templateId: string;
-  defaultArguments?: { [key: string]: unknown };
-  expiration: number;
+  arguments?: { [key: string]: unknown };
 }>;
 
-export type EncryptedUserWorkflow = Omit<UserWorkflow, "defaultArguments"> & {
-  defaultArguments: string;
+export type EncryptedUserWorkflow = Omit<UserWorkflow, "arguments"> & {
+  arguments: string;
 };
 
 export type Execution = Entity<{
@@ -63,7 +63,7 @@ export type ScheduledEvent = Entity<{
   };
 }>;
 
-export type Profile = Entity<{
+export type User = Entity<{
   surname: string;
   name: string;
   furiganaSurname: string;
@@ -74,6 +74,11 @@ export type Profile = Entity<{
   username: string;
   phone?: string;
   salesManagerId: string;
+  stripeSubscriptionId?: string;
+  stripeCustomerId?: string;
+  stripeLastSessionId?: string;
+  stripeProductId?: string;
+  roles: Rolemember[];
 }>;
 
 export type SalesManager = Entity<{

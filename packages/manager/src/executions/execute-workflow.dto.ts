@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsObject, IsString } from "class-validator";
+import { IsNotEmpty, IsObject, IsString } from "class-validator";
 import { Transform } from "class-transformer";
 
 export class ExecuteWorkflowDto {
@@ -9,10 +9,6 @@ export class ExecuteWorkflowDto {
   @IsNotEmpty()
   @IsString()
   templateId: string;
-
-  @IsNotEmpty()
-  @IsNumber()
-  expiration: number;
 
   @IsObject()
   @Transform(({ value }) => {

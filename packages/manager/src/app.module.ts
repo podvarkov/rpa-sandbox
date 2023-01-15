@@ -13,6 +13,8 @@ import { WorkflowsModule } from "./workflows/workflows.module";
 import { ExecutionsModule } from "./executions/executions.module";
 import { SchedulerModule } from "./scheduler/scheduler.module";
 import { ReportsModule } from "./reports/reports.module";
+import { StripeModule } from "./stripe/stripe.module";
+import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { ReportsModule } from "./reports/reports.module";
     EventEmitterModule.forRoot(),
     ScheduleModule.forRoot(),
     ReportsModule,
+    StripeModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService, Logger],

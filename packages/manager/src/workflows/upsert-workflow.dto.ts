@@ -1,11 +1,5 @@
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsObject,
-  IsOptional,
-  IsString,
-} from "class-validator";
 import { Transform } from "class-transformer";
+import { IsNotEmpty, IsObject, IsOptional, IsString } from "class-validator";
 
 export class UpsertWorkflowDto {
   @IsOptional()
@@ -20,10 +14,6 @@ export class UpsertWorkflowDto {
   @IsString()
   templateId: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  expiration: string;
-
   @IsOptional()
   @IsString()
   description?: string;
@@ -34,7 +24,7 @@ export class UpsertWorkflowDto {
       return val !== "" && val != null ? { ...acc, [key]: val } : acc;
     }, {});
   })
-  defaultArguments: { [key: string]: unknown };
+  arguments: { [key: string]: unknown };
 
   @IsOptional()
   @IsString()

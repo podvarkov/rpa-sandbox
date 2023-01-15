@@ -13,12 +13,12 @@ import {
   ModalOverlay,
   Text,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
 import { t, Trans } from "@lingui/macro";
+import React, { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import { api, WorkflowTemplate } from "../api";
+import { api, UpsertWorkflowValues, WorkflowTemplate } from "../api";
 import { useToast } from "../components/use-toast";
-import { WorkflowForm, WorkflowFormValues } from "../components/workflow-form";
+import { WorkflowForm } from "../components/workflow-form";
 
 const TemplatePreview: React.FC<
   Pick<WorkflowTemplate, "name" | "humanReadableName" | "logoSrc"> & {
@@ -75,7 +75,7 @@ export const TemplatesPage: React.FC = () => {
   const [selectedTemplate, setSelectedTemplate] = useState<WorkflowTemplate>();
 
   const mutation = useMutation(
-    (workflow: WorkflowFormValues) => {
+    (workflow: UpsertWorkflowValues) => {
       return api.upsertWorkflow(workflow);
     },
     {
@@ -130,8 +130,7 @@ export const TemplatesPage: React.FC = () => {
                   name: selectedTemplate.name,
                   templateId: selectedTemplate._id,
                   description: "",
-                  expiration: 60000,
-                  defaultArguments: (selectedTemplate.Parameters || [])
+                  arguments: (selectedTemplate.Parameters || [])
                     .filter(({ direction }) => direction === "in")
                     .reduce((acc, param) => ({ ...acc, [param.name]: "" }), {}),
                 }}

@@ -1,6 +1,3 @@
-import React from "react";
-import { Field, FieldProps, Form, Formik } from "formik";
-import * as Yup from "yup";
 import {
   Button,
   FormControl,
@@ -10,22 +7,16 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
-import { WorkflowTemplate } from "../api";
+import { Field, FieldProps, Form, Formik } from "formik";
+import React from "react";
+import * as Yup from "yup";
+import { UpsertWorkflowValues, WorkflowTemplate } from "../api";
 import { ParametersFormField } from "../components/parameter-form-field";
-
-export type WorkflowFormValues = {
-  _id?: string;
-  name: string;
-  description?: string;
-  templateId: string;
-  expiration: number;
-  defaultArguments?: { [key: string]: unknown };
-};
 
 export const WorkflowForm: React.FC<{
   templateParameters: WorkflowTemplate["Parameters"];
-  initialValues: WorkflowFormValues;
-  onSubmit: (values: WorkflowFormValues) => Promise<unknown>;
+  initialValues: UpsertWorkflowValues;
+  onSubmit: (values: UpsertWorkflowValues) => Promise<unknown>;
 }> = ({ initialValues, onSubmit, templateParameters }) => {
   return (
     <Formik
@@ -88,23 +79,6 @@ export const WorkflowForm: React.FC<{
                   name={`defaultArguments.${name}`}
                 />
               ))}
-
-            <Field name="expiration">
-              {({ field, meta }: FieldProps) => (
-                <FormControl isInvalid={!!(meta.touched && meta.error)}>
-                  <FormLabel>
-                    <Trans>Timeout</Trans>
-                  </FormLabel>
-                  <Input
-                    type="number"
-                    placeholder={t`timeout`}
-                    {...field}
-                    variant="default"
-                  />
-                  <FormErrorMessage>{meta.error}</FormErrorMessage>
-                </FormControl>
-              )}
-            </Field>
 
             <Button
               isLoading={isSubmitting}

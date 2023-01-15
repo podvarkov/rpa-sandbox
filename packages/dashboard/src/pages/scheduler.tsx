@@ -62,8 +62,9 @@ export const SchedulerPage: React.FC = () => {
       onSuccess: (data) => {
         successMessage(t`Event deleted`);
         setDeleteIntent(undefined);
-        client.setQueryData<ScheduledEvent[]>("events", (res) =>
-          (res || []).filter(({ _id }) => data?.id !== _id)
+        client.setQueryData<ScheduledEvent[]>(
+          ["events", { skip, top }],
+          (res) => (res || []).filter(({ _id }) => data?.id !== _id)
         );
       },
       onError: (e) => {

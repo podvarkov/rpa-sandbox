@@ -50,6 +50,7 @@ export const SignupPage: React.FC = () => {
             }}
             onSubmit={(values, actions) => {
               signup(values)
+                .then(() => navigate(`/signin?email=${values.username}`))
                 .catch((e: AxiosError) => {
                   console.error(e);
                   setError(

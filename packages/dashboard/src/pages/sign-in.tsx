@@ -18,7 +18,12 @@ import { t, Trans } from "@lingui/macro";
 import { AxiosError } from "axios";
 import { Field, FieldProps, Form, Formik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link as RouterLink,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import * as Yup from "yup";
 import { useAuth } from "../components/auth-provider";
 
@@ -28,6 +33,7 @@ export const SigninPage: React.FC = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const [error, setError] = useState<string>();
+  const [params] = useSearchParams();
 
   useEffect(() => {
     if (session) navigate(from, { replace: true });
@@ -44,7 +50,10 @@ export const SigninPage: React.FC = () => {
           </Center>
 
           <Formik
-            initialValues={{ username: "", password: "" }}
+            initialValues={{
+              username: params.get("email") || "",
+              password: "",
+            }}
             onSubmit={(values, actions) => {
               signin(values)
                 .catch((e: AxiosError) => {

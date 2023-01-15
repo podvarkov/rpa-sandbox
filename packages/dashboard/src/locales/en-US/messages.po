@@ -13,15 +13,31 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/pages/beta-rpa.tsx:39
-msgid "*Beta version only supports Rakuten"
-msgstr "*Beta version only supports Rakuten"
+#: src/pages/beta-rpa.tsx:44
+#~ msgid "*Beta version only supports Rakuten"
+#~ msgstr "*Beta version only supports Rakuten"
 
-#: src/pages/sign-up.tsx:139
+#: src/pages/sign-up.tsx:140
 msgid "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 msgstr "*Please do not set a password that is related to your personal information such as your login ID, date of birth, phone number, name, etc., or a simple character string that can be easily guessed by a third party (e.g. password). .s"
 
-#: src/pages/scheduler.tsx:227
+#: src/pages/pricing.tsx:107
+msgid "20 robots available"
+msgstr "20 robots available"
+
+#: src/pages/pricing.tsx:118
+msgid "30 robots available"
+msgstr "30 robots available"
+
+#: src/pages/profile.tsx:253
+msgid "Active"
+msgstr "Active"
+
+#: src/pages/profile.tsx:239
+msgid "Active till:"
+msgstr "Active till:"
+
+#: src/pages/scheduler.tsx:228
 msgid "Add event"
 msgstr "Add event"
 
@@ -45,19 +61,20 @@ msgstr "Are you sure? You can not undo this action afterwards."
 msgid "Arguments:"
 msgstr "Arguments:"
 
-#: src/pages/sign-up.tsx:135
+#: src/pages/sign-up.tsx:136
 msgid "Available symbols (half-width)"
 msgstr "Available symbols (half-width)"
 
-#: src/pages/profile.tsx:456
+#: src/pages/profile.tsx:583
 msgid "Browse"
 msgstr "Browse"
 
+#: src/pages/robot.tsx:35
 #: src/pages/templates.tsx:88
 msgid "Can not create workflow"
 msgstr "Can not create workflow"
 
-#: src/pages/scheduler.tsx:71
+#: src/pages/scheduler.tsx:72
 msgid "Can not delete event"
 msgstr "Can not delete event"
 
@@ -65,7 +82,7 @@ msgstr "Can not delete event"
 msgid "Can not delete report"
 msgstr "Can not delete report"
 
-#: src/pages/workflows.tsx:62
+#: src/pages/workflows.tsx:47
 msgid "Can not delete workflow"
 msgstr "Can not delete workflow"
 
@@ -73,7 +90,7 @@ msgstr "Can not delete workflow"
 msgid "Can not edit workflow"
 msgstr "Can not edit workflow"
 
-#: src/pages/profile.tsx:192
+#: src/pages/profile.tsx:369
 msgid "Can not update profile"
 msgstr "Can not update profile"
 
@@ -81,7 +98,7 @@ msgstr "Can not update profile"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/pages/profile.tsx:162
+#: src/pages/profile.tsx:165
 msgid "Changing email will lead to sign out"
 msgstr "Changing email will lead to sign out"
 
@@ -97,19 +114,18 @@ msgstr "Confirm"
 msgid "Confirm action"
 msgstr "Confirm action"
 
-#: src/pages/sign-up.tsx:117
+#: src/pages/sign-up.tsx:118
 msgid "Confirm password"
 msgstr "Confirm password"
 
-#: src/pages/profile.tsx:437
+#: src/pages/profile.tsx:339
 msgid "Contact us"
 msgstr "Contact us"
 
-#: src/pages/profile.tsx:217
 #~ msgid "Contents of inquiry"
 #~ msgstr "Contents of inquiry"
 
-#: src/pages/profile.tsx:442
+#: src/pages/profile.tsx:208
 msgid "Contract Information"
 msgstr "Contract Information"
 
@@ -117,16 +133,16 @@ msgstr "Contract Information"
 #~ msgid "Create account"
 #~ msgstr "Create account"
 
-#: src/components/workflow-form.tsx:114
+#: src/components/workflow-form.tsx:88
 msgid "Create workflow"
 msgstr "Create workflow"
 
 #: src/pages/reports.tsx:90
-#: src/pages/scheduler.tsx:162
+#: src/pages/scheduler.tsx:163
 msgid "Created"
 msgstr "Created"
 
-#: src/components/scheduler-form.tsx:306
+#: src/components/scheduler-form.tsx:304
 msgid "Custom"
 msgstr "Custom"
 
@@ -134,23 +150,23 @@ msgstr "Custom"
 #~ msgid "Custom..."
 #~ msgstr "Custom..."
 
-#: src/components/scheduler-form.tsx:441
+#: src/components/scheduler-form.tsx:439
 msgid "Date"
 msgstr "Date"
 
-#: src/components/scheduler-form.tsx:366
+#: src/components/scheduler-form.tsx:364
 msgid "Day"
 msgstr "Day"
 
 #: src/pages/profile.tsx:445
-msgid "Dear 111"
-msgstr "Dear 111"
+#~ msgid "Dear 111"
+#~ msgstr "Dear 111"
 
 #: src/pages/workflows.tsx:239
-msgid "Delete"
-msgstr "Delete"
+#~ msgid "Delete"
+#~ msgstr "Delete"
 
-#: src/pages/scheduler.tsx:95
+#: src/pages/scheduler.tsx:96
 msgid "Delete event"
 msgstr "Delete event"
 
@@ -158,25 +174,26 @@ msgstr "Delete event"
 msgid "Delete report"
 msgstr "Delete report"
 
-#: src/pages/workflows.tsx:124
+#: src/pages/workflows.tsx:71
+#: src/pages/workflows.tsx:172
 msgid "Delete workflow"
 msgstr "Delete workflow"
 
-#: src/pages/beta-rpa.tsx:105
-msgid "Desired delivery date of the robot"
-msgstr "Desired delivery date of the robot"
+#: src/pages/beta-rpa.tsx:110
+#~ msgid "Desired delivery date of the robot"
+#~ msgstr "Desired delivery date of the robot"
 
-#: src/components/scheduler-form.tsx:285
+#: src/components/scheduler-form.tsx:283
 msgid "Do not repeat"
 msgstr "Do not repeat"
 
 #: src/pages/workflows.tsx:236
-msgid "Edit"
-msgstr "Edit"
+#~ msgid "Edit"
+#~ msgstr "Edit"
 
-#: src/pages/profile.tsx:148
-#: src/pages/sign-in.tsx:74
-#: src/pages/sign-up.tsx:89
+#: src/pages/profile.tsx:151
+#: src/pages/sign-in.tsx:83
+#: src/pages/sign-up.tsx:90
 msgid "Email"
 msgstr "Email"
 
@@ -185,7 +202,8 @@ msgstr "Email"
 #~ msgid "Email address"
 #~ msgstr "Email address"
 
-#: src/components/scheduler-form.tsx:220
+#: src/components/scheduler-form.tsx:218
+#: src/pages/robot.tsx:87
 msgid "Enter event title"
 msgstr "Enter event title"
 
@@ -205,31 +223,31 @@ msgstr "Error:"
 msgid "Event deleted"
 msgstr "Event deleted"
 
-#: src/components/scheduler-form.tsx:294
+#: src/components/scheduler-form.tsx:292
 msgid "Every day"
 msgstr "Every day"
 
-#: src/components/scheduler-form.tsx:291
+#: src/components/scheduler-form.tsx:289
 msgid "Every hour"
 msgstr "Every hour"
 
-#: src/components/scheduler-form.tsx:288
+#: src/components/scheduler-form.tsx:286
 msgid "Every minute"
 msgstr "Every minute"
 
-#: src/components/scheduler-form.tsx:300
+#: src/components/scheduler-form.tsx:298
 msgid "Every month"
 msgstr "Every month"
 
-#: src/components/scheduler-form.tsx:297
+#: src/components/scheduler-form.tsx:295
 msgid "Every week"
 msgstr "Every week"
 
 #: src/pages/workflow-runner.tsx:140
-msgid "Execute"
-msgstr "Execute"
+#~ msgid "Execute"
+#~ msgstr "Execute"
 
-#: src/pages/workflows.tsx:181
+#: src/pages/workflows.tsx:131
 msgid "Execute workflow"
 msgstr "Execute workflow"
 
@@ -241,8 +259,7 @@ msgstr "Execution details"
 msgid "Execution with {0} id not found"
 msgstr "Execution with {0} id not found"
 
-#: src/components/layout.tsx:34
-#: src/components/sidebar.tsx:50
+#: src/components/sidebar.tsx:53
 msgid "Executions"
 msgstr "Executions"
 
@@ -250,7 +267,7 @@ msgstr "Executions"
 #~ msgid "Expiration timeout:"
 #~ msgstr "Expiration timeout:"
 
-#: src/pages/profile.tsx:419
+#: src/pages/profile.tsx:320
 msgid "FAX: {0}"
 msgstr "FAX: {0}"
 
@@ -266,19 +283,19 @@ msgstr "Finished"
 msgid "Finished at:"
 msgstr "Finished at:"
 
-#: src/pages/sign-up.tsx:186
+#: src/pages/sign-up.tsx:187
 msgid "For account holders"
 msgstr "For account holders"
 
-#: src/components/scheduler-form.tsx:391
+#: src/components/scheduler-form.tsx:389
 msgid "Fr"
 msgstr "Fr"
 
-#: src/pages/profile.tsx:448
-msgid "Free Trial Plan"
-msgstr "Free Trial Plan"
+#: src/pages/profile.tsx:186
+#~ msgid "Free Trial Plan"
+#~ msgstr "Free Trial Plan"
 
-#: src/pages/sign-up.tsx:193
+#: src/pages/sign-up.tsx:194
 msgid "Go to login screen"
 msgstr "Go to login screen"
 
@@ -286,11 +303,11 @@ msgstr "Go to login screen"
 #~ msgid "Have an account?"
 #~ msgstr "Have an account?"
 
-#: src/components/sidebar.tsx:38
+#: src/components/sidebar.tsx:40
 msgid "Home"
 msgstr "Home"
 
-#: src/components/scheduler-form.tsx:363
+#: src/components/scheduler-form.tsx:361
 msgid "Hour"
 msgstr "Hour"
 
@@ -307,11 +324,11 @@ msgstr "ID:"
 #~ msgid "Idle"
 #~ msgstr "Idle"
 
-#: src/pages/sign-in.tsx:121
+#: src/pages/sign-in.tsx:130
 msgid "If you forgot your password, click here"
 msgstr "If you forgot your password, click here"
 
-#: src/pages/profile.tsx:405
+#: src/pages/profile.tsx:303
 msgid "In charge of your company"
 msgstr "In charge of your company"
 
@@ -319,9 +336,13 @@ msgstr "In charge of your company"
 msgid "In progress"
 msgstr "In progress"
 
-#: src/pages/beta-rpa.tsx:118
-msgid "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
-msgstr "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
+#: src/pages/profile.tsx:256
+msgid "Inactive"
+msgstr "Inactive"
+
+#: src/pages/beta-rpa.tsx:123
+#~ msgid "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
+#~ msgstr "Information is collected from various management screens such as malls and access analysis. If it is not reflected, the reflection on various management screens may be delayed. Please try again later."
 
 #: src/components/workflow-form.tsx:79
 #~ msgid "Input argument"
@@ -331,18 +352,18 @@ msgstr "Information is collected from various management screens such as malls a
 #~ msgid "Input argument: {key}"
 #~ msgstr "Input argument: {key}"
 
-#: src/components/workflow-form.tsx:85
-#: src/components/workflow-form.tsx:86
+#: src/components/workflow-form.tsx:76
+#: src/components/workflow-form.tsx:77
 msgid "Input argument: {name}"
 msgstr "Input argument: {name}"
 
-#: src/pages/profile.tsx:413
+#: src/pages/profile.tsx:312
 msgid "Inquiries about RPA"
 msgstr "Inquiries about RPA"
 
-#: src/pages/profile.tsx:215
-#: src/pages/profile.tsx:252
-#: src/pages/profile.tsx:260
+#: src/pages/profile.tsx:392
+#: src/pages/profile.tsx:429
+#: src/pages/profile.tsx:437
 msgid "Inquiry"
 msgstr "Inquiry"
 
@@ -358,49 +379,53 @@ msgstr "Inquiry"
 #~ msgid "Invoked at:"
 #~ msgstr "Invoked at:"
 
-#: src/pages/sign-in.tsx:42
+#: src/pages/sign-in.tsx:48
 msgid "Login"
 msgstr "Login"
 
-#: src/pages/profile.tsx:422
+#: src/pages/profile.tsx:324
 msgid "MAIL: {0}"
 msgstr "MAIL: {0}"
 
-#: src/components/scheduler-form.tsx:360
+#: src/pages/profile.tsx:274
+msgid "Manage"
+msgstr "Manage"
+
+#: src/components/scheduler-form.tsx:358
 msgid "Minute"
 msgstr "Minute"
 
-#: src/components/scheduler-form.tsx:387
+#: src/components/scheduler-form.tsx:385
 msgid "Mo"
 msgstr "Mo"
 
-#: src/pages/scheduler.tsx:165
+#: src/pages/scheduler.tsx:166
 msgid "Modified"
 msgstr "Modified"
 
-#: src/components/scheduler-form.tsx:372
+#: src/components/scheduler-form.tsx:370
 msgid "Month"
 msgstr "Month"
 
-#: src/pages/beta-rpa.tsx:32
+#: src/pages/robot.tsx:48
 msgid "Monthly report creation"
 msgstr "Monthly report creation"
 
-#: src/pages/sign-in.tsx:60
-#: src/pages/sign-up.tsx:67
+#: src/pages/sign-in.tsx:69
+#: src/pages/sign-up.tsx:68
 msgid "Must be a valid email"
 msgstr "Must be a valid email"
 
-#: src/pages/sign-up.tsx:71
+#: src/pages/sign-up.tsx:72
 msgid "Must match pattern"
 msgstr "Must match pattern"
 
-#: src/pages/profile.tsx:91
+#: src/pages/profile.tsx:94
 #: src/pages/reports.tsx:87
 msgid "Name"
 msgstr "Name"
 
-#: src/components/scheduler-form.tsx:437
+#: src/components/scheduler-form.tsx:435
 msgid "Never"
 msgstr "Never"
 
@@ -408,9 +433,13 @@ msgstr "Never"
 msgid "New workflow"
 msgstr "New workflow"
 
+#: src/pages/profile.tsx:239
+#~ msgid "Next invoice date:"
+#~ msgstr "Next invoice date:"
+
 #: src/pages/executions.tsx:212
 #: src/pages/reports.tsx:99
-#: src/pages/scheduler.tsx:174
+#: src/pages/scheduler.tsx:175
 msgid "No data available"
 msgstr "No data available"
 
@@ -422,6 +451,10 @@ msgstr "No data available"
 #~ msgid "No parameters"
 #~ msgstr "No parameters"
 
+#: src/pages/profile.tsx:186
+msgid "No subscription"
+msgstr "No subscription"
+
 #: src/pages/templates.tsx:102
 msgid "No templates found"
 msgstr "No templates found"
@@ -430,7 +463,8 @@ msgstr "No templates found"
 #~ msgid "Not a member?"
 #~ msgstr "Not a member?"
 
-#: src/components/workflow-form.tsx:68
+#: src/components/workflow-form.tsx:59
+#: src/pages/robot.tsx:102
 msgid "Optional description"
 msgstr "Optional description"
 
@@ -438,16 +472,20 @@ msgstr "Optional description"
 msgid "Output:"
 msgstr "Output:"
 
-#: src/pages/sign-in.tsx:87
-#: src/pages/sign-up.tsx:103
+#: src/pages/profile.tsx:229
+#~ msgid "Paid at:"
+#~ msgstr "Paid at:"
+
+#: src/pages/sign-in.tsx:96
+#: src/pages/sign-up.tsx:104
 msgid "Password"
 msgstr "Password"
 
-#: src/pages/sign-up.tsx:128
+#: src/pages/sign-up.tsx:129
 msgid "Password must be 8 characters or more and 32 characters or less. You can use single-byte alphanumeric characters and the following symbols."
 msgstr "Password must be 8 characters or more and 32 characters or less. You can use single-byte alphanumeric characters and the following symbols."
 
-#: src/pages/sign-up.tsx:73
+#: src/pages/sign-up.tsx:74
 msgid "Passwords must match"
 msgstr "Passwords must match"
 
@@ -455,11 +493,19 @@ msgstr "Passwords must match"
 #~ msgid "Phone Number"
 #~ msgstr "Phone Number"
 
-#: src/pages/profile.tsx:134
+#: src/pages/profile.tsx:137
 msgid "Phone number"
 msgstr "Phone number"
 
-#: src/pages/sign-up.tsx:157
+#: src/pages/profile.tsx:220
+msgid "Plan:"
+msgstr "Plan:"
+
+#: src/pages/pricing.tsx:93
+msgid "Plans that fit your need"
+msgstr "Plans that fit your need"
+
+#: src/pages/sign-up.tsx:158
 msgid "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
 msgstr "Please cancel the setting or proceed with the procedure after setting it so that you can receive emails from the following domains."
 
@@ -467,15 +513,20 @@ msgstr "Please cancel the setting or proceed with the procedure after setting it
 msgid "Please enter your R-Login ID and password."
 msgstr "Please enter your R-Login ID and password."
 
-#: src/components/header.tsx:97
+#: src/pages/pricing.tsx:137
+#: src/pages/profile.tsx:184
+msgid "Premium"
+msgstr "Premium"
+
+#: src/components/header.tsx:91
 msgid "Profile"
 msgstr "Profile"
 
-#: src/pages/profile.tsx:302
+#: src/pages/profile.tsx:480
 msgid "Profile registration"
 msgstr "Profile registration"
 
-#: src/pages/profile.tsx:196
+#: src/pages/profile.tsx:373
 msgid "Profile updated"
 msgstr "Profile updated"
 
@@ -483,32 +534,34 @@ msgstr "Profile updated"
 msgid "Queued"
 msgstr "Queued"
 
-#: src/pages/beta-rpa.tsx:55
-msgid "Rakuten monthly report creation"
-msgstr "Rakuten monthly report creation"
+#: src/pages/beta-rpa.tsx:60
+#~ msgid "Rakuten monthly report creation"
+#~ msgstr "Rakuten monthly report creation"
 
-#: src/pages/profile.tsx:312
-#: src/pages/profile.tsx:335
+#: src/pages/profile.tsx:490
+#: src/pages/profile.tsx:513
 msgid "Registration / Editing"
 msgstr "Registration / Editing"
 
-#: src/components/scheduler-form.tsx:411
+#: src/components/scheduler-form.tsx:409
 msgid "Repeat finish:"
 msgstr "Repeat finish:"
 
-#: src/components/scheduler-form.tsx:317
+#: src/components/scheduler-form.tsx:315
 msgid "Repeat interval:"
 msgstr "Repeat interval:"
 
-#: src/pages/profile.tsx:453
+#: src/pages/profile.tsx:580
 msgid "Report Results"
 msgstr "Report Results"
 
-#: src/pages/beta-rpa.tsx:93
+#: src/components/robot-parameters.tsx:41
+#: src/components/robot-parametrs.tsx:42
 msgid "Report data end date"
 msgstr "Report data end date"
 
-#: src/pages/beta-rpa.tsx:81
+#: src/components/robot-parameters.tsx:19
+#: src/components/robot-parametrs.tsx:19
 msgid "Report data start date"
 msgstr "Report data start date"
 
@@ -516,47 +569,66 @@ msgstr "Report data start date"
 msgid "Report deleted"
 msgstr "Report deleted"
 
-#: src/components/sidebar.tsx:62
+#: src/components/sidebar.tsx:65
 msgid "Report download"
 msgstr "Report download"
 
-#: src/components/sidebar.tsx:44
+#: src/components/sidebar.tsx:46
 msgid "Reporting"
 msgstr "Reporting"
+
+#: src/pages/pricing.tsx:104
+#: src/pages/profile.tsx:178
+msgid "Robotic A"
+msgstr "Robotic A"
+
+#: src/pages/pricing.tsx:115
+#: src/pages/profile.tsx:180
+msgid "Robotic B"
+msgstr "Robotic B"
+
+#: src/pages/pricing.tsx:126
+#: src/pages/profile.tsx:182
+msgid "Robotic C"
+msgstr "Robotic C"
 
 #: src/pages/workflows.tsx:154
 #~ msgid "Run workflow"
 #~ msgstr "Run workflow"
 
-#: src/components/scheduler-form.tsx:392
+#: src/components/scheduler-form.tsx:390
 msgid "Sa"
 msgstr "Sa"
 
-#: src/components/scheduler-form.tsx:474
+#: src/components/scheduler-form.tsx:472
+#: src/pages/robot.tsx:118
 msgid "Save"
 msgstr "Save"
 
-#: src/components/sidebar.tsx:56
-#: src/pages/workflows.tsx:229
+#: src/components/sidebar.tsx:59
 msgid "Schedule"
 msgstr "Schedule"
 
-#: src/pages/scheduler.tsx:111
-#: src/pages/workflows.tsx:93
+#: src/pages/scheduler.tsx:112
 msgid "Schedule execution"
 msgstr "Schedule execution"
 
 #: src/pages/workflows.tsx:104
-msgid "Scheduled"
-msgstr "Scheduled"
+#~ msgid "Scheduled"
+#~ msgstr "Scheduled"
 
 #: src/pages/beta-rpa.tsx:36
-msgid "Select the robot you want to run."
-msgstr "Select the robot you want to run."
+#: src/pages/beta-rpa.tsx:36
+#~ msgid "Select the robot you want to run."
+#~ msgstr "Select the robot you want to run."
 
-#: src/pages/profile.tsx:279
-msgid "Send&Save"
-msgstr "Send&Save"
+#: src/pages/profile.tsx:456
+msgid "Send"
+msgstr "Send"
+
+#: src/pages/profile.tsx:434
+#~ msgid "Send&Save"
+#~ msgstr "Send&Save"
 
 #: src/pages/sign-in.tsx:43
 #: src/pages/sign-in.tsx:108
@@ -564,8 +636,7 @@ msgstr "Send&Save"
 #~ msgid "Sign in"
 #~ msgstr "Sign in"
 
-#: src/components/header.tsx:100
-#: src/components/layout.tsx:94
+#: src/components/header.tsx:94
 msgid "Sign out"
 msgstr "Sign out"
 
@@ -573,10 +644,14 @@ msgstr "Sign out"
 msgid "Sign up"
 msgstr "Sign up"
 
-#: src/pages/profile.tsx:237
-#: src/pages/scheduler.tsx:146
-#: src/pages/sign-up.tsx:58
-#: src/pages/workflows.tsx:107
+#: src/pages/robot.tsx:34
+msgid "Somethin went wrong: {0}"
+msgstr "Somethin went wrong: {0}"
+
+#: src/pages/profile.tsx:414
+#: src/pages/robot.tsx:63
+#: src/pages/scheduler.tsx:147
+#: src/pages/sign-up.tsx:59
 msgid "Something goes wrong"
 msgstr "Something goes wrong"
 
@@ -585,6 +660,7 @@ msgid "Started"
 msgstr "Started"
 
 #: src/pages/execution-details.tsx:118
+#: src/pages/profile.tsx:229
 msgid "Started at:"
 msgstr "Started at:"
 
@@ -593,73 +669,79 @@ msgid "Status"
 msgstr "Status"
 
 #: src/pages/execution-details.tsx:80
+#: src/pages/profile.tsx:249
 msgid "Status:"
 msgstr "Status:"
 
-#: src/pages/profile.tsx:325
+#: src/pages/profile.tsx:503
 msgid "Store Information Registration"
 msgstr "Store Information Registration"
 
-#: src/components/scheduler-form.tsx:393
+#: src/components/scheduler-form.tsx:391
 msgid "Su"
 msgstr "Su"
 
-#: src/pages/scheduler.tsx:140
+#: src/pages/pricing.tsx:71
+msgid "Subscribe"
+msgstr "Subscribe"
+
+#: src/pages/scheduler.tsx:141
 msgid "Success"
 msgstr "Success"
 
-#: src/pages/profile.tsx:416
+#: src/pages/profile.tsx:316
 msgid "TEL: {0}"
 msgstr "TEL: {0}"
 
-#: src/components/layout.tsx:26
-#: src/components/sidebar.tsx:68
+#: src/components/sidebar.tsx:71
 msgid "Templates"
 msgstr "Templates"
 
-#: src/components/scheduler-form.tsx:390
+#: src/components/scheduler-form.tsx:388
 msgid "Th"
 msgstr "Th"
 
 #: src/pages/execution-details.tsx:46
 #: src/pages/executions.tsx:97
-#: src/pages/profile.tsx:204
+#: src/pages/profile.tsx:381
 #: src/pages/reports.tsx:67
-#: src/pages/scheduler.tsx:83
+#: src/pages/scheduler.tsx:84
 #: src/pages/templates.tsx:95
-#: src/pages/workflows.tsx:69
+#: src/pages/workflows.tsx:54
 msgid "There was an error while loading"
 msgstr "There was an error while loading"
 
-#: src/components/workflow-form.tsx:39
-#: src/pages/sign-in.tsx:61
-#: src/pages/sign-in.tsx:62
-#: src/pages/sign-up.tsx:68
-#: src/pages/sign-up.tsx:70
-#: src/pages/sign-up.tsx:74
-#: src/pages/workflow-runner.tsx:59
+#: src/components/workflow-form.tsx:30
+#: src/pages/robot.tsx:70
+#: src/pages/sign-in.tsx:70
+#: src/pages/sign-in.tsx:71
+#: src/pages/sign-up.tsx:69
+#: src/pages/sign-up.tsx:71
+#: src/pages/sign-up.tsx:75
 msgid "This field is required"
 msgstr "This field is required"
 
-#: src/pages/sign-in.tsx:117
+#: src/pages/sign-in.tsx:126
 msgid "Those who have not yet registered as a member"
 msgstr "Those who have not yet registered as a member"
 
-#: src/components/workflow-form.tsx:96
 #: src/pages/executions.tsx:27
-#: src/pages/workflow-runner.tsx:115
 msgid "Timeout"
 msgstr "Timeout"
 
-#: src/pages/scheduler.tsx:159
+#: src/pages/scheduler.tsx:160
 msgid "Title"
 msgstr "Title"
 
-#: src/components/scheduler-form.tsx:388
+#: src/pages/profile.tsx:255
+msgid "Trial period"
+msgstr "Trial period"
+
+#: src/components/scheduler-form.tsx:386
 msgid "Tu"
 msgstr "Tu"
 
-#: src/components/workflow-form.tsx:114
+#: src/components/workflow-form.tsx:88
 msgid "Update workflow"
 msgstr "Update workflow"
 
@@ -667,23 +749,31 @@ msgstr "Update workflow"
 #~ msgid "Use template"
 #~ msgstr "Use template"
 
-#: src/pages/profile.tsx:191
+#: src/pages/profile.tsx:368
 msgid "User with such email already exists"
 msgstr "User with such email already exists"
 
-#: src/pages/sign-up.tsx:57
+#: src/pages/sign-up.tsx:58
 msgid "User {0} already exists"
 msgstr "User {0} already exists"
 
-#: src/components/scheduler-form.tsx:389
+#: src/pages/profile.tsx:213
+msgid "User:"
+msgstr "User:"
+
+#: src/pages/profile.tsx:289
+msgid "View plans"
+msgstr "View plans"
+
+#: src/components/scheduler-form.tsx:387
 msgid "We"
 msgstr "We"
 
-#: src/components/scheduler-form.tsx:369
+#: src/components/scheduler-form.tsx:367
 msgid "Week"
 msgstr "Week"
 
-#: src/components/scheduler-form.tsx:303
+#: src/components/scheduler-form.tsx:301
 msgid "Work days"
 msgstr "Work days"
 
@@ -695,15 +785,21 @@ msgstr "Workflow"
 msgid "Workflow created"
 msgstr "Workflow created"
 
-#: src/pages/workflows.tsx:54
+#: src/pages/robot.tsx:39
+msgid "Workflow created successfully"
+msgstr "Workflow created successfully"
+
+#: src/pages/workflows.tsx:39
 msgid "Workflow deleted"
 msgstr "Workflow deleted"
 
-#: src/components/workflow-form.tsx:65
+#: src/components/workflow-form.tsx:56
+#: src/pages/robot.tsx:99
 msgid "Workflow description:"
 msgstr "Workflow description:"
 
-#: src/components/workflow-form.tsx:51
+#: src/components/workflow-form.tsx:42
+#: src/pages/robot.tsx:82
 msgid "Workflow name:"
 msgstr "Workflow name:"
 
@@ -712,7 +808,6 @@ msgid "Workflow updated"
 msgstr "Workflow updated"
 
 #: src/pages/workflow-edit.tsx:47
-#: src/pages/workflow-runner.tsx:47
 msgid "Workflow with {0} id not found"
 msgstr "Workflow with {0} id not found"
 
@@ -725,24 +820,27 @@ msgstr "Workflow with {0} id not found"
 msgid "Workflow:"
 msgstr "Workflow:"
 
-#: src/components/layout.tsx:30
-#: src/components/sidebar.tsx:74
+#: src/components/sidebar.tsx:77
 msgid "Workflows"
 msgstr "Workflows"
 
-#: src/pages/sign-in.tsx:52
+#: src/pages/sign-in.tsx:61
 msgid "Wrong password or username"
 msgstr "Wrong password or username"
 
-#: src/pages/beta-rpa.tsx:70
-msgid "Yahoo! monthly report creation"
-msgstr "Yahoo! monthly report creation"
+#: src/pages/beta-rpa.tsx:75
+#~ msgid "Yahoo! monthly report creation"
+#~ msgstr "Yahoo! monthly report creation"
 
-#: src/pages/sign-up.tsx:148
+#: src/pages/pricing.tsx:88
+msgid "You already on a paid plan"
+msgstr "You already on a paid plan"
+
+#: src/pages/sign-up.tsx:149
 msgid "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 msgstr "You may not be able to receive the e-mail if you have set reception refusal such as specified domain reception. Please cancel the setting or proceed with the procedure after setting it so that you can receive mail from the following domain."
 
-#: src/pages/workflows.tsx:76
+#: src/pages/workflows.tsx:61
 msgid "Your workflows will be listed here"
 msgstr "Your workflows will be listed here"
 
@@ -750,19 +848,29 @@ msgstr "Your workflows will be listed here"
 #~ msgid "_ ! # $ ~ ^ @"
 #~ msgstr "_ ! # $ ~ ^ @"
 
-#: src/pages/beta-rpa.tsx:150
+#: src/pages/pricing.tsx:129
+msgid "all robots available"
+msgstr "all robots available"
+
 #: src/pages/mall-info.tsx:64
 msgid "back"
 msgstr "back"
 
-#: src/pages/workflow-runner.tsx:83
-#: src/pages/workflows.tsx:204
+#: src/pages/pricing.tsx:141
+msgid "dedicated support"
+msgstr "dedicated support"
+
+#: src/pages/workflows.tsx:155
 msgid "error"
 msgstr "error"
 
-#: src/pages/beta-rpa.tsx:136
-msgid "execution"
-msgstr "execution"
+#: src/pages/beta-rpa.tsx:141
+#~ msgid "execution"
+#~ msgstr "execution"
+
+#: src/pages/pricing.tsx:140
+msgid "full robots customization"
+msgstr "full robots customization"
 
 #: src/pages/profile.tsx:209
 #: src/pages/profile.tsx:241
@@ -770,11 +878,15 @@ msgstr "execution"
 #~ msgid "inquiry"
 #~ msgstr "inquiry"
 
-#: src/pages/sign-in.tsx:108
+#: src/pages/sign-in.tsx:117
 msgid "login"
 msgstr "login"
 
-#: src/pages/profile.tsx:106
+#: src/pages/pricing.tsx:50
+msgid "mo"
+msgstr "mo"
+
+#: src/pages/profile.tsx:109
 msgid "name"
 msgstr "name"
 
@@ -783,28 +895,43 @@ msgstr "name"
 msgid "password"
 msgstr "password"
 
-#: src/pages/workflow-runner.tsx:72
-#: src/pages/workflows.tsx:194
+#: src/pages/workflows.tsx:145
 msgid "queued"
 msgstr "queued"
 
 #: src/pages/mall-info.tsx:47
-#: src/pages/sign-up.tsx:177
+#: src/pages/sign-up.tsx:178
 msgid "register"
 msgstr "register"
+
+#: src/pages/pricing.tsx:139
+msgid "same as Robotic C"
+msgstr "same as Robotic C"
 
 #: src/pages/profile.tsx:220
 #~ msgid "send"
 #~ msgstr "send"
 
-#: src/pages/profile.tsx:96
+#: src/pages/profile.tsx:99
 msgid "surname"
 msgstr "surname"
 
 #: src/components/workflow-form.tsx:100
 #: src/pages/workflow-runner.tsx:119
-msgid "timeout"
-msgstr "timeout"
+#~ msgid "timeout"
+#~ msgstr "timeout"
+
+#: src/pages/pricing.tsx:106
+#: src/pages/pricing.tsx:117
+#: src/pages/pricing.tsx:128
+msgid "unlimited executions minutes"
+msgstr "unlimited executions minutes"
+
+#: src/pages/pricing.tsx:108
+#: src/pages/pricing.tsx:119
+#: src/pages/pricing.tsx:130
+msgid "up to 3 simultaneously executions"
+msgstr "up to 3 simultaneously executions"
 
 #: src/pages/reports.tsx:107
 msgid "{0}"
@@ -815,5 +942,5 @@ msgstr "{0}"
 #~ msgstr "{children}"
 
 #: src/components/layout.tsx:51
-msgid "© 2022 Coreus RPA. All rights reserved"
-msgstr "© 2022 Coreus RPA. All rights reserved"
+#~ msgid "© 2022 Coreus RPA. All rights reserved"
+#~ msgstr "© 2022 Coreus RPA. All rights reserved"

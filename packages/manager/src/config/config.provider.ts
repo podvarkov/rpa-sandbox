@@ -49,6 +49,26 @@ export class ConfigProvider {
    */
   @IsString()
   OPENFLOW_AES_SECRET!: string;
+
+  @IsString()
+  STRIPE_SECRET: string;
+
+  @IsString()
+  STRIPE_WEBHOOK_SECRET: string;
+
+  /**
+   * trial period for stripe subscriptions
+   * in days
+   * */
+  @Transform(({ value }) => Number.parseInt(value))
+  @IsOptional()
+  STRIPE_TRIAL_PERIOD_DAYS = 14;
+
+  /**
+   * App host for third party redirects
+   */
+  @IsString()
+  APP_HOST: string;
 }
 
 export const configFactory = {

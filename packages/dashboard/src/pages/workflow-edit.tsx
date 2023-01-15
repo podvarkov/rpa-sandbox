@@ -3,8 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Box, Center, Container, Heading, VStack } from "@chakra-ui/react";
 import { t, Trans } from "@lingui/macro";
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { api } from "../api";
-import { WorkflowForm, WorkflowFormValues } from "../components/workflow-form";
+import { api, UpsertWorkflowValues } from "../api";
+import { WorkflowForm } from "../components/workflow-form";
 import { useToast } from "../components/use-toast";
 
 export const EditWorkflowPage: React.FC = () => {
@@ -21,7 +21,7 @@ export const EditWorkflowPage: React.FC = () => {
   );
 
   const mutation = useMutation(
-    (wf: WorkflowFormValues) => {
+    (wf: UpsertWorkflowValues) => {
       return api.upsertWorkflow(wf);
     },
     {
@@ -56,7 +56,7 @@ export const EditWorkflowPage: React.FC = () => {
             </Heading>
             <WorkflowForm
               initialValues={workflow}
-              templateParameters={workflow.template.Parameters}
+              templateParameters={workflow?.template?.Parameters || []}
               onSubmit={(values) => mutation.mutateAsync(values)}
             />
           </VStack>

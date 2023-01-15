@@ -1,37 +1,39 @@
-import React, { PropsWithChildren } from "react";
+import { ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
   BoxProps,
   CloseButton,
-  Drawer,
-  DrawerContent,
   Flex,
   FlexProps,
+  HStack,
   Icon,
   useColorModeValue,
-  useDisclosure,
+  useOutsideClick,
 } from "@chakra-ui/react";
+import { MessageDescriptor } from "@lingui/core";
 import { defineMessage } from "@lingui/macro";
 import { useLingui } from "@lingui/react";
+import React, { PropsWithChildren, ReactNode, useRef, useState } from "react";
 import { IconType } from "react-icons";
 import { AiFillHome } from "react-icons/ai";
 import {
-  FaCloudDownloadAlt,
-  FaRegChartBar,
-  FaCodeBranch,
   FaCalendarDay,
+  FaCloudDownloadAlt,
+  FaCodeBranch,
   FaFileImport,
+  FaRegChartBar,
 } from "react-icons/fa";
-import { Outlet, NavLink as ReactLink } from "react-router-dom";
-import Header from "./header";
-import { MessageDescriptor } from "@lingui/core";
+import { NavLink as ReactLink } from "react-router-dom";
+import { RobotList } from "./submenus/robot-list";
 
 interface LinkItemProps {
   id: string;
   name: MessageDescriptor;
   icon: IconType;
   to: string;
+  subMenu?: ReactNode;
 }
+
 /* eslint-disable string-to-lingui/missing-lingui-transformation */
 const LinkItems: Array<LinkItemProps> = [
   {
@@ -43,8 +45,9 @@ const LinkItems: Array<LinkItemProps> = [
   {
     name: defineMessage({ message: "Reporting" }),
     icon: FaRegChartBar,
-    to: "/beta-rpa",
+    to: "/robot",
     id: "reporting",
+    subMenu: <RobotList />,
   },
   {
     name: defineMessage({ message: "Executions" }),
@@ -90,93 +93,120 @@ const NavItem: React.FC<PropsWithChildren<NavItemProps>> = ({
   ...rest
 }) => {
   return (
-    <ReactLink to={to} style={{ textDecoration: "none" }}>
-      {({ isActive }) => (
-        <Flex
-          align="center"
-          p="4"
-          role="group"
-          cursor="pointer"
-          color="white"
-          bg={isActive ? "rgba(255,255,255, 0.3)" : undefined}
-          _hover={{
-            bg: "rgba(255,255,255, 0.3)",
-          }}
-          {...rest}
-        >
-          {icon && (
-            <Icon
-              mr="4"
-              fontSize="24"
-              _groupHover={{
-                color: "white",
-              }}
-              as={icon}
-            />
-          )}
+    <ReactLink to={to} style={{ textDecoration: "none", position: "relative" }}>
+      {/* {({ isActive }) => ( */}
+      <Flex
+        align="center"
+        p="4"
+        role="group"
+        cursor="pointer"
+        color="white"
+        _hover={{
+          bg: "rgba(255,255,255, 0.3)",
+        }}
+        // bg={isActive ? "rgba(255,255,255, 0.3)" : undefined}
+        {...rest}
+      >
+        {icon && (
+          <Icon
+            mr="4"
+            fontSize="24"
+            _groupHover={{
+              color: "white",
+            }}
+            as={icon}
+          />
+        )}
+        <Flex flex="1" justifyContent="space-between" align="center">
           {children}
         </Flex>
-      )}
+      </Flex>
+      {/* )} */}
     </ReactLink>
   );
 };
 
-const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
   const { i18n } = useLingui();
+  const [visible, setVisible] = useState(false);
+  const [activeLink, setActiveLink] = useState("home");
+
+  const subMenuRef = useRef<HTMLDivElement>(null);
+  useOutsideClick({
+    ref: subMenuRef,
+    handler: () => setVisible(false),
+  });
+
+  console.log(activeLink);
+
+  const clickHandler = (link: LinkItemProps) => {
+    if (link.subMenu != null) {
+      setActiveLink(link.id);
+      setVisible(true);
+    } else setVisible(false);
+  };
+
   return (
-    <Box
+    <HStack
       transition="3s ease"
-      bg={useColorModeValue("#33B4DE", "gray.900")}
+      bg={useColorModeValue("#33B4DE", "gray.200")}
       borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
-      w={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
+      zIndex={99}
       {...rest}
     >
-      <Flex h="20" justifyContent="space-between">
-        <Box w={40} p={4} alignItems="center">
-          <img src="/header_logo.png" width="90%" alt="avatar" />
-        </Box>
-        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
-      </Flex>
-      {LinkItems.map((link) => (
-        <NavItem to={link.to} key={link.id} icon={link.icon}>
-          {i18n._(link.name)}
-        </NavItem>
-      ))}
-    </Box>
-  );
-};
+      <Flex h="full">
+        <Box w={{ base: "full", md: 60 }}>
+          <Flex h="20" justifyContent="space-between">
+            <Box w={40} p={4} alignItems="center">
+              <img src="/header_logo.png" width="90%" alt="avatar" />
+            </Box>
+            <CloseButton
+              display={{ base: "flex", md: "none" }}
+              onClick={onClose}
+            />
+          </Flex>
+          {LinkItems.map((link) => (
+            <Box key={link.id}>
+              <NavItem
+                to={link.to}
+                icon={link.icon}
+                onClick={() => clickHandler(link)}
+                onMouseOver={() => {
+                  if (link.subMenu != null) {
+                    setVisible(true);
+                  } else {
+                    setVisible(false);
+                  }
+                }}
+              >
+                {i18n._(link.name)}
+                {link.subMenu != null && <ChevronRightIcon fontSize={20} />}
+              </NavItem>
 
-export default function SidebarWithHeader() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  return (
-    <Box minH="100vh">
-      <SidebarContent
-        onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
-      />
-      <Drawer
-        autoFocus={false}
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        returnFocusOnClose={false}
-        onOverlayClick={onClose}
-        size="full"
-      >
-        <DrawerContent>
-          <SidebarContent onClose={onClose} />
-        </DrawerContent>
-      </Drawer>
-      {/* mobilenav */}
-      {/* <MobileNav onOpen={onOpen} /> */}
-      <Header onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} p="4">
-        <Outlet />
-      </Box>
-    </Box>
+              {visible && link.subMenu != null && (
+                <Box
+                  ref={subMenuRef}
+                  h="100vh"
+                  right="-100%"
+                  top="0"
+                  bg="#71CBE8"
+                  zIndex={999}
+                  w={{ base: "full", md: 60 }}
+                  position="absolute"
+                  transition="0.2s"
+                >
+                  <Flex h="20" justifyContent="space-between"></Flex>
+                  {link.subMenu}
+                </Box>
+              )}
+            </Box>
+          ))}
+        </Box>
+      </Flex>
+    </HStack>
   );
 }
 

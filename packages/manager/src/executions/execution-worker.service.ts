@@ -1,14 +1,16 @@
 import { Injectable, Logger } from "@nestjs/common";
-import { ConfigProvider } from "src/config/config.provider";
 import { WebSocket } from "ws";
 import { QueueMessage, SocketMessage, TokenUser } from "@openiap/openflow-api";
-import { CryptService } from "src/crypt/crypt.service";
 import { OnEvent } from "@nestjs/event-emitter";
-import { ExecuteWorkflowDto } from "src/workflows/execute-workflow.dto";
-import { Execution } from "./types";
-import { OpenflowService } from "src/openflow/openflow.service";
-import { Session } from "src/auth/auth.service";
 import { Cron, CronExpression } from "@nestjs/schedule";
+
+import { ConfigProvider } from "../config/config.provider";
+import { CryptService } from "../crypt/crypt.service";
+import { ExecuteWorkflowDto } from "../executions/execute-workflow.dto";
+import { Execution } from "../openflow/types";
+import { OpenflowService } from "../openflow/openflow.service";
+import { Session } from "../auth/auth.service";
+import { ExecutionsService } from "../executions/executions.service";
 
 @Injectable()
 export class ExecutionWorkerService {
@@ -19,7 +21,8 @@ export class ExecutionWorkerService {
   constructor(
     private readonly config: ConfigProvider,
     private readonly cryptService: CryptService,
-    private readonly openflowService: OpenflowService
+    private readonly openflowService: OpenflowService,
+    private readonly executionsService: ExecutionsService
   ) {
     this.initSocketConnection();
   }
@@ -129,10 +132,23 @@ export class ExecutionWorkerService {
     executionContext.startedAt = new Date();
     executionContext.correlationId = queueMessageData.correlationId;
     executionContext.status = "queued";
-    executionContext._id = queueMessageData.correlationId;
 
-    await this.openflowService.insertOne(session.jwt, executionContext);
-    this.ws.send(JSON.stringify(queueMsg));
+    try {
+      await this.executionsService.check(session.jwt, workflow.templateId);
+      await this.executionsService.upsertExecution(
+        session.jwt,
+        executionContext
+      );
+      this.ws.send(JSON.stringify(queueMsg));
+    } catch (error) {
+      executionContext.status = "error";
+      executionContext.error = error.message;
+      executionContext.finishedAt = new Date();
+      await this.executionsService.upsertExecution(
+        session.jwt,
+        executionContext
+      );
+    }
   }
 
   @Cron(CronExpression.EVERY_30_SECONDS)
@@ -141,31 +157,24 @@ export class ExecutionWorkerService {
       message: "Sync executions cron started",
     });
 
-    const executions = await this.openflowService
-      .queryCollection<Execution>(this.cryptService.rootToken, {
-        collectionname: "entities",
-        query: { _type: "user_execution", finishedAt: { $exists: false } },
+    const executions = await this.executionsService
+      .findExecutions(this.cryptService.rootToken, {
+        _type: "user_execution",
+        finishedAt: { $exists: false },
       })
       .then((data) =>
         data.reduce(
-          (acc, el) => ({ ...acc, [el._id]: el }),
+          (acc, el) => ({ ...acc, [el.correlationId]: el }),
           {} as { [key: string]: Execution }
         )
       );
 
     if (Object.keys(executions).length === 0) return;
 
-    const rpaInstances = await this.openflowService.queryCollection<{
-      isCompleted: boolean;
-      hasError: boolean;
-      errormessage: string;
-      _created: Date;
-      _modified: Date;
-      correlationId: string;
-    }>(this.cryptService.rootToken, {
-      collectionname: "openrpa_instances",
-      query: { correlationId: { $in: Object.keys(executions) } },
-    });
+    const rpaInstances = await this.executionsService.getRelatedRpaInstances(
+      this.cryptService.rootToken,
+      Object.keys(executions)
+    );
 
     for (const rpaInstance of rpaInstances) {
       const execution = executions[rpaInstance.correlationId];
@@ -185,11 +194,12 @@ export class ExecutionWorkerService {
           ? rpaInstance.errormessage
           : null;
 
-        await this.openflowService.updateOne(
+        await this.executionsService.upsertExecution(
           this.cryptService.rootToken,
           execution
         );
-        delete executions[execution._id];
+
+        delete executions[execution.correlationId];
       }
     }
 
@@ -202,7 +212,7 @@ export class ExecutionWorkerService {
       ) {
         execution.finishedAt = new Date();
         execution.status = "timeout";
-        await this.openflowService.updateOne(
+        await this.executionsService.upsertExecution(
           this.cryptService.rootToken,
           execution
         );

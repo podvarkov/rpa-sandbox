@@ -1,7 +1,7 @@
 import { TokenUser } from "@openiap/openflow-api";
 import Axios, { AxiosInstance } from "axios";
+import type { Stripe } from "stripe";
 import { EventFormValues } from "./components/scheduler-form";
-import { WorkflowFormValues } from "./components/workflow-form";
 
 export type SigninParams = { username: string; password: string };
 export type Session = {
@@ -49,13 +49,14 @@ export type Workflow = {
   description?: string;
   name: string;
   templateId: string;
-  defaultArguments?: { [key: string]: unknown };
+  arguments: { [key: string]: unknown };
   _created: string;
   _modified: string;
   _createdby: string;
   _createdbyid: string;
   _type: string;
   expiration: number;
+  disabled: boolean;
 };
 
 export type Execution = {
@@ -149,6 +150,14 @@ export type SendInquiryParams = UpdatableProfile & {
   inquiry: string;
 };
 
+export type UpsertWorkflowValues = {
+  _id?: string;
+  name: string;
+  description?: string;
+  templateId: string;
+  arguments: { [key: string]: unknown };
+};
+
 class Api {
   private axios: AxiosInstance;
   private session: Session = null;
@@ -187,9 +196,7 @@ class Api {
   }
 
   public signUp(params: SigninParams) {
-    return this.axios
-      .post("auth/signup", params)
-      .then(() => this.signIn(params));
+    return this.axios.post("auth/signup", params).then(() => undefined);
   }
 
   onAuthStateChanged(cb: AuthStateChangedCb) {
@@ -222,14 +229,14 @@ class Api {
 
   getWorkflowWithTemplate(id: string, signal?: AbortSignal) {
     return this.axios
-      .get<Workflow & { template: WorkflowTemplate }>(
+      .get<Workflow & { template: WorkflowTemplate | null }>(
         `workflows/${id}?withTemplate=true`,
         { signal }
       )
       .then(({ data }) => data);
   }
 
-  upsertWorkflow(params: WorkflowFormValues) {
+  upsertWorkflow(params: UpsertWorkflowValues) {
     return this.axios
       .post<Workflow>("workflows", params)
       .then(({ data }) => data);
@@ -247,7 +254,7 @@ class Api {
     templateId: string;
     arguments: { [key: string]: unknown };
   }) {
-    return this.axios.post("workflows/execute", data);
+    return this.axios.post("executions", data);
   }
 
   getExecutions(
@@ -311,6 +318,12 @@ class Api {
   sendInquiryToManager(profileInfoAndMsg: SendInquiryParams) {
     return this.axios
       .post("inquire", profileInfoAndMsg)
+      .then(({ data }) => data);
+  }
+
+  getSubscriptionInfo() {
+    return this.axios
+      .get<Stripe.Subscription>("payments/subscription")
       .then(({ data }) => data);
   }
 }
