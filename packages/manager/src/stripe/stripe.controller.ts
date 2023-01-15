@@ -2,6 +2,8 @@ import {
   Body,
   Controller,
   Get,
+  HttpCode,
+  Logger,
   Param,
   Post,
   Query,
@@ -16,15 +18,24 @@ import { StripeSignatureGuard } from "./stripe-signature.guard";
 
 @Controller()
 export class StripeController {
+  private readonly logger = new Logger(StripeController.name);
   constructor(private readonly stripeService: StripeService) {}
   @Post("api/payments/webhook")
+  @HttpCode(200)
   @UseGuards(StripeSignatureGuard)
-  testHooks(@Body() event: Stripe.Event) {
+  async handleStripeEvent(@Body() event: Stripe.Event) {
+    this.logger.debug({ message: "stripe webhook received", event });
     switch (event.type) {
       case "customer.subscription.deleted":
-        this.stripeService.removeSubscription(event.data.object["customer"]);
+        await this.stripeService.removeSubscription(
+          event.data.object["customer"]
+        );
+        break;
       case "customer.subscription.updated":
-        this.stripeService.updateSubscription(event.data);
+        await this.stripeService.updateSubscription(event.data);
+        break;
+      default:
+        this.logger.debug(`Unhandled stripe event: ${event.type}`);
     }
   }
   @Get("payments")
